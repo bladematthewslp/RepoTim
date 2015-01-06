@@ -1,0 +1,30 @@
+1-5
+--------------------------------
+Added Box Collider Component. It is showing in the game if visible is set to true. 
+No collision testing is added for it yet, however
+
+12-31
+-------------------------------
+Starting using a Component/Entity-based System. So far, it is working.
+
+The System class is a static class that updates the C/ES system. 
+
+The player is responding to left and right key inputs and events. Now I just need 
+to figure out how to make a scenenode graph, dividing the game objects into layers, how 
+to implement a state stack, and how to create different scenes, loading objects when the
+game goes to a different scene.
+
+12-22
+----------------------
+fixed a tweak with the jumping
+
+12-21
+-------------------
+Further improvements to the tile engine - it appears all movements and collisions work!
+
+12-21
+Also got the falling and jumping states to respond correctly to collision with tiles above and below the player
+with the checkTileAbovePlayer and checkTileBelowPlayer functions
+
+//	12-21
+Implemented states to the class: Standing and Jumping

@@ -1,0 +1,45 @@
+#pragma once
+
+#include <SFML/Graphics.hpp>
+class GameObject;
+
+class SpriteAnim
+{
+
+public:
+	
+	enum Status
+	{
+		RUNNING,
+		SUCCESS
+	};
+	
+	
+	SpriteAnim();
+	SpriteAnim(sf::IntRect rect, int numberFrames, int frameToHold, bool loop, float speed = 1, int startFrame = 0 );
+	int run(GameObject& player);
+	void exit();
+	bool isAnimDelayed();
+
+
+	// time keeping
+	sf::Time deltaTime;
+	sf::Clock deltaClock;
+	sf::Time timeSinceUpdate;
+
+	// frame variables
+	int startingFrame;
+	int currentFrame;
+	int numFrames;
+	int mFrameToHold;
+
+	bool mLoop;
+	float playSpeed;
+	float oldPlaySpeed;
+	float slashDelaySpeed;	
+	float timer;
+
+	const sf::IntRect textureRect;
+
+
+};
