@@ -1,0 +1,99 @@
+2-3
+-----------------------------
+Did some work with child transform.
+	GameObject.h/cpp
+	 - new variable: mChildPosition;
+	 - new functions: setChildPosition() and moveChild(), which essential sets and adds to the mChildPosition variable
+	 - in updateTransforms(), I set the absolute position of child objects to the product of the 
+		parent's transform and the mChildPosition variable
+	 - new function: getWorldPosition(), which returns the absolute position of the object
+	 - updated function: getLocalPosition, which returns the position of the object relative to its parent, if applicable
+
+	
+
+2-2
+-----------------------------
+Made a change to the red orb setup.
+	Red Orb count will be kept by PlayerLogic instead of the GUIRedOrbRender. PlayerLogic will feed
+	GUIRedOrbRender the updated amount when the player picks up a red orb.
+
+Health Bar Update
+	Health bar will increase when the player picks up a green orb.
+
+
+2-1
+------------------------------
+Added red orbs to the game.
+	The ninja will randomly drop a red orb if the random number is met. Player will collide and
+	remove the orb from scene.
+Added green orbs to the game.
+	They are functional, but not in any logic so far.
+	
+Added healthbar
+	To add healthbar, I had to modify the RenderComponent::update() function to take the window
+	as a parameter and add a case handler for UI-layered elements to offset the position by
+	the current view.
+	The healthbar will decrease when the player is hit.
+	
+
+1-31
+------------------------------
+Changed guard state to only play the guard animation when the player gets hit. Pressing the down arrow
+enters guard state but doesn't change the sprite. This is so the player can use the down arrow to perform
+a move without it quickly switching to the guarding sprite.
+
+Earlier, I also made the console print the grid position of the cursor when the mouse is clicked.
+
+1-25
+------------------------------
+I would occasionally get an error in the System::removeGameObject() function, giving an error about
+the == operator when comparing the gameObject's layername to the layer's name.
+
+I moved the section that removes the game object from the scene layers inside the for-loop that iterates
+the game object vector and made the change to dereference (*obj_itr) instead of gameObject when comparing names
+
+I also added a variable called mLookatPoint to focus the camera on as the player changes directions in World.cpp.
+
+1-23
+-------------------------------
+Added Player Air Hit logic.
+Added Ninja Air Hit logic.
+Fixed an issue with the Ninja moving backwards when he collides with his slash's attack box.
+
+
+1-17
+--------------------------------
+Lots of changes made, some forgotten
+First, the attacks have been added. AttackType.cpp hosts the names of all registered attacks.
+
+
+1-5
+--------------------------------
+Added Box Collider Component. It is showing in the game if visible is set to true. 
+No collision testing is added for it yet, however....
+
+12-31
+-------------------------------
+Starting using a Component/Entity-based System. So far, it is working.
+
+The System class is a static class that updates the C/ES system. 
+
+The player is responding to left and right key inputs and events. Now I just need 
+to figure out how to make a scenenode graph, dividing the game objects into layers, how 
+to implement a state stack, and how to create different scenes, loading objects when the
+game goes to a different scene.
+
+12-22
+----------------------
+fixed a tweak with the jumping
+
+12-21
+-------------------
+Further improvements to the tile engine - it appears all movements and collisions work!
+
+12-21
+Also got the falling and jumping states to respond correctly to collision with tiles above and below the player
+with the checkTileAbovePlayer and checkTileBelowPlayer functions
+
+//	12-21
+Implemented states to the class: Standing and Jumping
