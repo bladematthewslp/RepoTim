@@ -20,6 +20,7 @@ public:
 	explicit	SceneStack(Scene::Context context);
 	void		update(sf::Time dt);
 	void		handleEvent(sf::Event& event);
+	void		handleInput(sf::Event& event);
 	void		draw();
 
 	void		popScene();

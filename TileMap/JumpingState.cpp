@@ -29,10 +29,12 @@ CState* JumpingState::handleInput(GameObject* player, const sf::Event& event)
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		logic->setVelocityX(logic->getRunningSpeed());
+		logic->updateDirection(Direction::Right);
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		logic->setVelocityX(-logic->getRunningSpeed());
+		logic->updateDirection(Direction::Left);
 	}
 	else 
 	{

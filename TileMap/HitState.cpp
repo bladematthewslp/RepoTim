@@ -57,3 +57,10 @@ CState* HitState::update(GameObject* player, sf::Time dt, Grid& grid)
 	
 	return this;
 }
+
+void HitState::hitConsecutive(GameObject* player)
+{
+	// reset current animation
+	player->mRenderComponent->setAnimation("");			
+	player->mRenderComponent->setAnimation("Hit");
+}

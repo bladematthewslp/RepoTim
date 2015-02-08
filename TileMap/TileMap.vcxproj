@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D33EC454-5D0B-4FD7-993E-6C43B11876D2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TileMap</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\SFML\New\SFML-2.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\SFML\New\SFML-2.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-network.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AttackState.cpp" />
+    <ClCompile Include="AttackStateAir.cpp" />
+    <ClCompile Include="AttackType.cpp" />
+    <ClCompile Include="BackgroundGameObject.cpp" />
+    <ClCompile Include="BoxColliderComponent.cpp" />
+    <ClCompile Include="CState.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CStateNinjaAttacking.cpp" />
+    <ClCompile Include="CStateNinjaDead.cpp" />
+    <ClCompile Include="CStateNinjaDeadAir.cpp" />
+    <ClCompile Include="CStateNinjaHit.cpp" />
+    <ClCompile Include="CStateNinjaHitAir.cpp" />
+    <ClCompile Include="CStateNinjaJumping.cpp" />
+    <ClCompile Include="CStateNinjaRunning.cpp" />
+    <ClCompile Include="CStateNinjaStanding.cpp" />
+    <ClCompile Include="CStateRyobeBlocking.cpp" />
+    <ClCompile Include="CStateRyobeStanding.cpp" />
+    <ClCompile Include="CStateRyobeWalking.cpp" />
+    <ClCompile Include="DazedState.cpp" />
+    <ClCompile Include="DeadAirState.cpp" />
+    <ClCompile Include="FallingState.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GuardState.cpp" />
+    <ClCompile Include="GUIRedOrbLogic.cpp" />
+    <ClCompile Include="GUIRedOrbRender.cpp" />
+    <ClCompile Include="HealthBarLogic.cpp" />
+    <ClCompile Include="HitAirState.cpp" />
+    <ClCompile Include="HitState.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="ItemGameObject.cpp" />
+    <ClCompile Include="ItemLogic.cpp" />
+    <ClCompile Include="JumpingState.cpp" />
+    <ClCompile Include="KnockoutState.cpp" />
+    <ClCompile Include="LogicComponent.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NinjaBoxCollider.cpp" />
+    <ClCompile Include="NinjaGameObject.cpp" />
+    <ClCompile Include="NinjaInput.cpp" />
+    <ClCompile Include="NinjaLogic.cpp" />
+    <ClCompile Include="NinjaRender.cpp" />
+    <ClCompile Include="NinjaSlashBoxCollider.cpp" />
+    <ClCompile Include="NinjaSlashBoxLogic.cpp" />
+    <ClCompile Include="PauseScene.cpp" />
+    <ClCompile Include="PlayerBoxCollider.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
+    <ClCompile Include="PlayerLogic.cpp" />
+    <ClCompile Include="PlayerRender.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="ResourceHolder.inl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RunningState.cpp" />
+    <ClCompile Include="RyobeBoxCollider.cpp" />
+    <ClCompile Include="RyobeGameObject.cpp" />
+    <ClCompile Include="RyobeLogic.cpp" />
+    <ClCompile Include="RyobeRender.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneStack.cpp" />
+    <ClCompile Include="SlashBoxBoxCollider.cpp" />
+    <ClCompile Include="SlashBoxLogic.cpp" />
+    <ClCompile Include="SpriteAnim.cpp" />
+    <ClCompile Include="StandingState.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AttackState.h" />
+    <ClInclude Include="AttackStateAir.h" />
+    <ClInclude Include="AttackType.h" />
+    <ClInclude Include="BackgroundGameObject.h" />
+    <ClInclude Include="BoxColliderComponent.h" />
+    <ClInclude Include="CState.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="CStateNinjaAttacking.h" />
+    <ClInclude Include="CStateNinjaDead.h" />
+    <ClInclude Include="CStateNinjaDeadAir.h" />
+    <ClInclude Include="CStateNinjaHitAir.h" />
+    <ClInclude Include="CStateNinjaHit.h" />
+    <ClInclude Include="CStateNinjaJumping.h" />
+    <ClInclude Include="CStateNinjaRunning.h" />
+    <ClInclude Include="CStateNinjaStanding.h" />
+    <ClInclude Include="CStateRyobeBlocking.h" />
+    <ClInclude Include="CStateRyobeStanding.h" />
+    <ClInclude Include="CStateRyobeWalking.h" />
+    <ClInclude Include="DazedState.h" />
+    <ClInclude Include="DeadAirState.h" />
+    <ClInclude Include="FallingState.h" />
+    <ClInclude Include="Find_All.h" />
+    <ClInclude Include="Foreach.hpp" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GuardState.h" />
+    <ClInclude Include="GUIRedOrbLogic.h" />
+    <ClInclude Include="GUIRedOrbRender.h" />
+    <ClInclude Include="HealthBarLogic.h" />
+    <ClInclude Include="Helper.h" />
+    <ClInclude Include="HitAirState.h" />
+    <ClInclude Include="HitState.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="ItemGameObject.h" />
+    <ClInclude Include="ItemLogic.h" />
+    <ClInclude Include="JumpingState.h" />
+    <ClInclude Include="KnockoutState.h" />
+    <ClInclude Include="Layers.h" />
+    <ClInclude Include="LogicComponent.h" />
+    <ClInclude Include="NinjaBoxCollider.h" />
+    <ClInclude Include="NinjaGameObject.h" />
+    <ClInclude Include="NinjaInput.h" />
+    <ClInclude Include="NinjaLogic.h" />
+    <ClInclude Include="NinjaRender.h" />
+    <ClInclude Include="NinjaSlashBoxCollider.h" />
+    <ClInclude Include="NinjaSlashBoxLogic.h" />
+    <ClInclude Include="oldgrid.h" />
+    <ClInclude Include="PauseScene.h" />
+    <ClInclude Include="PlayerBoxCollider.h" />
+    <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="PlayerLogic.h" />
+    <ClInclude Include="PlayerRender.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="ResourceHolder.h" />
+    <ClInclude Include="ResourceIdentifiers.h" />
+    <ClInclude Include="RunningState.h" />
+    <ClInclude Include="RyobeBoxCollider.h" />
+    <ClInclude Include="RyobeGameObject.h" />
+    <ClInclude Include="RyobeLogic.h" />
+    <ClInclude Include="RyobeRender.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneIdentifier.h" />
+    <ClInclude Include="SceneStack.h" />
+    <ClInclude Include="SlashBoxBoxCollider.h" />
+    <ClInclude Include="SlashBoxLogic.h" />
+    <ClInclude Include="SpriteAnim.h" />
+    <ClInclude Include="StandingState.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WorkLog.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,3 +1,16 @@
+2-6
+-----------------------------
+Made an update with event/input handling.
+	- Logically, I separated event handling from input handling. In Game.h, SceneStack.h, Scene.h, World.h, and 
+		System.h, I made sure two events are created and called every game loop: handleEvent() and handleInput().
+		This solves the issue of the player not running when the left/right key is held when the player lands.
+		I may need to create two distinct functions in the InputComponent as well to handle events and inputs.
+		Currently, the InputComponent calls handleInput() on the current state twice: once in InputComponents::handleInput()
+		and once in InputComponent::handleEvent(). This may cause problems later but will address when the issue arises.
+
+Started adding new boss to game: Ryobe
+	- Ryobe has logic and render states. Just need to add the fighting behavior logic.
+
 2-3
 -----------------------------
 Did some work with child transform.

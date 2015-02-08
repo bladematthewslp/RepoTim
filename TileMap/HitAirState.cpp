@@ -5,7 +5,7 @@
 #include "Grid.h"
 #include <iostream>
 
-HitAirState::HitAirState(GameObject* player) : CState("HitState")
+HitAirState::HitAirState(GameObject* player) : CState("HitAirState")
 	, hitVelocity(-5.0f, -5.0f)
 {
 	player->mRenderComponent->setAnimation("HitAirPart1");
@@ -65,3 +65,4 @@ CState* HitAirState::update(GameObject* player, sf::Time dt, Grid& grid)
 	damageTimer++;
 	return this;
 }
+

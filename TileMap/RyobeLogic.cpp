@@ -1,17 +1,28 @@
 #include "RyobeLogic.h"
-
+#include "CStateRyobeStanding.h"
 
 
 RyobeLogic::RyobeLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
 {
-	mGameObject->mRenderComponent->setAnimation("Standing");
-
+	
+	
+	CState* state = std::unique_ptr<CState>(new CStateRyobeStanding(mGameObject)).release();
+	state->entry(mGameObject);
+	mGameObject->mState = state;
 	
 }
 
 void RyobeLogic::update(Grid& grid)
 {
-	mGameObject->mRenderComponent->runSpriteAnim(*mGameObject);
+	
+
+	CState* newState = mGameObject->mState->update(mGameObject, sf::seconds(1.0/60.0f), grid);
+	if(mGameObject->mState != newState)
+	{
+		std::cout << "!!" << std::endl;
+		mGameObject->mState = newState;
+	}
+
 
 }

@@ -63,6 +63,10 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,1600,200,200), "KnockoutAirPart1", true, 4, 1.7f);
 	createSpriteAnim(sf::IntRect(200,1600,200,200), "KnockoutAirPart2", false,9,1.7,-1,5);//, 1.7f);
 
+	// Dazed
+	createSpriteAnim(sf::IntRect(200,3400,200,200), "DazedPart1", false, 7, 1.3,4,2);
+	createSpriteAnim(sf::IntRect(200,3400,200,200), "DazedPart2", true, 11, 5,-1, 7);
+
 }
 
 

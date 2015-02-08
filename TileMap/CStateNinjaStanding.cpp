@@ -49,7 +49,7 @@ CState*	CStateNinjaStanding::update(GameObject* character, sf::Time dt, Grid& gr
 	{
 		//std::cout << delayTimer << std::endl;
 		delayTimer++;
-		if(delayTimer > 120)
+		if(delayTimer > 50)
 		{
 			spriteTimer = 0;
 			CState* newState = std::unique_ptr<CState>(new CStateNinjaRunning(character)).release();

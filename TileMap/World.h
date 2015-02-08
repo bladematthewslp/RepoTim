@@ -19,6 +19,8 @@ public:
 	World(sf::RenderWindow& window);
 
 	bool					handleEvent(sf::RenderWindow& window,sf::Event& event);
+	bool					handleInput(sf::Event& event);
+
 	bool					update(sf::Time dt);
 	void					draw(sf::RenderWindow& window);
 

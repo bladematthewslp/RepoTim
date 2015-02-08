@@ -76,7 +76,7 @@ void PlayerInput::handleKeyQueue()
 void PlayerInput::handleEvents(const sf::Event& event)
 {
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
-	if(logic->getHealth() <= 0)
+	if(logic->getHealth() <= 0 || mGameObject->mState->getName() == "HitState")
 		return;
 	
 

@@ -26,6 +26,12 @@ bool PauseScene::handleEvent(sf::Event& event)
 	return false;
 }
 
+bool PauseScene::handleInput(sf::Event& event)
+{
+
+	return true;
+}
+
 bool PauseScene::update(sf::Time dt)
 {
 	

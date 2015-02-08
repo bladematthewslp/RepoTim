@@ -14,6 +14,7 @@ FallingState::FallingState(GameObject* player)
 	spriteX = 3;
 	if(player->mRenderComponent->currentAnim != "PLAYER_SWEEP")
 		player->mRenderComponent->setAnimation("Falling");
+
 }
 
 CState* FallingState::handleInput(GameObject* player,  const sf::Event& event)
@@ -22,22 +23,24 @@ CState* FallingState::handleInput(GameObject* player,  const sf::Event& event)
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		logic->setVelocityX(logic->getRunningSpeed());
+		logic->updateDirection(Direction::Right);
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		logic->setVelocityX(-logic->getRunningSpeed());
+		logic->updateDirection(Direction::Left);
 	}
 	else 
 	{
 		logic->setVelocityX(0);
 	}
-	
+	/*
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		CState* newState = std::unique_ptr<CState>(new AttackStateAir(player)).release();
 		newState->entry(player);
 		return newState;
-	}
+	}*/
 	return this;
 }
 

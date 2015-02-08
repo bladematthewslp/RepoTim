@@ -13,4 +13,5 @@ public:
 	//CState* handleInput(GameObject* player, const sf::Event& event);
 	CState* update(GameObject* player, sf::Time dt, Grid& grid);
 
+	void hitConsecutive(GameObject* player);
 };

@@ -21,6 +21,15 @@ void SceneStack::handleEvent(sf::Event& event)
 
 	applyPendingChanges();
 }
+
+void SceneStack::handleInput(sf::Event& event)
+{
+	for(auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+	{
+		if( !(*itr)->handleInput(event))
+			break;
+	}
+}
 void SceneStack::update(sf::Time dt)
 {
 	for(auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)

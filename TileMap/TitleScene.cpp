@@ -30,6 +30,11 @@ bool TitleScene::handleEvent(sf::Event& event)
 	return true;
 }
 
+bool TitleScene::handleInput(sf::Event& event)
+{
+	return true;
+}
+
 bool TitleScene::update(sf::Time dt)
 {
 	

@@ -25,6 +25,7 @@ public:
 	virtual void	draw() = 0;
 	virtual bool	update(sf::Time dt) = 0;
 	virtual bool	handleEvent(sf::Event& event) = 0;
+	virtual bool	handleInput(sf::Event& event) = 0;
 
 protected:
 	void requestStackPop();

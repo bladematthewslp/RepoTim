@@ -19,7 +19,7 @@ SpriteAnim::SpriteAnim(sf::IntRect rect, int numberFrames, int frameToHold, bool
 	, done(false)
 { 
 	//playSpeed = 1/16.5;//.5;
-	slashDelaySpeed = 1/9.25;
+	slashDelaySpeed = playSpeed * 3.5;//1/9.25;
 	oldPlaySpeed = playSpeed;
 	timer = 0;
 	timeSinceUpdate = sf::Time::Zero;

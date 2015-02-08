@@ -4,6 +4,7 @@
 #include "AttackState.h"
 #include "FallingState.h"
 #include "RunningState.h"
+#include "DazedState.h"
 //#include "Player.h"
 #include "PlayerLogic.h"
 #include "HitState.h"
@@ -64,6 +65,13 @@ CState* StandingState::handleInput(GameObject* player, const sf::Event& event)
 		//CState* newState = std::unique_ptr<CState>(new AttackState(player)).release();
 		//newState->entry(player);
 		//return newState;
+	}
+
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+	{
+		CState* newState = std::unique_ptr<CState>(new DazedState(player)).release();
+		return newState;
 	}
 	return this;
 }

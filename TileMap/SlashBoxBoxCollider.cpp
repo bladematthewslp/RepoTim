@@ -20,7 +20,10 @@ void SlashBoxBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* oth
 		dynamic_cast<NinjaLogic*>(other->mGameObject->mLogicComponent)->hit(other->mGameObject, logic->getAttack());
 		System::removeGameObject(mGameObject);
 	}
-	
+	if(other->mGameObject->mLayerName == Layer::Enemy)
+	{
+		System::removeGameObject(mGameObject);
+	}
 	
 	/*if(other->mGameObject->mName == "Ninja")
 	{

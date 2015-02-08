@@ -186,7 +186,10 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 		else	// if not,
 		{
 			// change state to hit state
-			mGameObject->mState = std::unique_ptr<CState>(new HitState(mGameObject)).release();
+			if(mGameObject->mState->getName() == "HitState")
+				dynamic_cast<HitState*>(mGameObject->mState)->hitConsecutive(mGameObject);
+			else
+				mGameObject->mState = std::unique_ptr<CState>(new HitState(mGameObject)).release();
 		}
 	}
 	else if( mIsGrounded == false)

@@ -35,6 +35,11 @@ bool GameScene::handleEvent(sf::Event& event)
 	return true;
 }
 
+bool GameScene::handleInput(sf::Event& event)
+{
+	mWorld.handleInput(event);
+	return true;
+}
 bool GameScene::update(sf::Time dt)
 {
 	mWorld.update(dt);

@@ -33,7 +33,8 @@ Game::Game()
 	//, mPlayer(GameObjectDesc("Player", sf::RectangleShape(), Layer::Player))
 	, mSceneStack(Scene::Context(mWindow))
 {
-
+	sf::ContextSettings settings = mWindow.getSettings();
+	std::cout << settings.majorVersion << "." << settings.minorVersion << std::endl;
 	mWindow.setKeyRepeatEnabled(false);
 
 	registerScenes();
@@ -98,16 +99,17 @@ void Game::run()
 {
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+		
 	while(mWindow.isOpen() )
 	{
 		
-		//	sf::Event event;
+			sf::Event event;
 			timeSinceLastUpdate += clock.restart();
 			while(timeSinceLastUpdate > TimePerFrame)
 			{
 				timeSinceLastUpdate -= TimePerFrame;
-				
-				handleInput();
+				handleEvent(event);
+				handleInput(event);
 				update(TimePerFrame);
 				//System::handleInput(mWindow, grid, event);
 				//System::update(grid, TimePerFrame, mGameObjectManager);
@@ -120,10 +122,9 @@ void Game::run()
 	}
 }
 
-
-void Game::handleInput()
+void Game::handleEvent(sf::Event& event)
 {
-	sf::Event event;	
+	
 	while(mWindow.pollEvent(event))
 	{
 		
@@ -133,6 +134,11 @@ void Game::handleInput()
 			mWindow.close();
 		
 	}
+}
+
+void Game::handleInput(sf::Event& event)
+{
+	mSceneStack.handleInput(event);
 }
 void Game::update(sf::Time dt)
 {

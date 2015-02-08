@@ -57,7 +57,8 @@ public:
 	
 	
 	// Game loop functions
-	static void handleInput(sf::RenderWindow& window, const sf::Event& event);//(sf::RenderWindow& window, Grid& grid, sf::Event& event);
+	static void handleEvent(sf::RenderWindow& window, const sf::Event& event);
+	static void handleInput(sf::Event& event);//(sf::RenderWindow& window, Grid& grid, sf::Event& event);
 	static void update(Grid& grid, sf::Time dt);//, GameObjectManager& gameObjectManager);
 	static void draw(sf::RenderWindow& window);//, GameObjectManager& gameObjectManager);
 };

@@ -6,6 +6,7 @@
 //#include "NinjaLogic.h"
 #include "RenderComponent.h"
 #include "AttackType.h"
+#include "System.h"
 #include "NinjaRender.h"
 #include "ItemGameObject.h"
 #include <vector>
@@ -19,9 +20,12 @@ class PlayerLogic;
 class GameObject;
 class CState // stands for 'Character' State
 {
+		
 		std::string mStateName;
+	protected:
+		GameObject*	player;
 	public:
-		CState(std::string name = "CharacterState") : mStateName(name){};
+		CState(std::string name = "CharacterState");// : mStateName(name){player = System::findGameObjectByName("Player");};
 		virtual void		entry(GameObject* character);
 		virtual void		exit(GameObject* character);
 		virtual CState*		handleInput(GameObject* character, const sf::Event& event);

@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\System">
+      <UniqueIdentifier>{e9b95bdf-71c7-488f-a6fd-1d02a2d72bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\System\GameObject">
+      <UniqueIdentifier>{f0956941-2497-40a6-847d-de1f5378ec55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\System\Component">
+      <UniqueIdentifier>{7abde557-be29-455d-836b-4df39faba1f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{3858aedd-04ef-4dfb-a67f-17f545aa64ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System\GameObject">
+      <UniqueIdentifier>{ec515e4e-719d-4d74-b2db-3f52525a7cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System\Component">
+      <UniqueIdentifier>{4d32e151-60c6-4b51-84c0-c74c14c47ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters">
+      <UniqueIdentifier>{a5e8ebbc-0946-4962-8e9d-7763fed4ac7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Ninja">
+      <UniqueIdentifier>{95738cf2-72db-494d-8289-df9a1f413cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters">
+      <UniqueIdentifier>{ba136b4e-a5cc-45bd-b640-e40d1445de3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Ninja">
+      <UniqueIdentifier>{6c8e9572-ebc0-4657-bb74-825cce65875b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{eab9a2a8-05ad-4873-bd8c-8e4af5816309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{552c31c4-4efe-4307-bfac-7e705b94a579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Player">
+      <UniqueIdentifier>{304f67fe-3017-4ca8-8593-6f7d44fa4e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Player\SlashBox">
+      <UniqueIdentifier>{e1f20ef2-ce35-4221-b035-20ee9d8d4a96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Player\PlayerState">
+      <UniqueIdentifier>{44563dc9-8f3e-43d1-837d-3a56f9fb398c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Player">
+      <UniqueIdentifier>{0edb3953-aa36-41b8-9f43-3ee7f4015609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Player\SlashBox">
+      <UniqueIdentifier>{d256c8b7-0844-407b-a9aa-84f0d36ea52a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Player\PlayerState">
+      <UniqueIdentifier>{dc607e78-5914-4f28-b4a0-17e4359448b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Ninja\States">
+      <UniqueIdentifier>{7c3a4d54-6558-4421-90f8-1bcfd3c1a49c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Ninja\States">
+      <UniqueIdentifier>{f43fbc85-c596-4307-8e0e-462cd379b259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Assets">
+      <UniqueIdentifier>{e0ce0ffe-beaf-4792-b45a-8b3391a9ad87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Assets">
+      <UniqueIdentifier>{b6a209d9-569a-4121-9e22-2eb6d821f630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Assets\GUI">
+      <UniqueIdentifier>{a995b8a4-dc04-4abc-9e65-11dff322e08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Assets\GUI">
+      <UniqueIdentifier>{e0d27d30-b001-47bc-824b-52b8a48825e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Ryobe">
+      <UniqueIdentifier>{2c50dc66-1792-42c0-8ce3-d18f2af373f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Ryobe">
+      <UniqueIdentifier>{cd96ee1d-afa3-419f-b35e-e8dfdebcd713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Ryobe\States">
+      <UniqueIdentifier>{c57ee4b2-05b8-4e95-9d07-1eafc337737a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Ryobe\States">
+      <UniqueIdentifier>{8c06dcd3-6269-40f7-adbb-d5b2bf3bd2b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StandingState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpingState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="FallingState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="RunningState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="GuardState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\System\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\System\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Source Files\System\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files\System\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicComponent.cpp">
+      <Filter>Source Files\System\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerLogic.cpp">
+      <Filter>Source Files\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Source Files\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\System\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRender.cpp">
+      <Filter>Source Files\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaRender.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaLogic.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxColliderComponent.cpp">
+      <Filter>Source Files\System\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaInput.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="SlashBoxLogic.cpp">
+      <Filter>Source Files\Characters\Player\SlashBox</Filter>
+    </ClCompile>
+    <ClCompile Include="SlashBoxBoxCollider.cpp">
+      <Filter>Source Files\Characters\Player\SlashBox</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStack.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBoxCollider.cpp">
+      <Filter>Source Files\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaBoxCollider.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaGameObject.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="HitState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaSlashBoxLogic.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaSlashBoxCollider.cpp">
+      <Filter>Source Files\Characters\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="KnockoutState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackStateAir.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaAttacking.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaStanding.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaDead.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaHit.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaHitAir.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaJumping.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaRunning.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="HitAirState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadAirState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateNinjaDeadAir.cpp">
+      <Filter>Source Files\Characters\Ninja\States</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundGameObject.cpp">
+      <Filter>Source Files\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceHolder.inl">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemGameObject.cpp">
+      <Filter>Source Files\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemLogic.cpp">
+      <Filter>Source Files\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBarLogic.cpp">
+      <Filter>Source Files\Assets\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIRedOrbLogic.cpp">
+      <Filter>Source Files\Assets\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIRedOrbRender.cpp">
+      <Filter>Source Files\Assets\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RyobeGameObject.cpp">
+      <Filter>Source Files\Characters\Ryobe</Filter>
+    </ClCompile>
+    <ClCompile Include="RyobeRender.cpp">
+      <Filter>Source Files\Characters\Ryobe</Filter>
+    </ClCompile>
+    <ClCompile Include="RyobeLogic.cpp">
+      <Filter>Source Files\Characters\Ryobe</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeStanding.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeWalking.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeBlocking.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
+    <ClCompile Include="RyobeBoxCollider.cpp">
+      <Filter>Source Files\Characters\Ryobe</Filter>
+    </ClCompile>
+    <ClCompile Include="DazedState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="StandingState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="FallingState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="oldgrid.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="GuardState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Foreach.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\System\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Find_All.h">
+      <Filter>Header Files\System\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\System\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicComponent.h">
+      <Filter>Header Files\System\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Header Files\System\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Header Files\System\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerLogic.h">
+      <Filter>Header Files\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Header Files\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files\System\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRender.h">
+      <Filter>Header Files\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Layers.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaRender.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaLogic.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxColliderComponent.h">
+      <Filter>Header Files\System\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaInput.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="SlashBoxLogic.h">
+      <Filter>Header Files\Characters\Player\SlashBox</Filter>
+    </ClInclude>
+    <ClInclude Include="SlashBoxBoxCollider.h">
+      <Filter>Header Files\Characters\Player\SlashBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStack.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneIdentifier.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBoxCollider.h">
+      <Filter>Header Files\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaBoxCollider.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaGameObject.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="HitState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaSlashBoxLogic.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaSlashBoxCollider.h">
+      <Filter>Header Files\Characters\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="KnockoutState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackStateAir.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaAttacking.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaStanding.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaDead.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaHit.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaHitAir.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaJumping.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaRunning.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="HitAirState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadAirState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateNinjaDeadAir.h">
+      <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundGameObject.h">
+      <Filter>Header Files\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceHolder.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceIdentifiers.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemGameObject.h">
+      <Filter>Header Files\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemLogic.h">
+      <Filter>Header Files\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBarLogic.h">
+      <Filter>Header Files\Assets\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIRedOrbLogic.h">
+      <Filter>Header Files\Assets\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIRedOrbRender.h">
+      <Filter>Header Files\Assets\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RyobeGameObject.h">
+      <Filter>Header Files\Characters\Ryobe</Filter>
+    </ClInclude>
+    <ClInclude Include="RyobeRender.h">
+      <Filter>Header Files\Characters\Ryobe</Filter>
+    </ClInclude>
+    <ClInclude Include="RyobeLogic.h">
+      <Filter>Header Files\Characters\Ryobe</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeStanding.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeWalking.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeBlocking.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="RyobeBoxCollider.h">
+      <Filter>Header Files\Characters\Ryobe</Filter>
+    </ClInclude>
+    <ClInclude Include="DazedState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WorkLog.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

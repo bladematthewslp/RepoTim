@@ -1,5 +1,12 @@
 #include "CState.h"
 
+
+CState::CState(std::string name) 
+	: mStateName(name)
+{
+	player = System::findGameObjectByName("Player");
+}
+
 void CState::entry(GameObject* character)
 {			
 			

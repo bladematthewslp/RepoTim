@@ -216,7 +216,7 @@ GameObject*	System::findGameObjectByName(std::string name)
 
 
 
-void System::handleInput(sf::RenderWindow& window, const sf::Event& event) //(sf::RenderWindow& window, Grid& grid, sf::Event& event)
+void System::handleEvent(sf::RenderWindow& window, const sf::Event& event) //(sf::RenderWindow& window, Grid& grid, sf::Event& event)
 {
 //	std::cout << "SYSTEM HANDLE INPUT!" << std::endl;
 	
@@ -230,17 +230,16 @@ void System::handleInput(sf::RenderWindow& window, const sf::Event& event) //(sf
 		//dynamic_cast<PlayerInput*>(*iter)->handleEvents(event);
 	}
 	
+}
 
+void System::handleInput(sf::Event& event)
+{
 	// handle real time input
 	for(std::vector<InputComponent*>::iterator iter = mInputComponents.begin(); iter != mInputComponents.end(); ++iter)
 	{
 		//dynamic_cast<PlayerInput*>(*iter)->handleRealtimeInput(event);//(event);
 		(*iter)->handleRealtimeInput(event);
 	}
-
-
-	
-	
 }
 
 
