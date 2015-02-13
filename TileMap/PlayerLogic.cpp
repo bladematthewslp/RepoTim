@@ -13,6 +13,8 @@
 #include "PlayerInput.h"
 #include "HealthBarLogic.h"
 #include "GUIRedOrbRender.h"
+#include "RyobeLogic.h"
+#include "DaggerLogic.h"
 #include <iostream>
 
 const sf::Time deltaTime = sf::seconds(1.0f/60.0f);
@@ -116,8 +118,10 @@ void PlayerLogic::pickupRedOrb()
 void PlayerLogic::pickupGreenOrb()
 {
 	mHealth += 30;
+	
 	if(mHealth > 100)
 		mHealth = 100;
+
 	dynamic_cast<HealthBarLogic*>(mHealthBar->mLogicComponent)->updateHealth(mHealth);
 
 }
@@ -143,7 +147,22 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 	if(mHealth <= 0)
 		return;
 
-	NinjaLogic* logic = dynamic_cast<NinjaLogic*>(otherCharacter->mLogicComponent);
+	LogicComponent* logic = nullptr;
+	if(dynamic_cast<NinjaLogic*>(otherCharacter->mLogicComponent) != nullptr)
+	{
+		logic = dynamic_cast<NinjaLogic*>(otherCharacter->mLogicComponent);
+	}
+	else if(dynamic_cast<DaggerLogic*>(otherCharacter->mLogicComponent) != nullptr)
+	{
+		logic = dynamic_cast<DaggerLogic*>(otherCharacter->mLogicComponent);
+	}
+
+	if(logic == nullptr)
+	{
+		std::cout << "No Logic Component found" << std::endl;
+		return;
+	}
+
 	AttackType attackType = Attacks::getAttack(attackName);
 	
 	
@@ -253,6 +272,7 @@ sf::FloatRect PlayerLogic::getLocalBounds() const
 { 
 	return this->mGameObject->getSprite()->getLocalBounds(); 
 };
+
 sf::FloatRect PlayerLogic::getGlobalBounds() const 
 { 
 	return this->mGameObject->getSprite()->getGlobalBounds(); 

@@ -97,6 +97,12 @@
     <Filter Include="Source Files\Characters\Ryobe\States">
       <UniqueIdentifier>{8c06dcd3-6269-40f7-adbb-d5b2bf3bd2b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Assets\Blood">
+      <UniqueIdentifier>{61878806-beb5-4e2c-9e01-4f2fa91163b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Assets\Blood">
+      <UniqueIdentifier>{082f19c7-4ad8-4146-aa5f-51d06d103d0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -305,6 +311,18 @@
     </ClCompile>
     <ClCompile Include="DazedState.cpp">
       <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeAttackPunch.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodAnimationLogic.cpp">
+      <Filter>Source Files\Assets\Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeAttacking.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
+    <ClCompile Include="DaggerLogic.cpp">
+      <Filter>Source Files\Characters\Ryobe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -532,6 +550,21 @@
     </ClInclude>
     <ClInclude Include="DazedState.h">
       <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeAttackPunch.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodAnimationRender.h">
+      <Filter>Header Files\Assets\Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodAnimationLogic.h">
+      <Filter>Header Files\Assets\Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeAttacking.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="DaggerLogic.h">
+      <Filter>Header Files\Characters\Ryobe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

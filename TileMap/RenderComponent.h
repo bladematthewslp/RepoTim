@@ -18,6 +18,7 @@ private:
 	
 public:
 	RenderComponent(GameObject* gameObject);
+	~RenderComponent();
 	static void			loadImages();
 
 	static ImageHolder	mImageHolder;

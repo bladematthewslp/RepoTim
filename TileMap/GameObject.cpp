@@ -4,6 +4,7 @@
 #include "InputComponent.h"
 #include "BoxColliderComponent.h"
 #include "System.h"
+#include "Foreach.hpp"
 //#include "GameObjectManager.h"
 #include "CState.h"
 #include <iostream>
@@ -22,52 +23,97 @@ GameObject::GameObject(GameObjectDesc desc, bool isInitializing)
 {
 	static int GameObjectCount = 0;
 	
+	mChildren.reserve(300);
+
 	constructComponents(desc);
 	mName = desc.mName;
 	mLayerName = desc.mLayerName;
 	HRESULT l_result = CoCreateGuid(&mID);
-	if( mLayerName != Layer::Root && mLayerName != Layer::Layer)
-	{
-		System::mGameObjects.push_back(this);
-	}
-	/*
-	if( mLayerName == Layer::Root )
-	{
-		System::mSceneLayers[GameObjectCount] = this;
-		return;
-	}
 
-	if( isInitializing != true )
-	{
-		if(mLayerName == Layer::Layer)
-		{
-			System::mSceneLayers[GameObjectCount] = this;
-		}
-	}
-	*/
-	
-	if(mLayerName != Layer::Layer && mLayerName != Layer::Root)
+
+	// add to sceneLayers
+	if(mLayerName != Layer::Root && mLayerName != Layer::Layer)
 	{
 		for(int j = 0; j < System::mSceneLayers.size(); j++)
 		{
 			if(System::mSceneLayers[j]->mName == mLayerName)
 			{
 				
-				System::mSceneLayers[j]->addChild(std::move(std::unique_ptr<GameObject>(this)));
+				System::mSceneLayers[j]->addChild(this);
 				break;
 			}
 		}
 	}
 
+	// move ownership to System::mGameObjects vector
+	if( mLayerName != Layer::Root && mLayerName != Layer::Layer)
+	{
+		System::mGameObjects.push_back(std::move(std::unique_ptr<GameObject>(this)));
+	}
 	GameObjectCount++;
+}
+
+void GameObject::addChild(GameObject* child)
+{
+
+	//if(child->mParent->mName != Layer::Root)
+
+
+	//if child does not have a parent
+		// add code here
+
+	//if child has a parent
+	if(child->mParent != nullptr)
+	{
+		// if the parent is a layer
+		
+		/*if(child->mParent->mLayerName == Layer::Layer)
+		{
+			for(std::array<GameObject*, 7>::iterator layer_itr = System::mSceneLayers.begin();
+				layer_itr != System::mSceneLayers.end();
+				++layer_itr)
+			{
+				if((*layer_itr)->mLayerName == Layer::Layer)
+				{
+					std::vector<GameObject*>::iterator itr = std::remove((*layer_itr)->mChildren.begin(), (*layer_itr)->mChildren.end(), child);
+					(*layer_itr)->mChildren.erase(itr, (*layer_itr)->mChildren.end());
+
+				}
+
+			}
+		}
+		else*/
+		{
+			std::vector<GameObject*>::iterator itr = std::remove(child->mParent->mChildren.begin(), child->mParent->mChildren.end(), child);
+			child->mParent->mChildren.erase(itr, child->mParent->mChildren.end());
+		}
+	}
+
+	mChildren.push_back(child);
+	child->mParent = this;
+	child->mChildPosition = child->getPosition();
+	child->setPosition(child->mParent->getTransform() * child->mChildPosition);
+
+	/*
+	GameObject* temp = child.get();
+	mChildren.push_back(std::move(child));
+	temp->mParent = this;
+	temp->mChildPosition = temp->getPosition();
+	temp->setPosition(temp->mParent->getTransform()  * temp->mChildPosition );
+	*/
+	
 }
 
 GameObject::~GameObject()
 {
 	
+	
+
 }
 void GameObject::updateTransforms()
 {
+	if(mLayerName == Layer::Layer || mLayerName == Layer::Root)
+		return;
 	if(mLayerName != Layer::Layer && mLayerName != Layer::Root && mParent != nullptr && mParent->mLayerName != Layer::Layer)
 	{
 		//setPosition(getLocalTransform()  * sf::Vector2f() );
@@ -76,7 +122,7 @@ void GameObject::updateTransforms()
 
 	}
 	
-	for(std::vector<Ptr>::iterator itr = mChildren.begin(); itr != mChildren.end(); ++itr)
+	for(std::vector<GameObject*>::iterator itr = mChildren.begin(); itr != mChildren.end(); ++itr)
 	{
 		(*itr)->updateTransforms();
 	}
@@ -131,48 +177,7 @@ sf::Vector2f GameObject::getWorldPosition()
 	return position;
 }
 
-void GameObject::addChild(Ptr child)
-{
-	GameObject* temp = child.get();
-	mChildren.push_back(std::move(child));
-	temp->mParent = this;
-	temp->mChildPosition = temp->getPosition();
-	temp->setPosition(temp->mParent->getTransform()  * temp->mChildPosition );
-	/*
-	//lGameObject->mLayerName = this->mLayerName;
-	
 
-	sf::Transform transform = sf::Transform::Identity;
-	//if(updateTransform == true)
-	{
-		for (const GameObject* node = this; node != nullptr && node->mLayerName != Layer::Root && node->mLayerName != Layer::Layer; node = node->mParent)
-			transform = node->getTransform() * transform;
-			
-		/*for(const GameObject* object = lGameObject; object != nullptr; object = object->mParent)
-			transform = object->getTransform() * transform;
-
-		//float * zT = const_cast<float* >(transform.getMatrix());
-		//zT[14] = 8;
-		//sf::Transform transf = sf::Transform::
-		//std::cout << zT[14] << std::endl;
-		//sf::Transform zT = transform.getMatrix()
-		//std::cout << temp->getPosition().x << "," << temp->getPosition().y << std::endl;
-
-		//temp->setPosition(transform * sf::Vector2f());
-		//std::cout << temp->getPosition().x << "," << temp->getPosition().y << std::endl;
-
-		
-	}
-	//else
-	{
-		//temp->setPosition(temp->getTransform() * sf::Vector2f());
-		if(temp->mName == "redBlock")
-			std::cout << "!!!!" << std::endl;
-
-	}
-	*/
-	
-}
 
 GameObject* GameObject::findChildByName(std::string lName)
 {
@@ -228,7 +233,7 @@ void GameObject::drawSceneGraph(sf::RenderWindow& window)
 	{
 		mBoxColliderComponent->render(window);
 	}
-	for(std::vector<Ptr>::iterator itr = mChildren.begin(); itr != mChildren.end(); ++itr)
+	for(std::vector<GameObject*>::iterator itr = mChildren.begin(); itr != mChildren.end(); ++itr)
 	{
 		//std::cout << (getTransform() * sf::Vector2f()).x << std::endl;
 		(*itr)->drawSceneGraph(window);
@@ -316,6 +321,50 @@ void GameObject::create()
 }
 void GameObject::Destroy()
 {
+	// delete all components
+	if(mLogicComponent != nullptr)
+	{
+		mLogicComponent->~LogicComponent();
+		mLogicComponent = nullptr;
+	}
+
+	if(mRenderComponent != nullptr)
+	{
+		mRenderComponent->~RenderComponent();
+		mRenderComponent = nullptr;
+	}
+
+	if(mBoxColliderComponent != nullptr)
+	{
+		mBoxColliderComponent->~BoxColliderComponent();
+		mBoxColliderComponent = nullptr;
+	}
+	
+	// remove object from scene graph (remove from parent object's list of children)
+	if(mParent != nullptr)
+	{
+		std::vector<GameObject*>::iterator itr = std::remove(mParent->mChildren.begin(), mParent->mChildren.end(), this);
+		mParent->mChildren.erase(itr, mParent->mChildren.end());
+	}
+
+	// if object has children, call Destroy() on those as well
+	while(mChildren.size() != 0)
+	{
+		std::vector<GameObject*>::iterator itr = mChildren.begin();
+		(*itr)->Destroy();
+	}
+
+	for(std::vector<Ptr>::iterator obj_itr = System::mGameObjects.begin(); obj_itr != System::mGameObjects.end(); obj_itr++)
+	{
+		if( (*obj_itr)->mID.Data1 == mID.Data1)
+		{
+			System::mGameObjects.erase(obj_itr);
+			break;
+		}
+	}
+
+	
+	
 }
 void GameObject::FixedUpdate()
 {

@@ -23,6 +23,7 @@ public:
 
 	bool					update(sf::Time dt);
 	void					draw(sf::RenderWindow& window);
+	void					destroyGameObjectsOutsideView();
 
 	sf::RenderWindow&		mWindow;
 	sf::View				mWorldView;

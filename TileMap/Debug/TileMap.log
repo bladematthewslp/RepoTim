@@ -1,3 +1,4 @@
-﻿  Game.cpp
-  LINK : C:\SFML\TileMap\Debug\TileMap.exe not found or not built by the last incremental link; performing full link
+﻿  CStateRyobeAttacking.cpp
+c:\sfml\tilemap\cstateryobeattacking.cpp(40): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+c:\sfml\tilemap\cstateryobeattacking.cpp(44): warning C4482: nonstandard extension used: enum 'CStateRyobeAttacking::RyobeAttack' used in qualified name
   TileMap.vcxproj -> C:\SFML\TileMap\Debug\TileMap.exe

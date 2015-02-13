@@ -32,4 +32,5 @@ class CState // stands for 'Character' State
 		virtual CState*		update(GameObject* character, sf::Time dt, Grid& grid);
 
 		std::string getName();
+
 };

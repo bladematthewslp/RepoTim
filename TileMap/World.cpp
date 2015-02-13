@@ -4,20 +4,16 @@
 #include "PlayerLogic.h"
 #include "PlayerInput.h"
 #include "PlayerBoxCollider.h"
-#include "NinjaRender.h"
-#include "NinjaLogic.h"
-#include "NinjaBoxCollider.h"
 #include "NinjaGameObject.h"
 #include "BackgroundGameObject.h"
-#include "AttackType.h"
 #include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 #include "RenderComponent.h"
-#include "ItemGameObject.h"
 #include "HealthBarLogic.h"
 #include "GUIRedOrbLogic.h"
 #include "GUIRedOrbRender.h"
 #include "RyobeGameObject.h"
+#include "ItemGameObject.h"
 
 #include <iostream>
 World::World(sf::RenderWindow& window)
@@ -104,13 +100,15 @@ World::World(sf::RenderWindow& window)
 	std::cout << newBlock->getWorldPosition().x << "," << newBlock->getWorldPosition().y << std::endl;
 	std::cout << mPlayer->getWorldPosition().x << "," << mPlayer->getWorldPosition().y << std::endl;
 	*/
-
+	
 	GameObjectDesc ninjaDesc("Ninja",sf::RectangleShape(), Layer::Enemy);//,ComponentType::LogicComponent);
 	/*GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 	ninja->setPosition(800,475);
 	ninja->mBoxColliderComponent->setSize(50,75);
 		*/
 	//GameObjectDesc ninjaDesc("Ninja2",sf::RectangleShape(), Layer::Enemy);//,ComponentType::LogicComponent);
+	
+	
 	GameObject* ninja2 = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 	ninja2->setPosition(1200,475);
 	ninja2->mBoxColliderComponent->setSize(50,75);
@@ -127,15 +125,51 @@ World::World(sf::RenderWindow& window)
 
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
 	GameObject* ryobe = std::unique_ptr<GameObject>(new RyobeGameObject(ryobeDesc)).release();
-	ryobe->setPosition(925, 472);
+	ryobe->setPosition(500, 472);
 	
+	/*
+	//ryobe->Destroy();
+	std::unique_ptr<GameObject> rr(new GameObject(redBlockDesc));
+	rr->mRenderComponent->setFillColor(sf::Color::Red);
+	//GameObject r(redBlockDesc);
+	mPlayer->addChild(rr.get());
+	*/
+	//r.addComponent(ComponentType::LogicComponent);
+	
+	/*
+	GameObjectDesc redBlockDesc("redBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
+	GameObject* rr = std::unique_ptr<GameObject>(new GameObject(redBlockDesc)).release();
+	rr->mRenderComponent->setFillColor(sf::Color::Red);
+	
+	
+	
+	mPlayer->addChild(rr);
+	
+	GameObjectDesc blueBlockDesc("blueBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
+	GameObject* bb = std::unique_ptr<GameObject>(new GameObject(blueBlockDesc)).release();
+	bb->mRenderComponent->setFillColor(sf::Color::Blue);
+	bb->setPosition(50, -50);
+	rr->addChild(bb);
 
+	GameObjectDesc greenBlockDesc("greenBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
+	GameObject* gg = std::unique_ptr<GameObject>(new GameObject(greenBlockDesc)).release();
+	gg->mRenderComponent->setFillColor(sf::Color::Green);
+	gg->setPosition(-75, -100);
+	bb->addChild(gg);
+	*/
+
+	
+	
 	mLookAtPoint = sf::Vector2f(mPlayer->getPosition().x, 360);
 }
 
 bool World::handleEvent(sf::RenderWindow& window, sf::Event& event)
 {
-	
+	if(event.key.code == sf::Keyboard::U)
+	{
+		GameObject* f = System::findGameObjectByName("redBlock");
+		System::removeGameObject(f);
+	}
 	System::handleEvent(window, event);
 	//std::cout << "WORLD HANDLE EVENT" << std::endl;
 
@@ -155,6 +189,7 @@ bool World::handleInput(sf::Event& event)
 
 bool World::update(sf::Time dt)
 {
+	destroyGameObjectsOutsideView();
 	System::update(*mGrid,dt);
 	return true;
 }
@@ -188,5 +223,37 @@ void World::draw(sf::RenderWindow& window)
 	mWorldView.setCenter(mLookAtPoint);//sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
 	mWindow.setView(mWorldView);
 	System::draw(window);
-	//mWindow.draw( dynamic_cast<GUIRedOrbLogic*>(GUIRedOrb->mLogicComponent)->mText);
+}
+
+void World::destroyGameObjectsOutsideView()
+{
+	std::array<GameObject*, 7>::iterator layer_itr;
+	for(layer_itr = System::mSceneLayers.begin(); layer_itr != System::mSceneLayers.end(); layer_itr++)
+	{
+		if((*layer_itr)->mName == Layer::Enemy)
+		{
+			std::vector<GameObject*>::iterator obj_itr;
+			for(obj_itr = (*layer_itr)->mChildren.begin(); obj_itr != (*layer_itr)->mChildren.end(); obj_itr++)
+			{
+				if((*obj_itr)->mName == "Ryobe")
+				{
+					std::vector<GameObject*>::iterator child_itr;
+					for(child_itr = (*obj_itr)->mChildren.begin(); child_itr != (*obj_itr)->mChildren.end(); child_itr++)
+					{
+						if((*child_itr)->mName == "Dagger")
+						{
+							float dist = std::abs(mWorldView.getCenter().x - (*child_itr)->getWorldPosition().x);
+							if(dist > mWorldView.getSize().x/2)
+							{
+								System::removeGameObject( (*child_itr) );
+								std::cout << "DESTROYED" << std::endl;
+							}
+						}
+					}
+				}
+			}
+			break;
+		}
+	}
+
 }

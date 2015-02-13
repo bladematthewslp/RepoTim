@@ -7,6 +7,7 @@
 #include "BoxColliderComponent.h"
 #include <array>
 #include <vector>
+#include <set>
 #include <iostream>
 #include <typeinfo>
 #include <queue>
@@ -14,6 +15,8 @@
 
 class GameObjectManager;
 struct Grid;
+
+typedef std::unique_ptr<GameObject> Ptr;
 
 class System
 {
@@ -29,11 +32,13 @@ public:
 	static std::vector<LogicComponent*>				mLogicComponents;
 	static std::vector<InputComponent*>				mInputComponents;
 	static std::vector<BoxColliderComponent*>		mBoxColliderComponents;
-	static std::vector<GameObject*>					mGameObjects;
+	static std::vector<Ptr>					mGameObjects;
 
 	// Command Queue
 	static std::queue<std::function<void()>>	mCommandQueue;
 	
+	static std::set<GameObject*>					mGameObjsPendingDeletion;
+
 	// ***************
 	// FUNCTIONS
 	// ***************

@@ -27,6 +27,9 @@ void ItemGameObject::setItemType(Item::Type item)
 		case Item::GreenOrb:
 			this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::GreenOrb);
 			break;
+		case Item::RyobeDagger:
+			this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RyobeDagger);
+			break;
 	}
 	this->mRenderComponent->mTexture.loadFromImage(this->mRenderComponent->mImage);
 	this->mRenderComponent->mSprite.setTexture(&this->mRenderComponent->mTexture);

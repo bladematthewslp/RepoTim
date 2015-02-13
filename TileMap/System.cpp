@@ -13,15 +13,22 @@ std::vector<RenderComponent*>			System::mRenderComponents;
 std::vector<LogicComponent*>			System::mLogicComponents;
 std::vector<InputComponent*>			System::mInputComponents;
 std::vector<BoxColliderComponent*>		System::mBoxColliderComponents;
-std::vector<GameObject*>				System::mGameObjects;
+std::vector<Ptr>						System::mGameObjects;
 
 std::queue<std::function<void()>>		System::mCommandQueue;
+std::set<GameObject*>					System::mGameObjsPendingDeletion;
 
 GameObjectDesc							sceneGraphDesc("Root",sf::RectangleShape(), Layer::Root);
 GameObject								System::mSceneGraph(sceneGraphDesc);
 
 void System::init()
 {
+	mGameObjects.reserve(3000);	
+	mLogicComponents.reserve(3000);
+	mInputComponents.reserve(3000);
+	mRenderComponents.reserve(3000);
+	mBoxColliderComponents.reserve(3000);
+
 	GameObjectDesc layers[] = 
 	{
 		//GameObjectDesc("Root",			sf::RectangleShape(),Layer::Layer),
@@ -39,8 +46,11 @@ void System::init()
 	for(int i = 0; i < 7; ++i)
 	{
 		std::unique_ptr<GameObject> layer(new GameObject(layers[i], true));
-		mSceneLayers[i] = layer.get();
-		mSceneGraph.addChild(std::move(layer));
+		
+		mSceneGraph.addChild(layer.get());
+		mSceneLayers[i] = std::move(layer.release());
+		//mGameObjects.push_back();
+		//mSceneGraph.addChild(std::move(layer));
 	}
 	/*
 	for(int i = 0; i < mGameObjects.size(); i++)
@@ -56,11 +66,7 @@ void System::init()
 	}
 	*/
 	//std::unique_ptr<GameObject> layer(new GameObject());
-	mGameObjects.reserve(3000);	
-	mLogicComponents.reserve(3000);
-	mInputComponents.reserve(3000);
-	mRenderComponents.reserve(3000);
-	mBoxColliderComponents.reserve(3000);
+	
 	
 	std::cout << "DONE INITIALIZATING SYSTEM" << std::endl;
 }
@@ -90,118 +96,33 @@ void System::removeGameObject(GameObject* gameObject)
 	if(!gameObject)
 		return;
 
-	static int times = 0;
+	// add object to set of objects pending deleting
+	mGameObjsPendingDeletion.insert(gameObject);
+
 	std::function<void()> func = [=] () 
 								{ 
 									if(!gameObject)
 										return;
-									// make null all of the game object's components
-									for(std::vector<GameObject*>::iterator obj_itr = mGameObjects.begin(); obj_itr != mGameObjects.end(); ++obj_itr)
+									
+									while(mGameObjsPendingDeletion.size() > 0)
 									{
-										times ++;
-										if(gameObject->mID.Data1 == (*obj_itr)->mID.Data1 )
-										{
-											for(std::vector<RenderComponent*>::iterator ren_itr = mRenderComponents.begin(); ren_itr != mRenderComponents.end(); ++ren_itr)
-											{
-												if((*obj_itr)->mRenderComponent == (*ren_itr))
-												{
-													auto mRenderErased = mRenderComponents.erase(std::remove(mRenderComponents.begin(), mRenderComponents.end(), (*ren_itr)),mRenderComponents.end());//mRenderComponents.erase((*obj_itr)->mRenderComponent, (*obj_itr)->mRenderComponent );//(ren_itr));
-													(*obj_itr)->mRenderComponent = nullptr;
-													break;
-												}
-
-											}
-											for(std::vector<LogicComponent*>::iterator log_itr = mLogicComponents.begin(); log_itr != mLogicComponents.end(); ++log_itr)
-											{
-												if((*obj_itr)->mLogicComponent == (*log_itr))
-												{
-													auto mRenderErased = mLogicComponents.erase(std::remove(mLogicComponents.begin(), mLogicComponents.end(), (*log_itr)),mLogicComponents.end());//mRenderComponents.erase((*obj_itr)->mRenderComponent, (*obj_itr)->mRenderComponent );//(ren_itr));
-													(*obj_itr)->mLogicComponent = nullptr;
-													break;
-												}
-
-											}
-											for(std::vector<BoxColliderComponent*>::iterator boxCol_itr = mBoxColliderComponents.begin(); boxCol_itr != mBoxColliderComponents.end(); ++boxCol_itr)
-											{
-												if((*obj_itr)->mBoxColliderComponent == (*boxCol_itr))
-												{
-													auto mRenderErased = mBoxColliderComponents.erase(std::remove(mBoxColliderComponents.begin(), mBoxColliderComponents.end(), (*boxCol_itr)),mBoxColliderComponents.end());//mRenderComponents.erase((*obj_itr)->mRenderComponent, (*obj_itr)->mRenderComponent );//(ren_itr));
-													(*obj_itr)->mBoxColliderComponent->mDeleted = true;
-													//(*boxCol_itr)->mGameObject = nullptr;
-													(*obj_itr)->mBoxColliderComponent = nullptr;
-													break;
-												}
-
-											}
-
-											// Erase from SceneLayers
-											for(std::array<GameObject*,7>::iterator layer_iter = mSceneLayers.begin(); layer_iter !=mSceneLayers.end(); layer_iter++)
-											{
-												static float count = 0;
-												count++;
-												//std::cout << gameObject->mName << " , " << count << std::endl;
-											
-												if((gameObject != nullptr) && (*obj_itr)->mLayerName == (*layer_iter)->mName)
-												{
-													for(std::vector<GameObject::Ptr>::iterator child_iter = (*layer_iter)->mChildren.begin();
-														child_iter != (*layer_iter)->mChildren.end(); 
-															child_iter++)
-													{
-														//std::cout << (*child_iter)->mID.Data1 << std::endl;
-														if((*obj_itr)->mID == (*child_iter)->mID)
-														{
- 															(*layer_iter)->mChildren.erase(child_iter);
-															break;
-														}
-													}
-													break;
-												}
-											}
-
-										}
+										
+										(*mGameObjsPendingDeletion.begin())->Destroy();
+										mGameObjsPendingDeletion.erase(mGameObjsPendingDeletion.begin());
 									}
-									
-									
-
-									// remove from GameObjects vector
-									for(std::vector<GameObject*>::iterator obj_itr = mGameObjects.begin(); obj_itr != mGameObjects.end();
-											obj_itr++)
-									{
-										if((*obj_itr)->mID == gameObject->mID)
-										{
-											
-											int beforeCount = mGameObjects.size();
-											auto success = mGameObjects.erase(obj_itr);//, mGameObjects.end());
-											int afterCount = mGameObjects.size(); 
-											
-											if(beforeCount == afterCount) //if(success == mGameObjects.end())
-											{
-												std::cout << "no success " << std::endl;
-											}
-											else
-											{
-												std::cout << "Removed" << std::endl;
-												
-											}
-											break;
-										}
-									}
-									
-									
-
-									
 								};
 	
+
 	mCommandQueue.push(func);
 	
 }
 
 GameObject*	System::findGameObjectByName(std::string name)
 {
-	std::vector<GameObject*>::iterator itr;
+	std::vector<Ptr>::iterator itr;
 	for( itr = mGameObjects.begin(); itr != mGameObjects.end(); ++itr)
 	{
-		if((*itr)->mName == name)
+		if((*itr)->mName == name && (*itr)->mLayerName != Layer::Root && (*itr)->mLayerName != Layer::Layer)
 		{
 			break;
 		}
@@ -211,7 +132,7 @@ GameObject*	System::findGameObjectByName(std::string name)
 		return nullptr;
 	}
 	else
-		return *itr;
+		return itr->get();
 }
 
 
@@ -256,7 +177,7 @@ void System::update(Grid& grid, sf::Time dt)//, GameObjectManager& system)
 	}
 	//std::cout << mGameObjects.size() << std::endl;
 	// cheap way of updating the transform component (that is inherently derived from sf::Transformable	)
-	for(std::vector<GameObject*>::iterator iter = mGameObjects.begin(); iter != mGameObjects.end(); ++iter)
+	for(std::vector<Ptr>::iterator iter = mGameObjects.begin(); iter != mGameObjects.end(); ++iter)
 	{
 		(*iter)->updateTransforms();
 	}
@@ -308,6 +229,7 @@ void System::update(Grid& grid, sf::Time dt)//, GameObjectManager& system)
 				if((*iter_col)->mDeleted != true)
 					(*iter_this)->onCollisionExit(grid, (*iter_col));
 				
+
 				// copy a pointer to this collider to the collidersToRemove vector to be removed outside this for-loop
 				collidersToRemove.insert(*iter_col);
 			}
@@ -322,7 +244,7 @@ void System::update(Grid& grid, sf::Time dt)//, GameObjectManager& system)
 		}
 
 		// if there are any remaining colliders still in the mColliders set, call OnCollisionStay() on this collider
-		FOREACH(auto iter_col, (*iter_this)->mColliders)
+ 		FOREACH(auto iter_col, (*iter_this)->mColliders)
 		{
 			(*iter_this)->onCollisionStay(grid, iter_col);
 		}
@@ -371,7 +293,7 @@ void System::draw(sf::RenderWindow& window)//, GameObjectManager& gameObjectMana
 			renderComponent->draw(window, sf::RenderStates::Default);
 		}
 
-		for(std::vector<GameObject::Ptr>::iterator child_itr = gameObject->mChildren.begin(); child_itr != gameObject->mChildren.end(); ++child_itr)
+		for(std::vector<GameObject*>::iterator child_itr = gameObject->mChildren.begin(); child_itr != gameObject->mChildren.end(); ++child_itr)
 		{
 			//std::cout << (getTransform() * sf::Vector2f()).x << std::endl;
 			(*child_itr)->drawSceneGraph(window);

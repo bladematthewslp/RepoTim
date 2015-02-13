@@ -11,8 +11,9 @@ class LogicComponent : public Component
 public:
 	//GameObject*		mParent;
 
-
+	virtual int getDirection();
 	LogicComponent(GameObject* gameObject);
+	~LogicComponent();
 	void	Awake();
 	void	Destroy();
 	void	FixedUpdate();

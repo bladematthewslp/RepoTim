@@ -82,6 +82,7 @@
     <ClCompile Include="AttackStateAir.cpp" />
     <ClCompile Include="AttackType.cpp" />
     <ClCompile Include="BackgroundGameObject.cpp" />
+    <ClCompile Include="BloodAnimationLogic.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CState.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -93,9 +94,12 @@
     <ClCompile Include="CStateNinjaJumping.cpp" />
     <ClCompile Include="CStateNinjaRunning.cpp" />
     <ClCompile Include="CStateNinjaStanding.cpp" />
+    <ClCompile Include="CStateRyobeAttacking.cpp" />
+    <ClCompile Include="CStateRyobeAttackPunch.cpp" />
     <ClCompile Include="CStateRyobeBlocking.cpp" />
     <ClCompile Include="CStateRyobeStanding.cpp" />
     <ClCompile Include="CStateRyobeWalking.cpp" />
+    <ClCompile Include="DaggerLogic.cpp" />
     <ClCompile Include="DazedState.cpp" />
     <ClCompile Include="DeadAirState.cpp" />
     <ClCompile Include="FallingState.cpp" />
@@ -155,6 +159,8 @@
     <ClInclude Include="AttackStateAir.h" />
     <ClInclude Include="AttackType.h" />
     <ClInclude Include="BackgroundGameObject.h" />
+    <ClInclude Include="BloodAnimationLogic.h" />
+    <ClInclude Include="BloodAnimationRender.h" />
     <ClInclude Include="BoxColliderComponent.h" />
     <ClInclude Include="CState.h" />
     <ClInclude Include="Component.h" />
@@ -166,9 +172,12 @@
     <ClInclude Include="CStateNinjaJumping.h" />
     <ClInclude Include="CStateNinjaRunning.h" />
     <ClInclude Include="CStateNinjaStanding.h" />
+    <ClInclude Include="CStateRyobeAttacking.h" />
+    <ClInclude Include="CStateRyobeAttackPunch.h" />
     <ClInclude Include="CStateRyobeBlocking.h" />
     <ClInclude Include="CStateRyobeStanding.h" />
     <ClInclude Include="CStateRyobeWalking.h" />
+    <ClInclude Include="DaggerLogic.h" />
     <ClInclude Include="DazedState.h" />
     <ClInclude Include="DeadAirState.h" />
     <ClInclude Include="FallingState.h" />

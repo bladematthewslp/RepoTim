@@ -38,6 +38,16 @@ BoxColliderComponent::BoxColliderComponent(GameObject* gameObject)
 	System::addComponent(this);
 }
 
+BoxColliderComponent::~BoxColliderComponent()
+{
+	mDeleted = true;
+	std::vector<BoxColliderComponent*>::iterator box_itr;
+	box_itr = std::remove(System::mBoxColliderComponents.begin(), System::mBoxColliderComponents.end(), this);
+	System::mBoxColliderComponents.erase(box_itr, System::mBoxColliderComponents.end());
+
+
+}
+
 void BoxColliderComponent::onCollisionEnter(Grid& grid, BoxColliderComponent* other)
 {
 	
@@ -55,7 +65,15 @@ void BoxColliderComponent::onCollisionEnter(Grid& grid, BoxColliderComponent* ot
 
 void BoxColliderComponent::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 {
-
+	/*
+	for(std::set<BoxColliderComponent*>::iterator box_itr = mColliders.begin(); box_itr != mColliders.end(); ++box_itr)
+	{
+		if( (*box_itr) == other)
+		{
+			mColliders.erase(box_itr, mColliders.end());
+			break;
+		}
+	}*/
 }
 BoxColliderComponent* BoxColliderComponent::onCollisionExit(Grid& grid, BoxColliderComponent* other)
 {

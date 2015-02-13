@@ -24,6 +24,7 @@ public:
 	std::set<BoxColliderComponent*>	mRemovedColliders;	
 
 	BoxColliderComponent(GameObject* gameObject);
+	~BoxColliderComponent();
 	void update();
 	void render(sf::RenderWindow& window);
 	
@@ -34,7 +35,7 @@ public:
 	void							setOrigin(sf::Vector2f origin);
 	virtual void					onCollisionEnter(Grid& grid, BoxColliderComponent* other);
 	virtual void					onCollisionStay(Grid& grid, BoxColliderComponent* other);
-	virtual BoxColliderComponent*					onCollisionExit(Grid& grid, BoxColliderComponent* other);
+	virtual BoxColliderComponent*	onCollisionExit(Grid& grid, BoxColliderComponent* other);
 	std::vector<std::array<int, 2>> getOccupiedCells();
 
 };

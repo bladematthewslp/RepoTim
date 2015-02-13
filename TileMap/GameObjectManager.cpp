@@ -73,7 +73,7 @@ GameObjectManager::GameObjectManager()
 }
 void GameObjectManager::init()
 {
-	createGameObjectGraph(System::mGameObjects);
+	//createGameObjectGraph(System::mGameObjects);
 	/*for(int i = 0; i < mLayers.size(); i++)
 	{
 		sceneLayers[mLayers[i]] = new GameObject(root);

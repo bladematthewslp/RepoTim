@@ -33,6 +33,12 @@ void NinjaBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other)
 
 void NinjaBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 {
+	/*
+	bool otherColliderRemoved = BoxColliderComponent::onCollisionStay(grid, other);
+	
+	if(otherColliderRemoved == true)
+		return true;
+		*/
 	// resolve collision when ninja falls on top of player
 	if(dynamic_cast<PlayerLogic*>(other->mGameObject->mLogicComponent) != nullptr)
 	{
@@ -65,6 +71,4 @@ void NinjaBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 			}
 		}
 	}
-
-
 }

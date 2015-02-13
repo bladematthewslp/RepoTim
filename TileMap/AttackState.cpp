@@ -12,8 +12,9 @@
 #include <queue>
 
 #define CREATE_SLASH_BOX																															\
-			GameObjectDesc slashBoxDesc("PlayerAttackBox",sf::RectangleShape(sf::Vector2f(100,130)),	Layer::Player);										\
+			GameObjectDesc slashBoxDesc("PlayerAttackBox",sf::RectangleShape(sf::Vector2f(100,130)),	Layer::Player);								\
 			GameObject* slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();												\
+			std::cout << "NEW BOX " << std::endl;																									\
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<SlashBoxLogic>(new SlashBoxLogic(slashBox)).release());			\
 			slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new SlashBoxBoxCollider(slashBox)).release());	\
 			slashBox->mBoxColliderComponent->setVisible(true);																						\
@@ -146,7 +147,6 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 			slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(90,60));
 			slashLogic->init(logic->getDirection(), Attacks::PLAYER_SLASH2, 12);
 			isAttack = true;
-
 		}
 		else if(render->currentAnim == "Slash3")
 		{
@@ -154,7 +154,6 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 			slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(230,190));
 			slashLogic->init(logic->getDirection(), Attacks::PLAYER_SLASH3, 12);
 			isAttack = true;
-
 		}
 	}
 	else if(currentFrame == 5 && isAttack == false)
@@ -186,6 +185,8 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 			isAttack = true;
 			//std::cout << "BOX!" << std::endl;
 		}
+		if(currentFrame > 3)
+			isAttack = false;
 		
 	}
 	else if(render->currentAnim == "QuickStinger")
@@ -198,11 +199,13 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 			isAttack = true;
 			//std::cout << "BOX!" << std::endl;
 		}
+		if(currentFrame > 3)
+			isAttack = false;
 		
 	}
 	
-	if(currentFrame == 3 || currentFrame == 7 )
-		isAttack = false;
+	//if(currentFrame == 3 || currentFrame == 7 )
+		//isAttack = false;
 	if(player->mRenderComponent->currentAnim == "QuickUprising")// && render->isAnimDelayed() == true)
 	{
 		

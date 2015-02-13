@@ -10,13 +10,16 @@ TextureHolder RenderComponent::mTextureHolder;
 
 void RenderComponent::loadImages()
 {
+	mImageHolder.load(Images::BloodAnimationA, "Sprites/blood_animation_A.png");
 	mImageHolder.load(Images::Player, "Sprites/player_spritesheet.png");
 	mImageHolder.load(Images::Ninja, "Sprites/ninja_spritesheet.png");
 	mImageHolder.load(Images::RedOrb, "Sprites/red_orb.png");
 	mImageHolder.load(Images::GreenOrb, "Sprites/green_orb.png");
 	mImageHolder.load(Images::Ryobe,	"Sprites/ryobe_spritesheet.png");
+	mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
 	//mImageHolder.load(Images::HealthBar100, "Sprites/healthbar/100.png");
 
+	mTextureHolder.load(Textures::BloodAnimationA, "Sprites/blood_animation_A.png");
 	mTextureHolder.load(Textures::HealthBar100, "Sprites/healthbar/100.png");
 	mTextureHolder.load(Textures::HealthBar90, "Sprites/healthbar/90.png");
 	mTextureHolder.load(Textures::HealthBar80, "Sprites/healthbar/80.png");
@@ -45,6 +48,14 @@ RenderComponent::RenderComponent(GameObject* gameObject)
 	//std::cout << "CREATING RENDER COMPONENT " << std::endl;
 	//mGameObject = gameObject;
 	System::addComponent(this);
+}
+
+RenderComponent::~RenderComponent()
+{
+	std::vector<RenderComponent*>::iterator ren_itr;
+	ren_itr = std::remove(System::mRenderComponents.begin(), System::mRenderComponents.end(), this);
+	System::mRenderComponents.erase(ren_itr, System::mRenderComponents.end());
+
 }
 
 void RenderComponent::createSpriteAnim(sf::IntRect rect, std::string animName, bool loop, int numFrames,float speed, int frameToHold, int startingFrame )
@@ -85,6 +96,12 @@ int RenderComponent::runSpriteAnim(GameObject& gameObject)
 		stopSpriteAnim();
 
 	currentAnim = animName;*/
+	auto sprite = mSpriteSet.find(currentAnim);//->second->run(gameObject);
+	if(sprite == mSpriteSet.end())
+	{
+		std::cout << "Sprite " << currentAnim << " not found. Not playing sprite " << std::endl;
+		return SpriteAnim::Status::FAILURE;
+	}
 	mAnimStatus = mSpriteSet.find(currentAnim)->second->run(gameObject);
 	return mAnimStatus;
 }

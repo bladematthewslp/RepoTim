@@ -10,6 +10,7 @@ namespace Textures
 {
 	enum ID
 	{
+		BloodAnimationA,
 		HealthBar0,
 		HealthBar10,
 		HealthBar20,
@@ -31,11 +32,13 @@ namespace Images
 {
 	enum ID
 	{
+		BloodAnimationA,
 		GreenOrb,
 		Ninja,
 		Player,
 		RedOrb,
 		Ryobe,
+		RyobeDagger
 		
 		
 	};

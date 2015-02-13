@@ -1,6 +1,7 @@
 #include "CState.h"
 
 
+
 CState::CState(std::string name) 
 	: mStateName(name)
 {

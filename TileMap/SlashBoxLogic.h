@@ -21,7 +21,7 @@ public:
 	void			init(int dir, Attacks::Name attack, int timeToLast );
 	void			setAttackType(Attacks::Name type);
 	Attacks::Name	getAttack();
-	
+	GameObject*		getPlayer();
 	int direction;
 	
 private:

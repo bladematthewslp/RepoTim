@@ -8,7 +8,8 @@ namespace Item
 	enum Type
 	{
 		RedOrb,
-		GreenOrb
+		GreenOrb,
+		RyobeDagger
 	};
 
 }

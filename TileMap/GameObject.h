@@ -111,8 +111,8 @@ class GameObject : public sf::Transformable, private sf::Transform
 	Layer::Name					mLayerName;
 	CState*						mState;
 	std::vector<Component*>		mComponents;
-	std::vector<Ptr>			mChildren;
-
+	//std::vector<Ptr>			mChildren;
+	std::vector<GameObject*>	mChildren;
 	//GameObject(sf::RectangleShape shape, int components, const std::string name = "GameObject");
 	//GameObject(const std::string name = "GameObject");
 	GameObject(GameObjectDesc desc, bool isInitializing = false);
@@ -128,7 +128,7 @@ class GameObject : public sf::Transformable, private sf::Transform
 	
 	
 	
-	void						addChild(Ptr child );
+	void						addChild(GameObject* child );
 	void						addComponent(Component* lComponent);
 	
 	

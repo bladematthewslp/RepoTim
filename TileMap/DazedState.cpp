@@ -13,7 +13,7 @@ CState* DazedState::update(GameObject* character, sf::Time dt, Grid& grid)
 {
 	character->mRenderComponent->runSpriteAnim(*character);
 	dazedTimer += sf::seconds(1.0f/60.0f).asSeconds();
-	std::cout << dazedTimer << std::endl;
+	//std::cout << dazedTimer << std::endl;
 	if(character->mRenderComponent->currentAnim == "DazedPart1")
 	{
 		if(character->mRenderComponent->getAnimStatus() == SpriteAnim::Status::SUCCESS)

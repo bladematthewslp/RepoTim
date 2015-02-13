@@ -27,3 +27,17 @@ void LogicComponent::update(Grid& grid)
 {
 	
 }
+
+LogicComponent::~LogicComponent()
+{
+	std::vector<LogicComponent*>::iterator log_itr;
+	log_itr = std::remove(System::mLogicComponents.begin(), System::mLogicComponents.end(), this);
+	System::mLogicComponents.erase(log_itr, System::mLogicComponents.end());
+	
+}
+
+int LogicComponent::getDirection()
+{
+	std::cout << "getDirection() not overwritten" << std::endl;
+	return false;
+}

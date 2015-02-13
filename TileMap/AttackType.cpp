@@ -15,7 +15,9 @@ std::string Attacks::NINJA_SLASH_GROUND		= "NINJA_SLASH_GROUND",
 			Attacks::PLAYER_STINGER			= "PLAYER_STINGER",
 			Attacks::PLAYER_QUICKSTINGER	= "PLAYER_QUICKSTINGER",
 			Attacks::PLAYER_UPRISING		= "PLAYER_UPRISING",
-			Attacks::PLAYER_QUICKUPRISING	= "PLAYER_QUICKUPRISING"
+			Attacks::PLAYER_QUICKUPRISING	= "PLAYER_QUICKUPRISING",
+			Attacks::RYOBE_SWORDATTACK		= "RYOBE_SWORDATTACK",
+			Attacks::RYOBE_DAGGERTHROW		= "RYOBE_DAGGERTHROW"
 			;
 
 void Attacks::registerAttacks()
@@ -33,6 +35,8 @@ void Attacks::registerAttacks()
 	registeredAttacks[PLAYER_QUICKSTINGER]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Weak,false,	PLAYER_QUICKSTINGER)).release();
 	registeredAttacks[PLAYER_UPRISING]		= std::unique_ptr<AttackType>(new AttackType(DamageType::Medium,false,	PLAYER_UPRISING)).release();
 	registeredAttacks[PLAYER_QUICKUPRISING]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Medium,false,	PLAYER_QUICKUPRISING)).release();
+	registeredAttacks[RYOBE_SWORDATTACK]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Medium,false,	RYOBE_SWORDATTACK)).release();
+	registeredAttacks[RYOBE_DAGGERTHROW]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Medium,false,	RYOBE_DAGGERTHROW)).release();
 	
 	std::cout << "REGISTERING ATTACKS" << std::endl; 
 }

@@ -1,3 +1,25 @@
+2-12
+----------------------------
+Modified how game objects are destroyed (this work was done 2 days ago)
+	- In System::removeGameObject(), I commented out the deletion stuff and made a call to 
+		GameObject::Destroy() instead, which will remove all components, remove the object
+		from its parent's list of children, make recursive calls on Destroy() on all child objects,
+		then finally remove the object from System::mGameObjects
+
+2-9
+-----------------------------
+Added blood splatter animation to the game for Ryobe
+
+Adding blood splatter and making it a child object of Ryobe brought up a bug needed to be fixed:
+	- The object gets removed from scene as normal, but it was never removed from Ryobe's vector
+		of mChildren. I added functionality to System::removeGameObject() function to also remove
+		from parent's children vector if it has a parent. The main change was moving ownership
+		of the game object to a local variable so it remains alive until all removal functions
+		are complete.
+
+
+
+
 2-6
 -----------------------------
 Made an update with event/input handling.

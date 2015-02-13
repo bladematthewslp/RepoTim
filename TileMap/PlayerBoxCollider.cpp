@@ -36,7 +36,14 @@ void PlayerBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other
 
 void PlayerBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 {
+	/*bool otherColliderRemoved = BoxColliderComponent::onCollisionStay(grid, other);
+	
+	if(otherColliderRemoved == true)
+		return true;
+		*/
 	PlayerLogic* playerLogic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
+
+	
 
 	if(other->mGameObject->mName == "Ninja")
 	{
@@ -84,6 +91,12 @@ void PlayerBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 				}
 			}
 		}
+	}
+
+	if(other->mGameObject->mName == "Dagger")
+	{
+		playerLogic->hit(other->mGameObject, Attacks::RYOBE_DAGGERTHROW);
+		System::removeGameObject(other->mGameObject);
 	}
 
 	

@@ -47,7 +47,9 @@ struct Attacks
 						PLAYER_STINGER		,
 						PLAYER_QUICKSTINGER ,
 						PLAYER_UPRISING		,
-						PLAYER_QUICKUPRISING
+						PLAYER_QUICKUPRISING,
+						RYOBE_SWORDATTACK	,
+						RYOBE_DAGGERTHROW	
 						;
 	static std::map<Attacks::Name, AttackType*>		registeredAttacks;		
 	

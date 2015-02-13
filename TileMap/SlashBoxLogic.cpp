@@ -140,3 +140,8 @@ Attacks::Name	SlashBoxLogic::getAttack()
 
 
 }
+
+GameObject* SlashBoxLogic::getPlayer()
+{
+	return player;
+}
