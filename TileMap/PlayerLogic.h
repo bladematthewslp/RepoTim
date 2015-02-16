@@ -33,10 +33,12 @@ public:
 	PlayerLogic(GameObject* mGameObject);
 	void update(Grid& grid);
 	
+	void				setNewState(CState* newState);
+
 	void				pickupRedOrb();
 	void				pickupGreenOrb();
 
-	bool				statesCanAttack();
+	bool				canAttackFromState();
 	void				setHealth(int num);
 	int					getHealth();
 

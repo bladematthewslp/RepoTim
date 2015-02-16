@@ -10,6 +10,6 @@ public:
 	RyobeBoxCollider(GameObject* character);
 
 	void	onCollisionEnter(Grid& grid, BoxColliderComponent* other);
-
+	void	onCollisionStay(Grid& grid, BoxColliderComponent* other);
 
 };

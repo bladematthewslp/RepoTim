@@ -31,24 +31,42 @@ World::World(sf::RenderWindow& window)
 	// ___________________________________
 	//	GUI Setup
 	// ___________________________________
+	
+	
+	/*
 	// Mugshot
 	GameObjectDesc mugshotDesc(	"Mugshot",sf::RectangleShape(sf::Vector2f(90,120)),	Layer::UI,	ComponentType::RenderComponent);
 	GameObject* mugshot = std::unique_ptr<GameObject>(new GameObject(mugshotDesc)).release();
 	mugshot->setPosition(15, 10);
 	mugshot->setPosition(sf::Vector2f());
-	mugshot->mRenderComponent->mSprite.setTexture(&mugshot->getRenderComponent()->mTextureHolder.get(Textures::Mugshot));
-	
+	mugshot->mRenderComponent->mSprite.setTexture(&mugshot->getRenderComponent()->mTextureHolder.get(Textures::PlayerMugshot));
+	*/
 	// GUI Red Orb
 	GameObjectDesc GUIRedOrbDesc("GUIRedOrb", sf::RectangleShape(sf::Vector2f(27,45)), Layer::UI);
 	GUIRedOrb = std::unique_ptr<GameObject>(new GameObject(GUIRedOrbDesc)).release();
 	GUIRedOrb->addComponent(ComponentType::RenderComponent, std::unique_ptr<Component>(new GUIRedOrbRender(GUIRedOrb)).release());
 	GUIRedOrb->addComponent(ComponentType::LogicComponent, std::unique_ptr<Component>(new GUIRedOrbLogic(GUIRedOrb)).release());
 
-	GameObjectDesc healthBarDesc("HealthBar", sf::RectangleShape(sf::Vector2f(200,25)), Layer::UI, ComponentType::RenderComponent);
+	GameObjectDesc healthBarDesc("HealthBar", sf::RectangleShape(sf::Vector2f(225,20)), Layer::UI, ComponentType::RenderComponent);
 	mHealthBar = std::unique_ptr<GameObject>(new GameObject(healthBarDesc)).release();
 	mHealthBar->addComponent(ComponentType::LogicComponent, std::unique_ptr<Component>(new HealthBarLogic(mHealthBar)).release());
-	mHealthBar->setPosition(75, 40);
+	mHealthBar->setPosition(170, 82);
+	//mHealthBar->mRenderComponent->mIsEnabled = false;
 
+	GameObjectDesc playerHUDDesc("PlayerHUD", sf::RectangleShape(sf::Vector2f(407,136)), Layer::UI, ComponentType::RenderComponent);
+	GameObject* playerHUD = std::unique_ptr<GameObject>(new GameObject(playerHUDDesc)).release();
+	playerHUD->setPosition(15, 10);
+	playerHUD->setPosition(sf::Vector2f());
+	playerHUD->mRenderComponent->mSprite.setTexture(&playerHUD->getRenderComponent()->mTextureHolder.get(Textures::PlayerHUD));
+	/*
+	GameObjectDesc ryobeHUDHealthbarDesc("RyobeHUD", sf::RectangleShape(sf::Vector2f(352,20)), Layer::UI, ComponentType::RenderComponent);
+	GameObject* ryobeHUDHealthbar = std::unique_ptr<GameObject>(new GameObject(ryobeHUDHealthbarDesc)).release();
+	ryobeHUDHealthbar->setPosition(487, 679);
+	ryobeHUDHealthbar->mRenderComponent->mSprite.setTexture(&ryobeHUDHealthbar->getRenderComponent()->mTextureHolder.get(Textures::RyobeHUDHealthbar));
+	*/
+	
+	
+	
 
 	
 	mGrid = std::unique_ptr<Grid>(new Grid()).release();
@@ -125,7 +143,7 @@ World::World(sf::RenderWindow& window)
 
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
 	GameObject* ryobe = std::unique_ptr<GameObject>(new RyobeGameObject(ryobeDesc)).release();
-	ryobe->setPosition(500, 472);
+	ryobe->setPosition(600, 568);
 	
 	/*
 	//ryobe->Destroy();
@@ -157,8 +175,6 @@ World::World(sf::RenderWindow& window)
 	gg->setPosition(-75, -100);
 	bb->addChild(gg);
 	*/
-
-	
 	
 	mLookAtPoint = sf::Vector2f(mPlayer->getPosition().x, 360);
 }
@@ -197,7 +213,7 @@ bool World::update(sf::Time dt)
 void World::draw(sf::RenderWindow& window)
 {
 	int worldViewXLimit = 512;
-	int cameraLerpSpeed = 1;
+	int cameraLerpSpeed = 2;
 	int pointToLook;
 	int viewPosX = mWorldView.getCenter().x;
 	int playerPosX = mPlayer->getPosition().x;
@@ -219,6 +235,7 @@ void World::draw(sf::RenderWindow& window)
 	{
 		mLookAtPoint.x = worldViewXLimit;
 	}
+	
 	//mWorldView.setCenter(sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
 	mWorldView.setCenter(mLookAtPoint);//sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
 	mWindow.setView(mWorldView);
@@ -235,20 +252,13 @@ void World::destroyGameObjectsOutsideView()
 			std::vector<GameObject*>::iterator obj_itr;
 			for(obj_itr = (*layer_itr)->mChildren.begin(); obj_itr != (*layer_itr)->mChildren.end(); obj_itr++)
 			{
-				if((*obj_itr)->mName == "Ryobe")
+				if((*obj_itr)->mName == "Dagger")
 				{
-					std::vector<GameObject*>::iterator child_itr;
-					for(child_itr = (*obj_itr)->mChildren.begin(); child_itr != (*obj_itr)->mChildren.end(); child_itr++)
+					float dist = std::abs(mWorldView.getCenter().x - (*obj_itr)->getWorldPosition().x);
+					if(dist > mWorldView.getSize().x/2)
 					{
-						if((*child_itr)->mName == "Dagger")
-						{
-							float dist = std::abs(mWorldView.getCenter().x - (*child_itr)->getWorldPosition().x);
-							if(dist > mWorldView.getSize().x/2)
-							{
-								System::removeGameObject( (*child_itr) );
-								std::cout << "DESTROYED" << std::endl;
-							}
-						}
+						System::removeGameObject( (*obj_itr) );
+						std::cout << "DESTROYED" << std::endl;
 					}
 				}
 			}

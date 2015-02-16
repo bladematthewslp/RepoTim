@@ -31,7 +31,13 @@ void RenderComponent::loadImages()
 	mTextureHolder.load(Textures::HealthBar20, "Sprites/healthbar/20.png");
 	mTextureHolder.load(Textures::HealthBar10, "Sprites/healthbar/10.png");
 	mTextureHolder.load(Textures::HealthBar0,	"Sprites/healthbar/0.png");
-	mTextureHolder.load(Textures::Mugshot,		"Sprites/mugshot.png");
+	mTextureHolder.load(Textures::Lightning,	"Sprites/lightning.png");
+	mTextureHolder.load(Textures::PlayerHUD,	"Sprites/HUD/DojiHUDNoHealthbar.png");
+	mTextureHolder.load(Textures::PlayerHUDHealthbar,"Sprites/HUD/DojiHealthbar.png");
+	mTextureHolder.load(Textures::PlayerMugshot,"Sprites/mugshot.png");
+	mTextureHolder.load(Textures::RyobeHUD,		"Sprites/HUD/RyobiHUDNoHealthbar.png");
+	mTextureHolder.load(Textures::RyobeHUDHealthbar,"Sprites/HUD/RyobiHealthbar.png");
+	mTextureHolder.load(Textures::RyobeMugshot,"Sprites/ryobe_mugshot.png");
 }
 
 

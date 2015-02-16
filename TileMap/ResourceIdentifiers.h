@@ -22,7 +22,13 @@ namespace Textures
 		HealthBar80,
 		HealthBar90,
 		HealthBar100,
-		Mugshot,
+		Lightning,
+		PlayerHUD,
+		PlayerHUDHealthbar,
+		PlayerMugshot,
+		RyobeHUD,
+		RyobeHUDHealthbar,
+		RyobeMugshot,
 
 
 	};

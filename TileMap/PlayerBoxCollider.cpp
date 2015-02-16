@@ -2,6 +2,7 @@
 #include "PlayerLogic.h"
 #include "GUIRedOrbLogic.h"
 #include "GUIRedOrbRender.h"
+#include "CStateRyobeAttacking.h"
 #include  <iostream>
 PlayerBoxCollider::PlayerBoxCollider(GameObject* gameObject)
 	: BoxColliderComponent(gameObject)
@@ -18,6 +19,8 @@ void PlayerBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other
 		
 	}
 
+	
+
 	if(other->mGameObject->mName == "RedOrb")
 	{
 		playerLogic->pickupRedOrb();
@@ -31,6 +34,22 @@ void PlayerBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other
 		//dynamic_cast<GUIRedOrbLogic*>(GUIRedOrbObject->mLogicComponent)->increaseRedOrbCount();
 		System::removeGameObject(other->mGameObject);
 	}
+
+	
+	if(other->mGameObject->mName == "RyobeAttackBox")
+	{
+		CStateRyobeAttacking* ryobeAttackingState = dynamic_cast<CStateRyobeAttacking*>(other->mGameObject->mParent->mState);
+		if(ryobeAttackingState != nullptr)
+		{
+			playerLogic->hit(other->mGameObject->mParent, ryobeAttackingState->attackType);
+		}
+
+	}
+	if(other->mGameObject->mName == "Dagger")
+	{
+		playerLogic->hit(other->mGameObject, Attacks::RYOBE_DAGGERTHROW);
+		System::removeGameObject(other->mGameObject);
+	}
 	
 }
 
@@ -42,7 +61,14 @@ void PlayerBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 		return true;
 		*/
 	PlayerLogic* playerLogic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
+	if(other->mGameObject->mName == "Lightning")
+	{
+		if(other->mGameObject->getPosition().x < mGameObject->getPosition().x)
+			playerLogic->move(playerLogic->getRunningSpeed(), 0);
+		else
+			playerLogic->move(-playerLogic->getRunningSpeed(), 0);
 
+	}
 	
 
 	if(other->mGameObject->mName == "Ninja")
@@ -93,27 +119,12 @@ void PlayerBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 		}
 	}
 
-	if(other->mGameObject->mName == "Dagger")
-	{
-		playerLogic->hit(other->mGameObject, Attacks::RYOBE_DAGGERTHROW);
-		System::removeGameObject(other->mGameObject);
-	}
-
+	
 	
 }
 
 BoxColliderComponent* PlayerBoxCollider::onCollisionExit(Grid& grid, BoxColliderComponent* other)
 {
 	
-
-
-	//BoxColliderComponent* boxCollider = BoxColliderComponent::onCollisionExit(grid, other);
-	std::cout << " exit" << std::endl;
-	std::cout << other->mGameObject->mName << std::endl;
-	
-	mColliders.size();
-	//if(boxCollider !=  nullptr)
-		//std::cout << boxCollider->mGameObject->mName << std::endl;
-
 	return nullptr;
 }

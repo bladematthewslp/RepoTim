@@ -1,3 +1,18 @@
+2-16
+---------------------------
+
+Added HUD for Ryobe and Player
+Added healthbar logic for Ryobe and Player
+Added Lightning wall to game and collision logic
+
+
+2-14
+---------------------------
+Gave Ryobe more attacks
+	- charge, embracer
+
+Gave Ryobe slash attack box
+
 2-12
 ----------------------------
 Modified how game objects are destroyed (this work was done 2 days ago)

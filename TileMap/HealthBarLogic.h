@@ -6,6 +6,12 @@
 
 class HealthBarLogic : public LogicComponent
 {
+
+	int maxBarWidth;
+	int maxRectWidth;
+	
+	int healthBarHeight;
+	
 public:
 	HealthBarLogic(GameObject* gameObject);
 

@@ -324,6 +324,9 @@
     <ClCompile Include="DaggerLogic.cpp">
       <Filter>Source Files\Characters\Ryobe</Filter>
     </ClCompile>
+    <ClCompile Include="RyobeAttackBoxLogic.cpp">
+      <Filter>Source Files\Characters\Ryobe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -564,6 +567,9 @@
       <Filter>Header Files\Characters\Ryobe\States</Filter>
     </ClInclude>
     <ClInclude Include="DaggerLogic.h">
+      <Filter>Header Files\Characters\Ryobe</Filter>
+    </ClInclude>
+    <ClInclude Include="RyobeAttackBoxLogic.h">
       <Filter>Header Files\Characters\Ryobe</Filter>
     </ClInclude>
   </ItemGroup>

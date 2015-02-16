@@ -7,7 +7,10 @@ PauseScene::PauseScene(SceneStack& stack, Context context)
 	, mShape(sf::Vector2f(100,100))
 {
 	mShape.setFillColor(sf::Color::Magenta);
-	mShape.setPosition(300,300);
+	sf::Vector2f viewOrigin;
+	viewOrigin.x = getContext().window->getView().getCenter().x - getContext().window->getSize().x/2;
+	viewOrigin.y = getContext().window->getView().getCenter().y - getContext().window->getSize().y/2;
+	mShape.setPosition(viewOrigin + sf::Vector2f(300,300));
 }
 
 bool PauseScene::handleEvent(sf::Event& event)

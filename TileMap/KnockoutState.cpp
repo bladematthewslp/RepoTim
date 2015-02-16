@@ -54,10 +54,21 @@ CState*		KnockoutState::update(GameObject* player, sf::Time dt, Grid& grid)
 
 	if(render->runSpriteAnim(*player) == SpriteAnim::SUCCESS)
 	{
-		if(logic->getHealth() > 0)
+		if(render->currentAnim == "Knockout")
+		{
+			if(logic->getHealth() > 0)
+			{
+				render->setAnimation("HitRecover");
+			}
+		}
+		else if(render->currentAnim == "HitRecover")
 		{
 			CState* state = std::unique_ptr<CState>(new StandingState(player)).release();
 			return state;
+		}
+		else
+		{
+			// you dead
 		}
 	}
 	return this;

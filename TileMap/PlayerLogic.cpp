@@ -32,7 +32,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	mHealthBar = System::findGameObjectByName("HealthBar");
 	if(mHealthBar == nullptr)
 		std::cout << "HealthBar not found" << std::endl;
-	mHealthBar->getSprite()->setTexture(&mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar100));
+	
 
 	// RedOrbGUI
 	mRedOrbsGUI = System::findGameObjectByName("GUIRedOrb");
@@ -41,7 +41,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	dynamic_cast<GUIRedOrbRender*>(mRedOrbsGUI->mRenderComponent)->setRedOrbNum(mNumRedOrbs);
 
 
-	mGameObject->setPosition(300,(32*16) - mGameObject->getSprite()->getLocalBounds().height/8);
+	mGameObject->setPosition(300,(32*19) - mGameObject->getSprite()->getLocalBounds().height/8);
 
 	GameObjectDesc boxDesc("playerBBox", 
 							sf::RectangleShape(sf::Vector2f(mGameObject->getSprite()->getGlobalBounds().width/4,mGameObject->getSprite()->getGlobalBounds().height/4)), 
@@ -126,19 +126,29 @@ void PlayerLogic::pickupGreenOrb()
 
 }
 
-bool PlayerLogic::statesCanAttack()
+bool PlayerLogic::canAttackFromState()
 {
-	std::string states[] = 
-						{	
-							"StandingState",
-							"RunningState",
-							"GuardingState",
-							"JumpingState",
-							"FallingState",
-
+	std::array<std::string, 5>  statesNoAttack = {	
+					 	"DazedState",
+					 	"DeadAirState",
+					 	"HitAirState",
+					 	"HitState",
+					 	"KnockoutState"
+					 };
 	
-						};
+	int size = statesNoAttack.size();
 	
+	for(int i = 0; i < size; i++)
+	{
+		// if any state in "statesNoAttack" array is the current state
+		if(mGameObject->mState->getName() == statesNoAttack[i] )
+		{
+			// cannot attack, return false
+			return false;
+		}
+	}
+	
+	// otherwise return true
 	return true;
 }
 
@@ -155,6 +165,10 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 	else if(dynamic_cast<DaggerLogic*>(otherCharacter->mLogicComponent) != nullptr)
 	{
 		logic = dynamic_cast<DaggerLogic*>(otherCharacter->mLogicComponent);
+	}
+	else if(dynamic_cast<RyobeLogic*>(otherCharacter->mLogicComponent) != nullptr)
+	{
+		logic = dynamic_cast<RyobeLogic*>(otherCharacter->mLogicComponent);
 	}
 
 	if(logic == nullptr)
@@ -222,6 +236,7 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 
 		// Handle health and state change here
 		mHealth -= mDamageTable[attackType.mDamageType];
+		dynamic_cast<HealthBarLogic*>(mHealthBar->mLogicComponent)->updateHealth(mHealth);
 		if(mHealth <= 0)
 		{
 			mGameObject->mState = std::unique_ptr<CState>(new DeadAirState(mGameObject)).release();
@@ -339,4 +354,10 @@ void PlayerLogic::updateBox()
 	box.top = mGameObject->getPosition().y - 50;
 	box.width = 80;
 	box.height = 100;
+}
+
+void PlayerLogic::setNewState(CState* newState)
+{
+	CState* state = std::unique_ptr<CState>(newState).release();
+	mGameObject->mState = state;
 }

@@ -108,7 +108,7 @@ void PlayerInput::handleEvents(const sf::Event& event)
 		if(key == sf::Keyboard::Space)
 		{
 			//check if keys in keyQueue + Space equals a registered attack
-			bool canAttack = logic->statesCanAttack();
+			bool canAttack = logic->canAttackFromState();
 			if(canAttack == true)
 			{
 				PlayerLogic* logic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);

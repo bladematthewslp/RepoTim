@@ -139,7 +139,7 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 				//mGrid[i][j] = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape(sf::Vector2f(32,32) )).release();
 				mGrid[i][j]->setPosition(i*tileSize, j*tileSize);
 				mGrid[i][j]->getRenderComponent()->mSprite.setTexture(&mTexture);
-				mGrid[i][j]->getRenderComponent()->mIsEnabled = true;
+				mGrid[i][j]->getRenderComponent()->mIsEnabled = false;
 				
 				//mGrid[i][j]->addComponent(ComponentType::BoxColliderComponent);
 				//mGrid[i][j]->mBoxColliderComponent->setVisible(true);

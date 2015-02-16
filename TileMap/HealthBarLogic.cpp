@@ -3,48 +3,23 @@
 HealthBarLogic::HealthBarLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
 {
+	mGameObject->getSprite()->setTexture(&mGameObject->mRenderComponent->mTextureHolder.get(Textures::PlayerHUDHealthbar));
 
+
+	maxBarWidth = mGameObject->getSprite()->getSize().x;
+	maxRectWidth = mGameObject->getSprite()->getTextureRect().width;
+
+	healthBarHeight = mGameObject->getSprite()->getSize().y;
 
 }
 
-void HealthBarLogic::updateHealth(int num)
+void HealthBarLogic::updateHealth(int health)
 {
-	switch(num)
-	{
-		case 100:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar100));
-			break;
-		case 90:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar90));
-			break;
-		case 80:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar80));
-			break;
-		case 70:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar70));
-			break;
-		case 60:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar60));
-			break;
-		case 50:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar50));
-			break;
-		case 40:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar40));
-			break;
-		case 30:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar30));
-			break;
-		case 20:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar20));
-			break;
-		case 10:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar10));
-			break;
-		case 0:
-			mGameObject->getSprite()->setTexture( &mGameObject->mRenderComponent->mTextureHolder.get(Textures::HealthBar0));
-			break;
-		
-	}
+	sf::IntRect rect = mGameObject->getSprite()->getTextureRect();
+	rect.width = maxRectWidth * (health * 0.01);
+	mGameObject->getSprite()->setTextureRect(rect);
+
+	mGameObject->getSprite()->setSize(sf::Vector2f(maxBarWidth * (health * 0.01), healthBarHeight));
+	
 
 }

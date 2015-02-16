@@ -9,6 +9,7 @@
 
 enum DamageType
 {
+	NoDamage,
 	Weak,
 	Medium,
 	Strong,
@@ -49,7 +50,10 @@ struct Attacks
 						PLAYER_UPRISING		,
 						PLAYER_QUICKUPRISING,
 						RYOBE_SWORDATTACK	,
-						RYOBE_DAGGERTHROW	
+						RYOBE_DAGGERTHROW	,
+						RYOBE_EMBRACER		,
+						RYOBE_TELEPORT		
+
 						;
 	static std::map<Attacks::Name, AttackType*>		registeredAttacks;		
 	

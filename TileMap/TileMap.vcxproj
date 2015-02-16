@@ -139,6 +139,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="RunningState.cpp" />
+    <ClCompile Include="RyobeAttackBoxLogic.cpp" />
     <ClCompile Include="RyobeBoxCollider.cpp" />
     <ClCompile Include="RyobeGameObject.cpp" />
     <ClCompile Include="RyobeLogic.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="ResourceIdentifiers.h" />
     <ClInclude Include="RunningState.h" />
+    <ClInclude Include="RyobeAttackBoxLogic.h" />
     <ClInclude Include="RyobeBoxCollider.h" />
     <ClInclude Include="RyobeGameObject.h" />
     <ClInclude Include="RyobeLogic.h" />

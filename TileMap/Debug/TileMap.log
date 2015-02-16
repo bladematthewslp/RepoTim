@@ -1,4 +1,16 @@
-﻿  CStateRyobeAttacking.cpp
-c:\sfml\tilemap\cstateryobeattacking.cpp(40): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
-c:\sfml\tilemap\cstateryobeattacking.cpp(44): warning C4482: nonstandard extension used: enum 'CStateRyobeAttacking::RyobeAttack' used in qualified name
+﻿  RyobeLogic.cpp
+c:\sfml\tilemap\ryobelogic.cpp(21): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+c:\sfml\tilemap\ryobelogic.cpp(22): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+c:\sfml\tilemap\ryobelogic.cpp(23): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+c:\sfml\tilemap\ryobelogic.cpp(24): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+c:\sfml\tilemap\ryobelogic.cpp(25): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+c:\sfml\tilemap\ryobelogic.cpp(31): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\sfml\tilemap\ryobelogic.cpp(31): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\sfml\tilemap\ryobelogic.cpp(66): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\sfml\tilemap\ryobelogic.cpp(99): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\sfml\tilemap\ryobelogic.cpp(127): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+c:\sfml\tilemap\ryobelogic.cpp(130): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\sfml\tilemap\ryobelogic.cpp(130): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\sfml\tilemap\ryobelogic.cpp(132): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+c:\sfml\tilemap\ryobelogic.cpp(133): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
   TileMap.vcxproj -> C:\SFML\TileMap\Debug\TileMap.exe

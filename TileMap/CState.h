@@ -5,6 +5,7 @@
 #include "PlayerRender.h"
 //#include "NinjaLogic.h"
 #include "RenderComponent.h"
+#include "BoxColliderComponent.h"
 #include "AttackType.h"
 #include "System.h"
 #include "NinjaRender.h"
