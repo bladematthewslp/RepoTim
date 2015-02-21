@@ -12,7 +12,7 @@ class PlayerLogic;
 struct Grid
 {
 	sf::Vector2f										playerPosition;
-	std::array<std::array<GameObject*, 150>, 150> mGrid;
+	std::array<std::array<GameObject*, 160>, 160> mGrid;
 	unsigned int										tileSize;
 	bool												playerLanded;
 	void												draw(sf::RenderWindow& window);

@@ -35,15 +35,19 @@ CState*	CStateRyobeStanding::update(GameObject* character, sf::Time dt, Grid& gr
 		{
 			if(health >= 75)
 				newState->attackType = Attacks::RYOBE_SWORDATTACK;
-			else //if(health >= 50)
+			else if(health >= 40)
 				newState->attackType = Attacks::RYOBE_TELEPORT;
+			else
+				newState->attackType = Attacks::RYOBE_FELLCRESCENT;
 		}
 		else if(dist >= 200)
 		{
 			if(health >= 75)
 				newState->attackType = Attacks::RYOBE_DAGGERTHROW;
-			else //if(health >= 40)
+			else if(health >= 40)
 				newState->attackType = Attacks::RYOBE_EMBRACER;
+			else
+				newState->attackType = Attacks::RYOBE_TELEPORT;
 		}
 
 		newState->entry(character);

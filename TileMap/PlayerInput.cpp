@@ -40,7 +40,9 @@ PlayerInput::PlayerInput(GameObject* gameObject) : InputComponent(gameObject)
 
 void PlayerInput::handleRealtimeInput(const sf::Event& event)
 {
-	
+	if(mIsEnabled == false)
+		return;
+
 	CState* state = mGameObject->mState->handleInput(mGameObject,event);
 	if(state != mGameObject->mState)
 	{
@@ -75,6 +77,10 @@ void PlayerInput::handleKeyQueue()
 
 void PlayerInput::handleEvents(const sf::Event& event)
 {
+	if(mIsEnabled == false)
+		return;
+
+
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
 	if(logic->getHealth() <= 0 || mGameObject->mState->getName() == "HitState")
 		return;

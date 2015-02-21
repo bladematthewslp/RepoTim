@@ -15,11 +15,13 @@
 #include "RyobeGameObject.h"
 #include "ItemGameObject.h"
 
+#include "CStateRyobeBattleEntrance.h"
+
 #include <iostream>
 World::World(sf::RenderWindow& window)
 	: mWindow(window)
 	, mWorldView(sf::FloatRect(0,0, 1024, 720))
-	, mWorldBounds(0.0f, 0.0f, 1024.f, 720.f)
+	, mWorldBounds(0.0f, 0.0f, 5080.0f, 720.f)
 	, mWorldWidth(1024)
 	, mWorldHeight(720)
 {
@@ -58,15 +60,6 @@ World::World(sf::RenderWindow& window)
 	playerHUD->setPosition(15, 10);
 	playerHUD->setPosition(sf::Vector2f());
 	playerHUD->mRenderComponent->mSprite.setTexture(&playerHUD->getRenderComponent()->mTextureHolder.get(Textures::PlayerHUD));
-	/*
-	GameObjectDesc ryobeHUDHealthbarDesc("RyobeHUD", sf::RectangleShape(sf::Vector2f(352,20)), Layer::UI, ComponentType::RenderComponent);
-	GameObject* ryobeHUDHealthbar = std::unique_ptr<GameObject>(new GameObject(ryobeHUDHealthbarDesc)).release();
-	ryobeHUDHealthbar->setPosition(487, 679);
-	ryobeHUDHealthbar->mRenderComponent->mSprite.setTexture(&ryobeHUDHealthbar->getRenderComponent()->mTextureHolder.get(Textures::RyobeHUDHealthbar));
-	*/
-	
-	
-	
 
 	
 	mGrid = std::unique_ptr<Grid>(new Grid()).release();
@@ -78,7 +71,7 @@ World::World(sf::RenderWindow& window)
 									ComponentType::RenderComponent);
 
 	
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 6; i++)
 	{
 		mBackground[i] = std::unique_ptr<GameObject>(new BackgroundGameObject(backgroundDesc)).release();
 		mBackground[i]->setPosition( i * 1024, 0);
@@ -94,89 +87,32 @@ World::World(sf::RenderWindow& window)
 	mPlayer->mBoxColliderComponent->setSize(80, 98);
 		//mPlayer->mBoxColliderComponent->setVisible(true);
 
-	// block tests
-	/*
-	GameObjectDesc redBlockDesc("redBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
-	std::unique_ptr<GameObject> redBlock(new GameObject(redBlockDesc));
-	redBlock->mRenderComponent->setFillColor(sf::Color::Red);	
-	//redBlock->setChildPosition(200, -100);
-	redBlock->setPosition(100, -50);
-	std::cout << redBlock->getLocalPosition().x << "," << redBlock->getLocalPosition().y << std::endl;
-	mPlayer->addChild(std::move(redBlock));
 	
-	block = System::findGameObjectByName("redBlock");
-	std::cout << block->getLocalPosition().x << "," << block->getLocalPosition().y << std::endl;
-	
-	GameObjectDesc blueBlockDesc("blueBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
-	std::unique_ptr<GameObject> blueBlock(new GameObject(blueBlockDesc));
-	blueBlock->mRenderComponent->setFillColor(sf::Color::Blue);	
-	blueBlock->setPosition(100, 50);
-	std::cout << blueBlock->getWorldPosition().x << "," << blueBlock->getWorldPosition().y << std::endl;
-	
-	block->addChild(std::move(blueBlock));
-	GameObject* newBlock = System::findGameObjectByName("blueBlock");
-	std::cout << newBlock->getWorldPosition().x << "," << newBlock->getWorldPosition().y << std::endl;
-	std::cout << mPlayer->getWorldPosition().x << "," << mPlayer->getWorldPosition().y << std::endl;
-	*/
 	
 	GameObjectDesc ninjaDesc("Ninja",sf::RectangleShape(), Layer::Enemy);//,ComponentType::LogicComponent);
-	/*GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
-	ninja->setPosition(800,475);
-	ninja->mBoxColliderComponent->setSize(50,75);
-		*/
-	//GameObjectDesc ninjaDesc("Ninja2",sf::RectangleShape(), Layer::Enemy);//,ComponentType::LogicComponent);
-	
-	
-	GameObject* ninja2 = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
-	ninja2->setPosition(1200,475);
-	ninja2->mBoxColliderComponent->setSize(50,75);
-	
-	GameObject* ninja3 = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
-	ninja3->setPosition(1500, 475);
-	ninja3->mBoxColliderComponent->setSize(50,75);
-	GameObject* ninja4 = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
-	ninja4->setPosition(2100, 475);
-	ninja4->mBoxColliderComponent->setSize(50,75);
-	GameObject* ninja5 = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
-	ninja5->setPosition(1800, 475);
-	ninja5->mBoxColliderComponent->setSize(50,75);
-
+	// make 4 ninjas
+	ninjaGameObjects.reserve(4);
+	for(int i = 0; i < 4; i++)
+	{
+		GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
+		ninja->mBoxColliderComponent->setSize(50,75);
+		ninja->setPosition( 1200 + (300*i),568);
+		ninjaGameObjects.push_back(ninja);
+	}
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
-	GameObject* ryobe = std::unique_ptr<GameObject>(new RyobeGameObject(ryobeDesc)).release();
-	ryobe->setPosition(600, 568);
-	
-	/*
-	//ryobe->Destroy();
-	std::unique_ptr<GameObject> rr(new GameObject(redBlockDesc));
-	rr->mRenderComponent->setFillColor(sf::Color::Red);
-	//GameObject r(redBlockDesc);
-	mPlayer->addChild(rr.get());
-	*/
-	//r.addComponent(ComponentType::LogicComponent);
-	
-	/*
-	GameObjectDesc redBlockDesc("redBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
-	GameObject* rr = std::unique_ptr<GameObject>(new GameObject(redBlockDesc)).release();
-	rr->mRenderComponent->setFillColor(sf::Color::Red);
-	
-	
-	
-	mPlayer->addChild(rr);
-	
-	GameObjectDesc blueBlockDesc("blueBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
-	GameObject* bb = std::unique_ptr<GameObject>(new GameObject(blueBlockDesc)).release();
-	bb->mRenderComponent->setFillColor(sf::Color::Blue);
-	bb->setPosition(50, -50);
-	rr->addChild(bb);
-
-	GameObjectDesc greenBlockDesc("greenBlock",sf::RectangleShape(sf::Vector2f(20,20)), Layer::Player, ComponentType::RenderComponent);//,ComponentType::LogicComponent);
-	GameObject* gg = std::unique_ptr<GameObject>(new GameObject(greenBlockDesc)).release();
-	gg->mRenderComponent->setFillColor(sf::Color::Green);
-	gg->setPosition(-75, -100);
-	bb->addChild(gg);
-	*/
+	ryobeGameObject = std::unique_ptr<GameObject>(new RyobeGameObject(ryobeDesc)).release();
+	//ryobeGameObject->setPosition(100, 568);
+	ryobeGameObject->setPosition(-1000, -1000);
 	
 	mLookAtPoint = sf::Vector2f(mPlayer->getPosition().x, 360);
+	scrollableWorld = true;
+	bossFightStarted = false;
+	xPositionBossFightStart = 4000;
+	timerToBeginBattle = 0;
+	startTimerToBeginBattle = false;
+	lightningWallLeft  = nullptr;
+	lightningWallRight = nullptr;
+
 }
 
 bool World::handleEvent(sf::RenderWindow& window, sf::Event& event)
@@ -206,6 +142,54 @@ bool World::handleInput(sf::Event& event)
 bool World::update(sf::Time dt)
 {
 	destroyGameObjectsOutsideView();
+
+	if(scrollableWorld == true && bossFightStarted == false && mPlayer->getPosition().x >  xPositionBossFightStart)
+	{
+		GameObjectDesc lightningDesc("Lightning", sf::RectangleShape(sf::Vector2f(40,680)), Layer::Default, ComponentType::RenderComponent);
+		lightningWallLeft = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
+		lightningWallLeft->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
+		lightningWallLeft->mRenderComponent->setAnimation("Lightning");
+		lightningWallLeft->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));// = RenderComponent::mTextureHolder.get(Textures::Lightning);
+		lightningWallLeft->mRenderComponent->mSprite.setTexture(&lightningWallLeft->mRenderComponent->mTexture);
+		lightningWallLeft->addComponent(ComponentType::BoxColliderComponent);
+
+		lightningWallRight = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
+		lightningWallRight->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
+		lightningWallRight->mRenderComponent->setAnimation("Lightning");
+		lightningWallRight->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));
+		lightningWallRight->mRenderComponent->mSprite.setTexture(&lightningWallRight->mRenderComponent->mTexture);
+		lightningWallRight->addComponent(ComponentType::BoxColliderComponent);
+
+		lightningWallLeft->setPosition(xPositionBossFightStart - 450,0);
+		lightningWallRight->setPosition(xPositionBossFightStart + 450,0);
+		scrollableWorld = false;
+	
+		startTimerToBeginBattle = true;
+		//mPlayer->mInputComponent->mIsEnabled = false;
+	}
+	
+	if(startTimerToBeginBattle == true)
+	{
+		timerToBeginBattle += sf::seconds(1.0/60.0f).asSeconds();
+		if(timerToBeginBattle >= 3)
+		{
+			ryobeGameObject->setPosition(4300, 568);
+			ryobeGameObject->mState = std::unique_ptr<CState>(new CStateRyobeBattleEntrance(ryobeGameObject)).release();
+			bossFightStarted = true;
+			startTimerToBeginBattle = false;
+		}
+	}
+
+	
+
+
+	if(lightningWallLeft != nullptr && lightningWallRight != nullptr)
+	{
+		lightningWallLeft->mRenderComponent->runSpriteAnim(*lightningWallLeft);
+		lightningWallRight->mRenderComponent->runSpriteAnim(*lightningWallRight);
+	}
+
+
 	System::update(*mGrid,dt);
 	return true;
 }
@@ -237,7 +221,17 @@ void World::draw(sf::RenderWindow& window)
 	}
 	
 	//mWorldView.setCenter(sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
-	mWorldView.setCenter(mLookAtPoint);//sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
+	//mWorldView.setCenter(mLookAtPoint);//sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
+
+	if(scrollableWorld == true)
+	{
+		mWorldView.setCenter(mLookAtPoint);
+	}
+	else
+	{
+		mWorldView.setCenter(sf::Vector2f(xPositionBossFightStart, 360));
+	}
+
 	mWindow.setView(mWorldView);
 	System::draw(window);
 }

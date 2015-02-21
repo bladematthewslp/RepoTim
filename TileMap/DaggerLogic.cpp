@@ -7,7 +7,7 @@ DaggerLogic::DaggerLogic(GameObject* gameObject)
 	GameObject* ryobe = System::findGameObjectByName("Ryobe");
 	
 	int dir = dynamic_cast<RyobeLogic*>(ryobe->mLogicComponent)->getDirection();
-	speed = dir * 5;
+	speed = dir * 7;
 
 	mDirection = dir;
 	gameObject->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RyobeDagger);									
@@ -24,7 +24,7 @@ DaggerLogic::DaggerLogic(GameObject* gameObject)
 		gameObject->mBoxColliderComponent->setOrigin(sf::Vector2f(40,0));
 
 	//gameObject->mBoxColliderComponent->setOrigin(sf::Vector2f(gameObject->mBoxColliderComponent->getCollisionBox()->getSize().x/8, gameObject->mBoxColliderComponent->getCollisionBox()->getSize().y/8));
-	gameObject->mBoxColliderComponent->setVisible(true);	
+	//gameObject->mBoxColliderComponent->setVisible(true);	
 	
 
 	

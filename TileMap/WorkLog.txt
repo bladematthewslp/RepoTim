@@ -1,6 +1,17 @@
+2-21
+--------------------------
+Placed Ryobe in correct position with lightning walls. Ryobe collides with wall, too.
+Ryobe HUD stuff moved to his BattleEntrance state, then will give it to RyobeLogic
+ when state is over.
+Added Ryobe death state.
+Added Player attackblocked states, grounded and air.
+
+2-16b
+--------------------------
+Removed playerbox collision with ninja collider
+
 2-16
 ---------------------------
-
 Added HUD for Ryobe and Player
 Added healthbar logic for Ryobe and Player
 Added Lightning wall to game and collision logic

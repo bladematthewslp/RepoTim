@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Grid.h"
 #include "GameObject.h"
-
+#include <vector>
 
 
 
@@ -15,6 +15,20 @@ class World
 	GameObject*				mHealthBar;
 	GameObject*				GUIRedOrb;
 	GameObject*				block;
+
+	// world enemies
+	std::vector<GameObject*>	ninjaGameObjects;
+	GameObject*				ryobeGameObject;
+
+	// boss fight variables
+	GameObject*				lightningWallLeft;
+	GameObject*				lightningWallRight;
+	float					xPositionBossFightStart;
+	bool					bossFightStarted;
+	bool					scrollableWorld;
+	float					timerToBeginBattle;
+	bool					startTimerToBeginBattle;
+
 public:
 	World(sf::RenderWindow& window);
 

@@ -6,7 +6,7 @@
 
 class RyobeLogic : public LogicComponent
 {
-	GameObject*					lightning;
+	GameObject*					lightningChargeup;
 	GameObject*					player;
 	int							mDirection;
 	sf::Vector2f				mVelocity;
@@ -14,7 +14,7 @@ class RyobeLogic : public LogicComponent
 	bool						mIsUntouchable;
 	
 	int							mHealth;
-	GameObject*					mHealthBar;
+	GameObject*				    mHealthBar;
 
 	int							mMaxBarWidth;
 	int							mMaxRectWidth;
@@ -32,8 +32,11 @@ public:
 	void			update(Grid& grid);
 	
 	bool			isUntouchable();
+	void			createLightningChargeup();
+
 
 	GameObject*		getHealthBar();
+	void			setHealthBar(GameObject* healthbar);
 	void			hit(GameObject* character, Attacks::Name);
 	void			move(sf::Vector2f& vel);
 	void			move(float x, float y);

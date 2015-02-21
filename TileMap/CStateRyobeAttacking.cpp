@@ -3,6 +3,7 @@
 #include "RyobeAttackBoxLogic.h"
 #include "RyobeLogic.h"
 #include "DaggerLogic.h"
+#include "ParryEffectLogic.h"
 
 
 
@@ -18,7 +19,16 @@
 			GameObject* slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();									\
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<LogicComponent>(new RyobeAttackBoxLogic(slashBox)).release());\
 			slashBox->addComponent(ComponentType::BoxColliderComponent);																\
-			//slashBox->mBoxColliderComponent->setVisible(true);																			\
+			RyobeAttackBoxLogic* ryobeAttackBoxLogic = dynamic_cast<RyobeAttackBoxLogic*>(slashBox->mLogicComponent);					\
+			slashBox->mBoxColliderComponent->setVisible(true);																			\
+
+#define	CREATE_PARRY_EFFECT																															\
+		GameObjectDesc parryAnimation("ParryEffect",sf::RectangleShape(sf::Vector2f(175,175)),Layer::Player,ComponentType::RenderComponent);		\
+		parryEffect = std::unique_ptr<GameObject>(new GameObject(parryAnimation)).release();														\
+		parryEffect->addComponent(ComponentType::LogicComponent, std::unique_ptr<Component>(new ParryEffectLogic(parryEffect)).release() );			\
+		parryEffect->setPosition(sf::Vector2f(-100,-95));																\
+		dynamic_cast<ParryEffectLogic*>(parryEffect->mLogicComponent)->ryobeGameObject = character;													\
+		character->addChild(parryEffect);																											\
 
 
 CStateRyobeAttacking::CStateRyobeAttacking(GameObject* character)
@@ -27,12 +37,14 @@ CStateRyobeAttacking::CStateRyobeAttacking(GameObject* character)
 	, attackType("")
 	, timer(0)
 	, embracerSpeed(10)
+	, fellCrescentSpeed(12)
 	, teleporting(false)
 	, teleportTimer(0)
 	, chargeLoopCounter(0)
 	, embracerAttackBoxCreated(false)
+	, fellCrescentAttackBoxCreated(false)
 {
-	
+	parryEffect = nullptr;
 }
 
 
@@ -70,13 +82,57 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 		if( embracerAttackBoxCreated == false)
 		{
 			CREATE_ATTACK_BOX;
+			ryobeAttackBoxLogic->setTimeToExpire(25);
 			slashBox->mBoxColliderComponent->setSize(40,30);
 			slashBox->setPosition(80 * logic->getDirection(),-20);
 			character->addChild(slashBox);
 			embracerAttackBoxCreated = true;
 		}
 	}
-	
+	else if(character->mRenderComponent->currentAnim == "FellCrescent")
+	{
+		if(character->mRenderComponent->mSpriteSet["FellCrescent"]->currentFrame == 9)
+		{
+			logic->setVelocityX((fellCrescentSpeed * 1.5) * logic->getDirection() );
+			logic->move(logic->getVelocity().x, 0);
+			
+		}
+		else if(character->mRenderComponent->mSpriteSet["FellCrescent"]->currentFrame > 9)
+		{
+			fellCrescentSpeed -= 0.2f;
+			if(fellCrescentSpeed  < 0)
+				fellCrescentSpeed = 0;
+			logic->setVelocityX(fellCrescentSpeed * logic->getDirection() );
+			logic->move(logic->getVelocity().x, 0);
+		}
+		else if(character->mRenderComponent->mSpriteSet["FellCrescent"]->currentFrame >= 6)
+		{
+			//fellCrescentSpeed -= 0.2f;
+			//if(fellCrescentSpeed  < 0)
+				//fellCrescentSpeed = 0;
+			logic->setVelocityX(fellCrescentSpeed * logic->getDirection() );
+			logic->move(logic->getVelocity().x, 0);
+			if(fellCrescentAttackBoxCreated == false)
+			{
+				CREATE_ATTACK_BOX;
+				ryobeAttackBoxLogic->setTimeToExpire(60);
+				slashBox->mBoxColliderComponent->setSize(40,30);
+				slashBox->setPosition(80 * logic->getDirection(),-20);
+				character->addChild(slashBox);
+				fellCrescentAttackBoxCreated = true;
+			}
+		}
+		else if(character->mRenderComponent->mSpriteSet["FellCrescent"]->currentFrame == 3)
+		{
+			logic->createLightningChargeup();
+		}
+
+		if(grid.checkCollisionLeft(character->mBoxColliderComponent) == true)
+		{
+			//std::cout << logic->getVelocity().x << std::endl;
+			logic->move(-logic->getVelocity().x, 0);
+		}
+	}
 
 	if(character->mRenderComponent->getAnimStatus() == SpriteAnim::Status::SUCCESS)
 	{
@@ -90,10 +146,16 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			{
 				character->mRenderComponent->setAnimation("Charge2");
 			}
+			else if(attackType == Attacks::RYOBE_FELLCRESCENT)
+			{
+				character->mRenderComponent->setAnimation("FellCrescent");
+				
+			}
 			else
 			{
 				character->mRenderComponent->setAnimation("SwordAttack1");
 				CREATE_ATTACK_BOX;
+				ryobeAttackBoxLogic->setTimeToExpire(25);
 				slashBox->mBoxColliderComponent->setSize(45,65);
 				slashBox->setPosition(50 * logic->getDirection(),-60);
 				character->addChild(slashBox);
@@ -158,6 +220,7 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			character->mRenderComponent->setAnimation("TeleportSwordAttack1");
 
 			CREATE_ATTACK_BOX;
+			ryobeAttackBoxLogic->setTimeToExpire(25);
 			slashBox->mBoxColliderComponent->setSize(45,65);
 			slashBox->setPosition(50 * logic->getDirection(),-60);
 			character->addChild(slashBox);
@@ -175,15 +238,23 @@ void CStateRyobeAttacking::entry(GameObject* character)
 	if(attackType == Attacks::RYOBE_EMBRACER)
 	{
 		character->mRenderComponent->setAnimation("Charge2");
+		CREATE_PARRY_EFFECT;
+		
 	}
 	else if(attackType == Attacks::RYOBE_TELEPORT)
 	{
 		character->mRenderComponent->setAnimation("Teleport");
 		attackType = Attacks::RYOBE_SWORDATTACK;
 	}
+	else if(attackType == Attacks::RYOBE_FELLCRESCENT)
+	{
+		character->mRenderComponent->setAnimation("AttackReady");
+		CREATE_PARRY_EFFECT;
+	}
 	else
 	{
 		character->mRenderComponent->setAnimation("AttackReady");
+		
 	}
 	
 }

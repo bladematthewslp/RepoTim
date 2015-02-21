@@ -15,6 +15,7 @@
 #include "GUIRedOrbRender.h"
 #include "RyobeLogic.h"
 #include "DaggerLogic.h"
+#include "ParryEffectLogic.h"
 #include <iostream>
 
 const sf::Time deltaTime = sf::seconds(1.0f/60.0f);
@@ -86,6 +87,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	mDamageTable[DamageType::Super] = 40;
 	mDamageTable[DamageType::Unblockable] = 40;
 
+	
 }
 
 void PlayerLogic::update(Grid& grid)
@@ -96,11 +98,12 @@ void PlayerLogic::update(Grid& grid)
 	PlayerInput* input = dynamic_cast<PlayerInput*>(mGameObject->mInputComponent);
 	input->handleKeyQueue();
 
-	if(mVelocity.y != 0 && (mGameObject->mState->getName() != "JumpingState" || mGameObject->mState->getName() != "FallingState") )
+	if(mVelocity.y != 0)// && (mGameObject->mState->getName() != "JumpingState" || mGameObject->mState->getName() != "FallingState") )
 		mIsGrounded = false;
 	else
 		mIsGrounded = true;
 
+	
 	
 	CState* state = mGameObject->mState->update(playerObject, deltaTime, grid);
 	if(state != mGameObject->mState)
@@ -128,12 +131,14 @@ void PlayerLogic::pickupGreenOrb()
 
 bool PlayerLogic::canAttackFromState()
 {
-	std::array<std::string, 5>  statesNoAttack = {	
+	std::array<std::string, 7>  statesNoAttack = {	
 					 	"DazedState",
 					 	"DeadAirState",
 					 	"HitAirState",
 					 	"HitState",
-					 	"KnockoutState"
+					 	"KnockoutState",
+						"AttackBlockedState",
+						"AttackBlockedAirState"
 					 };
 	
 	int size = statesNoAttack.size();
@@ -210,8 +215,8 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 			return;
 		}
 
-		// if damage type is STRONG
-		if(attackType.mDamageType == DamageType::Strong)
+		// if damage type is STRONG or SUPER
+		if(attackType.mDamageType == DamageType::Strong || attackType.mDamageType == DamageType::Super)
 		{
 			// change state to knockdown state
 			mGameObject->mState = std::unique_ptr<CState>(new KnockoutState(mGameObject)).release();

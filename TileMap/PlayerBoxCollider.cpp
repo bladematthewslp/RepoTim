@@ -20,6 +20,7 @@ void PlayerBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other
 	}
 
 	
+	
 
 	if(other->mGameObject->mName == "RedOrb")
 	{
@@ -63,14 +64,30 @@ void PlayerBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 	PlayerLogic* playerLogic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
 	if(other->mGameObject->mName == "Lightning")
 	{
+		sf::FloatRect& otherBox = other->mGameObject->mBoxColliderComponent->getCollisionBox()->getGlobalBounds();
+		sf::FloatRect& playerBox = mGameObject->mBoxColliderComponent->getCollisionBox()->getGlobalBounds();
+		if(other->mGameObject->getPosition().x < mGameObject->getPosition().x)
+		{
+			float dist = (otherBox.left + otherBox.width) - playerBox.left ;
+			playerLogic->move(dist, 0);
+		}
+		else
+		{
+			float dist = (playerBox.left + playerBox.width) - otherBox.left ;
+			playerLogic->move(-dist, 0);
+		}
+
+	}
+	/*if(other->mGameObject->mName == "Lightning")
+	{
 		if(other->mGameObject->getPosition().x < mGameObject->getPosition().x)
 			playerLogic->move(playerLogic->getRunningSpeed(), 0);
 		else
 			playerLogic->move(-playerLogic->getRunningSpeed(), 0);
 
 	}
-	
-
+	*/
+	/*
 	if(other->mGameObject->mName == "Ninja")
 	{
 		if(mCollisionBox.getGlobalBounds().intersects(other->getCollisionBox()->getGlobalBounds()))
@@ -117,7 +134,7 @@ void PlayerBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 				}
 			}
 		}
-	}
+	}*/
 
 	
 	

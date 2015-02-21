@@ -22,7 +22,6 @@ namespace Textures
 		HealthBar80,
 		HealthBar90,
 		HealthBar100,
-		Lightning,
 		PlayerHUD,
 		PlayerHUDHealthbar,
 		PlayerMugshot,
@@ -40,11 +39,15 @@ namespace Images
 	{
 		BloodAnimationA,
 		GreenOrb,
+		GridBlockCrate,
+		LightningWall,
 		Ninja,
+		Parry,
 		Player,
 		RedOrb,
 		Ryobe,
-		RyobeDagger
+		RyobeDagger,
+		
 		
 		
 	};

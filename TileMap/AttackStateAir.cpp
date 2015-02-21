@@ -79,7 +79,7 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 
 	int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
 
-	if(currentFrame == 1 && attackBoxCreated == false)
+	if(currentFrame == 2 && attackBoxCreated == false)
 	{
 		CREATE_SLASH_BOX;
 		slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(225,225));
@@ -88,7 +88,7 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 		attackBoxCreated = true;
 	}
 
-	if(currentFrame == 2)
+	if(currentFrame == 3)
 		attackBoxCreated = false;
 	sf::Vector2f velocity = logic->getVelocity();
 	

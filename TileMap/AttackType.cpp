@@ -19,6 +19,7 @@ std::string Attacks::NINJA_SLASH_GROUND		= "NINJA_SLASH_GROUND",
 			Attacks::RYOBE_SWORDATTACK		= "RYOBE_SWORDATTACK",
 			Attacks::RYOBE_DAGGERTHROW		= "RYOBE_DAGGERTHROW",
 			Attacks::RYOBE_EMBRACER			= "RYOBE_EMBRACER",
+			Attacks::RYOBE_FELLCRESCENT		= "RYOBE_FELLCRESCENT",
 			Attacks::RYOBE_TELEPORT			= "RYOBE_TELEPORT"
 			;
 
@@ -40,6 +41,7 @@ void Attacks::registerAttacks()
 	registeredAttacks[RYOBE_SWORDATTACK]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Medium,false,	RYOBE_SWORDATTACK)).release();
 	registeredAttacks[RYOBE_DAGGERTHROW]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Medium,false,	RYOBE_DAGGERTHROW)).release();
 	registeredAttacks[RYOBE_EMBRACER]		= std::unique_ptr<AttackType>(new AttackType(DamageType::Strong,false,	RYOBE_EMBRACER)).release();
+	registeredAttacks[RYOBE_FELLCRESCENT]	= std::unique_ptr<AttackType>(new AttackType(DamageType::Super,false,	RYOBE_FELLCRESCENT)).release();
 	registeredAttacks[RYOBE_TELEPORT]		= std::unique_ptr<AttackType>(new AttackType(DamageType::NoDamage,false,RYOBE_TELEPORT)).release();
 	
 	

@@ -52,6 +52,7 @@ struct Attacks
 						RYOBE_SWORDATTACK	,
 						RYOBE_DAGGERTHROW	,
 						RYOBE_EMBRACER		,
+						RYOBE_FELLCRESCENT	,
 						RYOBE_TELEPORT		
 
 						;

@@ -11,11 +11,14 @@ TextureHolder RenderComponent::mTextureHolder;
 void RenderComponent::loadImages()
 {
 	mImageHolder.load(Images::BloodAnimationA, "Sprites/blood_animation_A.png");
-	mImageHolder.load(Images::Player, "Sprites/player_spritesheet.png");
-	mImageHolder.load(Images::Ninja, "Sprites/ninja_spritesheet.png");
-	mImageHolder.load(Images::RedOrb, "Sprites/red_orb.png");
-	mImageHolder.load(Images::GreenOrb, "Sprites/green_orb.png");
-	mImageHolder.load(Images::Ryobe,	"Sprites/ryobe_spritesheet.png");
+	mImageHolder.load(Images::Player,		"Sprites/player_spritesheet.png");
+	mImageHolder.load(Images::Ninja,		"Sprites/ninja_spritesheet.png");
+	mImageHolder.load(Images::RedOrb,		"Sprites/red_orb.png");
+	mImageHolder.load(Images::GreenOrb,		"Sprites/green_orb.png");
+	mImageHolder.load(Images::GridBlockCrate,"Sprites/crate.png");
+	mImageHolder.load(Images::LightningWall,	"Sprites/lightning.png");
+	mImageHolder.load(Images::Parry,		"Sprites/electricParry.png");
+	mImageHolder.load(Images::Ryobe,		"Sprites/ryobe_spritesheet.png");
 	mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
 	//mImageHolder.load(Images::HealthBar100, "Sprites/healthbar/100.png");
 
@@ -31,7 +34,6 @@ void RenderComponent::loadImages()
 	mTextureHolder.load(Textures::HealthBar20, "Sprites/healthbar/20.png");
 	mTextureHolder.load(Textures::HealthBar10, "Sprites/healthbar/10.png");
 	mTextureHolder.load(Textures::HealthBar0,	"Sprites/healthbar/0.png");
-	mTextureHolder.load(Textures::Lightning,	"Sprites/lightning.png");
 	mTextureHolder.load(Textures::PlayerHUD,	"Sprites/HUD/DojiHUDNoHealthbar.png");
 	mTextureHolder.load(Textures::PlayerHUDHealthbar,"Sprites/HUD/DojiHealthbar.png");
 	mTextureHolder.load(Textures::PlayerMugshot,"Sprites/mugshot.png");

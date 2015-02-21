@@ -21,15 +21,17 @@ void RyobeBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 
 	if(other->mGameObject->mName == "Lightning")
 	{
+		sf::FloatRect& otherBox = other->mGameObject->mBoxColliderComponent->getCollisionBox()->getGlobalBounds();
+		sf::FloatRect& ryobeBox = mGameObject->mBoxColliderComponent->getCollisionBox()->getGlobalBounds();
 		if(other->mGameObject->getPosition().x < mGameObject->getPosition().x)
 		{
-			logic->move(logic->getVelocity().x, 0);
-			std::cout << "LIGHTNING LEFT" << std::endl;
+			float dist = (otherBox.left + otherBox.width) - ryobeBox.left ;
+			logic->move(dist, 0);
 		}
 		else
 		{
-			logic->move(-logic->getVelocity().x, 0);
-			std::cout << "LIGHTNING RIGHT" << std::endl;
+			float dist = (ryobeBox.left + ryobeBox.width) - otherBox.left ;
+			logic->move(-dist, 0);
 		}
 	}
 

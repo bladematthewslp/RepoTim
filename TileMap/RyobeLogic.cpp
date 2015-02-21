@@ -2,7 +2,7 @@
 #include "CStateRyobeStanding.h"
 #include "BloodAnimationLogic.h"
 #include "CStateRyobeAttacking.h"
-
+#include "CStateRyobeDead.h"
 
 RyobeLogic::RyobeLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
@@ -12,6 +12,7 @@ RyobeLogic::RyobeLogic(GameObject* gameObject)
 	, mDirection(Direction::Left)
 	, mVelocity(0,0)
 	, mIsUntouchable(false)
+	, lightningChargeup(nullptr)
 {
 	
 	player = System::findGameObjectByName("Player");
@@ -28,57 +29,25 @@ RyobeLogic::RyobeLogic(GameObject* gameObject)
 	mHealthBarWidth = 352;
 	mHealthBarHeight = 20;
 	mMaxBarWidth = mHealthBarWidth;
-	GameObjectDesc healthBarDesc("RyobeHealthBar",sf::RectangleShape(sf::Vector2f(mHealthBarWidth,mHealthBarHeight)), Layer::UI, ComponentType::RenderComponent);
+	/*GameObjectDesc healthBarDesc("RyobeHealthBar",sf::RectangleShape(sf::Vector2f(mHealthBarWidth,mHealthBarHeight)), Layer::UI, ComponentType::RenderComponent);
 	mHealthBar = std::unique_ptr<GameObject>(new GameObject(healthBarDesc)).release();
 	mHealthBar->mRenderComponent->mTexture = mHealthBar->getRenderComponent()->mTextureHolder.get(Textures::RyobeHUDHealthbar);
 	mHealthBar->mRenderComponent->mSprite.setTexture(&mHealthBar->mRenderComponent->mTexture);
 	mMaxRectWidth = mHealthBar->mRenderComponent->mSprite.getTextureRect().width;
 	mHealthBar->setPosition(487, 677);
-
-	GameObjectDesc ryobeHUDDesc("RyobeHUD", sf::RectangleShape(sf::Vector2f(607,160)), Layer::UI, ComponentType::RenderComponent);
-	GameObject* ryobeHUD = std::unique_ptr<GameObject>(new GameObject(ryobeHUDDesc)).release();
-	ryobeHUD->setPosition(400, 578);
-	ryobeHUD->mRenderComponent->mSprite.setTexture(&ryobeHUD->getRenderComponent()->mTextureHolder.get(Textures::RyobeHUD));
-
-
-	/*
-	GameObjectDesc healthBarBorderDesc("RyobeHealthBarBorder", sf::RectangleShape(sf::Vector2f(mHealthBarWidth, mHealthBarHeight)), Layer::UI, ComponentType::RenderComponent);
-	GameObject* healthBarBorder = std::unique_ptr<GameObject>(new GameObject(healthBarBorderDesc)).release();
-	healthBarBorder->mRenderComponent->mSprite.setFillColor(sf::Color::Transparent);
-	healthBarBorder->getSprite()->setOutlineColor(sf::Color::Black);
-	healthBarBorder->getSprite()->setOutlineThickness(5);
-	healthBarBorder->setPosition(mHealthBar->getPosition());
-	*/
-	/*
-	GameObjectDesc ryobeMugShotDesc("RyobeMugShot", sf::RectangleShape(sf::Vector2f(80, 85)), Layer::UI, ComponentType::RenderComponent);
-	GameObject* mugshot = std::unique_ptr<GameObject>(new GameObject(ryobeMugShotDesc)).release();
-	mugshot->setPosition(900, 625);
-	mugshot->mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::RyobeMugshot);
-	mugshot->mRenderComponent->mSprite.setTexture(&mugshot->mRenderComponent->mTexture);
 	*/
 	
-	CState* state = std::unique_ptr<CState>(new CStateRyobeStanding(mGameObject)).release();
-	state->entry(mGameObject);
-	mGameObject->mState = state;
+
+
+
 	
-	GameObjectDesc lightningDesc("Lightning", sf::RectangleShape(sf::Vector2f(40,680)), Layer::Enemy, ComponentType::RenderComponent);
-	lightning = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
-	lightning->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
-	lightning->mRenderComponent->setAnimation("Lightning");
-	lightning->mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::Lightning);
-	lightning->mRenderComponent->mSprite.setTexture(&lightning->mRenderComponent->mTexture);
-	lightning->addComponent(ComponentType::BoxColliderComponent);
-	//lightning->mBoxColliderComponent->setSize(40, 680);
-	sf::Vector2f boxSize = lightning->mBoxColliderComponent->getCollisionBox()->getSize();
-	//lightning->mBoxColliderComponent->setOrigin(sf::Vector2f(boxSize.x,boxSize.y));
-	
-	
-	//lightning->mBoxColliderComponent->setVisible(true);
-	lightning->setPosition(70,0);
 }
 
 void RyobeLogic::update(Grid& grid)
 {
+	if(mGameObject->mState == nullptr)
+		return;
+
 	updateDirection();
 
 	mVelocity.x = 0;
@@ -86,14 +55,25 @@ void RyobeLogic::update(Grid& grid)
 	if(mGameObject->mState->getName() == "CStateRyobeAttacking")
 	{
 		CStateRyobeAttacking* attackState = dynamic_cast<CStateRyobeAttacking*>(mGameObject->mState);
-		if(attackState->attackType == Attacks::RYOBE_EMBRACER)
+		if(attackState->attackType == Attacks::RYOBE_EMBRACER
+			|| attackState->attackType == Attacks::RYOBE_FELLCRESCENT)
 			mIsUntouchable = true;
 		else
 			mIsUntouchable = false;
 	}
+	else
+		mIsUntouchable = false;
 	
-	lightning->mRenderComponent->runSpriteAnim(*lightning);
-
+	if(lightningChargeup != nullptr)
+	{
+		if(lightningChargeup->mRenderComponent->runSpriteAnim(*lightningChargeup) == SpriteAnim::Status::SUCCESS)
+		//if(mGameObject->mState->getName() != "CStateRyobeAttacking")
+		{
+			System::removeGameObject(lightningChargeup);
+			lightningChargeup = nullptr;
+		}
+	}
+	
 	
 	
 	CState* newState = mGameObject->mState->update(mGameObject, sf::seconds(1.0/60.0f), grid);
@@ -123,6 +103,9 @@ void RyobeLogic::hit(GameObject* character, Attacks::Name attackName)
 	int damageAmount = mDamageTable[attackType.mDamageType];
 	mHealth -= damageAmount;
 
+	if(mHealth <= 0)
+		mGameObject->mState = std::unique_ptr<CState>(new CStateRyobeDead(mGameObject)).release();
+
 	sf::IntRect rect = mHealthBar->getSprite()->getTextureRect();
 	rect.width = mMaxRectWidth * (mHealth * 0.01);
 	mHealthBar->getSprite()->setTextureRect(rect);
@@ -131,25 +114,6 @@ void RyobeLogic::hit(GameObject* character, Attacks::Name attackName)
 	
 	float healthBarDiff = (mHealthBarWidth* (damageAmount * 0.01) );
 	mHealthBar->move(mMaxBarWidth * (damageAmount * 0.01), 0);
-
-	/*float barSize = mHealthBar->mRenderComponent->mSprite.getSize().x;
-	
-	if(mHealth <= 0)
-	{
-		mHealthBar->mRenderComponent->mSprite.setSize(sf::Vector2f(0,mHealthBarHeight));
-	}
-	else
-	{
-		mHealthBar->mRenderComponent->mSprite.setSize(sf::Vector2f(barSize - healthBarDiff,mHealthBarHeight));
-
-	}
-
-	sf::IntRect rect = mHealthBar->mRenderComponent->mSprite.getTextureRect();
-	rect.width -= healthBarDiff;
-	mHealthBar->mRenderComponent->mSprite.setTextureRect(rect);
-	*/
-
-	//mHealthBar->move(healthBarDiff, 0);
 
 	GameObjectDesc bloodDesc("BloodAnimation",sf::RectangleShape(),Layer::Foreground,ComponentType::RenderComponent);
 	GameObject* blood = std::unique_ptr<GameObject>(new GameObject(bloodDesc)).release();
@@ -238,4 +202,24 @@ GameObject* RyobeLogic::getHealthBar()
 bool RyobeLogic::isUntouchable()
 {
 	return mIsUntouchable;
+}
+
+void RyobeLogic::setHealthBar(GameObject* healthbar) 
+{ 
+	mHealthBar = std::move(healthbar); 
+	mMaxRectWidth = mHealthBar->mRenderComponent->mSprite.getTextureRect().width;
+}
+
+void RyobeLogic::createLightningChargeup()
+{
+	if(lightningChargeup != nullptr)
+		return;
+	GameObjectDesc lightningChargupDesc("LightningChargeup",sf::RectangleShape(sf::Vector2f(40,500)), Layer::Default, ComponentType::RenderComponent);
+	lightningChargeup = std::unique_ptr<GameObject>(new GameObject(lightningChargupDesc)).release();
+	lightningChargeup->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 3, 1);
+	lightningChargeup->mRenderComponent->setAnimation("Lightning");
+	lightningChargeup->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));// = RenderComponent::mTextureHolder.get(Textures::Lightning);
+	lightningChargeup->mRenderComponent->mSprite.setTexture(&lightningChargeup->mRenderComponent->mTexture);
+
+	lightningChargeup->setPosition(mGameObject->getPosition().x - 20, 0);
 }

@@ -27,7 +27,6 @@ CState* HitAirState::update(GameObject* player, sf::Time dt, Grid& grid)
 	if(hitVelocity.y > 0)
 	{
 		hitVelocity.y = 0;
-		//player->mRenderComponent->setAnimation("HitAirPart2");
 	}
 	
 	logic->setVelocityX(hitVelocity.x * logic->getDirection());

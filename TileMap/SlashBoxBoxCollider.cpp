@@ -5,6 +5,8 @@
 #include "SlashBoxLogic.h"
 #include "AttackType.h"
 #include "DazedState.h"
+#include "AttackBlockedState.h"
+#include "AttackBlockedAirState.h"
 #include "System.h"
 
 SlashBoxBoxCollider::SlashBoxBoxCollider(GameObject* gameObject)
@@ -18,6 +20,7 @@ SlashBoxBoxCollider::SlashBoxBoxCollider(GameObject* gameObject)
 void SlashBoxBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other)
 {
 	SlashBoxLogic* logic = dynamic_cast<SlashBoxLogic*>(mGameObject->mLogicComponent);
+	PlayerLogic* playerLogic = dynamic_cast<PlayerLogic*>(logic->getPlayer()->mLogicComponent);
 	/*if(other->mGameObject->mName == "Ninja")
 	{
 		dynamic_cast<NinjaLogic*>(other->mGameObject->mLogicComponent)->hit(other->mGameObject, logic->getAttack());
@@ -35,8 +38,15 @@ void SlashBoxBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* oth
 		if(other->mGameObject->mName == "Ryobe")
 		{
 			RyobeLogic* ryobeLogic = dynamic_cast<RyobeLogic*>(other->mGameObject->mLogicComponent);
+			// if ryobe is untouchable when he is hit
 			if(ryobeLogic->isUntouchable() == true)
-				dynamic_cast<PlayerLogic*>(logic->getPlayer()->mLogicComponent)->setNewState(new DazedState(logic->getPlayer()));
+			{
+				// set player state, depending on if he is grounded or airborne
+				if(playerLogic->isGrounded() == true)
+					playerLogic->setNewState(new AttackBlockedState(logic->getPlayer()));
+				else
+					playerLogic->setNewState(new AttackBlockedAirState(logic->getPlayer()));
+			}
 			else
 				ryobeLogic->hit(other->mGameObject, logic->getAttack());
 		}

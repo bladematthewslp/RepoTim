@@ -9,7 +9,7 @@
 #include <string>
 #include <array>
 extern sf::RectangleShape* bBox;
-std::array<std::array<int, 150>, 150> worldGrid;// = {{ 
+std::array<std::array<int, 160>, 160> worldGrid;// = {{ 
 /*std::array<std::array<int, 72>, 72> worldGrid = {{ 
 					{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 					{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -87,8 +87,8 @@ std::array<std::array<int, 150>, 150> worldGrid;// = {{
 Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 {
 
-	mImage.loadFromFile("Sprites/crate.png");
-	mTexture.loadFromImage(mImage);
+	//mImage.loadFromFile("Sprites/crate.png");
+	mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::GridBlockCrate));//mImage);
 	sf::RectangleShape block(sf::Vector2f(32,32));
 	GameObjectDesc tile("Grid Block", block, Layer::Default, ComponentType::RenderComponent, nullptr);
 	
@@ -139,7 +139,7 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 				//mGrid[i][j] = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape(sf::Vector2f(32,32) )).release();
 				mGrid[i][j]->setPosition(i*tileSize, j*tileSize);
 				mGrid[i][j]->getRenderComponent()->mSprite.setTexture(&mTexture);
-				mGrid[i][j]->getRenderComponent()->mIsEnabled = false;
+				mGrid[i][j]->getRenderComponent()->mIsEnabled = true;
 				
 				//mGrid[i][j]->addComponent(ComponentType::BoxColliderComponent);
 				//mGrid[i][j]->mBoxColliderComponent->setVisible(true);

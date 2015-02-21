@@ -78,6 +78,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackBlockedAirState.cpp" />
+    <ClCompile Include="AttackBlockedState.cpp" />
     <ClCompile Include="AttackState.cpp" />
     <ClCompile Include="AttackStateAir.cpp" />
     <ClCompile Include="AttackType.cpp" />
@@ -96,7 +98,9 @@
     <ClCompile Include="CStateNinjaStanding.cpp" />
     <ClCompile Include="CStateRyobeAttacking.cpp" />
     <ClCompile Include="CStateRyobeAttackPunch.cpp" />
+    <ClCompile Include="CStateRyobeBattleEntrance.cpp" />
     <ClCompile Include="CStateRyobeBlocking.cpp" />
+    <ClCompile Include="CStateRyobeDead.cpp" />
     <ClCompile Include="CStateRyobeStanding.cpp" />
     <ClCompile Include="CStateRyobeWalking.cpp" />
     <ClCompile Include="DaggerLogic.cpp" />
@@ -128,6 +132,7 @@
     <ClCompile Include="NinjaRender.cpp" />
     <ClCompile Include="NinjaSlashBoxCollider.cpp" />
     <ClCompile Include="NinjaSlashBoxLogic.cpp" />
+    <ClCompile Include="ParryEffectLogic.cpp" />
     <ClCompile Include="PauseScene.cpp" />
     <ClCompile Include="PlayerBoxCollider.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
@@ -156,6 +161,8 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackBlockedAirState.h" />
+    <ClInclude Include="AttackBlockedState.h" />
     <ClInclude Include="AttackState.h" />
     <ClInclude Include="AttackStateAir.h" />
     <ClInclude Include="AttackType.h" />
@@ -175,7 +182,9 @@
     <ClInclude Include="CStateNinjaStanding.h" />
     <ClInclude Include="CStateRyobeAttacking.h" />
     <ClInclude Include="CStateRyobeAttackPunch.h" />
+    <ClInclude Include="CStateRyobeBattleEntrance.h" />
     <ClInclude Include="CStateRyobeBlocking.h" />
+    <ClInclude Include="CStateRyobeDead.h" />
     <ClInclude Include="CStateRyobeStanding.h" />
     <ClInclude Include="CStateRyobeWalking.h" />
     <ClInclude Include="DaggerLogic.h" />
@@ -211,6 +220,7 @@
     <ClInclude Include="NinjaSlashBoxCollider.h" />
     <ClInclude Include="NinjaSlashBoxLogic.h" />
     <ClInclude Include="oldgrid.h" />
+    <ClInclude Include="ParryEffectLogic.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="PlayerBoxCollider.h" />
     <ClInclude Include="PlayerInput.h" />

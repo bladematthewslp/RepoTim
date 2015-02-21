@@ -327,6 +327,21 @@
     <ClCompile Include="RyobeAttackBoxLogic.cpp">
       <Filter>Source Files\Characters\Ryobe</Filter>
     </ClCompile>
+    <ClCompile Include="AttackBlockedState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="ParryEffectLogic.cpp">
+      <Filter>Source Files\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeBattleEntrance.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackBlockedAirState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateRyobeDead.cpp">
+      <Filter>Source Files\Characters\Ryobe\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -571,6 +586,21 @@
     </ClInclude>
     <ClInclude Include="RyobeAttackBoxLogic.h">
       <Filter>Header Files\Characters\Ryobe</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBlockedState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="ParryEffectLogic.h">
+      <Filter>Header Files\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeBattleEntrance.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBlockedAirState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateRyobeDead.h">
+      <Filter>Header Files\Characters\Ryobe\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
