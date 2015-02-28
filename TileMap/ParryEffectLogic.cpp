@@ -6,8 +6,8 @@ ParryEffectLogic::ParryEffectLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
 {
 	RenderComponent* render = gameObject->getRenderComponent();
-	render->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::Parry));
-	render->mSprite.setTexture(&render->mTexture);
+	//render->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::Parry));
+	render->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::RyobeParryEffect));//render->mTexture);
 	
 
 	gameObject->mRenderComponent->createSpriteAnim(sf::IntRect(512,0,512,512),"Parry", true, 7, 1);

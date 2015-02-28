@@ -17,6 +17,7 @@ GameObject::GameObject(GameObjectDesc desc, bool isInitializing)
 	, mRenderComponent(nullptr)
 	, mLogicComponent(nullptr)
 	, mBoxColliderComponent(nullptr)
+	, mInputComponent(nullptr)
 	, mParent(nullptr)
 	, mState(nullptr)
 	, mChildPosition(0,0)
@@ -338,6 +339,12 @@ void GameObject::Destroy()
 	{
 		mBoxColliderComponent->~BoxColliderComponent();
 		mBoxColliderComponent = nullptr;
+	}
+
+	if(mInputComponent != nullptr)
+	{
+		mInputComponent->~InputComponent();
+		mInputComponent = nullptr;
 	}
 	
 	// remove object from scene graph (remove from parent object's list of children)

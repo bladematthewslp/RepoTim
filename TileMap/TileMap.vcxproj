@@ -84,6 +84,7 @@
     <ClCompile Include="AttackStateAir.cpp" />
     <ClCompile Include="AttackType.cpp" />
     <ClCompile Include="BackgroundGameObject.cpp" />
+    <ClCompile Include="BattleReadyState.cpp" />
     <ClCompile Include="BloodAnimationLogic.cpp" />
     <ClCompile Include="BoxColliderComponent.cpp" />
     <ClCompile Include="CState.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="WinState.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +169,7 @@
     <ClInclude Include="AttackStateAir.h" />
     <ClInclude Include="AttackType.h" />
     <ClInclude Include="BackgroundGameObject.h" />
+    <ClInclude Include="BattleReadyState.h" />
     <ClInclude Include="BloodAnimationLogic.h" />
     <ClInclude Include="BloodAnimationRender.h" />
     <ClInclude Include="BoxColliderComponent.h" />
@@ -246,6 +249,7 @@
     <ClInclude Include="System.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="WinState.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

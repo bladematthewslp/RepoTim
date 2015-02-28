@@ -7,6 +7,7 @@
 #include "KnockoutState.h"
 #include "HitAirState.h"
 #include "DeadAirState.h"
+#include "BattleReadyState.h"
 #include "GuardState.h"
 #include "NinjaLogic.h"
 #include "BoxColliderComponent.h"
@@ -42,7 +43,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	dynamic_cast<GUIRedOrbRender*>(mRedOrbsGUI->mRenderComponent)->setRedOrbNum(mNumRedOrbs);
 
 
-	mGameObject->setPosition(300,(32*19) - mGameObject->getSprite()->getLocalBounds().height/8);
+	mGameObject->setPosition(3400,(32*18) - mGameObject->getSprite()->getLocalBounds().height/8);
 
 	GameObjectDesc boxDesc("playerBBox", 
 							sf::RectangleShape(sf::Vector2f(mGameObject->getSprite()->getGlobalBounds().width/4,mGameObject->getSprite()->getGlobalBounds().height/4)), 
@@ -56,7 +57,9 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	
 	playerObject = mGameObject;
 	
-	mGameObject->mState = std::unique_ptr<StandingState>(new StandingState(mGameObject)).release();
+	BattleReadyState* newState = std::unique_ptr<BattleReadyState>(new BattleReadyState(mGameObject)).release();
+	newState->setMaxTime(8);
+	mGameObject->mState = newState;
 	
 	
 	/* _________________________________________________________________________________________________________________________________*/
@@ -112,6 +115,18 @@ void PlayerLogic::update(Grid& grid)
 	}
 }
 
+bool PlayerLogic::isReadyForBattle()
+{
+	if(mIsGrounded == true	&& mVelocity.x == 0 && mGameObject->mState->getName() != "BattleReadyState")
+	{
+		mGameObject->mState = std::unique_ptr<CState>(new BattleReadyState(mGameObject)).release();
+		mGameObject->mState->entry(mGameObject);
+		return true;
+	}
+
+	return false;
+}
+
 void PlayerLogic::pickupRedOrb()
 {
 	mNumRedOrbs += 5;
@@ -131,14 +146,15 @@ void PlayerLogic::pickupGreenOrb()
 
 bool PlayerLogic::canAttackFromState()
 {
-	std::array<std::string, 7>  statesNoAttack = {	
+	std::array<std::string, 8>  statesNoAttack = {	
 					 	"DazedState",
 					 	"DeadAirState",
 					 	"HitAirState",
 					 	"HitState",
 					 	"KnockoutState",
 						"AttackBlockedState",
-						"AttackBlockedAirState"
+						"AttackBlockedAirState",
+						"BattleReadyState"
 					 };
 	
 	int size = statesNoAttack.size();

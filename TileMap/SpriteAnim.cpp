@@ -96,3 +96,58 @@ bool SpriteAnim::isAnimDelayed()
 {
 	return (playSpeed == slashDelaySpeed ? true : false );
 }
+
+int SpriteAnim::run(sf::RectangleShape& sprite)
+{
+	timeSinceUpdate = deltaClock.restart();
+		
+		
+	timer += deltaTime.asSeconds();
+
+	if(timer >= playSpeed)
+	{
+		currentFrame++;
+
+		if(currentFrame >= numFrames)
+		{
+			if(mLoop == true)
+				currentFrame = startingFrame;
+			else
+			{	
+				//done = true;
+				return Status::SUCCESS;
+			}
+				//if(currentFrame == numFrames)
+				{
+					exit();
+					return Status::SUCCESS;
+				}
+				//currentFrame--;
+
+				
+		}
+		if(currentFrame == mFrameToHold)
+		{
+			//std::cout << "NOW " << mFrameToHold  << std::endl;
+			playSpeed = slashDelaySpeed;
+		}
+		else
+		{
+			playSpeed = oldPlaySpeed;
+		}
+		timer = 0;
+				
+	}
+
+	sf::IntRect newRect(currentFrame * textureRect.left, textureRect.top, textureRect.width, textureRect.height);
+	sprite.setTextureRect(newRect);
+	//player.getSprite()->setTextureRect(newRect);
+		
+		
+	//if(timer == (playSpeed * numFrames) )
+	//std::cout << timer << std::endl;
+		
+		
+
+	return Status::RUNNING;
+};

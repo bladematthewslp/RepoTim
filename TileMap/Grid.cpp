@@ -88,7 +88,7 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 {
 
 	//mImage.loadFromFile("Sprites/crate.png");
-	mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::GridBlockCrate));//mImage);
+	//mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::GridBlockCrate));//mImage);
 	sf::RectangleShape block(sf::Vector2f(32,32));
 	GameObjectDesc tile("Grid Block", block, Layer::Default, ComponentType::RenderComponent, nullptr);
 	
@@ -138,7 +138,7 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 				//mGrid[i][j] = std::unique_ptr<GameObject>(new GameObject(sf::RectangleShape(sf::Vector2f(32,32)), ComponentType::RenderComponent,"Grid Block")).release();
 				//mGrid[i][j] = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape(sf::Vector2f(32,32) )).release();
 				mGrid[i][j]->setPosition(i*tileSize, j*tileSize);
-				mGrid[i][j]->getRenderComponent()->mSprite.setTexture(&mTexture);
+				mGrid[i][j]->getRenderComponent()->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::GridBlockCrate));//mTexture);
 				mGrid[i][j]->getRenderComponent()->mIsEnabled = true;
 				
 				//mGrid[i][j]->addComponent(ComponentType::BoxColliderComponent);

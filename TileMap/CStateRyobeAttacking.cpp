@@ -205,15 +205,15 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 		if(teleportTimer >= timeToAppear)
 		{
 			GameObject* player = System::findGameObjectByName("Player");
-			if(player->getPosition().x > 200)
+			if(player->getPosition().x > 3590 && player->getPosition().x < 4375)
 			{
-				if(player->getPosition().x < 900)
-					character->setPosition(player->getPosition().x + 80, 568);
-				else
-					character->setPosition(player->getPosition().x - 80, 568);
+				//if(player->getPosition().x < 900)
+					character->setPosition(player->getPosition().x + 80, 536);
+				//else
+					//character->setPosition(player->getPosition().x - 80, 536);
 			}
 			else
-				character->setPosition(player->getPosition().x + 80, 568);
+				character->setPosition(player->getPosition().x - 80, 536);
 
 
 			logic->updateDirection();

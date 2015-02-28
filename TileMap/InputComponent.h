@@ -9,7 +9,6 @@ class InputComponent :	public Component
 public:
 	//GameObject* mParent;
 	InputComponent(GameObject* parent);
-	
 	void	Awake();
 	void	Destroy();
 	void	FixedUpdate();

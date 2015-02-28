@@ -33,6 +33,7 @@ public:
 	PlayerLogic(GameObject* mGameObject);
 	void update(Grid& grid);
 	
+	bool				isReadyForBattle();
 	void				setNewState(CState* newState);
 
 	void				pickupRedOrb();

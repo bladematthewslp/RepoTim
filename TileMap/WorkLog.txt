@@ -1,3 +1,31 @@
+2-27
+---------------------------
+World
+	- Raised the floor of the world
+	- made the background without the foreground layer
+	- delayed input at boss battle start
+	- only begins boss fight when all minor enemies are dead
+	- added a fadeout shape that is trigger when the player defeats the boss
+
+Player
+	- added WinState to player for his winning pose
+
+
+
+2-22
+--------------------------
+Title screen
+	- Created title screen, which includes:
+		1.) Black fade-in screen
+		2.) Image of Doji
+		3.) Animated raining background
+		4.) White sprite that flashes to simulate lightning
+
+Player
+	- Added BattleReady state, which also delays input at level start
+	- Added attack special effects for ChopperStyle and Impact attacks
+
+
 2-21
 --------------------------
 Placed Ryobe in correct position with lightning walls. Ryobe collides with wall, too.

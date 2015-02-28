@@ -2,13 +2,33 @@
 
 #include <SFML/Graphics.hpp>
 #include "Scene.h"
+#include "SpriteAnim.h"
 
 
 class TitleScene : public Scene
 {
+	sf::Text				mText;
+	sf::Font				mFont;
+
+	sf::Texture				mDojiTexture;
+	sf::RectangleShape		mDojiSprite;
+	
+	sf::Texture				mBackgroundTexture;
 	sf::RectangleShape		mBackgroundSprite;
-	sf::Text		mText;
-	sf::Font		mFont;
+	
+	
+	SpriteAnim				anim;
+
+	
+	int						flipScale;
+	float					scaleRate;
+	float					scaleAmount;
+
+	float					flashTimer;
+	sf::RectangleShape		mWhiteFlash;
+
+	float					fadeInTimer;
+	sf::RectangleShape		fadeInSprite;
 public:
 					TitleScene(SceneStack& stack, Context context);
 	virtual bool	handleEvent(sf::Event& event);

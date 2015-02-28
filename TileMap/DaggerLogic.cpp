@@ -10,9 +10,9 @@ DaggerLogic::DaggerLogic(GameObject* gameObject)
 	speed = dir * 7;
 
 	mDirection = dir;
-	gameObject->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RyobeDagger);									
-	gameObject->mRenderComponent->mTexture.loadFromImage(gameObject->mRenderComponent->mImage);										
-	gameObject->mRenderComponent->mSprite.setTexture(&gameObject->mRenderComponent->mTexture);	
+	//gameObject->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RyobeDagger);									
+	//gameObject->mRenderComponent->mTexture.loadFromImage(gameObject->mRenderComponent->mImage);										
+	gameObject->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::RyobeDagger));//&gameObject->mRenderComponent->mTexture);	
 	sf::RectangleShape* sprite = mGameObject->getSprite();
 	sprite->setScale(-sprite->getScale().x * dir, sprite->getScale().y);
 	gameObject->addComponent(ComponentType::BoxColliderComponent);																	

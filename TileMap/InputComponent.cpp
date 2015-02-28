@@ -46,4 +46,7 @@ void InputComponent::update(const sf::Event& event)
 }
 InputComponent::~InputComponent(void)
 {
+	std::vector<InputComponent*>::iterator input_itr;
+	input_itr = std::remove(System::mInputComponents.begin(), System::mInputComponents.end(), this);
+	System::mInputComponents.erase(input_itr, System::mInputComponents.end());
 }

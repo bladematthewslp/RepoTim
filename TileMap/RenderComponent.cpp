@@ -13,33 +13,28 @@ void RenderComponent::loadImages()
 	mImageHolder.load(Images::BloodAnimationA, "Sprites/blood_animation_A.png");
 	mImageHolder.load(Images::Player,		"Sprites/player_spritesheet.png");
 	mImageHolder.load(Images::Ninja,		"Sprites/ninja_spritesheet.png");
-	mImageHolder.load(Images::RedOrb,		"Sprites/red_orb.png");
-	mImageHolder.load(Images::GreenOrb,		"Sprites/green_orb.png");
-	mImageHolder.load(Images::GridBlockCrate,"Sprites/crate.png");
-	mImageHolder.load(Images::LightningWall,	"Sprites/lightning.png");
-	mImageHolder.load(Images::Parry,		"Sprites/electricParry.png");
+	//mImageHolder.load(Images::RedOrb,		"Sprites/red_orb.png");
+	//mImageHolder.load(Images::GreenOrb,		"Sprites/green_orb.png");
+	//mImageHolder.load(Images::GridBlockCrate,"Sprites/crate.png");
+	//mImageHolder.load(Images::LightningWall,	"Sprites/lightning.png");
+	//mImageHolder.load(Images::Parry,		"Sprites/electricParry.png");
 	mImageHolder.load(Images::Ryobe,		"Sprites/ryobe_spritesheet.png");
-	mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
-	//mImageHolder.load(Images::HealthBar100, "Sprites/healthbar/100.png");
+	//mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
 
 	mTextureHolder.load(Textures::BloodAnimationA, "Sprites/blood_animation_A.png");
-	mTextureHolder.load(Textures::HealthBar100, "Sprites/healthbar/100.png");
-	mTextureHolder.load(Textures::HealthBar90, "Sprites/healthbar/90.png");
-	mTextureHolder.load(Textures::HealthBar80, "Sprites/healthbar/80.png");
-	mTextureHolder.load(Textures::HealthBar70, "Sprites/healthbar/70.png");
-	mTextureHolder.load(Textures::HealthBar60, "Sprites/healthbar/60.png");
-	mTextureHolder.load(Textures::HealthBar50, "Sprites/healthbar/50.png");
-	mTextureHolder.load(Textures::HealthBar40, "Sprites/healthbar/40.png");
-	mTextureHolder.load(Textures::HealthBar30, "Sprites/healthbar/30.png");
-	mTextureHolder.load(Textures::HealthBar20, "Sprites/healthbar/20.png");
-	mTextureHolder.load(Textures::HealthBar10, "Sprites/healthbar/10.png");
-	mTextureHolder.load(Textures::HealthBar0,	"Sprites/healthbar/0.png");
+	mTextureHolder.load(Textures::GridBlockCrate, "Sprites/crate.png");
+	mTextureHolder.load(Textures::GreenOrb,		"Sprites/green_orb.png");
+	mTextureHolder.load(Textures::LightningWall, "Sprites/lightning.png");
 	mTextureHolder.load(Textures::PlayerHUD,	"Sprites/HUD/DojiHUDNoHealthbar.png");
 	mTextureHolder.load(Textures::PlayerHUDHealthbar,"Sprites/HUD/DojiHealthbar.png");
-	mTextureHolder.load(Textures::PlayerMugshot,"Sprites/mugshot.png");
+	mTextureHolder.load(Textures::RedOrb,		"Sprites/red_orb.png");
+	mTextureHolder.load(Textures::RyobeDagger,		"Sprites/dagger.png");
 	mTextureHolder.load(Textures::RyobeHUD,		"Sprites/HUD/RyobiHUDNoHealthbar.png");
 	mTextureHolder.load(Textures::RyobeHUDHealthbar,"Sprites/HUD/RyobiHealthbar.png");
-	mTextureHolder.load(Textures::RyobeMugshot,"Sprites/ryobe_mugshot.png");
+	mTextureHolder.load(Textures::RyobeParryEffect, "Sprites/electricParry.png");
+	mTextureHolder.load(Textures::WoodsBackground,"Sprites/Background/woods_background.png");
+	mTextureHolder.load(Textures::WoodsForeground,"Sprites/Background/woods_foreground.png");
+	mTextureHolder.load(Textures::WoodsBackgroundComplete,"Sprites/Background/woods_background_complete.png");
 }
 
 

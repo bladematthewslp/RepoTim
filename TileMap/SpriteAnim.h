@@ -21,6 +21,7 @@ public:
 	SpriteAnim();
 	SpriteAnim(sf::IntRect rect, int numberFrames, int frameToHold, bool loop, float speed = 1, int startFrame = 0 );
 	int run(GameObject& player);
+	int run(sf::RectangleShape& sprite);
 	void exit();
 	bool isAnimDelayed();
 

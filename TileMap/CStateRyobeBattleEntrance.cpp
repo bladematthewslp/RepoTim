@@ -30,6 +30,7 @@ CStateRyobeBattleEntrance::CStateRyobeBattleEntrance(GameObject* character)
 	color = mHealthBar->getSprite()->getFillColor();
 	color.a = 0;
 	mHealthBar->getSprite()->setFillColor(color);
+
 }
 
 

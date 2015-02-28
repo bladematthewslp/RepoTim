@@ -5,7 +5,7 @@
 
 class CStateRyobeAttacking : public CState
 {
-		
+		GameObject* parryEffect;
 	public:
 		
 		std::string attackType;
@@ -18,12 +18,18 @@ class CStateRyobeAttacking : public CState
 		bool isTeleporting(); 
 	private:
 		int			timer;
+		
+		float		fellCrescentSpeed;
+		bool		fellCrescentAttackBoxCreated;
+
 		float		embracerSpeed;
+		bool		embracerAttackBoxCreated;
+
 		bool		teleporting;
 		float		teleportTimer;
 
 		int			chargeLoopCounter;
 
-		bool		embracerAttackBoxCreated;
+		
 
 };

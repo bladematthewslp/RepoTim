@@ -16,7 +16,7 @@ const sf::Time deltaTime = sf::seconds(1.0f/60.0f);
 NinjaLogic::NinjaLogic(GameObject* gameObject) 
 	: LogicComponent(gameObject)
 	, mDirection(Direction::Left)
-	, mHealth(100)
+	, mHealth(1)
 	, mVelocity(0,0)
 	, mIsGrounded(true)
 	, mRunningSpeed(2.0f)

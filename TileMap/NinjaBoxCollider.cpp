@@ -39,6 +39,9 @@ void NinjaBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 	if(otherColliderRemoved == true)
 		return true;
 		*/
+
+
+	/*
 	// resolve collision when ninja falls on top of player
 	if(dynamic_cast<PlayerLogic*>(other->mGameObject->mLogicComponent) != nullptr)
 	{
@@ -54,6 +57,9 @@ void NinjaBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 			}
 		}
 	}
+	*/
+
+	/*
 	// resolve collision when ninja collides with player horizonally
 	if(other->mGameObject->mName == "Player" || other->mGameObject->mName == "Ninja")
 	{
@@ -71,4 +77,6 @@ void NinjaBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 			}
 		}
 	}
+	*/
+	
 }

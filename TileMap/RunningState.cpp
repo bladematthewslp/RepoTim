@@ -36,13 +36,14 @@ CState* RunningState::handleInput(GameObject* player, const sf::Event& event)
 		newState->entry(player);
 		return newState;
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	
+	/*if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		CState* newState = std::unique_ptr<CState>(new AttackState(player)).release();
 		newState->entry(player);
 		return newState;
 	}
-	
+	*/
 	return this;
 }
 

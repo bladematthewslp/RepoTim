@@ -5,12 +5,13 @@ NinjaRender::NinjaRender(GameObject* mGameObject)
 	: RenderComponent(mGameObject)
 {
 	mImage = mImageHolder.get(Images::Ninja);
-	//mImage.loadFromFile("Sprites/ninja_spritesheet.png");
+	
 	mImage.createMaskFromColor(sf::Color(34,177,76), 1);
 
 	mTexture.loadFromImage(mImage);//loadFromFile("ninja_spritesheet.png");
 	mSprite.setSize(sf::Vector2f(400,400));
 	mSprite.setTexture(&mTexture);
+	
 	mSprite.setTextureRect(sf::IntRect(0,0, 200, 200));
 	mSprite.setOrigin(mSprite.getLocalBounds().width/2, mSprite.getLocalBounds().height/2);
 	

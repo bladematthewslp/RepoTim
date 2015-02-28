@@ -11,24 +11,19 @@ namespace Textures
 	enum ID
 	{
 		BloodAnimationA,
-		HealthBar0,
-		HealthBar10,
-		HealthBar20,
-		HealthBar30,
-		HealthBar40,
-		HealthBar50,
-		HealthBar60,
-		HealthBar70,
-		HealthBar80,
-		HealthBar90,
-		HealthBar100,
+		GridBlockCrate,
+		GreenOrb,
+		LightningWall,
 		PlayerHUD,
 		PlayerHUDHealthbar,
-		PlayerMugshot,
+		RedOrb,
+		RyobeDagger,
+		RyobeParryEffect,
 		RyobeHUD,
 		RyobeHUDHealthbar,
-		RyobeMugshot,
-
+		WoodsBackground,
+		WoodsForeground,
+		WoodsBackgroundComplete
 
 	};
 }
@@ -38,15 +33,13 @@ namespace Images
 	enum ID
 	{
 		BloodAnimationA,
-		GreenOrb,
-		GridBlockCrate,
-		LightningWall,
+		//GreenOrb,
+		//LightningWall,
 		Ninja,
-		Parry,
+		//Parry,
 		Player,
-		RedOrb,
+		//RedOrb,
 		Ryobe,
-		RyobeDagger,
 		
 		
 		

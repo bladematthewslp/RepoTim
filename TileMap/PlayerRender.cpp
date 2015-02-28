@@ -22,6 +22,11 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,200,200,200), "Running", true,8);
 	createSpriteAnim(sf::IntRect(200,400,200,200), "Guarding", false, 1);
 	createSpriteAnim(sf::IntRect(200,400,200,200), "Blocking", false,1,1,1,1);
+	createSpriteAnim(sf::IntRect(200,3600,200,200), "BattleReadyBegin", false,4,1.7);
+	createSpriteAnim(sf::IntRect(200,3600,200,200), "BattleReadyLoop", true,7,1.7,-1,4);
+	createSpriteAnim(sf::IntRect(200,3600,200,200), "BattleReadyEnding", false,11,1.3, -1,8);
+	createSpriteAnim(sf::IntRect(200,3800,200,200), "WinPoseBegin", false,2,2);
+	createSpriteAnim(sf::IntRect(200,3800,200,200), "WinPoseLoop", true,5,2, -1,3);
 
 	// Air Basic
 	createSpriteAnim(sf::IntRect(200,600,200,200), "Jumping", true, 3, 1,4,1);
@@ -39,9 +44,9 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,2000,200,200), "PLAYER_IMPACT", false,7, 1);
 	createSpriteAnim(sf::IntRect(200,2000,200,200), "PLAYER_IMPACT_REPEATED", true, 7, 1,-1, 5);
 	createSpriteAnim(sf::IntRect(200,2000,200,200), "PLAYER_IMPACT_RECOVERING", false, 9, 1, -1, 7);
-	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE", false, 9);//9, 1, -1, 7);
-	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE_REPEATED", true, 9,1, -1,7);//9, 1, -1, 7);
-	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE_RECOVERING", false, 12,1, -1,9);//9, 1, -1, 7);
+	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE", false, 10);//9, 1, -1, 7);
+	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE_REPEATED", true, 10,1, -1,7);//9, 1, -1, 7);
+	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE_RECOVERING", false, 13,1, -1,10);//9, 1, -1, 7);
 
 	// Air Attacks
 	createSpriteAnim(sf::IntRect(200,2200,200,200), "PLAYER_SWEEP", false, 5, 1.1,4);

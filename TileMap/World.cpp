@@ -14,8 +14,11 @@
 #include "GUIRedOrbRender.h"
 #include "RyobeGameObject.h"
 #include "ItemGameObject.h"
+#include "NinjaLogic.h"
 
+#include "BattleReadyState.h"
 #include "CStateRyobeBattleEntrance.h"
+#include "WinState.h"
 
 #include <iostream>
 World::World(sf::RenderWindow& window)
@@ -24,6 +27,7 @@ World::World(sf::RenderWindow& window)
 	, mWorldBounds(0.0f, 0.0f, 5080.0f, 720.f)
 	, mWorldWidth(1024)
 	, mWorldHeight(720)
+	, mFadeOutShape(sf::Vector2f(2000,2000))
 {
 	// init stuff here
 	RenderComponent::loadImages();
@@ -69,13 +73,23 @@ World::World(sf::RenderWindow& window)
 									sf::RectangleShape(sf::Vector2f(1024, 720)), 
 									Layer::Background, 
 									ComponentType::RenderComponent);
+	GameObjectDesc foregroundDesc(	"Foreground", 
+									sf::RectangleShape(sf::Vector2f(1024, 720)), 
+									Layer::Foreground, 
+									ComponentType::RenderComponent);
 
 	
 	for(int i = 0; i < 6; i++)
 	{
 		mBackground[i] = std::unique_ptr<GameObject>(new BackgroundGameObject(backgroundDesc)).release();
 		mBackground[i]->setPosition( i * 1024, 0);
+
+		/*mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
+		//mForeground[i]->mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::WoodsForeground);
+		mForeground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsForeground));
+		mForeground[i]->setPosition( i * 1024, 0);*/
 	}
+	
 	
 
 	mPlayer = std::unique_ptr<GameObject>(new GameObject(GameObjectDesc("Player", sf::RectangleShape(), Layer::Player))).release();
@@ -96,7 +110,7 @@ World::World(sf::RenderWindow& window)
 	{
 		GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 		ninja->mBoxColliderComponent->setSize(50,75);
-		ninja->setPosition( 1200 + (300*i),568);
+		ninja->setPosition( 3600 + (300*i),536);
 		ninjaGameObjects.push_back(ninja);
 	}
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
@@ -106,13 +120,20 @@ World::World(sf::RenderWindow& window)
 	
 	mLookAtPoint = sf::Vector2f(mPlayer->getPosition().x, 360);
 	scrollableWorld = true;
+	playerReachedBossFightLocation = false;
 	bossFightStarted = false;
 	xPositionBossFightStart = 4000;
 	timerToBeginBattle = 0;
 	startTimerToBeginBattle = false;
 	lightningWallLeft  = nullptr;
 	lightningWallRight = nullptr;
+	
+	bossDefeated = false;
+	timerToStartPlayerWinPose = 0;
 
+	sf::Color black = sf::Color::Black;
+	black.a = 0;
+	mFadeOutShape.setFillColor(black);
 }
 
 bool World::handleEvent(sf::RenderWindow& window, sf::Event& event)
@@ -143,43 +164,135 @@ bool World::update(sf::Time dt)
 {
 	destroyGameObjectsOutsideView();
 
-	if(scrollableWorld == true && bossFightStarted == false && mPlayer->getPosition().x >  xPositionBossFightStart)
+	// if player is in the range of battle
+	if(playerReachedBossFightLocation == false 
+		&& mPlayer->getPosition().x >  xPositionBossFightStart && mPlayer->getPosition().x < xPositionBossFightStart + 100 )
 	{
-		GameObjectDesc lightningDesc("Lightning", sf::RectangleShape(sf::Vector2f(40,680)), Layer::Default, ComponentType::RenderComponent);
-		lightningWallLeft = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
-		lightningWallLeft->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
-		lightningWallLeft->mRenderComponent->setAnimation("Lightning");
-		lightningWallLeft->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));// = RenderComponent::mTextureHolder.get(Textures::Lightning);
-		lightningWallLeft->mRenderComponent->mSprite.setTexture(&lightningWallLeft->mRenderComponent->mTexture);
-		lightningWallLeft->addComponent(ComponentType::BoxColliderComponent);
+		// check if all ninjas are dead
+		int count = 0;
+  		for(int i = 0; i < ninjaGameObjects.size(); i++)
+		{
+			
+			if( dynamic_cast<NinjaLogic*>(ninjaGameObjects.at(i)->mLogicComponent)->getHealth() <= 0 )
+			{
+				count++;
+			}
+		}
 
-		lightningWallRight = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
-		lightningWallRight->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
-		lightningWallRight->mRenderComponent->setAnimation("Lightning");
-		lightningWallRight->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));
-		lightningWallRight->mRenderComponent->mSprite.setTexture(&lightningWallRight->mRenderComponent->mTexture);
-		lightningWallRight->addComponent(ComponentType::BoxColliderComponent);
+		// if all ninjas are dead, remove them from game
+		if(count == ninjaGameObjects.size() )
+		{
+			while(ninjaGameObjects.size() != 0)
+			{
+				
+				System::removeGameObject( ninjaGameObjects.back() );
+				ninjaGameObjects.pop_back();
+			}
+			playerReachedBossFightLocation = true;
 
-		lightningWallLeft->setPosition(xPositionBossFightStart - 450,0);
-		lightningWallRight->setPosition(xPositionBossFightStart + 450,0);
+		}
+		
+	}
+
+	// once player reaches fight location and all ninjas are dead...
+	if(playerReachedBossFightLocation == true && startTimerToBeginBattle == false && bossFightStarted == false)
+	{
+		// turn world scrolling off
 		scrollableWorld = false;
-	
-		startTimerToBeginBattle = true;
-		//mPlayer->mInputComponent->mIsEnabled = false;
+
+		// disable player input
+		dynamic_cast<PlayerInput*>(mPlayer->mInputComponent)->disableInput();
+
+		// if player is ready for battle
+		if( dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->isReadyForBattle() == true && startTimerToBeginBattle == false)
+		{
+			// turn player to direction of ryobe
+			dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->updateDirection(Direction::Right);
+
+			// setup  lightning walls
+			GameObjectDesc lightningDesc("Lightning", sf::RectangleShape(sf::Vector2f(40,680)), Layer::Default, ComponentType::RenderComponent);
+			lightningWallLeft = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
+			lightningWallLeft->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
+			lightningWallLeft->mRenderComponent->setAnimation("Lightning");
+			lightningWallLeft->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::LightningWall));//lightningWallLeft->mRenderComponent->mTexture);
+			lightningWallLeft->addComponent(ComponentType::BoxColliderComponent);
+
+			lightningWallRight = std::unique_ptr<GameObject>(new GameObject(lightningDesc)).release();
+			lightningWallRight->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 6, 1.6);
+			lightningWallRight->mRenderComponent->setAnimation("Lightning");
+			lightningWallRight->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::LightningWall));//lightningWallRight->mRenderComponent->mTexture);
+			lightningWallRight->addComponent(ComponentType::BoxColliderComponent);
+
+			lightningWallLeft->setPosition(xPositionBossFightStart - 450,0);
+			lightningWallRight->setPosition(xPositionBossFightStart + 450,0);
+			startTimerToBeginBattle = true;
+		}
 	}
 	
+
+	// if timer to begin battle has begun
 	if(startTimerToBeginBattle == true)
 	{
-		timerToBeginBattle += sf::seconds(1.0/60.0f).asSeconds();
-		if(timerToBeginBattle >= 3)
+		timerToBeginBattle += dt.asSeconds();
+
+		// if timer reaches set number to make ryobe appear in screen
+		if(timerToBeginBattle >= 3 && ryobeGameObject->mState == nullptr )
 		{
-			ryobeGameObject->setPosition(4300, 568);
+			ryobeGameObject->setPosition(4300, 536);
 			ryobeGameObject->mState = std::unique_ptr<CState>(new CStateRyobeBattleEntrance(ryobeGameObject)).release();
-			bossFightStarted = true;
+			//bossFightStarted = true;
 			startTimerToBeginBattle = false;
 		}
 	}
 
+	//ready the player for battle
+	if(bossFightStarted == false)
+	{
+		if(ryobeGameObject->mState != nullptr && ryobeGameObject->mState->getName() == "CStateRyobeStanding")
+		{
+			//dynamic_cast<BattleReadyState*>(mPlayer->mState)->setMaxTime(1);
+			
+			mPlayer->mRenderComponent->setAnimation("BattleReadyEnding");
+			mPlayer->mInputComponent->mIsEnabled = true;
+			bossFightStarted = true;
+		}
+	}
+
+	// after the boss fight begins, check if he is dead
+	if(bossFightStarted == true)
+	{
+		if(ryobeGameObject->mState->getName() == "CStateRyobeDead")
+		{
+			bossDefeated = true;
+			dynamic_cast<PlayerInput*>(mPlayer->mInputComponent)->disableInput();
+		}
+
+		// if boss is dead...
+		if(bossDefeated == true)
+		{
+			timerToStartPlayerWinPose += dt.asSeconds();
+			// change player state to win state
+			if(timerToStartPlayerWinPose > 5 && mPlayer->mState->getName() != "WinState")
+			{
+				CState* newState = std::unique_ptr<CState>(new WinState(mPlayer)).release();
+				dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->setNewState(newState);
+				
+			}
+			// fade out when the timer reaches a set number
+			else if(timerToStartPlayerWinPose > 10)
+			{
+				mFadeOutShape.setPosition(mWorldView.getCenter().x - mWorldView.getSize().x/2, 0);
+				sf::Color color = mFadeOutShape.getFillColor();
+				if(color.a > 250)
+				{
+					color.a = 255;
+					return false;
+				}
+				color.a += 2.5;
+				mFadeOutShape.setFillColor(color);
+			}
+		}
+	}
 	
 
 
@@ -201,39 +314,60 @@ void World::draw(sf::RenderWindow& window)
 	int pointToLook;
 	int viewPosX = mWorldView.getCenter().x;
 	int playerPosX = mPlayer->getPosition().x;
-	if(dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->getDirection() == Direction::Right)
+
+	if(playerReachedBossFightLocation == false)
 	{
-		if(playerPosX > viewPosX + 50)
-			mLookAtPoint.x += cameraLerpSpeed;
-		//else if(playerPosX < viewPosX + 50)
-			//mLookAtPoint.x -= cameraLerpSpeed;
+
+		if(dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->getDirection() == Direction::Right)
+		{
+		
+				if(playerPosX > viewPosX + 50)
+					mLookAtPoint.x += cameraLerpSpeed;
+			//}
+			//else if(playerPosX < viewPosX + 50)
+				//mLookAtPoint.x -= cameraLerpSpeed;
+		}
+		else if(dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->getDirection() == Direction::Left)
+		{
+		
+				if(playerPosX < viewPosX - 50)
+					mLookAtPoint.x -= cameraLerpSpeed;
+			//}
+			//else if(playerPosX > viewPosX - 50)
+				//mLookAtPoint.x += cameraLerpSpeed;
+		}
 	}
-	else if(dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->getDirection() == Direction::Left)
+	else if(playerReachedBossFightLocation == true && mLookAtPoint.x != xPositionBossFightStart)
 	{
-		if(playerPosX < viewPosX - 50)
-			mLookAtPoint.x -= cameraLerpSpeed;
-		//else if(playerPosX > viewPosX - 50)
-			//mLookAtPoint.x += cameraLerpSpeed;
+		if(mLookAtPoint.x > xPositionBossFightStart )
+			mLookAtPoint.x -= 1;
+		else if(mLookAtPoint.x < xPositionBossFightStart )
+			mLookAtPoint.x += 1;
+	
 	}
+
 	if(mLookAtPoint.x < worldViewXLimit)
 	{
 		mLookAtPoint.x = worldViewXLimit;
 	}
+
+
 	
 	//mWorldView.setCenter(sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
 	//mWorldView.setCenter(mLookAtPoint);//sf::Vector2f( (mPlayer->getPosition().x < 512 ? 512 : mPlayer->getPosition().x), 360));
 
-	if(scrollableWorld == true)
+	//if(scrollableWorld == true)
 	{
 		mWorldView.setCenter(mLookAtPoint);
 	}
-	else
+	//else
 	{
-		mWorldView.setCenter(sf::Vector2f(xPositionBossFightStart, 360));
+		//mWorldView.setCenter(sf::Vector2f(xPositionBossFightStart, 360));
 	}
 
 	mWindow.setView(mWorldView);
 	System::draw(window);
+	window.draw(mFadeOutShape);
 }
 
 void World::destroyGameObjectsOutsideView()

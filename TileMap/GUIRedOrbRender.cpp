@@ -29,9 +29,9 @@ GUIRedOrbRender::GUIRedOrbRender(GameObject* gameObject)
 	mText.setStyle(sf::Text::Bold);
 
 	// initialize sprite
-	mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::RedOrb));
+	//mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::RedOrb));
 	mSprite.setSize(sf::Vector2f(27,45));
-	mSprite.setTexture(&mTexture);
+	mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::RedOrb));//mTexture);
 	mSprite.setPosition(100, 100);
 
 

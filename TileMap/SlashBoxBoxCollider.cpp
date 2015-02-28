@@ -54,6 +54,8 @@ void SlashBoxBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* oth
 		{
 			System::removeGameObject(other->mGameObject);
 		}
+
+		if(logic->getAttack() != Attacks::PLAYER_CHOPPERSTYLE)
 		System::removeGameObject(mGameObject);
 	}
 	

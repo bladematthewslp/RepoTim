@@ -32,15 +32,19 @@ CState* DeadAirState::update(GameObject* player, sf::Time dt, Grid& grid)
 	logic->setVelocityX(hitVelocity.x * logic->getDirection());
 	logic->setVelocityY(hitVelocity.y );
 	logic->move(logic->getVelocity());
-
+	if(grid.checkCollisionLeft(player->mBoxColliderComponent) == true)
+	{
+		logic->move(-logic->getVelocity().x, 0);
+	}
+	if(grid.checkCollisionRight(player->mBoxColliderComponent) == true)
+	{
+		logic->move(-logic->getVelocity().x, 0);
+	}
 	if(grid.checkCollisionBelow(player->mBoxColliderComponent) == true && dead == false  )
 	{
 		logic->move(sf::Vector2f(0, -grid.playerPosition.y ));
 		player->mRenderComponent->setAnimation("KnockoutAirPart2");
 		dead = true;
-		//CState* newState = std::unique_ptr<CState>(new FallingState(player)).release();
-		//newState->entry(player);
-		//return newState;
 	}
 
 

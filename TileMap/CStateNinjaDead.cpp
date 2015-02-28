@@ -6,7 +6,7 @@
 #include <iostream>
 
 CStateNinjaDead::CStateNinjaDead(GameObject* character)
-	: CState("CStateNinjaHit")
+	: CState("CStateNinjaDead")
 {
 	NinjaLogic* logic = dynamic_cast<NinjaLogic*>(character->mLogicComponent);
 	character->mRenderComponent->setAnimation("HitAndDie");

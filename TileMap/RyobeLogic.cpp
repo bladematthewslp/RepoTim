@@ -218,8 +218,8 @@ void RyobeLogic::createLightningChargeup()
 	lightningChargeup = std::unique_ptr<GameObject>(new GameObject(lightningChargupDesc)).release();
 	lightningChargeup->mRenderComponent->createSpriteAnim(sf::IntRect(40, 0, 40, 340),"Lightning",true, 3, 1);
 	lightningChargeup->mRenderComponent->setAnimation("Lightning");
-	lightningChargeup->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));// = RenderComponent::mTextureHolder.get(Textures::Lightning);
-	lightningChargeup->mRenderComponent->mSprite.setTexture(&lightningChargeup->mRenderComponent->mTexture);
+	//lightningChargeup->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));// = RenderComponent::mTextureHolder.get(Textures::Lightning);
+	lightningChargeup->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::LightningWall));//lightningChargeup->mRenderComponent->mTexture);
 
-	lightningChargeup->setPosition(mGameObject->getPosition().x - 20, 0);
+	lightningChargeup->setPosition(mGameObject->getPosition().x - 20, -64);
 }

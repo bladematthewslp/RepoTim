@@ -6,10 +6,10 @@ BloodAnimationLogic::BloodAnimationLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
 {
 	RenderComponent* render = gameObject->getRenderComponent();
-	render->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::BloodAnimationA));
-	render->mTexture.setSmooth(true);
+	//render->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::BloodAnimationA));
+	//render->mTexture.setSmooth(true);
 	
-	render->mSprite.setTexture(&render->mTexture);
+	render->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::BloodAnimationA));//render->mTexture);
 	render->mSprite.setSize(sf::Vector2f(100,100));
 	sf::IntRect bloodAnimation(512,0,512,512);
 	render->createSpriteAnim(bloodAnimation,"BloodAnimation",true, 6,.6);

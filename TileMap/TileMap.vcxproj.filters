@@ -342,6 +342,12 @@
     <ClCompile Include="CStateRyobeDead.cpp">
       <Filter>Source Files\Characters\Ryobe\States</Filter>
     </ClCompile>
+    <ClCompile Include="BattleReadyState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="WinState.cpp">
+      <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -601,6 +607,12 @@
     </ClInclude>
     <ClInclude Include="CStateRyobeDead.h">
       <Filter>Header Files\Characters\Ryobe\States</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleReadyState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="WinState.h">
+      <Filter>Header Files\Characters\Player\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

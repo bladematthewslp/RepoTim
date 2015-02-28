@@ -9,6 +9,7 @@
 
 class World
 {
+	GameObject*				mForeground[5];
 	GameObject*				mBackground[5];
 	GameObject*				mPlayer;
 	sf::Vector2f			mLookAtPoint;
@@ -24,10 +25,16 @@ class World
 	GameObject*				lightningWallLeft;
 	GameObject*				lightningWallRight;
 	float					xPositionBossFightStart;
+	bool					playerReachedBossFightLocation;
 	bool					bossFightStarted;
 	bool					scrollableWorld;
 	float					timerToBeginBattle;
 	bool					startTimerToBeginBattle;
+
+	bool					bossDefeated;
+	float					timerToStartPlayerWinPose;
+
+	sf::RectangleShape		mFadeOutShape;
 
 public:
 	World(sf::RenderWindow& window);

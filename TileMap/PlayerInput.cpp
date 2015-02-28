@@ -38,6 +38,12 @@ PlayerInput::PlayerInput(GameObject* gameObject) : InputComponent(gameObject)
 	}
 }
 
+void PlayerInput::disableInput()
+{
+	dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent)->setVelocityX(0);
+	mIsEnabled = false;
+
+}
 void PlayerInput::handleRealtimeInput(const sf::Event& event)
 {
 	if(mIsEnabled == false)

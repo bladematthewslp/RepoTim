@@ -15,7 +15,7 @@ class SlashBoxLogic : public LogicComponent
 public:
 
 	
-
+	
 					SlashBoxLogic(GameObject* gameObject);
 	void			update(Grid& grid);
 	void			init(int dir, Attacks::Name attack, int timeToLast );

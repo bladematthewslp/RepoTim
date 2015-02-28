@@ -22,16 +22,19 @@ void ItemGameObject::setItemType(Item::Type item)
 	switch(item)
 	{
 		case Item::RedOrb:
-			this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RedOrb);
+			this->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::RedOrb));
+			//this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RedOrb);
 			break;
 		case Item::GreenOrb:
-			this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::GreenOrb);
+			this->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::GreenOrb));
+			//this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::GreenOrb);
 			break;
 		case Item::RyobeDagger:
-			this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RyobeDagger);
+			this->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::RyobeDagger));
+			//this->mRenderComponent->mImage = RenderComponent::mImageHolder.get(Images::RyobeDagger);
 			break;
 	}
-	this->mRenderComponent->mTexture.loadFromImage(this->mRenderComponent->mImage);
-	this->mRenderComponent->mSprite.setTexture(&this->mRenderComponent->mTexture);
+	//this->mRenderComponent->mTexture.loadFromImage(this->mRenderComponent->mImage);
+	//this->mRenderComponent->mSprite.setTexture(&this->mRenderComponent->mTexture);
 
 }
