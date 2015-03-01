@@ -42,7 +42,11 @@ bool GameScene::handleInput(sf::Event& event)
 }
 bool GameScene::update(sf::Time dt)
 {
-	mWorld.update(dt);
+	if(mWorld.update(dt) == false)
+	{
+		requestStackPop();
+		requestStackPush(Scenes::Title);
+	}
 	return true;
 }
 

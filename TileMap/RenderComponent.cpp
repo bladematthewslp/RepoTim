@@ -37,6 +37,11 @@ void RenderComponent::loadImages()
 	mTextureHolder.load(Textures::WoodsBackgroundComplete,"Sprites/Background/woods_background_complete.png");
 }
 
+void RenderComponent::unloadImages()
+{
+	mImageHolder.mResourceMap.clear();
+	mTextureHolder.mResourceMap.clear();
+}
 
 
 

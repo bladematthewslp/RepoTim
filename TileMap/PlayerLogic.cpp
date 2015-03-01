@@ -28,7 +28,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	, mMoveList()
 	, mIsGrounded(true)
 	, mHealth(100)
-	, mNumRedOrbs(5)
+	, mNumRedOrbs(0)
 {
 	// HealthBar
 	mHealthBar = System::findGameObjectByName("HealthBar");
@@ -43,7 +43,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	dynamic_cast<GUIRedOrbRender*>(mRedOrbsGUI->mRenderComponent)->setRedOrbNum(mNumRedOrbs);
 
 
-	mGameObject->setPosition(3400,(32*18) - mGameObject->getSprite()->getLocalBounds().height/8);
+	mGameObject->setPosition(300,(32*18) - mGameObject->getSprite()->getLocalBounds().height/8);
 
 	GameObjectDesc boxDesc("playerBBox", 
 							sf::RectangleShape(sf::Vector2f(mGameObject->getSprite()->getGlobalBounds().width/4,mGameObject->getSprite()->getGlobalBounds().height/4)), 

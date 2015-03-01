@@ -131,7 +131,6 @@ void SlashBoxLogic::update(Grid& grid)
 void SlashBoxLogic::setAttackType(Attacks::Name type)
 {
 	mAttackType = type;
-	
 }
 
 Attacks::Name	SlashBoxLogic::getAttack()

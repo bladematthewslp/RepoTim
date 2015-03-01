@@ -6,11 +6,27 @@
 TitleScene::TitleScene(SceneStack& stack, Context context)
 	: Scene(stack, context)
 	, anim(sf::IntRect(800,0,800,336),8, 15, true, 1.6, 0)
+	, mMusic()
 {
-	//mFont.loadFromFile("Sansation.ttf");
+	// reset the view
+	sf::Vector2f centerPoint(context.window->getSize().x/2, context.window->getSize().y/2);
+	sf::Vector2f windowSize(context.window->getSize().x, context.window->getSize().y);
+	context.window->setView(sf::View(centerPoint, windowSize));
+
+	// setup intro music
+	mFilename = "Music/IntroMusic.ogg";
+	// Open it from an audio file
+	if (!mMusic.openFromFile(mFilename))
+	{
+		throw std::runtime_error("Music " + mFilename + " could not be loaded.");
+	}
+	mMusic.setLoop(true);        
+	// Play it
+	mMusic.play();
+	
+	
 	mFont.loadFromFile("Chiller.ttf");
 
-	//mBackgroundSprite.setFillColor(sf::Color(0,0,0,155));
 	mBackgroundSprite.setSize(sf::Vector2f(context.window->getSize().x + 75, context.window->getSize().y + 25));//sf::Vector2f(100,100));
 
 	mText.setFont(mFont);
@@ -46,14 +62,23 @@ TitleScene::TitleScene(SceneStack& stack, Context context)
 	fadeInSprite.setSize(sf::Vector2f(2000,2000));
 	fadeInSprite.setFillColor(sf::Color::Black);
 	
-	
+	playGameSelected = false;
 }
 bool TitleScene::handleEvent(sf::Event& event)
 {
 	if(event.type == sf::Event::KeyPressed)
 	{
-		requestStackPop();
-		requestStackPush(Scenes::Game);
+		sf::Color color = fadeInSprite.getFillColor();
+		if(playGameSelected == false && color.a != 0)
+		{
+			color.a = 0;
+			fadeInSprite.setFillColor(color);
+		}
+		else
+		{
+			if( playGameSelected == false)
+				playGameSelected = true;
+		}
 	}
 	
 	return true;
@@ -66,6 +91,7 @@ bool TitleScene::handleInput(sf::Event& event)
 
 bool TitleScene::update(sf::Time dt)
 {
+
 	// background scaling and playing
 	scaleAmount += scaleRate;
 	if(scaleAmount > 1.01 || scaleAmount < 0.99)
@@ -90,9 +116,9 @@ bool TitleScene::update(sf::Time dt)
 		mWhiteFlash.setFillColor(color);
 	}
 	
-	// black fading out
+	// black fading in
 	fadeInTimer += dt.asSeconds();
-	if(fadeInTimer > dt.asSeconds() * 2 )
+	if(playGameSelected == false && fadeInTimer > dt.asSeconds() * 2 )
 	{
 		
 		sf::Color color(fadeInSprite.getFillColor());
@@ -102,6 +128,24 @@ bool TitleScene::update(sf::Time dt)
 			color.a -= dt.asSeconds() * 140;
 		fadeInSprite.setFillColor(color);
 		fadeInTimer = 0;
+	}
+
+	if(playGameSelected == true)
+	{
+		sf::Color color = fadeInSprite.getFillColor();
+		if(color.a < 250)
+		{
+			color.a += dt.asSeconds() * 140;
+			fadeInSprite.setFillColor(color);
+		}
+		else
+		{
+			color.a = 255;
+			mMusic.stop();
+			requestStackPop();
+			requestStackPush(Scenes::Game);
+		}
+
 	}
 
 

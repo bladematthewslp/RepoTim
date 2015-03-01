@@ -5,6 +5,8 @@
 #include "LogicComponent.h"
 #include "InputComponent.h"
 #include "BoxColliderComponent.h"
+#include "MusicPlayer.h"
+#include "SoundPlayer.h"
 #include <array>
 #include <vector>
 #include <set>
@@ -22,6 +24,8 @@ class System
 {
 public:
 
+	static MusicPlayer								mMusicPlayer;
+	static SoundPlayer								mSoundPlayer;
 	
 	
 	// Scene Graph
@@ -42,7 +46,7 @@ public:
 	// ***************
 	// FUNCTIONS
 	// ***************
-
+	static void										removeAllGameObjects();
 	static void										setupSceneGraph();
 
 	System() { };

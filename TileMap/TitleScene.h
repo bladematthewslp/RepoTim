@@ -1,12 +1,16 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio/Music.hpp>
 #include "Scene.h"
 #include "SpriteAnim.h"
 
 
 class TitleScene : public Scene
 {
+	sf::Music				mMusic;
+	std::string				mFilename;
+	bool					playGameSelected;
 	sf::Text				mText;
 	sf::Font				mFont;
 

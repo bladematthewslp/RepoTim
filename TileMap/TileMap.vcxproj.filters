@@ -103,6 +103,12 @@
     <Filter Include="Header Files\Assets\Blood">
       <UniqueIdentifier>{082f19c7-4ad8-4146-aa5f-51d06d103d0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\System\Audio">
+      <UniqueIdentifier>{2570d207-0227-480f-af92-d2f79187d367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System\Audio">
+      <UniqueIdentifier>{afc0f283-ad59-427a-a40a-066c2c2c0730}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -347,6 +353,12 @@
     </ClCompile>
     <ClCompile Include="WinState.cpp">
       <Filter>Source Files\Characters\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicPlayer.cpp">
+      <Filter>Source Files\System\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Source Files\System\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -613,6 +625,12 @@
     </ClInclude>
     <ClInclude Include="WinState.h">
       <Filter>Header Files\Characters\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicPlayer.h">
+      <Filter>Header Files\System\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Header Files\System\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

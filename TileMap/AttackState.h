@@ -7,6 +7,7 @@
 class GameObject;
 class AttackState : public CState
 {
+	bool soundEffectPlayed;
 	int timeInState;
 	int	spriteX;
 	int slashNumber;

@@ -1,3 +1,11 @@
+3-1
+---------------------------
+Level restarts when player dies
+Title Screen music added
+Woods Level background music added
+Ryobe Battle music added
+Player vocal sounds for regular slashes added
+
 2-27
 ---------------------------
 World
@@ -5,7 +13,7 @@ World
 	- made the background without the foreground layer
 	- delayed input at boss battle start
 	- only begins boss fight when all minor enemies are dead
-	- added a fadeout shape that is trigger when the player defeats the boss
+	- added a fadeout shape that is triggered when the player defeats the boss
 
 Player
 	- added WinState to player for his winning pose

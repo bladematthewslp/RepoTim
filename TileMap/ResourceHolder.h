@@ -16,11 +16,11 @@ public:
 
 	Resource&	get(Identifier id);
 	const Resource& get(Identifier id) const;
-
+	std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
 private:
 	void			insertResource(Identifier id, std::unique_ptr<Resource> resource);
 
-	std::map<Identifier, std::unique_ptr<Resource>> mResourceMap;
+	
 	
 };
 

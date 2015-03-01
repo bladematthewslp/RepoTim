@@ -1,12 +1,9 @@
-//#include "GameObjectManager.h"
 #include "System.h"
-//#include "Game.h"
-//#include "Grid.h"
 #include "PlayerInput.h"
-//#include "PlayerLogic.h"
 #include "Foreach.hpp"
 
-
+MusicPlayer								System::mMusicPlayer;
+SoundPlayer								System::mSoundPlayer;
 
 std::array<GameObject*, 7>				System::mSceneLayers;
 std::vector<RenderComponent*>			System::mRenderComponents;
@@ -23,11 +20,11 @@ GameObject								System::mSceneGraph(sceneGraphDesc);
 
 void System::init()
 {
-	mGameObjects.reserve(3000);	
-	mLogicComponents.reserve(3000);
-	mInputComponents.reserve(3000);
-	mRenderComponents.reserve(3000);
-	mBoxColliderComponents.reserve(3000);
+	mGameObjects.reserve(1000);	
+	mLogicComponents.reserve(1000);
+	mInputComponents.reserve(1000);
+	mRenderComponents.reserve(1000);
+	mBoxColliderComponents.reserve(1000);
 
 	GameObjectDesc layers[] = 
 	{
@@ -328,3 +325,15 @@ void System::draw(sf::RenderWindow& window)//, GameObjectManager& gameObjectMana
 	*/
 }
 
+void System::removeAllGameObjects()
+{
+	mGameObjects;
+
+	while(mGameObjects.size() != 0)
+	{
+		(*mGameObjects.back()).Destroy();
+		//mGameObjects.pop_back();
+	}
+
+	mGameObjects;
+}

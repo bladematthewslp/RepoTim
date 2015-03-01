@@ -4,7 +4,7 @@
 GUIRedOrbLogic::GUIRedOrbLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
 	, deltaTime(sf::seconds(1.0f/60.0f))
-	, timerGUI(9)
+	, timerGUI(15)
 {
 	
 	mGameObject->setPosition(900,20);

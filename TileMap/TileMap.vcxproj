@@ -126,6 +126,7 @@
     <ClCompile Include="KnockoutState.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="NinjaBoxCollider.cpp" />
     <ClCompile Include="NinjaGameObject.cpp" />
     <ClCompile Include="NinjaInput.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="SceneStack.cpp" />
     <ClCompile Include="SlashBoxBoxCollider.cpp" />
     <ClCompile Include="SlashBoxLogic.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SpriteAnim.cpp" />
     <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="System.cpp" />
@@ -215,6 +217,7 @@
     <ClInclude Include="KnockoutState.h" />
     <ClInclude Include="Layers.h" />
     <ClInclude Include="LogicComponent.h" />
+    <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="NinjaBoxCollider.h" />
     <ClInclude Include="NinjaGameObject.h" />
     <ClInclude Include="NinjaInput.h" />
@@ -244,6 +247,7 @@
     <ClInclude Include="SceneStack.h" />
     <ClInclude Include="SlashBoxBoxCollider.h" />
     <ClInclude Include="SlashBoxLogic.h" />
+    <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SpriteAnim.h" />
     <ClInclude Include="StandingState.h" />
     <ClInclude Include="System.h" />

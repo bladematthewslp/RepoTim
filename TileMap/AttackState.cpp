@@ -35,7 +35,9 @@ AttackState::AttackState(GameObject* player)
 	slashNumber = 0;
 	//player->mRenderComponent->setAnimation("Slash1");
 	isAttack = false;
-	//std::cout << "NEW ATTACK STATE" << std::endl;
+	std::cout << "NEW ATTACK STATE" << std::endl;
+	soundEffectPlayed = false;
+	
 }
 
 GameObject* AttackState::createSlashBox()
@@ -119,6 +121,21 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	RenderComponent* render = dynamic_cast<RenderComponent*>(player->mRenderComponent);
 
+	// play sound effect
+	if(soundEffectPlayed == false)
+	{
+
+		if(render->currentAnim == "Slash1")
+			System::mSoundPlayer.play(SoundEffect::DojiSwordSwing1);
+		else if(render->currentAnim == "Slash2Part1")
+			System::mSoundPlayer.play(SoundEffect::DojiSwordSwing2);
+		else if(render->currentAnim == "QuickStinger" || render->currentAnim == "QuickUprising")
+			System::mSoundPlayer.play(SoundEffect::DojiSwordSwingQuick);
+		else if(render->currentAnim == "Slash3")
+			System::mSoundPlayer.play(SoundEffect::DojiSwordSwing3);
+		soundEffectPlayed = true;
+	}
+
 	int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
 	
 	delayTimer++;
@@ -136,6 +153,7 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 		if(render->currentAnim == "Slash1")
 		{
 			CREATE_SLASH_BOX;
+			
 			slashLogic->init(logic->getDirection(), Attacks::PLAYER_SLASH1, 15);
 			slashLogic->setAttackType(Attacks::PLAYER_SLASH1);
 			isAttack = true;

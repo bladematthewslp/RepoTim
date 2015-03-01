@@ -9,36 +9,53 @@
 
 class World
 {
+	// Background data
 	GameObject*				mForeground[5];
 	GameObject*				mBackground[5];
+
+	// World characters
 	GameObject*				mPlayer;
-	sf::Vector2f			mLookAtPoint;
+	std::vector<GameObject*>	ninjaGameObjects;
+	GameObject*				ryobeGameObject;
+
+	// Player GUI data
 	GameObject*				mHealthBar;
 	GameObject*				GUIRedOrb;
 	GameObject*				block;
 
-	// world enemies
-	std::vector<GameObject*>	ninjaGameObjects;
-	GameObject*				ryobeGameObject;
+	// world view data
+	sf::Vector2f			mLookAtPoint;
+	bool					scrollableWorld;							// toggle for if the world is still scrollable. Will be false when boss fight begins
 
 	// boss fight variables
 	GameObject*				lightningWallLeft;
 	GameObject*				lightningWallRight;
-	float					xPositionBossFightStart;
-	bool					playerReachedBossFightLocation;
-	bool					bossFightStarted;
-	bool					scrollableWorld;
-	float					timerToBeginBattle;
-	bool					startTimerToBeginBattle;
+	float					xPositionBossFightStart;					// location where player must be for boss fight to begin
+	bool					playerReachedBossFightLocation;				// check for if player has reached the boss fight location
+	bool					bossFightStarted;							// check if the boss fight has started
+	float					timerToBeginBattle;							// timer to start the boss battle
+	bool					startTimerToBeginBattle;					// check for if the boss battle timer has started
 
-	bool					bossDefeated;
-	float					timerToStartPlayerWinPose;
+	
+	float					timerToStartPlayerWinPose;					// timer for player's win pose
 
-	sf::RectangleShape		mFadeOutShape;
 
+	sf::RectangleShape		mFadeOutShape;								// shape used for world fade in/out
+
+	// data to use for world restart or world completion
+	bool					playerDefeated;								// check if player is dead
+	bool					bossDefeated;								// check for if the boss is defeated
+	float					timerToFadeOut;								// timer to fade out
+
+
+	// private functions
+	void					fadeIn();
+
+	void					restartWorld();
+	void					cleanupWorld();
 public:
 	World(sf::RenderWindow& window);
-
+	void					init();
 	bool					handleEvent(sf::RenderWindow& window,sf::Event& event);
 	bool					handleInput(sf::Event& event);
 

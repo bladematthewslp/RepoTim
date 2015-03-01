@@ -20,7 +20,7 @@ public:
 	RenderComponent(GameObject* gameObject);
 	~RenderComponent();
 	static void			loadImages();
-
+	static void			unloadImages();
 	static ImageHolder	mImageHolder;
 	static TextureHolder mTextureHolder;
 

@@ -166,7 +166,8 @@ void PlayerInput::handleEvents(const sf::Event& event)
 					}
 					else
 					{
-						if(mGameObject->mRenderComponent->isAnimDelayed() == true)
+						// if the animation is delayed and player is not on last slash
+						if(mGameObject->mRenderComponent->isAnimDelayed() == true && mGameObject->getRenderComponent()->currentAnim != "Slash3")
 						{
 							mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
 							if(mGameObject->getRenderComponent()->currentAnim == "Slash1")

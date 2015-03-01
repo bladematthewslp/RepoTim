@@ -9,6 +9,6 @@ BackgroundGameObject::BackgroundGameObject(GameObjectDesc desc)
 	//mRenderComponent->mImage.loadFromFile("Sprites/forest_background.png");
 	//mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::WoodsBackground);//loadFromImage(mRenderComponent->mImage);
 	mRenderComponent->mTexture.setRepeated(true);
-	mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsBackgroundComplete));
+	mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsBackground));
 
 }

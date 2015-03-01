@@ -5,17 +5,6 @@
 #include "TitleScene.h"
 #include "GameScene.h"
 #include "PauseScene.h"
-//#include "Component.h"
-//#include "GameObject.h"
-//#include "Command.h"
-//#include "GameObjectManager.h"
-//#include "System.h"
-//#include "PlayerRender.h"
-//#include "PlayerLogic.h"
-//#include "PlayerInput.h"
-//#include "NinjaRender.h"
-//#include "BoxColliderComponent.h"
-//#include "NinjaLogic.h"
 #include "Scene.h"
 #include <array>
 
@@ -52,10 +41,11 @@ void Game::run()
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 		
-	while(mWindow.isOpen() )
+	while(mWindow.isOpen())
 	{
 		
 			sf::Event event;
+			
 			timeSinceLastUpdate += clock.restart();
 			while(timeSinceLastUpdate > TimePerFrame)
 			{

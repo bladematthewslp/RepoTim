@@ -34,19 +34,16 @@ World::World(sf::RenderWindow& window)
 	System::init();
 	Attacks::registerAttacks();
 
+	init();
+}
+
+void World::init()
+{
+	System::mMusicPlayer.play(Music::WoodsTheme);
 	// ___________________________________
 	//	GUI Setup
 	// ___________________________________
-	
-	
-	/*
-	// Mugshot
-	GameObjectDesc mugshotDesc(	"Mugshot",sf::RectangleShape(sf::Vector2f(90,120)),	Layer::UI,	ComponentType::RenderComponent);
-	GameObject* mugshot = std::unique_ptr<GameObject>(new GameObject(mugshotDesc)).release();
-	mugshot->setPosition(15, 10);
-	mugshot->setPosition(sf::Vector2f());
-	mugshot->mRenderComponent->mSprite.setTexture(&mugshot->getRenderComponent()->mTextureHolder.get(Textures::PlayerMugshot));
-	*/
+
 	// GUI Red Orb
 	GameObjectDesc GUIRedOrbDesc("GUIRedOrb", sf::RectangleShape(sf::Vector2f(27,45)), Layer::UI);
 	GUIRedOrb = std::unique_ptr<GameObject>(new GameObject(GUIRedOrbDesc)).release();
@@ -84,10 +81,10 @@ World::World(sf::RenderWindow& window)
 		mBackground[i] = std::unique_ptr<GameObject>(new BackgroundGameObject(backgroundDesc)).release();
 		mBackground[i]->setPosition( i * 1024, 0);
 
-		/*mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
+		mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
 		//mForeground[i]->mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::WoodsForeground);
 		mForeground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsForeground));
-		mForeground[i]->setPosition( i * 1024, 0);*/
+		mForeground[i]->setPosition( i * 1024, 0);
 	}
 	
 	
@@ -110,7 +107,7 @@ World::World(sf::RenderWindow& window)
 	{
 		GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 		ninja->mBoxColliderComponent->setSize(50,75);
-		ninja->setPosition( 3600 + (300*i),536);
+		ninja->setPosition( 1200 + (300*i),536);
 		ninjaGameObjects.push_back(ninja);
 	}
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
@@ -128,12 +125,16 @@ World::World(sf::RenderWindow& window)
 	lightningWallLeft  = nullptr;
 	lightningWallRight = nullptr;
 	
+	// data to use for world restart or world completion
 	bossDefeated = false;
+	playerDefeated = false;
+	timerToFadeOut = 0;
+
 	timerToStartPlayerWinPose = 0;
 
-	sf::Color black = sf::Color::Black;
-	black.a = 0;
-	mFadeOutShape.setFillColor(black);
+	
+	mFadeOutShape.setFillColor(sf::Color::Black);
+	mFadeOutShape.setPosition(0,0);
 }
 
 bool World::handleEvent(sf::RenderWindow& window, sf::Event& event)
@@ -162,8 +163,28 @@ bool World::handleInput(sf::Event& event)
 
 bool World::update(sf::Time dt)
 {
-	destroyGameObjectsOutsideView();
 
+	// check if player is defeated
+	PlayerLogic* playerLogic = dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent);
+	if(playerLogic->getHealth() <= 0)
+	{
+		timerToFadeOut += dt.asSeconds();
+		if(timerToFadeOut >= 3)
+		{
+			timerToFadeOut = 0;
+			restartWorld();
+		}
+	}
+
+	// fade in to game
+	if(bossDefeated == false)
+	{
+		fadeIn();
+	}
+	
+	//----------------------------------
+	// BOSS FIGHT HANDLING
+	// ---------------------------------
 	// if player is in the range of battle
 	if(playerReachedBossFightLocation == false 
 		&& mPlayer->getPosition().x >  xPositionBossFightStart && mPlayer->getPosition().x < xPositionBossFightStart + 100 )
@@ -197,6 +218,8 @@ bool World::update(sf::Time dt)
 	// once player reaches fight location and all ninjas are dead...
 	if(playerReachedBossFightLocation == true && startTimerToBeginBattle == false && bossFightStarted == false)
 	{
+		// immediately play ryobe battle theme
+		System::mMusicPlayer.play(Music::RyobeFightTheme);
 		// turn world scrolling off
 		scrollableWorld = false;
 
@@ -286,6 +309,7 @@ bool World::update(sf::Time dt)
 				if(color.a > 250)
 				{
 					color.a = 255;
+					cleanupWorld();
 					return false;
 				}
 				color.a += 2.5;
@@ -302,7 +326,14 @@ bool World::update(sf::Time dt)
 		lightningWallRight->mRenderComponent->runSpriteAnim(*lightningWallRight);
 	}
 
+	//----------------------------------
+	// END BOSS FIGHT HANDLING
+	// ---------------------------------
+	
 
+	// update world
+	System::mSoundPlayer.removeStoppedSounds();
+	destroyGameObjectsOutsideView();
 	System::update(*mGrid,dt);
 	return true;
 }
@@ -315,35 +346,28 @@ void World::draw(sf::RenderWindow& window)
 	int viewPosX = mWorldView.getCenter().x;
 	int playerPosX = mPlayer->getPosition().x;
 
+	// set focus point for normal gameplay
 	if(playerReachedBossFightLocation == false)
 	{
 
 		if(dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->getDirection() == Direction::Right)
 		{
-		
-				if(playerPosX > viewPosX + 50)
-					mLookAtPoint.x += cameraLerpSpeed;
-			//}
-			//else if(playerPosX < viewPosX + 50)
-				//mLookAtPoint.x -= cameraLerpSpeed;
+			if(playerPosX > viewPosX + 50)
+				mLookAtPoint.x += cameraLerpSpeed;
 		}
 		else if(dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent)->getDirection() == Direction::Left)
 		{
-		
-				if(playerPosX < viewPosX - 50)
-					mLookAtPoint.x -= cameraLerpSpeed;
-			//}
-			//else if(playerPosX > viewPosX - 50)
-				//mLookAtPoint.x += cameraLerpSpeed;
+			if(playerPosX < viewPosX - 50)
+				mLookAtPoint.x -= cameraLerpSpeed;
 		}
 	}
+	// set focus point for boss fight
 	else if(playerReachedBossFightLocation == true && mLookAtPoint.x != xPositionBossFightStart)
 	{
 		if(mLookAtPoint.x > xPositionBossFightStart )
 			mLookAtPoint.x -= 1;
 		else if(mLookAtPoint.x < xPositionBossFightStart )
 			mLookAtPoint.x += 1;
-	
 	}
 
 	if(mLookAtPoint.x < worldViewXLimit)
@@ -394,4 +418,42 @@ void World::destroyGameObjectsOutsideView()
 		}
 	}
 
+}
+
+void World::fadeIn()
+{
+	sf::Time dt = sf::seconds(1.0/60.0);
+	static float timer = 0;
+	timer += dt.asSeconds() * 50;
+	if(timer > 1)
+	{
+		// fade in
+		sf::Color color = mFadeOutShape.getFillColor();
+		if(color.a > 5)
+		{
+			color.a -= dt.asSeconds() * 50;
+		}
+		else
+		{
+			color.a = 0;
+		}
+		mFadeOutShape.setFillColor(color);
+	
+		timer = 0;
+	}
+}
+
+void World::cleanupWorld()
+{
+	System::mMusicPlayer.stop();
+	System::removeAllGameObjects();
+	RenderComponent::unloadImages();
+}
+
+void World::restartWorld()
+{
+	System::mMusicPlayer.stop();
+	System::removeAllGameObjects();
+	ninjaGameObjects.clear();
+	init();
 }
