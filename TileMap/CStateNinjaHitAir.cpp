@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-const float MAX_FALLING_SPEED = 5;
+const float MAX_FALLING_SPEED = 4;
 
 CStateNinjaHitAir::CStateNinjaHitAir(GameObject* character) : CState("CStateNinjaHitAir")
 	, isAirborne(false)
@@ -40,7 +40,7 @@ CState* CStateNinjaHitAir::update(GameObject* character, sf::Time dt, Grid& grid
 	if(vel.y >= -3 && vel.y < 0)
 		mAirSpeed += 0.22f;
 	else
-		mAirSpeed += 0.33f;
+		mAirSpeed += 0.63f;
 
 	if(mAirSpeed > MAX_FALLING_SPEED)
 		mAirSpeed = MAX_FALLING_SPEED;

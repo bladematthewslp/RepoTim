@@ -2,7 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "SceneIdentifier.h"
-
+#include "ResourceHolder.h"
+#include "ResourceIdentifiers.h"
 
 class SceneStack;
 
@@ -16,9 +17,23 @@ public:
 	
 	struct Context
 	{
-		Context(sf::RenderWindow& window) : window(&window){};
+
+		Context(sf::RenderWindow& window) : window(&window), redOrbCount(nullptr), mButtonHolder(nullptr)
+		{ 
+			mButtonHolder = std::unique_ptr<ButtonHolder>(new ButtonHolder()).release();
+			mButtonHolder->load(Buttons::PlayNormal,		"Buttons/PlayNormal.png");
+			mButtonHolder->load(Buttons::PlaySelected,		"Buttons/PlaySelected.png");
+			mButtonHolder->load(Buttons::ControlsNormal,	"Buttons/ControlsNormal.png");
+			mButtonHolder->load(Buttons::ControlsSelected,	"Buttons/ControlsSelected.png");
+			mButtonHolder->load(Buttons::QuitNormal,		"Buttons/QuitNormal.png");
+			mButtonHolder->load(Buttons::QuitSelected,		"Buttons/QuitSelected.png");
+			mButtonHolder->load(Buttons::ResumeNormal,		"Buttons/ResumeNormal.png");
+			mButtonHolder->load(Buttons::ResumeSelected,	"Buttons/ResumeSelected.png");
+		};
 
 		sf::RenderWindow* window;
+		ButtonHolder*			mButtonHolder;
+		int* redOrbCount;
 	};
 
 					Scene(SceneStack& stack, Context context);
@@ -26,12 +41,12 @@ public:
 	virtual bool	update(sf::Time dt) = 0;
 	virtual bool	handleEvent(sf::Event& event) = 0;
 	virtual bool	handleInput(sf::Event& event) = 0;
-
+	Context		getContext() const;
 protected:
 	void requestStackPop();
 	void requestStackPush(Scenes::ID stateID);
 	void requestStackClear();
-	Context		getContext() const;
+	
 
 private:
 	SceneStack*	mStack;

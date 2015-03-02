@@ -14,7 +14,7 @@ const float MAX_JUMPING_SPEED = 5.0f;
 
 JumpingState::JumpingState(GameObject* player) 
 	: CState("JumpingState")
-	, gravity(0.0f, 0.3f)
+	, gravity(0.0f, 0.6f)
 	, oldPosition()
 {
 	spriteX = 1;
@@ -40,14 +40,14 @@ CState* JumpingState::handleInput(GameObject* player, const sf::Event& event)
 	{
 		logic->setVelocityX(0);
 	}
-	
+	/*
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		CState* newState = std::unique_ptr<CState>(new AttackStateAir(player)).release();
 		newState->entry(player);
 		return newState;
 	}
-	
+	*/
 	return this;
 }
 

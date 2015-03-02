@@ -1,3 +1,18 @@
+3-1b
+---------------------------
+Title Screen
+	- Buttons added with full functionality
+	- Controls screen added
+
+Paused Screen
+	- Buttons added with full functionality
+	- Controls screen added
+
+Game
+	- Lowered Ryobe's jump
+
+
+
 3-1
 ---------------------------
 Level restarts when player dies

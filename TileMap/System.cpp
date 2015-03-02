@@ -1,7 +1,9 @@
 #include "System.h"
 #include "PlayerInput.h"
+#include "World.h"
 #include "Foreach.hpp"
 
+World*									System::mWorld(nullptr);
 MusicPlayer								System::mMusicPlayer;
 SoundPlayer								System::mSoundPlayer;
 
@@ -18,8 +20,9 @@ std::set<GameObject*>					System::mGameObjsPendingDeletion;
 GameObjectDesc							sceneGraphDesc("Root",sf::RectangleShape(), Layer::Root);
 GameObject								System::mSceneGraph(sceneGraphDesc);
 
-void System::init()
+void System::init(World& world)
 {
+	mWorld = &world;
 	mGameObjects.reserve(1000);	
 	mLogicComponents.reserve(1000);
 	mInputComponents.reserve(1000);

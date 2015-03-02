@@ -19,7 +19,7 @@ GUIRedOrbRender::GUIRedOrbRender(GameObject* gameObject)
 	, mTextColor(sf::Color(232,43,1,255))
 {
 	// load font
-	mFont.loadFromFile("CHILLER.ttf");
+	mFont.loadFromFile("Fonts/CHILLER.ttf");
 
 	// initialize text
 	mText.setFont(mFont);
@@ -34,7 +34,7 @@ GUIRedOrbRender::GUIRedOrbRender(GameObject* gameObject)
 	mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::RedOrb));//mTexture);
 	mSprite.setPosition(100, 100);
 
-
+	mNumOrbs = 0;
 	
 }
 
@@ -55,7 +55,7 @@ void GUIRedOrbRender::draw(sf::RenderTarget& window, sf::RenderStates states ) c
 
 void GUIRedOrbRender::setRedOrbNum(int num)
 {
-	//mNumOrbs = num;
+	mNumOrbs = num;
 	std::string numOrbs = convertIntToString(num);
 	mText.setString("x" + numOrbs);
 

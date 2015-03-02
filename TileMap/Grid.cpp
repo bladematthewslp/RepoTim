@@ -94,7 +94,7 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 	
 	std::cout << "\n" << "LOADING GRID FROM FILE" << std::endl;
 	std::ifstream openfile("Map/map1.csv");
-
+	std::cerr << "Loading Grid: " << strerror(errno);
 	
 	int x = 0;
 	int y = 0;

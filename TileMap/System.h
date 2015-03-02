@@ -15,7 +15,8 @@
 #include <queue>
 #include <functional>
 
-class GameObjectManager;
+//class GameObjectManager;
+class World;
 struct Grid;
 
 typedef std::unique_ptr<GameObject> Ptr;
@@ -23,7 +24,7 @@ typedef std::unique_ptr<GameObject> Ptr;
 class System
 {
 public:
-
+	static World*											mWorld;
 	static MusicPlayer								mMusicPlayer;
 	static SoundPlayer								mSoundPlayer;
 	
@@ -50,7 +51,7 @@ public:
 	static void										setupSceneGraph();
 
 	System() { };
-	static void init();
+	static void init(World& world);
 
 	// Component management
 	template <typename T>

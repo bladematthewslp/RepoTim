@@ -7,7 +7,7 @@ SceneStack::SceneStack(Scene::Context context)
 	, mContext(context)
 	, mPendingList()
 {
-
+	
 }
 
 void SceneStack::handleEvent(sf::Event& event)

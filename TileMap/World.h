@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Grid.h"
 #include "GameObject.h"
+#include "Scene.h"
 #include <vector>
 
 
@@ -51,10 +52,10 @@ class World
 	// private functions
 	void					fadeIn();
 
-	void					restartWorld();
-	void					cleanupWorld();
+	
+	Scene::Context*			mContext;
 public:
-	World(sf::RenderWindow& window);
+	World(Scene::Context& context );
 	void					init();
 	bool					handleEvent(sf::RenderWindow& window,sf::Event& event);
 	bool					handleInput(sf::Event& event);
@@ -62,6 +63,9 @@ public:
 	bool					update(sf::Time dt);
 	void					draw(sf::RenderWindow& window);
 	void					destroyGameObjectsOutsideView();
+
+	void					restartWorld();
+	void					cleanupWorld();
 
 	sf::RenderWindow&		mWindow;
 	sf::View				mWorldView;

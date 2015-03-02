@@ -13,11 +13,6 @@ void RenderComponent::loadImages()
 	mImageHolder.load(Images::BloodAnimationA, "Sprites/blood_animation_A.png");
 	mImageHolder.load(Images::Player,		"Sprites/player_spritesheet.png");
 	mImageHolder.load(Images::Ninja,		"Sprites/ninja_spritesheet.png");
-	//mImageHolder.load(Images::RedOrb,		"Sprites/red_orb.png");
-	//mImageHolder.load(Images::GreenOrb,		"Sprites/green_orb.png");
-	//mImageHolder.load(Images::GridBlockCrate,"Sprites/crate.png");
-	//mImageHolder.load(Images::LightningWall,	"Sprites/lightning.png");
-	//mImageHolder.load(Images::Parry,		"Sprites/electricParry.png");
 	mImageHolder.load(Images::Ryobe,		"Sprites/ryobe_spritesheet.png");
 	//mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
 

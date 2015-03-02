@@ -16,4 +16,5 @@ public:
 	void		fade();
 	void		show();
 	void		setRedOrbNum(int num);
+	int			mNumOrbs;
 };

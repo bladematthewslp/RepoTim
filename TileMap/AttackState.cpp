@@ -35,7 +35,7 @@ AttackState::AttackState(GameObject* player)
 	slashNumber = 0;
 	//player->mRenderComponent->setAnimation("Slash1");
 	isAttack = false;
-	std::cout << "NEW ATTACK STATE" << std::endl;
+	//std::cout << "NEW ATTACK STATE" << std::endl;
 	soundEffectPlayed = false;
 	
 }
@@ -178,7 +178,7 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 		if(render->currentAnim == Attacks::PLAYER_IMPACT)
 		{
 			CREATE_SLASH_BOX;
-			slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(150,150));
+			slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(170,110));
 			slashLogic->init(logic->getDirection(), Attacks::PLAYER_IMPACT, 12);
 		}
 	}

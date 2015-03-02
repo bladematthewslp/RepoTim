@@ -9,7 +9,7 @@ class SceneStack;
 class GameScene : public Scene
 {
 	sf::RectangleShape	mShape;
-	World				mWorld;
+	World*				mWorld;
 public:
 	GameScene(SceneStack& stack, Context context);
 

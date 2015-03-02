@@ -5,7 +5,7 @@
 #include "Grid.h"
 #include <array>
 #include "GameObject.h"
-#include "GameObjectManager.h"
+//#include "GameObjectManager.h"
 //#include "System.h"
 //#include "PlayerObject.h"
 #include "SceneStack.h"

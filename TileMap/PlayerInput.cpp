@@ -117,7 +117,7 @@ void PlayerInput::handleEvents(const sf::Event& event)
 			}
 		}
 
-		if(key == sf::Keyboard::Space)
+		if(key == sf::Keyboard::S)
 		{
 			//check if keys in keyQueue + Space equals a registered attack
 			bool canAttack = logic->canAttackFromState();

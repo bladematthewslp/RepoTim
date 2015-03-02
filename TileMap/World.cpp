@@ -21,8 +21,9 @@
 #include "WinState.h"
 
 #include <iostream>
-World::World(sf::RenderWindow& window)
-	: mWindow(window)
+World::World(Scene::Context& context)
+	: mContext(&context)
+	, mWindow(*context.window)
 	, mWorldView(sf::FloatRect(0,0, 1024, 720))
 	, mWorldBounds(0.0f, 0.0f, 5080.0f, 720.f)
 	, mWorldWidth(1024)
@@ -31,7 +32,7 @@ World::World(sf::RenderWindow& window)
 {
 	// init stuff here
 	RenderComponent::loadImages();
-	System::init();
+	System::init(*this);
 	Attacks::registerAttacks();
 
 	init();
@@ -40,6 +41,7 @@ World::World(sf::RenderWindow& window)
 void World::init()
 {
 	System::mMusicPlayer.play(Music::WoodsTheme);
+	
 	// ___________________________________
 	//	GUI Setup
 	// ___________________________________
@@ -49,6 +51,8 @@ void World::init()
 	GUIRedOrb = std::unique_ptr<GameObject>(new GameObject(GUIRedOrbDesc)).release();
 	GUIRedOrb->addComponent(ComponentType::RenderComponent, std::unique_ptr<Component>(new GUIRedOrbRender(GUIRedOrb)).release());
 	GUIRedOrb->addComponent(ComponentType::LogicComponent, std::unique_ptr<Component>(new GUIRedOrbLogic(GUIRedOrb)).release());
+
+	
 
 	GameObjectDesc healthBarDesc("HealthBar", sf::RectangleShape(sf::Vector2f(225,20)), Layer::UI, ComponentType::RenderComponent);
 	mHealthBar = std::unique_ptr<GameObject>(new GameObject(healthBarDesc)).release();
@@ -163,6 +167,8 @@ bool World::handleInput(sf::Event& event)
 
 bool World::update(sf::Time dt)
 {
+	//constantly update the Context of the number of red orbs
+	mContext->redOrbCount = &dynamic_cast<GUIRedOrbRender*>(GUIRedOrb->mRenderComponent)->mNumOrbs;
 
 	// check if player is defeated
 	PlayerLogic* playerLogic = dynamic_cast<PlayerLogic*>(mPlayer->mLogicComponent);

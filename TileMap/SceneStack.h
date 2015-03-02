@@ -3,12 +3,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "Scene.h"
+
 #include <vector>
 #include <map>
 #include <functional>
 
 class SceneStack
 {
+	
 public:
 	enum Action
 	{
@@ -16,7 +18,8 @@ public:
 		Pop,
 		Clear
 	};
-				
+	
+	Scene::Context										mContext;			
 	explicit	SceneStack(Scene::Context context);
 	void		update(sf::Time dt);
 	void		handleEvent(sf::Event& event);
@@ -44,7 +47,7 @@ private:
 	};
 	std::vector<Scene::Ptr>								mStack;				// holds stack of active states
 	std::map<Scenes::ID, std::function<Scene::Ptr()>>	mFactories;			// holds map of functions that creates specified scenes
-	Scene::Context										mContext;
+	
 	
 	std::vector<PendingChange>							mPendingList;
 	

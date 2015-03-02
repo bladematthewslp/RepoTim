@@ -168,9 +168,6 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\System\Component</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>Source Files\System</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerRender.cpp">
       <Filter>Source Files\Characters\Player</Filter>
     </ClCompile>
@@ -425,9 +422,6 @@
     <ClInclude Include="InputComponent.h">
       <Filter>Header Files\System\Component</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>Header Files\System</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerRender.h">
       <Filter>Header Files\Characters\Player</Filter>
     </ClInclude>
@@ -631,6 +625,9 @@
     </ClInclude>
     <ClInclude Include="SoundPlayer.h">
       <Filter>Header Files\System\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="icon.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
