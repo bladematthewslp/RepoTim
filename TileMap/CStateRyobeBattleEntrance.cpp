@@ -8,15 +8,7 @@ CStateRyobeBattleEntrance::CStateRyobeBattleEntrance(GameObject* character)
 	character->mRenderComponent->setAnimation("TeleportIn");
 	timerToBeginBattle = 0.0f;
 
-	// create Ryobe HUD
-	GameObjectDesc ryobeHUDDesc("RyobeHUD", sf::RectangleShape(sf::Vector2f(607,160)), Layer::UI, ComponentType::RenderComponent);
-	ryobeHUD = std::unique_ptr<GameObject>(new GameObject(ryobeHUDDesc)).release();
-	ryobeHUD->setPosition(400, 578);
-	ryobeHUD->mRenderComponent->mSprite.setTexture(&ryobeHUD->getRenderComponent()->mTextureHolder.get(Textures::RyobeHUD));
-	sf::Color color = ryobeHUD->getSprite()->getFillColor();
-	color.a = 0;
-	ryobeHUD->getSprite()->setFillColor(color);
-
+	// create Ryobe HUD - health bar first, then HUD!
 	mHealthBarWidth = 352;
 	mHealthBarHeight = 20;
 	mMaxBarWidth = mHealthBarWidth;
@@ -26,6 +18,17 @@ CStateRyobeBattleEntrance::CStateRyobeBattleEntrance(GameObject* character)
 	mHealthBar->mRenderComponent->mSprite.setTexture(&mHealthBar->mRenderComponent->mTexture);
 	mMaxRectWidth = mHealthBar->mRenderComponent->mSprite.getTextureRect().width;
 	mHealthBar->setPosition(487, 677);
+
+
+	GameObjectDesc ryobeHUDDesc("RyobeHUD", sf::RectangleShape(sf::Vector2f(607,160)), Layer::UI, ComponentType::RenderComponent);
+	ryobeHUD = std::unique_ptr<GameObject>(new GameObject(ryobeHUDDesc)).release();
+	ryobeHUD->setPosition(400, 578);
+	ryobeHUD->mRenderComponent->mSprite.setTexture(&ryobeHUD->getRenderComponent()->mTextureHolder.get(Textures::RyobeHUD));
+	sf::Color color = ryobeHUD->getSprite()->getFillColor();
+	color.a = 0;
+	ryobeHUD->getSprite()->setFillColor(color);
+
+	
 
 	color = mHealthBar->getSprite()->getFillColor();
 	color.a = 0;
@@ -59,7 +62,7 @@ CState* CStateRyobeBattleEntrance::update(GameObject* character, sf::Time dt, Gr
 			
 			RyobeLogic* ryobeLogic = dynamic_cast<RyobeLogic*>(character->mLogicComponent);
 			ryobeLogic->setHealthBar(this->mHealthBar);
-			
+			ryobeLogic->mSoundPlayer.play(SoundEffect::RyobeComeAndGetMe);
 			CState* newState = std::unique_ptr<CState>(new CStateRyobeStanding(character)).release();
 			newState->entry(character);
 			return newState;

@@ -92,9 +92,9 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 	sf::RectangleShape block(sf::Vector2f(32,32));
 	GameObjectDesc tile("Grid Block", block, Layer::Default, ComponentType::RenderComponent, nullptr);
 	
-	std::cout << "\n" << "LOADING GRID FROM FILE" << std::endl;
+	//std::cout << "\n" << "LOADING GRID FROM FILE" << std::endl;
 	std::ifstream openfile("Map/map1.csv");
-	std::cerr << "Loading Grid: " << strerror(errno);
+	//std::cerr << "Loading Grid: " << strerror(errno);
 	
 	int x = 0;
 	int y = 0;
@@ -125,9 +125,9 @@ Grid::Grid() : tileSize(32), playerPosition(), playerLanded(false)
 		}
 	}
 
-	std::cout << "\nFINISHED LOADING GRID FROM FILE \n";
+	//std::cout << "\nFINISHED LOADING GRID FROM FILE \n";
 	
-	std::cout << std::endl << "CREATING GRID FOR WORLD" << std::endl << std::endl;
+	//std::cout << std::endl << "CREATING GRID FOR WORLD" << std::endl << std::endl;
 	for(int i = 0; i < worldGrid.size(); i++)
 	{
 		for(int j = 0; j < worldGrid[0].size(); j++)
@@ -572,7 +572,7 @@ bool Grid::checkLeft(BoxColliderComponent* collider)
 	{
 		if(mGrid[i][startX+2] != nullptr)
 		{
-			std::cout << "LEFT checkleft" << std::endl;
+			//std::cout << "LEFT checkleft" << std::endl;
 			return true;
 		}
 	/*	for(int j = cells[0].at(0); j < endX; j++)

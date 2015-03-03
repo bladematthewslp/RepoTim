@@ -109,7 +109,7 @@ void StandingState::entry(GameObject* player)
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	logic->setGrounded(true);
 
-	std::cout << "entry" << std::endl;
+	//std::cout << "entry" << std::endl;
 	logic->setVelocity(sf::Vector2f(0,0));
 
 	

@@ -221,7 +221,7 @@ void PlayerInput::handleEvents(const sf::Event& event)
 							if(mGameObject->mState->getName() != "AttackStateAir")
 							{
 								mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
-								std::cout << iter->second << std::endl;
+								//std::cout << iter->second << std::endl;
 								mGameObject->mRenderComponent->setAnimation(iter->second);
 							}
 						}

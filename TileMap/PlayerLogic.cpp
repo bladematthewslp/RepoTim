@@ -17,6 +17,7 @@
 #include "RyobeLogic.h"
 #include "DaggerLogic.h"
 #include "ParryEffectLogic.h"
+#include "SoundPlayer.h"
 #include <iostream>
 
 const sf::Time deltaTime = sf::seconds(1.0f/60.0f);
@@ -29,7 +30,13 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	, mIsGrounded(true)
 	, mHealth(100)
 	, mNumRedOrbs(0)
+	, mSoundPlayer()
 {
+	
+
+	
+	
+
 	// HealthBar
 	mHealthBar = System::findGameObjectByName("HealthBar");
 	if(mHealthBar == nullptr)
@@ -43,7 +50,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	dynamic_cast<GUIRedOrbRender*>(mRedOrbsGUI->mRenderComponent)->setRedOrbNum(mNumRedOrbs);
 
 
-	mGameObject->setPosition(300,(32*18) - mGameObject->getSprite()->getLocalBounds().height/8);
+	mGameObject->setPosition(300,(32*19) - mGameObject->getSprite()->getLocalBounds().height/8);
 
 	GameObjectDesc boxDesc("playerBBox", 
 							sf::RectangleShape(sf::Vector2f(mGameObject->getSprite()->getGlobalBounds().width/4,mGameObject->getSprite()->getGlobalBounds().height/4)), 
@@ -96,7 +103,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 void PlayerLogic::update(Grid& grid)
 {
 	//updateBox();
-
+	//mSoundPlayer.removeStoppedSounds();
 	// this is unorthodox but it needs to be here to update every frame
 	PlayerInput* input = dynamic_cast<PlayerInput*>(mGameObject->mInputComponent);
 	input->handleKeyQueue();
@@ -113,7 +120,10 @@ void PlayerLogic::update(Grid& grid)
 	{
 		mGameObject->mState = state;
 	}
+
+	
 }
+
 
 bool PlayerLogic::isReadyForBattle()
 {

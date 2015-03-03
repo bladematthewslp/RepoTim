@@ -6,7 +6,7 @@
 
 RyobeLogic::RyobeLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
-	, mHealth(100)
+	, mHealth(1)
 	, mIsHit(false)
 	, mHitCounter(0)
 	, mDirection(Direction::Left)
@@ -82,7 +82,7 @@ void RyobeLogic::update(Grid& grid)
 		mGameObject->mState = newState;
 	}
 
-
+	mSoundPlayer.removeStoppedSounds();
 }
 
 
@@ -221,5 +221,5 @@ void RyobeLogic::createLightningChargeup()
 	//lightningChargeup->mRenderComponent->mTexture.loadFromImage(RenderComponent::mImageHolder.get(Images::LightningWall));// = RenderComponent::mTextureHolder.get(Textures::Lightning);
 	lightningChargeup->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::LightningWall));//lightningChargeup->mRenderComponent->mTexture);
 
-	lightningChargeup->setPosition(mGameObject->getPosition().x - 20, -64);
+	lightningChargeup->setPosition(mGameObject->getPosition().x - 20, -32);
 }

@@ -31,6 +31,7 @@ World::World(Scene::Context& context)
 	, mFadeOutShape(sf::Vector2f(2000,2000))
 {
 	// init stuff here
+	SoundPlayer::loadAllSounds();
 	RenderComponent::loadImages();
 	System::init(*this);
 	Attacks::registerAttacks();
@@ -82,13 +83,34 @@ void World::init()
 	
 	for(int i = 0; i < 6; i++)
 	{
-		mBackground[i] = std::unique_ptr<GameObject>(new BackgroundGameObject(backgroundDesc)).release();
-		mBackground[i]->setPosition( i * 1024, 0);
+		//if(i < 3)
+		{
+			mBackground[i] = std::unique_ptr<GameObject>(new BackgroundGameObject(backgroundDesc)).release();
+			mBackground[i]->setPosition( i * 1024, 0);
 
-		mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
+
+			mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
+			mForeground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsForeground));
+			mForeground[i]->setPosition( i * 1024, 0);
+		}
+		//else
+		{
+			/*
+			mBackground[i] = std::unique_ptr<GameObject>(new GameObject(backgroundDesc)).release();
+			mBackground[i]->mRenderComponent->mTexture.setRepeated(true);
+			mBackground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsBackgroundComplete));
+			*/
+			//mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
+			//mForeground[i]->mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::WoodsForeground);
+			//mForeground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsForeground));
+			//mForeground[i]->setPosition( i * 1024, 0);
+		}
+		
+
+		/*mForeground[i] = std::unique_ptr<GameObject>(new GameObject(foregroundDesc)).release();
 		//mForeground[i]->mRenderComponent->mTexture = RenderComponent::mTextureHolder.get(Textures::WoodsForeground);
 		mForeground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::WoodsForeground));
-		mForeground[i]->setPosition( i * 1024, 0);
+		mForeground[i]->setPosition( i * 1024, 0);*/
 	}
 	
 	
@@ -111,7 +133,7 @@ void World::init()
 	{
 		GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 		ninja->mBoxColliderComponent->setSize(50,75);
-		ninja->setPosition( 1200 + (300*i),536);
+		ninja->setPosition( 1200 + (300*i),568);
 		ninjaGameObjects.push_back(ninja);
 	}
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
@@ -154,7 +176,7 @@ bool World::handleEvent(sf::RenderWindow& window, sf::Event& event)
 	if(event.type == sf::Event::MouseButtonPressed)
 	{
 		sf::Vector2i pos = mWindow.mapCoordsToPixel(sf::Vector2f(sf::Mouse::getPosition(mWindow)),mWindow.getDefaultView());
-		std::cout << (int)(pos.x + mWorldView.getCenter().x - 512)/32 << "," << pos.y/32 << std::endl;
+		//std::cout << (int)(pos.x + mWorldView.getCenter().x - 512)/32 << "," << pos.y/32 << std::endl;
 	}
 	return true;
 }
@@ -267,7 +289,7 @@ bool World::update(sf::Time dt)
 		// if timer reaches set number to make ryobe appear in screen
 		if(timerToBeginBattle >= 3 && ryobeGameObject->mState == nullptr )
 		{
-			ryobeGameObject->setPosition(4300, 536);
+			ryobeGameObject->setPosition(4300, 568);
 			ryobeGameObject->mState = std::unique_ptr<CState>(new CStateRyobeBattleEntrance(ryobeGameObject)).release();
 			//bossFightStarted = true;
 			startTimerToBeginBattle = false;
@@ -416,7 +438,7 @@ void World::destroyGameObjectsOutsideView()
 					if(dist > mWorldView.getSize().x/2)
 					{
 						System::removeGameObject( (*obj_itr) );
-						std::cout << "DESTROYED" << std::endl;
+						//std::cout << "DESTROYED" << std::endl;
 					}
 				}
 			}
@@ -454,6 +476,7 @@ void World::cleanupWorld()
 	System::mMusicPlayer.stop();
 	System::removeAllGameObjects();
 	RenderComponent::unloadImages();
+	SoundPlayer::mSoundBuffers.mResourceMap.clear();
 }
 
 void World::restartWorld()

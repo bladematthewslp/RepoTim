@@ -24,7 +24,7 @@ Game::Game()
 	//std::cout << settings.majorVersion << "." << settings.minorVersion << std::endl;
 	sf::VideoMode videoMode;
 	mWindow.setKeyRepeatEnabled(false);
-	mWindow.setPosition(sf::Vector2i(128, 0));
+	//mWindow.setPosition(sf::Vector2i(128, 0));
 	mWindow.setIcon(icon.width,icon.height, icon.pixel_data);
 	registerScenes();
 	mSceneStack.pushScene(Scenes::Title);

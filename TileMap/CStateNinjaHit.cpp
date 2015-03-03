@@ -114,6 +114,6 @@ void CStateNinjaHit::successiveHit(GameObject* character, AttackType attackType)
 	{
 		dynamic_cast<NinjaLogic*>(character->mLogicComponent)->setVelocityY(mLaunchSpeed);
 		isAirborne = true;
-		std::cout << isAirborne << std::endl;
+		//std::cout << isAirborne << std::endl;
 	}
 }

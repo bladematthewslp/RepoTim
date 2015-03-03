@@ -65,13 +65,26 @@ namespace SoundEffect
 {
 	enum ID
 	{
+		None,
+		ChargeUp,
 		DojiSwordSwing1,
 		DojiSwordSwing2,
 		DojiSwordSwingQuick,
 		DojiSwordSwing3,
 		DojiSwordSwingHit,
-		NinjaSwordSwing,
-		NinjaSwordSwingHit
+		DojiImpact,
+		ElectricCurrent,
+		NinjaDaggerSwing,
+		NinjaSwordSwingHit,
+		RyobeComeAndGetMe,
+		RyobeDead,
+		RyobeEmbracer,
+		RyobeFellCrescent,
+		RyobeFire,
+		RyobeKnifeThrow,
+		RyobeStandStill,
+		RyobeSwordAttack,
+		Teleport
 
 	};
 

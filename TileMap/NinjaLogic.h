@@ -4,6 +4,7 @@
 #include "AttackType.h"
 #include "LogicComponent.h"
 #include "Helper.h"
+#include "SoundPlayer.h"
 
 struct Grid;
 class CState;
@@ -19,6 +20,10 @@ class NinjaLogic : public LogicComponent
 	std::map<DamageType, int>	mDamageTable;
 	bool		mIsGrounded;
 public:
+
+	SoundPlayer	mSoundPlayer;
+
+
 	NinjaLogic(GameObject* mGameObject);
 	void		update(Grid& grid);
 

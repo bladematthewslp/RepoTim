@@ -5,8 +5,10 @@ CStateRyobeDead::CStateRyobeDead(GameObject* character)
 	: CState("CStateRyobeDead")
 	, mVelocity(-5.0f, 0)
 {
-
+	RyobeLogic* logic = dynamic_cast<RyobeLogic*>(character->mLogicComponent);
 	character->mRenderComponent->setAnimation("Dead");
+
+	logic->mSoundPlayer.play(SoundEffect::RyobeDead);
 }
 
 CState* CStateRyobeDead::update(GameObject* character, sf::Time dt, Grid& grid)

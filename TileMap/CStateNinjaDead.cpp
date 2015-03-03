@@ -41,7 +41,7 @@ CStateNinjaDead::CStateNinjaDead(GameObject* character)
 
 	}
 
-
+	
 }
 
 

@@ -38,6 +38,6 @@ LogicComponent::~LogicComponent()
 
 int LogicComponent::getDirection()
 {
-	std::cout << "getDirection() not overwritten" << std::endl;
+	//std::cout << "getDirection() not overwritten" << std::endl;
 	return false;
 }

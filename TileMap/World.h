@@ -11,7 +11,7 @@
 class World
 {
 	// Background data
-	GameObject*				mForeground[5];
+	GameObject*				mForeground[4];
 	GameObject*				mBackground[5];
 
 	// World characters

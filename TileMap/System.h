@@ -6,7 +6,7 @@
 #include "InputComponent.h"
 #include "BoxColliderComponent.h"
 #include "MusicPlayer.h"
-#include "SoundPlayer.h"
+#include "SystemSoundPlayer.h"
 #include <array>
 #include <vector>
 #include <set>
@@ -25,8 +25,8 @@ class System
 {
 public:
 	static World*											mWorld;
-	static MusicPlayer								mMusicPlayer;
-	static SoundPlayer								mSoundPlayer;
+	static MusicPlayer										mMusicPlayer;
+	static SystemSoundPlayer								mSoundPlayer;
 	
 	
 	// Scene Graph
@@ -94,7 +94,7 @@ void System::addComponent(T* comp)
 	}
 	else if(dynamic_cast<InputComponent*>(comp) != nullptr)
 	{
-		std::cout << "Input" << std::endl;
+		//std::cout << "Input" << std::endl;
 		auto newComponent = dynamic_cast<InputComponent*>(comp);
 		System::mInputComponents.push_back(newComponent);
 	}
@@ -120,7 +120,7 @@ void System::removeComponent(T* comp)
 	}
 	else if(dynamic_cast<InputComponent*>(comp) != nullptr)
 	{
-		std::cout << "Input" << std::endl;
+		//std::cout << "Input" << std::endl;
 		auto newComponent = dynamic_cast<InputComponent*>(comp);
 		System::mInputComponents.push_back(newComponent);
 	}

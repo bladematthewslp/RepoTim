@@ -5,7 +5,7 @@
 
 World*									System::mWorld(nullptr);
 MusicPlayer								System::mMusicPlayer;
-SoundPlayer								System::mSoundPlayer;
+SystemSoundPlayer						System::mSoundPlayer;
 
 std::array<GameObject*, 7>				System::mSceneLayers;
 std::vector<RenderComponent*>			System::mRenderComponents;
@@ -68,7 +68,7 @@ void System::init(World& world)
 	//std::unique_ptr<GameObject> layer(new GameObject());
 	
 	
-	std::cout << "DONE INITIALIZATING SYSTEM" << std::endl;
+	//std::cout << "DONE INITIALIZATING SYSTEM" << std::endl;
 }
 
 void System::setupSceneGraph()

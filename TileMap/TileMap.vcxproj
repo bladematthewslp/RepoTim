@@ -156,10 +156,12 @@
     <ClCompile Include="SceneStack.cpp" />
     <ClCompile Include="SlashBoxBoxCollider.cpp" />
     <ClCompile Include="SlashBoxLogic.cpp" />
+    <ClCompile Include="SoundEffectLogic.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SpriteAnim.cpp" />
     <ClCompile Include="StandingState.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="SystemSoundPlayer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="WinState.cpp" />
@@ -248,10 +250,12 @@
     <ClInclude Include="SceneStack.h" />
     <ClInclude Include="SlashBoxBoxCollider.h" />
     <ClInclude Include="SlashBoxLogic.h" />
+    <ClInclude Include="SoundEffectLogic.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SpriteAnim.h" />
     <ClInclude Include="StandingState.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="SystemSoundPlayer.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinState.h" />

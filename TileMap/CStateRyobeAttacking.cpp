@@ -4,6 +4,7 @@
 #include "RyobeLogic.h"
 #include "DaggerLogic.h"
 #include "ParryEffectLogic.h"
+#include "SoundEffectLogic.h"
 
 
 
@@ -26,9 +27,10 @@
 		GameObjectDesc parryAnimation("ParryEffect",sf::RectangleShape(sf::Vector2f(175,175)),Layer::Player,ComponentType::RenderComponent);		\
 		parryEffect = std::unique_ptr<GameObject>(new GameObject(parryAnimation)).release();														\
 		parryEffect->addComponent(ComponentType::LogicComponent, std::unique_ptr<Component>(new ParryEffectLogic(parryEffect)).release() );			\
-		parryEffect->setPosition(sf::Vector2f(-100,-95));																\
+		parryEffect->setPosition(sf::Vector2f(-100,-95));																							\
 		dynamic_cast<ParryEffectLogic*>(parryEffect->mLogicComponent)->ryobeGameObject = character;													\
 		character->addChild(parryEffect);																											\
+		System::mSoundPlayer.play(SoundEffect::ElectricCurrent);																					\
 
 
 CStateRyobeAttacking::CStateRyobeAttacking(GameObject* character)
@@ -45,8 +47,14 @@ CStateRyobeAttacking::CStateRyobeAttacking(GameObject* character)
 	, fellCrescentAttackBoxCreated(false)
 {
 	parryEffect = nullptr;
+	soundEffectPlayed = false;
 }
 
+void CStateRyobeAttacking::playSound(SoundEffect::ID effect, RyobeLogic* logic)
+{
+	logic->mSoundPlayer.play(effect);
+	soundEffectPlayed = true;
+}
 
 
 CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& grid)
@@ -55,7 +63,50 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 	
 	character->mRenderComponent->runSpriteAnim(*character);
 
+	// play sound
+	if(soundEffectPlayed == false)
+	{
+		if(character->mRenderComponent->currentAnim == "SwordAttack1" )
+			playSound(SoundEffect::RyobeSwordAttack, logic);
+		else if(character->mRenderComponent->currentAnim == "WeaponThrow")
+			playSound(SoundEffect::RyobeKnifeThrow, logic);
+		else if(character->mRenderComponent->currentAnim == "Charge2" )
+		{
+			System::mSoundPlayer.play(SoundEffect::ChargeUp);
+			playSound(SoundEffect::RyobeFire, logic);
+		}
+		else if(character->mRenderComponent->currentAnim == "AttackReady" && parryEffect != nullptr)		// for Fell Crescent chargeup
+			playSound(SoundEffect::RyobeStandStill, logic);
+		else if(character->mRenderComponent->currentAnim == "FellCrescent" 
+				&& character->mRenderComponent->mSpriteSet["FellCrescent" ]->currentFrame == 7)
+			playSound(SoundEffect::RyobeFellCrescent, logic);
+		else if(character->mRenderComponent->currentAnim == "EmbracerPart2"
+				&& character->mRenderComponent->mSpriteSet["EmbracerPart2" ]->currentFrame == 3)
+			playSound(SoundEffect::RyobeEmbracer, logic);
+		else if(character->mRenderComponent->currentAnim == "Teleport")
+		{
+			
+			System::mSoundPlayer.play(SoundEffect::Teleport);
+			soundEffectPlayed = true;
+		}
+		else if(character->mRenderComponent->currentAnim == "TeleportSwordAttack1")
+		{
+			/*
+			System::mSoundPlayer.play(SoundEffect::Teleport);
+			GameObjectDesc soundDesc("Sound");
+			GameObject* sound = std::unique_ptr<GameObject>(new GameObject(soundDesc)).release();
+			sound->addComponent(ComponentType::LogicComponent, std::unique_ptr<LogicComponent>(new SoundEffectLogic(sound)).release() );
+			dynamic_cast<SoundEffectLogic*>(sound->mLogicComponent)->mSoundPlayer.play(SoundEffect::RyobeSwordAttack);
+			*/
+			
 
+			
+			playSound(SoundEffect::RyobeSwordAttack, logic);
+
+			
+			//playSound(SoundEffect::RyobeSwordAttack, logic);
+		}
+	}
 	if(character->mRenderComponent->currentAnim == "WeaponThrow")
 	{
 		if(character->mRenderComponent->mSpriteSet["WeaponThrow"]->currentFrame == 1 && daggerThrown == false)
@@ -76,7 +127,7 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 
 		if(grid.checkCollisionLeft(character->mBoxColliderComponent) == true)
 		{
-			std::cout << logic->getVelocity().x << std::endl;
+			//std::cout << logic->getVelocity().x << std::endl;
 			logic->move(-logic->getVelocity().x, 0);
 		}
 		if( embracerAttackBoxCreated == false)
@@ -148,6 +199,7 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			}
 			else if(attackType == Attacks::RYOBE_FELLCRESCENT)
 			{
+				soundEffectPlayed = false;
 				character->mRenderComponent->setAnimation("FellCrescent");
 				
 			}
@@ -155,6 +207,7 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			{
 				character->mRenderComponent->setAnimation("SwordAttack1");
 				CREATE_ATTACK_BOX;
+
 				ryobeAttackBoxLogic->setTimeToExpire(25);
 				slashBox->mBoxColliderComponent->setSize(45,65);
 				slashBox->setPosition(50 * logic->getDirection(),-60);
@@ -180,6 +233,7 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			timer++;
 			if(timer > 30)
 			{
+				soundEffectPlayed = false;
 				character->mRenderComponent->setAnimation("EmbracerPart2");
 			}
 		}
@@ -208,18 +262,21 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			if(player->getPosition().x > 3590 && player->getPosition().x < 4375)
 			{
 				//if(player->getPosition().x < 900)
-					character->setPosition(player->getPosition().x + 80, 536);
+					character->setPosition(player->getPosition().x + 80, 568);
 				//else
 					//character->setPosition(player->getPosition().x - 80, 536);
 			}
 			else
-				character->setPosition(player->getPosition().x - 80, 536);
+				character->setPosition(player->getPosition().x - 80, 568);
 
 
 			logic->updateDirection();
+			
 			character->mRenderComponent->setAnimation("TeleportSwordAttack1");
 
+			soundEffectPlayed = false;
 			CREATE_ATTACK_BOX;
+		
 			ryobeAttackBoxLogic->setTimeToExpire(25);
 			slashBox->mBoxColliderComponent->setSize(45,65);
 			slashBox->setPosition(50 * logic->getDirection(),-60);

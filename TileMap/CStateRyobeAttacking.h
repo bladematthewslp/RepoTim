@@ -3,6 +3,8 @@
 
 #include "CState.h"
 
+class RyobeLogic;
+
 class CStateRyobeAttacking : public CState
 {
 		GameObject* parryEffect;
@@ -16,7 +18,9 @@ class CStateRyobeAttacking : public CState
 		void entry(GameObject* character);
 
 		bool isTeleporting(); 
+		void		playSound(SoundEffect::ID, RyobeLogic*);
 	private:
+		bool		soundEffectPlayed;
 		int			timer;
 		
 		float		fellCrescentSpeed;

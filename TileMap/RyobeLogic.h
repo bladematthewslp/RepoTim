@@ -6,6 +6,7 @@
 
 class RyobeLogic : public LogicComponent
 {
+	
 	GameObject*					lightningChargeup;
 	GameObject*					player;
 	int							mDirection;
@@ -27,7 +28,7 @@ class RyobeLogic : public LogicComponent
 	std::map<DamageType, int>	mDamageTable;
 public:
 	RyobeLogic(GameObject* gameObject);
-
+	SoundPlayer					mSoundPlayer;
 
 	void			update(Grid& grid);
 	

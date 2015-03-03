@@ -46,7 +46,7 @@ void Attacks::registerAttacks()
 	
 	
 
-	std::cout << "REGISTERING ATTACKS" << std::endl; 
+	//std::cout << "REGISTERING ATTACKS" << std::endl; 
 }
 
 AttackType& Attacks::getAttack(Attacks::Name name)

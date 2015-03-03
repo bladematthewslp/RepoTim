@@ -14,6 +14,10 @@ CStateNinjaAttacking::CStateNinjaAttacking(GameObject* player) : CState("CStateN
 {
 	player->mRenderComponent->setAnimation(Attacks::NINJA_SLASH_GROUND);
 	timer = 0;
+
+	NinjaLogic* ninjaLogic = dynamic_cast<NinjaLogic*>(player->mLogicComponent);
+	ninjaLogic->mSoundPlayer.play(SoundEffect::NinjaDaggerSwing);
+
 }
 
 void CStateNinjaAttacking::entry(GameObject* player)
@@ -29,6 +33,7 @@ CState*	CStateNinjaAttacking::update(GameObject* player, sf::Time dt, Grid& grid
 	
 	RenderComponent* ninjaRender = player->mRenderComponent;
 	NinjaLogic* ninjaLogic = dynamic_cast<NinjaLogic*>(player->mLogicComponent);
+	
 	int currentFrame = ninjaRender->mSpriteSet[ninjaRender->currentAnim]->currentFrame;
 	
 	if(currentFrame == 7 && slashBoxCreated == false)
@@ -46,6 +51,9 @@ CState*	CStateNinjaAttacking::update(GameObject* player, sf::Time dt, Grid& grid
 		slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new NinjaSlashBoxCollider(slashBox)).release());
 		slashBox->mBoxColliderComponent->setVisible(true);
 		slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(100,60));
+
+		
+
 		slashBoxCreated = true;
 	}
 	if(currentFrame == 8)

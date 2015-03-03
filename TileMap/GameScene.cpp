@@ -9,7 +9,7 @@ GameScene::GameScene(SceneStack& stack, Context context)
 	, mShape()
 
 {
-	std::cout << "Game scene context = " << &stack.mContext << std::endl;
+	//std::cout << "Game scene context = " << &stack.mContext << std::endl;
 	mShape.setSize(sf::Vector2f(100,100));
 	mShape.setFillColor(sf::Color(187, 88, 93, 255));
 	mShape.setPosition(50,50);

@@ -8,6 +8,7 @@
 
 class CState;
 struct Grid;
+class SoundPlayer;
 
 class PlayerLogic : public LogicComponent
 {
@@ -86,7 +87,7 @@ public:
 
 	GameObject*			playerObject;
 	GameObject*			playerBBox;
-	
-
+	SoundPlayer			mSoundPlayer;
+	SoundEffect::ID		mCurrentSoundEffect;
 	
 };

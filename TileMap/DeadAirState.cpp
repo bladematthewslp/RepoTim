@@ -7,7 +7,7 @@ DeadAirState::DeadAirState(GameObject* player)
 	dead = false;
 	player->getRenderComponent()->setAnimation("KnockoutAirPart1");
 	hitVelocity = sf::Vector2f(-5,-3);
-	std::cout << "Knockout" << std::endl;
+	//std::cout << "Knockout" << std::endl;
 }
 
 

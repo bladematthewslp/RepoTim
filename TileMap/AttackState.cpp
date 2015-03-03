@@ -120,20 +120,25 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 {
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	RenderComponent* render = dynamic_cast<RenderComponent*>(player->mRenderComponent);
+	
 
 	// play sound effect
 	if(soundEffectPlayed == false)
 	{
+		
 
 		if(render->currentAnim == "Slash1")
-			System::mSoundPlayer.play(SoundEffect::DojiSwordSwing1);
+			playSound(SoundEffect::DojiSwordSwing1, logic);
 		else if(render->currentAnim == "Slash2Part1")
-			System::mSoundPlayer.play(SoundEffect::DojiSwordSwing2);
+			playSound(SoundEffect::DojiSwordSwing2, logic);
 		else if(render->currentAnim == "QuickStinger" || render->currentAnim == "QuickUprising")
-			System::mSoundPlayer.play(SoundEffect::DojiSwordSwingQuick);
+			playSound(SoundEffect::DojiSwordSwingQuick, logic);
 		else if(render->currentAnim == "Slash3")
-			System::mSoundPlayer.play(SoundEffect::DojiSwordSwing3);
-		soundEffectPlayed = true;
+			playSound(SoundEffect::DojiSwordSwing3, logic);
+		else if(render->currentAnim == "PLAYER_IMPACT" && render->mSpriteSet[render->currentAnim]->currentFrame == 3)
+			playSound(SoundEffect::DojiImpact, logic);
+
+
 	}
 
 	int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
@@ -305,6 +310,13 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 	
 
 	return this;
+}
+
+void AttackState::playSound(SoundEffect::ID effect, PlayerLogic* playerLogic)
+{
+	playerLogic->mSoundPlayer.play(effect);
+	soundEffectPlayed = true;
+
 }
 
 void AttackState::entry(GameObject* player)

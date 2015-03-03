@@ -35,7 +35,8 @@ struct Attacks
 {
 	typedef std::string Name;
 	
-	static std::string	NINJA_SLASH_GROUND	,
+	static std::string	NONE				,
+						NINJA_SLASH_GROUND	,
 						NINJA_SLICE			,
 						PLAYER_SLASH		,
 						PLAYER_SLASH1		,
