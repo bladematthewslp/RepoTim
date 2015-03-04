@@ -16,7 +16,7 @@
 			GameObject* slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();												\
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<SlashBoxLogic>(new SlashBoxLogic(slashBox)).release());			\
 			slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new SlashBoxBoxCollider(slashBox)).release());	\
-			slashBox->mBoxColliderComponent->setVisible(true);																						\
+			slashBox->mBoxColliderComponent->setVisible(false);																						\
 			SlashBoxLogic* slashLogic = dynamic_cast<SlashBoxLogic*>(slashBox->mLogicComponent);													\
 			//isAttack = true;																														\
 																																					\
@@ -34,6 +34,10 @@ AttackStateAir::AttackStateAir(GameObject* player)
 	airJumpSpeed = -1;
 	//isAttack = false;
 	previousState = player->mState;
+
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
+
+	logic->mSoundPlayer.play(SoundEffect::DojiSwordSwingAir);
 }
 
 
@@ -82,14 +86,27 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 	if(currentFrame == 2 && attackBoxCreated == false)
 	{
 		CREATE_SLASH_BOX;
-		slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(225,225));
+		slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(110,105));
 		slashLogic->init(logic->getDirection(), Attacks::PLAYER_SLASH2, 12);
-		slashBox->setPosition(player->getPosition() + sf::Vector2f(-100,-100));
+		if(logic->getDirection() == Direction::Right)
+			slashBox->setPosition(player->getPosition() + sf::Vector2f(0,-40));
+		else if(logic->getDirection() == Direction::Left)
+			slashBox->setPosition(player->getPosition() + sf::Vector2f(-100,-40));
 		attackBoxCreated = true;
 	}
 
-	if(currentFrame == 3)
+	if(currentFrame == 3 && attackBoxCreated == true)
+	{
 		attackBoxCreated = false;
+		CREATE_SLASH_BOX;
+		slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(105,110));
+		slashLogic->init(logic->getDirection(), Attacks::PLAYER_SLASH2, 12);
+		if(logic->getDirection() == Direction::Right)
+			slashBox->setPosition(player->getPosition() + sf::Vector2f(0,0));
+		else if(logic->getDirection() == Direction::Left)
+			slashBox->setPosition(player->getPosition() + sf::Vector2f(-100,0));
+	}
+
 	sf::Vector2f velocity = logic->getVelocity();
 	
 	if( render->runSpriteAnim(*player) == SpriteAnim::Status::SUCCESS)

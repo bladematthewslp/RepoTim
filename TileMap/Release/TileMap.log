@@ -1,52 +1,11 @@
-﻿Build started 3/1/2015 1:43:54 PM.
+﻿Build started 3/4/2015 1:04:27 AM.
      1>Project "C:\SFML\TileMap\TileMap.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\TileMap.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\SFML\New\SFML-2.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Grid.cpp
-         Grid.cpp
-     1>Grid.cpp(97): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(157) : see declaration of 'strerror'
-     1>Grid.cpp(111): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(131): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(133): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(140): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
-     1>Grid.cpp(140): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
-     1>Grid.cpp(163): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(165): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(205): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(207): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(240): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(242): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(268): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(270): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(300): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(302): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(335): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(337): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(364): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(366): warning C4018: '<' : signed/unsigned mismatch
-     1>Grid.cpp(390): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(391): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(400): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(401): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(418): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(419): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(429): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(430): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(447): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(448): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(460): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(461): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(479): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(480): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(493): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(494): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(519): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(520): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(525): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(527): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>Grid.cpp(539): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\SFML\New\SFML-2.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AttackStateAir.cpp
+         AttackStateAir.cpp
+     1>AttackStateAir.cpp(112): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\SFML\TileMap\Release\TileMap.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\SFML\New\SFML-2.0\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-network-s.lib" "sfml-audio-s.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\TileMap.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\SFML\TileMap\Release\TileMap.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\SFML\TileMap\Release\TileMap.lib" /MACHINE:X86 Release\AttackBlockedAirState.obj
          Release\AttackBlockedState.obj
@@ -80,7 +39,6 @@
          Release\FallingState.obj
          Release\Game.obj
          Release\GameObject.obj
-         Release\GameObjectManager.obj
          Release\GameScene.obj
          Release\Grid.obj
          Release\GuardState.obj
@@ -123,10 +81,12 @@
          Release\SceneStack.obj
          Release\SlashBoxBoxCollider.obj
          Release\SlashBoxLogic.obj
+         Release\SoundEffectLogic.obj
          Release\SoundPlayer.obj
          Release\SpriteAnim.obj
          Release\StandingState.obj
          Release\System.obj
+         Release\SystemSoundPlayer.obj
          Release\TitleScene.obj
          Release\TransformComponent.obj
          Release\WinState.obj
@@ -143,4 +103,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:10.25
+Time Elapsed 00:00:10.54

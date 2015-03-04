@@ -8,7 +8,7 @@ struct Grid;
 class PlayerInput : public InputComponent
 {
 	int								keyDelayTimer;
-	int								keyQueueTimer;
+	float							keyQueueTimer;
 	std::queue<sf::Keyboard::Key>*	keyQueue;
 	GameObject*						playerObject;
 public:

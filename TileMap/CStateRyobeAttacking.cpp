@@ -21,7 +21,7 @@
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<LogicComponent>(new RyobeAttackBoxLogic(slashBox)).release());\
 			slashBox->addComponent(ComponentType::BoxColliderComponent);																\
 			RyobeAttackBoxLogic* ryobeAttackBoxLogic = dynamic_cast<RyobeAttackBoxLogic*>(slashBox->mLogicComponent);					\
-			slashBox->mBoxColliderComponent->setVisible(true);																			\
+			slashBox->mBoxColliderComponent->setVisible(false);																			\
 
 #define	CREATE_PARRY_EFFECT																															\
 		GameObjectDesc parryAnimation("ParryEffect",sf::RectangleShape(sf::Vector2f(175,175)),Layer::Player,ComponentType::RenderComponent);		\
@@ -100,7 +100,7 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			*/
 			
 
-			
+			System::mSoundPlayer.play(SoundEffect::Teleport);
 			playSound(SoundEffect::RyobeSwordAttack, logic);
 
 			

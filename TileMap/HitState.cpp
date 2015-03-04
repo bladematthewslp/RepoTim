@@ -8,14 +8,17 @@
 HitState::HitState(GameObject* player) : CState("HitState")
 	, hitVelocity(6.0f)
 {
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	player->mRenderComponent->setAnimation("Hit");
 	player->mBoxColliderComponent->setSize(120, 98);
+
+	logic->mSoundPlayer.play(SoundEffect::DojiHit);
 }
 
 CState* HitState::update(GameObject* player, sf::Time dt, Grid& grid)
 {
-	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	
 	static int pauseTimer = 0;
 	hitVelocity -= 0.1f;

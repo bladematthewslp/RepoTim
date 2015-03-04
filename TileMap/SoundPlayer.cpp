@@ -15,9 +15,12 @@ SoundPlayer::SoundPlayer()
 void SoundPlayer::loadAllSounds()
 {
 	mSoundBuffers.load(SoundEffect::ChargeUp,		"SoundEffects/ChargeUp.wav");
+	mSoundBuffers.load(SoundEffect::DojiDead, "SoundEffects/DojiDead.wav");
+	mSoundBuffers.load(SoundEffect::DojiHit, "SoundEffects/DojiHit.wav");
 	mSoundBuffers.load(SoundEffect::DojiSwordSwing1, "SoundEffects/DojiSwordSwing1.wav");
 	mSoundBuffers.load(SoundEffect::DojiSwordSwing2, "SoundEffects/DojiSwordSwing2.wav");
 	mSoundBuffers.load(SoundEffect::DojiSwordSwing3, "SoundEffects/DojiSwordSwing3.wav");
+	mSoundBuffers.load(SoundEffect::DojiSwordSwingAir, "SoundEffects/DojiSwordSwingAir.wav");
 	mSoundBuffers.load(SoundEffect::DojiSwordSwingQuick, "SoundEffects/DojiSwordSwingQuick.wav");
 	mSoundBuffers.load(SoundEffect::DojiImpact,			"SoundEffects/DojiImpact.wav");
 	mSoundBuffers.load(SoundEffect::ElectricCurrent,			"SoundEffects/ElectricCurrent.wav");

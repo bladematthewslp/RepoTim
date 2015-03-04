@@ -8,8 +8,12 @@
 HitAirState::HitAirState(GameObject* player) : CState("HitAirState")
 	, hitVelocity(-5.0f, -5.0f)
 {
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	player->mRenderComponent->setAnimation("HitAirPart1");
 	player->mBoxColliderComponent->setSize(120, 98);
+
+	logic->mSoundPlayer.play(SoundEffect::DojiHit);
+
 }
 
 CState* HitAirState::update(GameObject* player, sf::Time dt, Grid& grid)

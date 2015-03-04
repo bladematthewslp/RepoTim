@@ -6,7 +6,7 @@
 
 RyobeLogic::RyobeLogic(GameObject* gameObject)
 	: LogicComponent(gameObject)
-	, mHealth(1)
+	, mHealth(100)
 	, mIsHit(false)
 	, mHitCounter(0)
 	, mDirection(Direction::Left)

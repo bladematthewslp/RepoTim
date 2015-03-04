@@ -4,10 +4,14 @@
 DeadAirState::DeadAirState(GameObject* player)
 	: CState("DeadState")
 {
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	dead = false;
 	player->getRenderComponent()->setAnimation("KnockoutAirPart1");
 	hitVelocity = sf::Vector2f(-5,-3);
 	//std::cout << "Knockout" << std::endl;
+
+	logic->mSoundPlayer.play(SoundEffect::DojiDead);
+
 }
 
 

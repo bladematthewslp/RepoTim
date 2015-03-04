@@ -49,7 +49,7 @@ CState*	CStateNinjaAttacking::update(GameObject* player, sf::Time dt, Grid& grid
 		
 		// add and configure box collider component
 		slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new NinjaSlashBoxCollider(slashBox)).release());
-		slashBox->mBoxColliderComponent->setVisible(true);
+		slashBox->mBoxColliderComponent->setVisible(false);
 		slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(100,60));
 
 		

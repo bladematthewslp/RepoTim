@@ -120,7 +120,7 @@ void SlashBoxLogic::update(Grid& grid)
 	
 	timer++;
 
-	if(timer == maxTime)// || player->mState->getName() != "AttackState" || player->mState->getName() != "AttackStateAir")
+	if(timer == maxTime || (player->mState->getName() != "AttackState" && player->mState->getName() != "AttackStateAir") )
 	{
 		timer = 0;
 		System::removeGameObject(mGameObject);

@@ -30,7 +30,7 @@ PauseScene::PauseScene(SceneStack& stack, Context context)
 	sf::Vector2f viewOrigin;
 	viewOrigin.x = getContext().window->getView().getCenter().x - getContext().window->getSize().x/2;
 	viewOrigin.y = getContext().window->getView().getCenter().y - getContext().window->getSize().y/2;
-	mShape.setPosition(viewOrigin + sf::Vector2f(800,230));
+	mShape.setPosition(viewOrigin + sf::Vector2f(875,20));
 
 	// load font
 	mFont.loadFromFile("Fonts/CHILLER.ttf");
@@ -41,7 +41,7 @@ PauseScene::PauseScene(SceneStack& stack, Context context)
 	int i = *(getContext().redOrbCount);
 	std::string numOrbs = convertIntToString(i);
 	mText.setString("x" + numOrbs);
-	mText.setPosition( viewOrigin + sf::Vector2f(840,240));
+	mText.setPosition( viewOrigin + sf::Vector2f(910,30));
 	mText.setColor(mTextColor);
 	mText.setStyle(sf::Text::Bold);
 

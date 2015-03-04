@@ -66,9 +66,10 @@ void PlayerInput::update(const sf::Event& event)
 
 void PlayerInput::handleKeyQueue()
 {
+	
 	// pop last key in key queue every 40 frames
-	keyQueueTimer++;
-	if(keyQueueTimer == 40)
+	keyQueueTimer += deltaTime.asSeconds();;
+	if(keyQueueTimer >= 1)
 	{
 		
 		keyQueueTimer = 0;
@@ -109,8 +110,10 @@ void PlayerInput::handleEvents(const sf::Event& event)
 
 		if(validKey(key) == true) 
 		{
- 			keyQueue->push(key);
-			
+			// reset key queue timer
+			keyQueueTimer = 0;
+
+			keyQueue->push(key);
 			if(keyQueue->size() > 2)
 			{
 				keyQueue->pop();

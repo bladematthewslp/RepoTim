@@ -12,6 +12,8 @@ KnockoutState::KnockoutState(GameObject* player)
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	int dir = logic->getDirection();
 	dynamic_cast<PlayerLogic*>(player->mLogicComponent)->setVelocityX(-8 * dir);
+
+	logic->mSoundPlayer.play(SoundEffect::DojiDead);
 }
 
 
