@@ -1,0 +1,336 @@
+﻿Build started 3/8/2015 10:33:46 PM.
+     1>Project "C:\SFML\SolsticeScar\TileMap.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\SolsticeScar.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\SFML\New\SFML-2.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AttackBlockedAirState.cpp AttackBlockedState.cpp AttackState.cpp AttackStateAir.cpp AttackType.cpp BackgroundGameObject.cpp BattleReadyState.cpp BloodAnimationLogic.cpp BoxColliderComponent.cpp CState.cpp CStateNinjaAttacking.cpp CStateNinjaDead.cpp CStateNinjaDeadAir.cpp CStateNinjaHit.cpp CStateNinjaHitAir.cpp CStateNinjaHitAirToGround.cpp CStateNinjaJumping.cpp CStateNinjaRunning.cpp CStateNinjaStanding.cpp CStateRyobeAttacking.cpp CStateRyobeAttackPunch.cpp CStateRyobeBattleEntrance.cpp CStateRyobeBlocking.cpp CStateRyobeDead.cpp CStateRyobeStanding.cpp CStateRyobeWalking.cpp DaggerLogic.cpp DazedState.cpp DeadAirState.cpp FallingState.cpp GameObject.cpp GameScene.cpp Grid.cpp GuardState.cpp GUIRedOrbLogic.cpp GUIRedOrbRender.cpp HealthBarLogic.cpp HitAirState.cpp HitState.cpp InputComponent.cpp ItemGameObject.cpp ItemLogic.cpp JumpingState.cpp KnockoutState.cpp LogicComponent.cpp NinjaBoxCollider.cpp NinjaGameObject.cpp NinjaInput.cpp NinjaLogic.cpp NinjaRender.cpp NinjaSlashBoxCollider.cpp NinjaSlashBoxLogic.cpp ParryEffectLogic.cpp PauseScene.cpp PlayerBoxCollider.cpp PlayerInput.cpp PlayerLogic.cpp PlayerRender.cpp PlayerState.cpp RenderComponent.cpp RunningState.cpp RyobeAttackBoxLogic.cpp RyobeBoxCollider.cpp RyobeGameObject.cpp RyobeLogic.cpp RyobeRender.cpp SlashBoxBoxCollider.cpp SlashBoxLogic.cpp SoundEffectLogic.cpp StandingState.cpp System.cpp WinState.cpp World.cpp
+         AttackBlockedAirState.cpp
+     1>AttackBlockedAirState.cpp(40): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         AttackBlockedState.cpp
+     1>AttackBlockedState.cpp(17): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         AttackState.cpp
+         AttackStateAir.cpp
+     1>AttackStateAir.cpp(156): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         AttackType.cpp
+     1>AttackType.cpp(29): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(30): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(31): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(32): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(33): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(34): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(35): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(36): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(37): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(38): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(39): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(40): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(41): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(42): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(43): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(44): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(45): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(46): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>AttackType.cpp(47): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+         BackgroundGameObject.cpp
+         BattleReadyState.cpp
+         BloodAnimationLogic.cpp
+     1>BloodAnimationLogic.cpp(15): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>BloodAnimationLogic.cpp(22): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         BoxColliderComponent.cpp
+         CState.cpp
+         CStateNinjaAttacking.cpp
+     1>CStateNinjaAttacking.cpp(67): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         CStateNinjaDead.cpp
+     1>CStateNinjaDead.cpp(21): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         CStateNinjaDeadAir.cpp
+     1>CStateNinjaDeadAir.cpp(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>CStateNinjaDeadAir.cpp(76): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         CStateNinjaHit.cpp
+         CStateNinjaHitAir.cpp
+         CStateNinjaHitAirToGround.cpp
+     1>CStateNinjaHitAirToGround.cpp(52): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         CStateNinjaJumping.cpp
+         CStateNinjaRunning.cpp
+         CStateNinjaStanding.cpp
+         CStateRyobeAttacking.cpp
+     1>CStateRyobeAttacking.cpp(138): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>CStateRyobeAttacking.cpp(147): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>CStateRyobeAttacking.cpp(171): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>CStateRyobeAttacking.cpp(188): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+     1>CStateRyobeAttacking.cpp(213): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>CStateRyobeAttacking.cpp(282): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Compiling...
+         CStateRyobeAttackPunch.cpp
+     1>CStateRyobeAttackPunch.cpp(18): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         CStateRyobeBattleEntrance.cpp
+     1>CStateRyobeBattleEntrance.cpp(15): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>CStateRyobeBattleEntrance.cpp(15): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>CStateRyobeBattleEntrance.cpp(42): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         CStateRyobeBlocking.cpp
+         CStateRyobeDead.cpp
+         CStateRyobeStanding.cpp
+         CStateRyobeWalking.cpp
+         DaggerLogic.cpp
+     1>DaggerLogic.cpp(36): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         DazedState.cpp
+     1>DazedState.cpp(19): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         DeadAirState.cpp
+         FallingState.cpp
+     1>FallingState.cpp(53): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         GameObject.cpp
+     1>GameObject.cpp(38): warning C4018: '<' : signed/unsigned mismatch
+         GameScene.cpp
+         Grid.cpp
+     1>Grid.cpp(111): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(131): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(133): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(140): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>Grid.cpp(140): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>Grid.cpp(163): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(165): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(205): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(207): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(240): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(242): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(268): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(270): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(300): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(302): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(335): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(337): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(364): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(366): warning C4018: '<' : signed/unsigned mismatch
+     1>Grid.cpp(390): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(391): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(400): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(401): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(418): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(419): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(429): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(430): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(447): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(448): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(460): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(461): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(479): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(480): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(493): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(494): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(519): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(520): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(525): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(527): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Grid.cpp(539): warning C4018: '<' : signed/unsigned mismatch
+         GuardState.cpp
+         GUIRedOrbLogic.cpp
+         GUIRedOrbRender.cpp
+     1>GUIRedOrbRender.cpp(43): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
+         HealthBarLogic.cpp
+     1>HealthBarLogic.cpp(9): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>HealthBarLogic.cpp(12): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>HealthBarLogic.cpp(19): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>HealthBarLogic.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>HealthBarLogic.cpp(22): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         HitAirState.cpp
+     1>HitAirState.cpp(55): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         HitState.cpp
+     1>HitState.cpp(47): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+         InputComponent.cpp
+         Compiling...
+         ItemGameObject.cpp
+         ItemLogic.cpp
+         JumpingState.cpp
+         KnockoutState.cpp
+     1>KnockoutState.cpp(14): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         LogicComponent.cpp
+         NinjaBoxCollider.cpp
+         NinjaGameObject.cpp
+         NinjaInput.cpp
+         NinjaLogic.cpp
+     1>NinjaLogic.cpp(36): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>NinjaLogic.cpp(37): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>NinjaLogic.cpp(38): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>NinjaLogic.cpp(39): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>NinjaLogic.cpp(40): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>NinjaLogic.cpp(196): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         NinjaRender.cpp
+     1>NinjaRender.cpp(41): warning C4305: 'argument' : truncation from 'double' to 'float'
+         NinjaSlashBoxCollider.cpp
+         NinjaSlashBoxLogic.cpp
+         ParryEffectLogic.cpp
+         PauseScene.cpp
+         PlayerBoxCollider.cpp
+         PlayerInput.cpp
+         PlayerLogic.cpp
+     1>PlayerLogic.cpp(96): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>PlayerLogic.cpp(97): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>PlayerLogic.cpp(98): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>PlayerLogic.cpp(99): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>PlayerLogic.cpp(100): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>PlayerLogic.cpp(250): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>PlayerLogic.cpp(250): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+         PlayerRender.cpp
+     1>PlayerRender.cpp(25): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(26): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(27): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(36): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(37): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(39): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(41): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(43): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(52): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(53): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(71): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>PlayerRender.cpp(74): warning C4305: 'argument' : truncation from 'double' to 'float'
+         PlayerState.cpp
+         RenderComponent.cpp
+     1>RenderComponent.cpp(50): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+     1>RenderComponent.cpp(50): warning C4305: '=' : truncation from 'SpriteAnim::Status' to 'bool'
+     1>RenderComponent.cpp(92): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+     1>RenderComponent.cpp(92): warning C4305: '=' : truncation from 'SpriteAnim::Status' to 'bool'
+     1>RenderComponent.cpp(106): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+     1>RenderComponent.cpp(108): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>RenderComponent.cpp(144): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
+         Compiling...
+         RunningState.cpp
+         RyobeAttackBoxLogic.cpp
+         RyobeBoxCollider.cpp
+         RyobeGameObject.cpp
+         RyobeLogic.cpp
+     1>RyobeLogic.cpp(22): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>RyobeLogic.cpp(23): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>RyobeLogic.cpp(24): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>RyobeLogic.cpp(25): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>RyobeLogic.cpp(26): warning C4482: nonstandard extension used: enum 'DamageType' used in qualified name
+     1>RyobeLogic.cpp(69): warning C4482: nonstandard extension used: enum 'SpriteAnim::Status' used in qualified name
+     1>RyobeLogic.cpp(79): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>RyobeLogic.cpp(110): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>RyobeLogic.cpp(113): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>RyobeLogic.cpp(113): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>RyobeLogic.cpp(115): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>RyobeLogic.cpp(116): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         RyobeRender.cpp
+     1>RyobeRender.cpp(18): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>RyobeRender.cpp(21): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>RyobeRender.cpp(27): warning C4305: 'argument' : truncation from 'double' to 'float'
+         SlashBoxBoxCollider.cpp
+         SlashBoxLogic.cpp
+         SoundEffectLogic.cpp
+     1>SoundEffectLogic.cpp(14): warning C4482: nonstandard extension used: enum 'sf::SoundSource::Status' used in qualified name
+         StandingState.cpp
+         System.cpp
+     1>System.cpp(171): warning C4018: '<' : signed/unsigned mismatch
+         WinState.cpp
+         World.cpp
+     1>World.cpp(89): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>World.cpp(94): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>World.cpp(136): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>World.cpp(222): warning C4018: '<' : signed/unsigned mismatch
+     1>World.cpp(266): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>World.cpp(272): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>World.cpp(343): warning C4244: '+=' : conversion from 'double' to 'sf::Uint8', possible loss of data
+     1>World.cpp(374): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
+     1>World.cpp(375): warning C4244: 'initializing' : conversion from 'const float' to 'int', possible loss of data
+     1>World.cpp(403): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>World.cpp(373): warning C4101: 'pointToLook' : unreferenced local variable
+     1>World.cpp(453): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>World.cpp(462): warning C4244: '-=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\SFML\SolsticeScar\Release\SolsticeScar.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\SFML\New\SFML-2.0\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-network-s.lib" "sfml-audio-s.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\SolsticeScar.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\SFML\SolsticeScar\Release\SolsticeScar.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\SFML\SolsticeScar\Release\SolsticeScar.lib" /MACHINE:X86 Release\AttackBlockedAirState.obj
+         Release\AttackBlockedState.obj
+         Release\AttackState.obj
+         Release\AttackStateAir.obj
+         Release\AttackType.obj
+         Release\BackgroundGameObject.obj
+         Release\BattleReadyState.obj
+         Release\BloodAnimationLogic.obj
+         Release\BoxColliderComponent.obj
+         Release\CState.obj
+         Release\Component.obj
+         Release\CStateNinjaAttacking.obj
+         Release\CStateNinjaDead.obj
+         Release\CStateNinjaDeadAir.obj
+         Release\CStateNinjaHit.obj
+         Release\CStateNinjaHitAir.obj
+         Release\CStateNinjaHitAirToGround.obj
+         Release\CStateNinjaJumping.obj
+         Release\CStateNinjaRunning.obj
+         Release\CStateNinjaStanding.obj
+         Release\CStateRyobeAttacking.obj
+         Release\CStateRyobeAttackPunch.obj
+         Release\CStateRyobeBattleEntrance.obj
+         Release\CStateRyobeBlocking.obj
+         Release\CStateRyobeDead.obj
+         Release\CStateRyobeStanding.obj
+         Release\CStateRyobeWalking.obj
+         Release\DaggerLogic.obj
+         Release\DazedState.obj
+         Release\DeadAirState.obj
+         Release\FallingState.obj
+         Release\Game.obj
+         Release\GameObject.obj
+         Release\GameScene.obj
+         Release\Grid.obj
+         Release\GuardState.obj
+         Release\GUIRedOrbLogic.obj
+         Release\GUIRedOrbRender.obj
+         Release\HealthBarLogic.obj
+         Release\HitAirState.obj
+         Release\HitState.obj
+         Release\InputComponent.obj
+         Release\ItemGameObject.obj
+         Release\ItemLogic.obj
+         Release\JumpingState.obj
+         Release\KnockoutState.obj
+         Release\LogicComponent.obj
+         Release\main.obj
+         Release\MusicPlayer.obj
+         Release\NinjaBoxCollider.obj
+         Release\NinjaGameObject.obj
+         Release\NinjaInput.obj
+         Release\NinjaLogic.obj
+         Release\NinjaRender.obj
+         Release\NinjaSlashBoxCollider.obj
+         Release\NinjaSlashBoxLogic.obj
+         Release\ParryEffectLogic.obj
+         Release\PauseScene.obj
+         Release\PlayerBoxCollider.obj
+         Release\PlayerInput.obj
+         Release\PlayerLogic.obj
+         Release\PlayerRender.obj
+         Release\PlayerState.obj
+         Release\RenderComponent.obj
+         Release\ResourceHolder.obj
+         Release\RunningState.obj
+         Release\RyobeAttackBoxLogic.obj
+         Release\RyobeBoxCollider.obj
+         Release\RyobeGameObject.obj
+         Release\RyobeLogic.obj
+         Release\RyobeRender.obj
+         Release\Scene.obj
+         Release\SceneStack.obj
+         Release\SlashBoxBoxCollider.obj
+         Release\SlashBoxLogic.obj
+         Release\SoundEffectLogic.obj
+         Release\SoundPlayer.obj
+         Release\SpriteAnim.obj
+         Release\StandingState.obj
+         Release\System.obj
+         Release\SystemSoundPlayer.obj
+         Release\TitleScene.obj
+         Release\TransformComponent.obj
+         Release\WinState.obj
+         Release\World.obj
+         Generating code
+         Finished generating code
+         TileMap.vcxproj -> C:\SFML\SolsticeScar\Release\SolsticeScar.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\SFML\SolsticeScar\Release\SolsticeScar.exe;#1" /manifest Release\SolsticeScar.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\SolsticeScar.unsuccessfulbuild".
+         Touching "Release\SolsticeScar.lastbuildstate".
+     1>Done Building Project "C:\SFML\SolsticeScar\TileMap.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:01:52.51

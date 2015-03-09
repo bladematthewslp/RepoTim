@@ -1,0 +1,29 @@
+Good Dante Voices
+#'s
+
+1622
+1324
+1196
+1198
+1202
+1219
+1253
+1261
+1263
+
+1314 - "Sweet dreams"
+1324 - "Sweet dreams" devil trigger
+1402 and 1402 - "Down and out"
+1512 and 1514 - "You're grounded"
+1618 and 1622 - "Stand still"
+
+1105 - Knife Throw
+1103 - Sword slash
+1108 - Long sword attack
+1110 - Dead
+
+1130 - "Come and get me"
+1546 and 1548 - "Fire"
+
+
+
