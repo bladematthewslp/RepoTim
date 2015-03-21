@@ -52,7 +52,7 @@ GameObject::GameObject(GameObjectDesc desc, bool isInitializing)
 		System::mGameObjects.push_back(std::move(std::unique_ptr<GameObject>(this)));
 	}
 	GameObjectCount++;
-	std::cout << ++GameObjectCounter << std::endl;
+	//std::cout << ++GameObjectCounter << std::endl;
 }
 
 void GameObject::addChild(GameObject* child)

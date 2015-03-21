@@ -16,12 +16,11 @@ std::string PauseScene::convertIntToString(int num)
 	return result;
 }
 
-PauseScene::PauseScene(SceneStack& stack, Context context)
+PauseScene::PauseScene(SceneStack& stack, Context& context)
 	: Scene(stack, stack.mContext)
 	, mShape(sf::Vector2f(27,45))
 	, mTextColor(sf::Color(232,43,1,255))
 {
-	
 
 	mRedOrbTexture.loadFromFile("Sprites/red_orb.png");
 	
@@ -38,7 +37,7 @@ PauseScene::PauseScene(SceneStack& stack, Context context)
 
 	// initialize text
 	mText.setFont(mFont);
-	int i = *(getContext().redOrbCount);
+	int i = getContext().redOrbCount;
 	std::string numOrbs = convertIntToString(i);
 	mText.setString("x" + numOrbs);
 	mText.setPosition( viewOrigin + sf::Vector2f(910,30));

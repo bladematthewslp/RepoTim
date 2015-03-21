@@ -4,20 +4,49 @@
 #include "Grid.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "Helper.h"
+
+#include "HealthBarLogic.h"
+#include "GUIRedOrbLogic.h"
+#include "GUIRedOrbRender.h"
+#include "NinjaGameObject.h"
+#include "NinjaLogic.h"
+#include "RyobeGameObject.h"
+#include "PlayerRender.h"
+#include "PlayerLogic.h"
+#include "PlayerInput.h"
+#include "PlayerBoxCollider.h"
+#include "BackgroundGameObject.h"
+
+
+#include "System.h"
+
+#include <iostream>
 #include <vector>
+
 
 
 
 class World
 {
+protected:
+	friend class GameScene;
+	
+	enum Status
+	{
+		PLAYING,
+		PAUSED,
+		PLAYER_WON,
+		PLAYER_LOST,
+		
+	};
+
 	// Background data
 	GameObject*				mForeground[4];
 	GameObject*				mBackground[5];
 
 	// World characters
 	GameObject*				mPlayer;
-	std::vector<GameObject*>	ninjaGameObjects;
-	GameObject*				ryobeGameObject;
 
 	// Player GUI data
 	GameObject*				mHealthBar;
@@ -28,24 +57,9 @@ class World
 	sf::Vector2f			mLookAtPoint;
 	bool					scrollableWorld;							// toggle for if the world is still scrollable. Will be false when boss fight begins
 
-	// boss fight variables
-	GameObject*				lightningWallLeft;
-	GameObject*				lightningWallRight;
-	float					xPositionBossFightStart;					// location where player must be for boss fight to begin
-	bool					playerReachedBossFightLocation;				// check for if player has reached the boss fight location
-	bool					bossFightStarted;							// check if the boss fight has started
-	float					timerToBeginBattle;							// timer to start the boss battle
-	bool					startTimerToBeginBattle;					// check for if the boss battle timer has started
-
-	
-	float					timerToStartPlayerWinPose;					// timer for player's win pose
-
 
 	sf::RectangleShape		mFadeOutShape;								// shape used for world fade in/out
 
-	// data to use for world restart or world completion
-	bool					playerDefeated;								// check if player is dead
-	bool					bossDefeated;								// check for if the boss is defeated
 	float					timerToFadeOut;								// timer to fade out
 
 
@@ -55,17 +69,24 @@ class World
 	
 	Scene::Context*			mContext;
 public:
+
+	typedef std::unique_ptr<World> Ptr;
+
 	World(Scene::Context& context );
-	void					init();
-	bool					handleEvent(sf::RenderWindow& window,sf::Event& event);
-	bool					handleInput(sf::Event& event);
+	
+	virtual void			init();
+	virtual bool			handleEvent(sf::RenderWindow& window,sf::Event& event);
+	virtual bool			handleInput(sf::Event& event);
 
-	bool					update(sf::Time dt);
-	void					draw(sf::RenderWindow& window);
-	void					destroyGameObjectsOutsideView();
+	virtual unsigned int	update(sf::Time dt) = 0;
+	virtual void			draw(sf::RenderWindow& window);
+	virtual void			destroyGameObjectsOutsideView();
+	virtual void			updateCamera();
 
-	void					restartWorld();
-	void					cleanupWorld();
+	virtual void			restartWorld();
+	virtual void			cleanupWorld();
+
+	
 
 	sf::RenderWindow&		mWindow;
 	sf::View				mWorldView;

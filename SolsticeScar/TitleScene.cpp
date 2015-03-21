@@ -4,12 +4,14 @@
 #include <iostream>
 
 
-TitleScene::TitleScene(SceneStack& stack, Context context)
+TitleScene::TitleScene(SceneStack& stack, Context& context)
 	: Scene(stack, stack.mContext)
 	, anim(sf::IntRect(800,0,800,336),8, 15, true, 1.6, 0)
 	, mMusic()
 	, mSelectionFunctions()
 {
+
+	
 	// setup functions for buttons
 	mSelectionFunctions[Options::Play] =		[&] () { playGameSelected = true; buttonSelected = true; };
 	mSelectionFunctions[Options::Controls] =	[&] () { controlsSelected = true; };

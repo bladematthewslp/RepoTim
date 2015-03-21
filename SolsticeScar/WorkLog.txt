@@ -1,3 +1,11 @@
+3-21
+-------------------------
+World.cpp
+ - made new function: updateCamera(). This updates world view every frame after System::update
+	to reduce jitter when player moves laterally
+
+Fixed issue with new context being created when scenes and worlds are created. Made mStack and mContext protected in Scene.h.
+
 3-8
 --------------------------
 

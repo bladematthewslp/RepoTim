@@ -11,3 +11,4 @@ namespace Direction
 		Left = -1,
 	};
 }
+

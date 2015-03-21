@@ -1,20 +1,27 @@
 #include "GameScene.h"
 #include "SceneStack.h"
+#include "WorldWoods.h"
 #include "System.h"
 #include <iostream>
 #include "ResourceHolder.h"
 
-GameScene::GameScene(SceneStack& stack, Context context)
+GameScene::GameScene(SceneStack& stack, Context& context)
 	: Scene(stack, stack.mContext)
 	, mShape()
 
 {
+
+
 	//std::cout << "Game scene context = " << &stack.mContext << std::endl;
 	mShape.setSize(sf::Vector2f(100,100));
 	mShape.setFillColor(sf::Color(187, 88, 93, 255));
 	mShape.setPosition(50,50);
 	
-	mWorld = std::unique_ptr<World>(new World(stack.mContext)).release();
+
+	registerWorld<WorldWoods>(Worlds::Woods);
+	mCurrentWorld = createWorld(Worlds::Woods);
+	
+	//mWorld = std::unique_ptr<World>(new World(stack.mContext)).release();
 }
 
 bool GameScene::handleEvent(sf::Event& event)
@@ -33,22 +40,38 @@ bool GameScene::handleEvent(sf::Event& event)
 
 		
 
-		mWorld->handleEvent(window, event);
+		mCurrentWorld->handleEvent(window, event);
 	//}
 	return true;
 }
 
 bool GameScene::handleInput(sf::Event& event)
 {
-	mWorld->handleInput(event);
+	mCurrentWorld->handleInput(event);
 	return true;
 }
 bool GameScene::update(sf::Time dt)
 {
-	if(mWorld->update(dt) == false)
+	switch( mCurrentWorld->update(dt) )
 	{
-		requestStackPop();
-		requestStackPush(Scenes::Title);
+		case World::Status::PLAYING:
+		{
+			break;
+		}
+		case World::Status::PLAYER_WON:
+		{
+			requestStackPop();
+			requestStackPush(Scenes::Title);
+			break;
+		}
+		case World::Status::PLAYER_LOST:
+		{
+			break;
+		}
+		case World::Status::PAUSED:
+		{
+			break;
+		}
 	}
 	return true;
 }
@@ -56,7 +79,15 @@ bool GameScene::update(sf::Time dt)
 void GameScene::draw()
 {
 	sf::RenderWindow& window = *getContext().window;
-	mWorld->draw(window);
-	//window.draw(mShape);
+	mCurrentWorld->draw(window);
+
+}
+
+World::Ptr GameScene::createWorld(Worlds::ID worldID)
+{
+	auto found = mWorldFactories.find(worldID);
+	
+	assert(found != mWorldFactories.end());
+	return found->second();
 
 }

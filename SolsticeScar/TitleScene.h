@@ -72,7 +72,7 @@ class TitleScene : public Scene
 
 	void					showButtons();
 public:
-					TitleScene(SceneStack& stack, Context context);
+					TitleScene(SceneStack& stack, Context& context);
 	virtual bool	handleEvent(sf::Event& event);
 	virtual bool	handleInput(sf::Event& event);
 

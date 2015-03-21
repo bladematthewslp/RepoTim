@@ -18,7 +18,7 @@ public:
 	struct Context
 	{
 
-		Context(sf::RenderWindow& window) : window(&window), redOrbCount(nullptr), mButtonHolder(nullptr)
+		Context(sf::RenderWindow& window) : window(&window), redOrbCount(0), mButtonHolder(nullptr)
 		{ 
 			mButtonHolder = std::unique_ptr<ButtonHolder>(new ButtonHolder()).release();
 			mButtonHolder->load(Buttons::PlayNormal,		"Buttons/PlayNormal.png");
@@ -33,22 +33,22 @@ public:
 
 		sf::RenderWindow* window;
 		ButtonHolder*			mButtonHolder;
-		int* redOrbCount;
+		int redOrbCount;
 	};
 
-					Scene(SceneStack& stack, Context context);
+					Scene(SceneStack& stack, Context& context);
 	virtual void	draw() = 0;
 	virtual bool	update(sf::Time dt) = 0;
 	virtual bool	handleEvent(sf::Event& event) = 0;
 	virtual bool	handleInput(sf::Event& event) = 0;
-	Context		getContext() const;
+	Context&		getContext();
 protected:
 	void requestStackPop();
 	void requestStackPush(Scenes::ID stateID);
 	void requestStackClear();
 	
 
-private:
+//private:
 	SceneStack*	mStack;
 	Context		mContext;
 
