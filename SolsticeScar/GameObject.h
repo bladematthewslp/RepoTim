@@ -45,20 +45,6 @@ namespace Layer
 						Root		= "Root",
 						UI			= "UI";
 
-	
-	/*enum Name
-	{
-		Background,
-		Default,
-		Enemy,
-		Foreground,
-		Layer,
-		Player,
-		Root,
-		UI
-	};*/
-
-
 }
 #endif
 
@@ -171,6 +157,7 @@ class GameObject : public sf::Transformable, private sf::Transform
 		return nullptr;
 	}
 
+	static int GameObjectCounter;
 
 	
 

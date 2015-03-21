@@ -146,7 +146,7 @@ void PlayerInput::handleEvents(const sf::Event& event)
 				
 				if(logic->isGrounded() == true)
 				{
-
+					typedef std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator moveListIterator;
 					// check if pressed keys matches an action in the move list
 					for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); iter++)
 					{
