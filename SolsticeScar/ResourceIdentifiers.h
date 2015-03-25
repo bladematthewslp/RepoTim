@@ -8,10 +8,14 @@ namespace sf
 	class SoundBuffer;
 }
 
+
+
 namespace Textures
 {
 	enum ID
 	{
+		Background_Woods,
+		Background_Rounded,
 		BloodAnimationA,
 		GridBlockCrate,
 		GreenOrb,
@@ -23,10 +27,28 @@ namespace Textures
 		RyobeParryEffect,
 		RyobeHUD,
 		RyobeHUDHealthbar,
+		
 		WoodsBackground,
 		WoodsForeground,
-		WoodsBackgroundComplete
+		WoodsBackgroundComplete,
 
+		TILE_BLANK,
+		TILE_BRICK_WALL2_0_0,
+		TILE_BRICK_WALL2_0_1,
+		TILE_BRICK_WALL2_0_2,
+		TILE_BRICK_WALL2_1_0,
+		TILE_BRICK_WALL2_1_1,
+		TILE_BRICK_WALL2_1_2,
+		TILE_BRICK_WALL2_2_0,
+		TILE_BRICK_WALL2_2_1,
+		TILE_BRICK_WALL2_2_2,
+		TILE_BRICK_WALL2_3_0,
+		TILE_BRICK_WALL2_3_1,
+		TILE_BRICK_WALL2_3_2,
+		TILE_GROUND2,
+		TILE_ROCK_WALL4,
+
+		PROP_LIGHT_HANGING,
 	};
 }
 
@@ -82,6 +104,7 @@ namespace SoundEffect
 		DojiImpact,
 		DojiYouAreNotWorthy,
 		ElectricCurrent,
+		Jump,
 		NinjaHit,
 		NinjaDaggerSwing,
 		NinjaSwordSwingHit,

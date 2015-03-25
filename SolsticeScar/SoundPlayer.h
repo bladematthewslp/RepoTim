@@ -11,16 +11,16 @@ class SoundPlayer
 
 public:
 	SoundPlayer();
+	virtual void	stop();
+	virtual void	play(SoundEffect::ID);
+	void			load(SoundEffect::ID, std::string filename);
+	void			removeStoppedSounds();
+	static void		loadAllSounds();
+	static void		unloadAllSounds();
+	static			SoundBufferHolder mSoundBuffers;
 
-	virtual void play(SoundEffect::ID);
-	void load(SoundEffect::ID, std::string filename);
-	void removeStoppedSounds();
-	static void loadAllSounds();
-	static void unloadAllSounds();
-	static SoundBufferHolder mSoundBuffers;
 
-
-	sf::Sound		mSound;
+	sf::Sound*		mSound;
 protected:
 	
 	SoundEffect::ID		mCurrentSoundEffect;

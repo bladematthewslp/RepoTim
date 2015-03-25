@@ -3,17 +3,19 @@
 SoundBufferHolder SoundPlayer::mSoundBuffers;
 
 SoundPlayer::SoundPlayer()
-	: mSounds()
+	: 
 	//, mSound(nullptr)
-	, mCurrentSoundEffect(SoundEffect::None)
+	 mCurrentSoundEffect(SoundEffect::None)
 {
 	
-	
+	mSound = nullptr;//std::unique_ptr<sf::Sound>(new sf::Sound(mSoundBuffers.get(SoundEffect::None))).release();
 	
 }
 
 void SoundPlayer::loadAllSounds()
 {
+
+	mSoundBuffers.load(SoundEffect::None,		"SoundEffects/silence.wav");
 	mSoundBuffers.load(SoundEffect::ChargeUp,		"SoundEffects/ChargeUp.wav");
 	mSoundBuffers.load(SoundEffect::DojiChopperStyle, "SoundEffects/DojiChopperStyle.wav");
 	//mSoundBuffers.load(SoundEffect::DojiChopperStyleSoundEffect, "SoundEffects/DojiChopperStyleSoundEffect.wav");
@@ -29,6 +31,7 @@ void SoundPlayer::loadAllSounds()
 	mSoundBuffers.load(SoundEffect::DojiImpact,			"SoundEffects/DojiImpact.wav");
 	mSoundBuffers.load(SoundEffect::DojiYouAreNotWorthy,			"SoundEffects/DojiYouAreNotWorthy.wav");
 	mSoundBuffers.load(SoundEffect::ElectricCurrent,			"SoundEffects/ElectricCurrent.wav");
+	mSoundBuffers.load(SoundEffect::Jump,			"SoundEffects/Jump.wav");
 	mSoundBuffers.load(SoundEffect::NinjaDaggerSwing,			"SoundEffects/NinjaDaggerSwing.wav");
 	mSoundBuffers.load(SoundEffect::NinjaHit,			"SoundEffects/NinjaHit.wav");
 	mSoundBuffers.load(SoundEffect::RyobeComeAndGetMe, "SoundEffects/RyobeComeAndGetMe.wav");
@@ -56,52 +59,38 @@ void SoundPlayer::load(SoundEffect::ID effect, std::string filename)
 
 void SoundPlayer::play(SoundEffect::ID effect)
 {
-	/*
-	sf::SoundBuffer& buff = mSoundBuffers.get(mCurrentSoundEffect);
-	sf::Sound newSound(mSoundBuffers.get(effect));
-	if(newSound.getBuffer() == &buff)
-	{
-
-	}
-	/*
-	mSounds.remove_if( [] (const sf::Sound& s)
-	{
-		
-		return s.getStatus() == sf::Sound::Stopped;
-	} );
 	
-	mSounds.push_back(sf::Sound(mSoundBuffers.get(effect)));
-	mSounds.back().play();
-	*/
 
-	if(mSound.getStatus() == sf::Sound::Status::Playing)//mSound != nullptr)
+	if(mSound != nullptr && mSound->getStatus() == sf::Sound::Status::Playing)//mSound != nullptr)
 	{
 		//std::cout << "SoundPlayer::play : about to play. stopping current sound." << std::endl;
-		mSound.stop();
+		mSound->stop();
+		delete mSound;
 	}
 	mCurrentSoundEffect = effect;
 	
-	buff = sf::SoundBuffer(mSoundBuffers.get(effect));
-//	mSound = std::unique_ptr<sf::Sound>(new sf::Sound(mSoundBuffers.get(effect))).release();
-	mSound = sf::Sound(mSoundBuffers.get(effect));
-	mSound.play();
-	/*
-	std::list<sf::Sound>::iterator iter;
-	for(iter = mSounds.begin(); iter != mSounds.end(); ++iter)
+	
+	mSound = std::unique_ptr<sf::Sound>(new sf::Sound(mSoundBuffers.get(effect))).release();
+	
+	mSound->play();
+}
+
+void SoundPlayer::stop()
+{
+	if(mSound != nullptr)
 	{
-		if(iter == m
-	}
-	if(sf::Sound(mSoundBuffers.get(mCurrentSoundEffect)).getStatus() == sf::SoundSource::Status::Playing)
-	{
-		
-		mSounds
-	}
-	mSounds.push_back(sf::Sound(mSoundBuffers.get(effect)));
-	mSounds.back().play();*/
+		mSound->stop();
+		mSound = nullptr;
+	};
 }
 
 void SoundPlayer::removeStoppedSounds()
 {
+	if( mSound != nullptr && mSound->getStatus() == sf::Sound::Status::Stopped)
+	{
+		delete mSound;
+		mSound = nullptr;
+	}
 	//std::cout << "removing" << std::endl;
 	
 	/*

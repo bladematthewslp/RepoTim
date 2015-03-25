@@ -16,8 +16,10 @@ void RenderComponent::loadImages()
 	mImageHolder.load(Images::Ryobe,		"Sprites/ryobe_spritesheet.png");
 	//mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
 
+	mTextureHolder.load(Textures::Background_Rounded, "Sprites/Background/background_rounded.png");
+	mTextureHolder.load(Textures::Background_Woods, "Sprites/Background/woods_background.png");
 	mTextureHolder.load(Textures::BloodAnimationA, "Sprites/blood_animation_A.png");
-	mTextureHolder.load(Textures::GridBlockCrate, "Sprites/crate.png");
+	mTextureHolder.load(Textures::GridBlockCrate, "Sprites/Tiles/ground2.png");
 	mTextureHolder.load(Textures::GreenOrb,		"Sprites/green_orb.png");
 	mTextureHolder.load(Textures::LightningWall, "Sprites/lightning.png");
 	mTextureHolder.load(Textures::PlayerHUD,	"Sprites/HUD/DojiHUDNoHealthbar.png");
@@ -27,9 +29,36 @@ void RenderComponent::loadImages()
 	mTextureHolder.load(Textures::RyobeHUD,		"Sprites/HUD/RyobiHUDNoHealthbar.png");
 	mTextureHolder.load(Textures::RyobeHUDHealthbar,"Sprites/HUD/RyobiHealthbar.png");
 	mTextureHolder.load(Textures::RyobeParryEffect, "Sprites/electricParry.png");
+	
 	mTextureHolder.load(Textures::WoodsBackground,"Sprites/Background/woods_background.png");
 	mTextureHolder.load(Textures::WoodsForeground,"Sprites/Background/woods_foreground.png");
 	mTextureHolder.load(Textures::WoodsBackgroundComplete,"Sprites/Background/woods_background_complete.png");
+
+
+	// TILES
+
+	mTextureHolder.load(Textures::TILE_BLANK,			"Sprites/tiles/blank.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_0_0,	"Sprites/tiles/brick_wall2/brick_wall2_0_0.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_0_1,	"Sprites/tiles/brick_wall2/brick_wall2_0_1.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_0_2,	"Sprites/tiles/brick_wall2/brick_wall2_0_2.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_1_0,	"Sprites/tiles/brick_wall2/brick_wall2_1_0.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_1_1,	"Sprites/tiles/brick_wall2/brick_wall2_1_1.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_1_2,	"Sprites/tiles/brick_wall2/brick_wall2_1_2.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_2_0,	"Sprites/tiles/brick_wall2/brick_wall2_2_0.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_2_1,	"Sprites/tiles/brick_wall2/brick_wall2_2_1.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_2_2,	"Sprites/tiles/brick_wall2/brick_wall2_2_2.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_3_0,	"Sprites/tiles/brick_wall2/brick_wall2_3_0.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_3_1,	"Sprites/tiles/brick_wall2/brick_wall2_3_1.png");
+	mTextureHolder.load(Textures::TILE_BRICK_WALL2_3_2,	"Sprites/tiles/brick_wall2/brick_wall2_3_2.png");
+	mTextureHolder.load(Textures::TILE_GROUND2,			"Sprites/Tiles/ground2.png");
+	mTextureHolder.load(Textures::TILE_ROCK_WALL4,		"Sprites/Tiles/rock_wall4.png");
+
+	// PROPS
+
+	mTextureHolder.load(Textures::PROP_LIGHT_HANGING,	"Sprites/Props/light_hanging.png");
+
+
+
 }
 
 void RenderComponent::unloadImages()

@@ -375,6 +375,9 @@
     <ClCompile Include="WorldWoods.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
+    <ClCompile Include="WorldForest.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -660,6 +663,9 @@
       <Filter>Header Files\World</Filter>
     </ClInclude>
     <ClInclude Include="WorldWoods.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldForest.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>

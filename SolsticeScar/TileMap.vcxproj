@@ -168,6 +168,7 @@
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="WinState.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldForest.cpp" />
     <ClCompile Include="WorldWoods.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +265,7 @@
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="WinState.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldForest.h" />
     <ClInclude Include="WorldIdentifier.h" />
     <ClInclude Include="WorldWoods.h" />
   </ItemGroup>

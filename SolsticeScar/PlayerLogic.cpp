@@ -123,10 +123,20 @@ void PlayerLogic::update(Grid& grid)
 	CState* state = mGameObject->mState->update(playerObject, deltaTime, grid);
 	if(state != mGameObject->mState)
 	{
-		mGameObject->mState = state;
+		enterNewState(state);
 	}
 
-	
+	mSoundPlayer.removeStoppedSounds();
+}
+int deleteCount = 0;
+void PlayerLogic::enterNewState(CState* newState)
+{
+	mGameObject->mState->exit(mGameObject);
+	delete mGameObject->mState;
+
+	mGameObject->mState = newState;
+
+
 }
 
 

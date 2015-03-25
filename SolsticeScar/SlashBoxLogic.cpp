@@ -26,6 +26,7 @@ SlashBoxLogic::SlashBoxLogic(GameObject* gameObject)
 	mSpawnPos[Attacks::PLAYER_HAILBRINGER][0] =  sf::Vector2f(-10, -40);
 	mSpawnPos[Attacks::PLAYER_HAILBRINGER][1] =  sf::Vector2f(-100, -40);
 	
+	mStateWhenCreated = player->mState;
 }
 
 void SlashBoxLogic::init(int dir, Attacks::Name attack, int timeToLast)
@@ -133,7 +134,7 @@ void SlashBoxLogic::update(Grid& grid)
 	
 	timer++;
 
-	if(timer == maxTime || (player->mState->getName() != "AttackState" && player->mState->getName() != "AttackStateAir") )
+	if(timer == maxTime || mStateWhenCreated != player->mState)// || (player->mState->getName() != "AttackState" && player->mState->getName() != "AttackStateAir") )
 	{
 		timer = 0;
 		System::removeGameObject(mGameObject);

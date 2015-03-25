@@ -14,10 +14,10 @@
 
 #define CREATE_SLASH_BOX																															\
 			GameObjectDesc slashBoxDesc("PlayerAttackBox",sf::RectangleShape(sf::Vector2f(100,130)),	Layer::Player);								\
-			GameObject* slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();												\
+			slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();												\
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<SlashBoxLogic>(new SlashBoxLogic(slashBox)).release());			\
 			slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new SlashBoxBoxCollider(slashBox)).release());	\
-			slashBox->mBoxColliderComponent->setVisible(false);																						\
+			slashBox->mBoxColliderComponent->setVisible(true);																						\
 			SlashBoxLogic* slashLogic = dynamic_cast<SlashBoxLogic*>(slashBox->mLogicComponent);													\
 			isAttack = true;																														\
 																																					\
@@ -200,6 +200,7 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 	{
 		if(render->currentAnim == Attacks::PLAYER_IMPACT)
 		{
+				
 			CREATE_SLASH_BOX;
 			slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(170,110));
 			slashLogic->init(logic->getDirection(), Attacks::PLAYER_IMPACT, 12);
@@ -391,6 +392,13 @@ void AttackState::entry(GameObject* player)
 	slashNumber++;*/
 //	player->mRenderComponent->setAnimation("PLAYER_SWEEP");
 
+
+
+}
+
+void AttackState::exit(GameObject* character)
+{
+	
 
 
 }

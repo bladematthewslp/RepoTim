@@ -32,6 +32,7 @@ private:
 	std::map<Attacks::Name, std::array<sf::Vector2f,2>> mSpawnPos;
 	Attacks::Name				mAttackType;
 
+	CState*						mStateWhenCreated;
 	
 	
 };

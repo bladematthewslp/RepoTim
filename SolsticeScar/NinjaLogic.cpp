@@ -66,6 +66,7 @@ void NinjaLogic::update(Grid& grid)
 		mGameObject->mState = state;
 	}
 
+
 }
 
 void NinjaLogic::setGrounded(bool flag)

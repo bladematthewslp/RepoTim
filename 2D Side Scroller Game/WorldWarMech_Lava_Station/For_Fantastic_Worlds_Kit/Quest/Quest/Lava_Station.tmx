@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="4096" height="768" tilewidth="1" tileheight="1">
+ <tileset firstgid="1" name="platform4" tilewidth="262" tileheight="291">
+  <image source="../../For_Tiled/platform4.png" width="262" height="291"/>
+ </tileset>
+ <tileset firstgid="2" name="platform3_ls" tilewidth="195" tileheight="291">
+  <image source="../../For_Tiled/platform3_ls.png" width="195" height="291"/>
+ </tileset>
+ <tileset firstgid="3" name="platform2" tilewidth="132" tileheight="291">
+  <image source="../../For_Tiled/platform2.png" width="132" height="291"/>
+ </tileset>
+ <tileset firstgid="4" name="wall1_darker" tilewidth="293" tileheight="301">
+  <image source="../../For_Tiled/wall1_darker.png" width="293" height="301"/>
+ </tileset>
+ <tileset firstgid="5" name="tile_window" tilewidth="66" tileheight="66">
+  <image source="../../For_Tiled/tile_window.png" width="66" height="66"/>
+ </tileset>
+ <tileset firstgid="6" name="lava_orange0001" tilewidth="222" tileheight="55">
+  <image source="../../For_Tiled/lava_orange0001.png" width="222" height="55"/>
+ </tileset>
+ <tileset firstgid="7" name="background_descending" tilewidth="301" tileheight="768">
+  <image source="../../For_Tiled/background_descending.png" width="301" height="768"/>
+ </tileset>
+ <tileset firstgid="8" name="platform_simple" tilewidth="212" tileheight="36">
+  <image source="../../For_Tiled/platform_simple.png" width="212" height="36"/>
+ </tileset>
+ <tileset firstgid="9" name="platform_rail2" tilewidth="18" tileheight="239">
+  <image source="../../For_Tiled/platform_rail2.png" width="18" height="239"/>
+ </tileset>
+ <tileset firstgid="10" name="platform1" tilewidth="97" tileheight="48">
+  <image source="../../For_Tiled/platform1.png" width="97" height="48"/>
+ </tileset>
+ <tileset firstgid="11" name="crate" tilewidth="45" tileheight="32">
+  <image source="../../For_Tiled/crate.png" width="45" height="32"/>
+ </tileset>
+ <tileset firstgid="12" name="fence_box" tilewidth="119" tileheight="85">
+  <image source="../../For_Tiled/fence_box.png" width="119" height="85"/>
+ </tileset>
+ <tileset firstgid="13" name="spike1" tilewidth="97" tileheight="26">
+  <image source="../../For_Tiled/spike1.png" width="97" height="26"/>
+ </tileset>
+ <tileset firstgid="14" name="spike2" tilewidth="97" tileheight="43">
+  <image source="../../For_Tiled/spike2.png" width="97" height="43"/>
+ </tileset>
+ <tileset firstgid="15" name="spike3" tilewidth="70" tileheight="62">
+  <image source="../../For_Tiled/spike3.png" width="70" height="62"/>
+ </tileset>
+ <tileset firstgid="16" name="resupply1" tilewidth="54" tileheight="39">
+  <image source="../../For_Tiled/resupply1.png" width="54" height="39"/>
+ </tileset>
+ <tileset firstgid="17" name="resupply2" tilewidth="54" tileheight="40">
+  <image source="../../For_Tiled/resupply2.png" width="54" height="40"/>
+ </tileset>
+ <tileset firstgid="18" name="switch_off" tilewidth="34" tileheight="33">
+  <image source="../../For_Tiled/switch_off.png" width="34" height="33"/>
+ </tileset>
+ <tileset firstgid="19" name="door_opening0001" tilewidth="88" tileheight="106">
+  <image source="../../For_Tiled/door_opening0001.png" width="88" height="106"/>
+ </tileset>
+ <tileset firstgid="20" name="conveyor_belt0001" tilewidth="184" tileheight="60">
+  <image source="../../For_Tiled/conveyor_belt0001.png" width="184" height="60"/>
+ </tileset>
+ <tileset firstgid="21" name="platform_rail_horizontal" tilewidth="239" tileheight="18">
+  <image source="../../For_Tiled/platform_rail_horizontal.png" width="239" height="18"/>
+ </tileset>
+ <tileset firstgid="22" name="uranium1" tilewidth="28" tileheight="27">
+  <image source="../../For_Tiled/uranium1.png" width="28" height="27"/>
+ </tileset>
+ <tileset firstgid="23" name="lava_fall0001" tilewidth="50" tileheight="394">
+  <image source="../../For_Tiled/lava_fall0001.png" width="50" height="394"/>
+ </tileset>
+ <tileset firstgid="24" name="ladder2" tilewidth="53" tileheight="243">
+  <image source="../../For_Tiled/ladder2.png" width="53" height="243"/>
+ </tileset>
+ <objectgroup name="Walls" width="4096" height="768">
+  <object name="Wall1_Darker" type="Objects" gid="4" x="294" y="196"/>
+  <object name="Wall1_Darker" type="Objects" gid="4" x="294" y="496"/>
+  <object name="Wall1_Darker" type="Objects" gid="4" x="296" y="797"/>
+  <object name="Wall1_Darker" type="Objects" gid="4" x="583" y="797"/>
+  <object name="Wall1_Darker" type="Objects" gid="4" x="583" y="496"/>
+  <object name="Wall1_Darker" type="Objects" gid="4" x="583" y="196"/>
+  <object name="Background_Descending" type="Objects" gid="7" x="-9" y="740"/>
+  <object name="Lava_Fall" type="Objects" gid="23" x="1115" y="792"/>
+  <object name="Platform_No_Body" type="Objects" gid="3" x="2618" y="645"/>
+  <object name="Platform2" type="Objects" gid="3" x="2715" y="645"/>
+ </objectgroup>
+ <objectgroup name="Windows" width="4096" height="768">
+  <object name="Window" type="Objects" gid="5" x="365" y="351"/>
+  <object name="Window" type="Objects" gid="5" x="474" y="353"/>
+  <object name="Window" type="Objects" gid="5" x="641" y="356"/>
+  <object name="Window" type="Objects" gid="5" x="757" y="356"/>
+  <object name="Lava_Animated" type="Objects" gid="6" x="333" y="775"/>
+  <object name="Lava_Animated" type="Objects" gid="6" x="648" y="774"/>
+  <object name="Lava_Animated" type="Objects" gid="6" x="-83" y="775"/>
+  <object name="Lava_Animated_Repeating" type="Objects" gid="6" x="921" y="776"/>
+  <object name="Platform_Rail2" type="Objects" gid="9" x="1289" y="336"/>
+  <object name="Platform_Rail2" type="Objects" gid="9" x="1522" y="500"/>
+  <object name="Platform_Rail2" type="Objects" gid="9" x="1739" y="372"/>
+ </objectgroup>
+ <objectgroup name="Platforms" width="4096" height="768">
+  <object name="Platform4" type="Objects" gid="1" x="127" y="773"/>
+  <object name="StartingPoint" type="Portals" x="560" y="478" width="60" height="65"/>
+  <object name="InstantDeath" type="Objects" x="-254" y="747" width="4096" height="10"/>
+  <object name="Platform3" type="Objects" gid="2" x="464" y="855"/>
+  <object name="Platform2" type="Objects" gid="3" x="794" y="796"/>
+  <object name="Platform_Simple" type="Objects" gid="8" x="989" y="429"/>
+  <object name="Platform_Simple" type="Objects" gid="8" x="712" y="296"/>
+  <object name="Moving_Platform1" type="Objects" gid="10" x="1252" y="150"/>
+  <object name="Moving_Platform2" type="Objects" gid="10" x="1486" y="501"/>
+  <object name="Moving_Platform1" type="Objects" gid="10" x="1702" y="192"/>
+  <object name="Crate" type="Objects" gid="11" x="487" y="565"/>
+  <object name="Crate" type="Objects" gid="11" x="752" y="259"/>
+  <object name="Crate" type="Objects" gid="11" x="769" y="227"/>
+  <object name="Crate" type="Objects" gid="11" x="755" y="195"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1143" y="778"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1468" y="776"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1587" y="797"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1708" y="778"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1828" y="797"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1949" y="787"/>
+  <object name="Spike1" type="Objects" gid="13" x="1599" y="713"/>
+  <object name="Spike2" type="Objects" gid="14" x="1843" y="711"/>
+  <object name="Fence_Box" type="Objects" gid="12" x="1263" y="778"/>
+  <object name="Spike3" type="Objects" gid="15" x="1226" y="697"/>
+  <object name="HealthCrate" type="Objects" gid="16" x="1304" y="692"/>
+  <object name="BoosterCrate" type="Objects" gid="17" x="857" y="260"/>
+  <object name="Switch" type="Objects" gid="18" x="2191" y="616"/>
+  <object name="Platform3" type="Objects" gid="2" x="2171" y="907"/>
+  <object name="Platform4" type="Objects" gid="1" x="2355" y="932"/>
+  <object name="Platform4" type="Objects" gid="1" x="2605" y="897"/>
+  <object name="Exit_With_Switch" type="Portals" gid="19" x="2445" y="642"/>
+  <object name="Lava_Animated" type="Objects" gid="6" x="2813" y="792"/>
+  <object name="Lava_Animated" type="Objects" gid="6" x="3033" y="792"/>
+  <object name="Conveyor" type="Objects" gid="20" x="1908" y="363"/>
+  <object name="Rail_Horizontal" type="Objects" gid="21" x="2256" y="334"/>
+  <object name="Moving_Platform3" type="Objects" gid="10" x="2253" y="350"/>
+  <object name="Ladder" type="Objects" gid="24" x="2647" y="563"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="1753" y="652"/>
+ </objectgroup>
+ <objectgroup name="Collectibles" width="4096" height="768">
+  <object name="Uranium" type="Collectibles" gid="22" x="1013" y="376"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="1074" y="374"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="1132" y="374"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="816" y="482"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="871" y="479"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="1510" y="666"/>
+  <object name="Uranium" type="Collectibles" gid="22" x="1997" y="668"/>
+ </objectgroup>
+ <objectgroup name="Boundaries" width="4096" height="768">
+  <object type="Boundaries" x="467" y="-102" width="2622" height="960" visible="0"/>
+ </objectgroup>
+</map>

@@ -66,7 +66,7 @@ CState* CStateNinjaHitAir::update(GameObject* character, sf::Time dt, Grid& grid
 		
 		CState* newState = std::unique_ptr<CState>(new CStateNinjaStanding(character)).release();
 		newState->entry(character);
-		logic->mSoundPlayer.mSound.stop();
+		logic->mSoundPlayer.mSound->stop();
 		return newState;
 	}
 

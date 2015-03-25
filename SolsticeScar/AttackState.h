@@ -15,9 +15,12 @@ class AttackState : public CState
 	int timer;
 	int delayTimer;
 	GameObject&			mGameObject;
+
+	GameObject*			slashBox;
 public:
 	AttackState(GameObject* player);
 	void				entry(GameObject* player);
+	void				exit(GameObject* character);
 	CState*				handleInput(GameObject* player,const sf::Event& event);
 	CState*				update(GameObject* player, sf::Time dt, Grid& grid);
 	GameObject*			createSlashBox();

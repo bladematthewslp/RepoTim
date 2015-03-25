@@ -33,6 +33,8 @@ public:
 
 	PlayerLogic(GameObject* mGameObject);
 	void update(Grid& grid);
+
+	void				enterNewState(CState* newState);
 	
 	bool				isReadyForBattle();
 	void				setNewState(CState* newState);
@@ -91,3 +93,4 @@ public:
 	SoundEffect::ID		mCurrentSoundEffect;
 	
 };
+

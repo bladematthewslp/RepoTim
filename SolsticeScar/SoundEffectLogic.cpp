@@ -11,7 +11,7 @@ SoundEffectLogic::SoundEffectLogic(GameObject* gameObject)
 
 void SoundEffectLogic::update(Grid& grid)
 {
-	if(dynamic_cast<CState*>(gameCharacter->mState)->getName() != "AttackState" || mSoundPlayer.mSound.getStatus() == sf::Sound::Status::Stopped)
+	if(dynamic_cast<CState*>(gameCharacter->mState)->getName() != "AttackState" || mSoundPlayer.mSound->getStatus() == sf::Sound::Status::Stopped)
 	{
 		std::cout << "REMOVING" << std::endl;
 		System::removeGameObject(mGameObject);

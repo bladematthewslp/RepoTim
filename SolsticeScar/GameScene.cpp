@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "SceneStack.h"
 #include "WorldWoods.h"
+#include "WorldForest.h"
 #include "System.h"
 #include <iostream>
 #include "ResourceHolder.h"
@@ -17,9 +18,9 @@ GameScene::GameScene(SceneStack& stack, Context& context)
 	mShape.setFillColor(sf::Color(187, 88, 93, 255));
 	mShape.setPosition(50,50);
 	
-
+	registerWorld<WorldForest>(Worlds::Forest);
 	registerWorld<WorldWoods>(Worlds::Woods);
-	mCurrentWorld = createWorld(Worlds::Woods);
+	mCurrentWorld = createWorld(mWorlds.front());
 	
 	//mWorld = std::unique_ptr<World>(new World(stack.mContext)).release();
 }
@@ -60,8 +61,16 @@ bool GameScene::update(sf::Time dt)
 		}
 		case World::Status::PLAYER_WON:
 		{
-			requestStackPop();
-			requestStackPush(Scenes::Title);
+			mWorlds.erase(mWorlds.begin() );
+			if(mWorlds.size() == 0)
+			{
+				requestStackPop();
+				requestStackPush(Scenes::Title);
+			}
+			else
+			{
+				mCurrentWorld = createWorld(mWorlds.front());
+			}
 			break;
 		}
 		case World::Status::PLAYER_LOST:

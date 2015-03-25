@@ -5,6 +5,7 @@
 WorldWoods::WorldWoods(Scene::Context& context )
 	: World(context)
 {
+
 	// init stuff here
 	SoundPlayer::loadAllSounds();
 	RenderComponent::loadImages();
@@ -18,7 +19,9 @@ WorldWoods::WorldWoods(Scene::Context& context )
 void WorldWoods::init()
 {
 	System::mMusicPlayer.play(Music::WoodsTheme);
-	
+
+	mGrid = std::unique_ptr<Grid>(new Grid(Maps::Woods)).release();
+
 	// ___________________________________
 	//	GUI Setup
 	// ___________________________________
@@ -44,7 +47,6 @@ void WorldWoods::init()
 	playerHUD->mRenderComponent->mSprite.setTexture(&playerHUD->getRenderComponent()->mTextureHolder.get(Textures::PlayerHUD));
 
 	
-	mGrid = std::unique_ptr<Grid>(new Grid()).release();
 
 	// Add the background sprite to the scene
 	GameObjectDesc backgroundDesc(	"Background", 
@@ -62,6 +64,7 @@ void WorldWoods::init()
 		
 		
 		mBackground[i] = std::unique_ptr<GameObject>(new BackgroundGameObject(backgroundDesc)).release();
+		mBackground[i]->mRenderComponent->mSprite.setTexture(&RenderComponent::mTextureHolder.get(Textures::Background_Woods));
 		mBackground[i]->setPosition( i * 1024, 0);
 
 

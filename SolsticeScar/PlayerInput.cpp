@@ -49,10 +49,13 @@ void PlayerInput::handleRealtimeInput(const sf::Event& event)
 	if(mIsEnabled == false)
 		return;
 
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
+
 	CState* state = mGameObject->mState->handleInput(mGameObject,event);
 	if(state != mGameObject->mState)
 	{
-		mGameObject->mState = state;
+		logic->enterNewState(state);
+		//mGameObject->mState = state;
 	}
 }
 
@@ -155,7 +158,8 @@ void PlayerInput::handleEvents(const sf::Event& event)
 							&& Attacks::getAttack(iter->second).mIsAirAttack == false			// if the attack is not an air attack
 							&& iter->second != Attacks::PLAYER_SLASH)							// if the attack is not a basic slash
 						{
-							mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+							CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+							logic->enterNewState(newState);
 							mGameObject->mRenderComponent->setAnimation(iter->second);
 							return;
 						}
@@ -164,7 +168,9 @@ void PlayerInput::handleEvents(const sf::Event& event)
 					// if keys did not match any move list, set default slash animation accordingly
 					if(mGameObject->mState->getName() != "AttackState")
 					{
-						mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+						CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+						logic->enterNewState(newState);
+						//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
 						mGameObject->getRenderComponent()->setAnimation("Slash1");
 					}
 					else
@@ -172,7 +178,9 @@ void PlayerInput::handleEvents(const sf::Event& event)
 						// if the animation is delayed and player is not on last slash
 						if(mGameObject->mRenderComponent->isAnimDelayed() == true && mGameObject->getRenderComponent()->currentAnim != "Slash3" && mGameObject->getRenderComponent()->currentAnim != "PLAYER_HAILBRINGER_PART2")
 						{
-							mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+							CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+							logic->enterNewState(newState);
+							//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
 							if(mGameObject->getRenderComponent()->currentAnim == "Slash1")
 							{
 								
@@ -198,12 +206,16 @@ void PlayerInput::handleEvents(const sf::Event& event)
 							{
 								if(mGameObject->getRenderComponent()->currentAnim == "Slash2Part2")
 								{
-									mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+									CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+									logic->enterNewState(newState);
+									//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
 									mGameObject->getRenderComponent()->setAnimation("QuickUprising");
 								}
 								else if(mGameObject->getRenderComponent()->currentAnim == "QuickUprising")
 								{
-									mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+									CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+									logic->enterNewState(newState);
+									//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
 									mGameObject->getRenderComponent()->setAnimation("QuickStinger");
 								}
 
@@ -231,17 +243,22 @@ void PlayerInput::handleEvents(const sf::Event& event)
 								// if so...
 								if(keyQueue == iter->first && Attacks::getAttack(iter->second).mIsAirAttack == true)
 								{
-										mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
-										//std::cout << iter->second << std::endl;
-										mGameObject->mRenderComponent->setAnimation(iter->second);
-										matchingKeyVectorFound = true;
-										break;
+									CState* newState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+									logic->enterNewState(newState);
+									
+									//mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+									//std::cout << iter->second << std::endl;
+									mGameObject->mRenderComponent->setAnimation(iter->second);
+									matchingKeyVectorFound = true;
+									break;
 								}
 							}	// end for loop
 							// if keys did not match any move list, set default slash animation
 							if(matchingKeyVectorFound == false)
 							{
-								mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+								CState* newState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+								logic->enterNewState(newState);
+								//mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
 								mGameObject->mRenderComponent->setAnimation("PLAYER_SWEEP");
 							}
 						}
@@ -257,17 +274,21 @@ void PlayerInput::handleEvents(const sf::Event& event)
 							// if so...
 							if(keyQueue == iter->first && Attacks::getAttack(iter->second).mIsAirAttack == true)
 							{
-									mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
-									//std::cout << iter->second << std::endl;
-									mGameObject->mRenderComponent->setAnimation(iter->second);
-									matchingKeyVectorFound = true;
-									break;
+								CState* newState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+								logic->enterNewState(newState);
+								//mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+								//std::cout << iter->second << std::endl;
+								mGameObject->mRenderComponent->setAnimation(iter->second);
+								matchingKeyVectorFound = true;
+								break;
 							}
 						}	// end for loop
 						// if keys did not match any move list, set default slash animation
 						if(matchingKeyVectorFound == false && render->currentAnim != "PLAYER_SWEEP")
 						{
-							mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+							CState* newState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
+							logic->enterNewState(newState);
+							//mGameObject->mState = std::unique_ptr<CState>(new AttackStateAir(mGameObject)).release();
 							mGameObject->mRenderComponent->setAnimation("PLAYER_SWEEP");
 						}
 					
@@ -282,53 +303,13 @@ void PlayerInput::handleEvents(const sf::Event& event)
 	CState* state = mGameObject->mState->handleInput(mGameObject,event);
 	if(state != mGameObject->mState)
 	{
-		mGameObject->mState = state;
+		logic->enterNewState(state);
+		//mGameObject->mState = state;
 	}
 	
 }
 
-bool PlayerInput::checkValidCommand()
-{
-	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
-	PlayerInput* input = dynamic_cast<PlayerInput*>(mGameObject->mInputComponent);
-	
-	// get move List from logic component
-	std::multimap<std::vector<sf::Keyboard::Key>, std::string> list = logic->getMoveList();
 
-	// create key queue to match to move list
-	std::vector<sf::Keyboard::Key> commandKeys;
-	
-	int keyQueueSize = keyQueue->size();
-
-	for(int i = 0; i < keyQueueSize; i++)
-	{
-		commandKeys.push_back(keyQueue->front());//input->getKeyQueue()->front());
-		keyQueue->pop();
-	}
-	
-	// check if pressed keys matches an action in the move list
-	for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); iter++)
-	{
-		// if so...
-		if(commandKeys == iter->first)
-		{
-			if(Attacks::getAttack(iter->second).mIsAirAttack == false)
-			{
-				AttackState* newState = std::unique_ptr<AttackState>(new AttackState(mGameObject)).release();
-				newState->setAttack(iter->second);
-			}
-			else if(Attacks::getAttack(iter->second).mIsAirAttack == true)
-			{
-
-			}
-		
-			return true;
-		}
-	}
-
-	return false;
-
-}
 
 std::queue<sf::Keyboard::Key>* PlayerInput::getKeyQueue()
 {

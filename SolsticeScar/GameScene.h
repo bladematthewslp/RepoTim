@@ -9,6 +9,7 @@
 #include <map>
 #include <functional>
 
+
 class SceneStack;
 
 class GameScene : public Scene
@@ -27,6 +28,8 @@ public:
 	void draw();
 
 	std::map<Worlds::ID, std::function<World::Ptr()>> mWorldFactories;
+	std::vector<Worlds::ID> mWorlds;
+
 
 	template <typename T>
 	void registerWorld(Worlds::ID);
@@ -36,10 +39,13 @@ public:
 };
 
 template <typename T>
-void GameScene::registerWorld(Worlds::ID world)
+void GameScene::registerWorld(Worlds::ID worldID)
 {
-	mWorldFactories[world] = [this] ()
+	
+	mWorldFactories[worldID] = [this] ()
 	{
 		return World::Ptr(new T(mStack->mContext) );
 	};
+	
+	mWorlds.push_back(worldID);
 }

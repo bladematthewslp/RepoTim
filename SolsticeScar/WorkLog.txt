@@ -1,3 +1,9 @@
+3-23
+-------------------------
+Grid.cpp
+ - Made change to how characters are streamed from file (it now reads multi-numbered entries between each comma instead of a single number)
+ 
+
 3-21
 -------------------------
 World.cpp

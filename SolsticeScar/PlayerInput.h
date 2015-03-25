@@ -14,7 +14,6 @@ class PlayerInput : public InputComponent
 public:
 	PlayerInput(GameObject* gameObject);
 	void							disableInput();
-	bool							checkValidCommand();
 	void							update(const sf::Event& event);
 	void							handleEvents(const sf::Event& event);
 	void							handleRealtimeInput(const sf::Event& event);

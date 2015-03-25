@@ -17,6 +17,8 @@ JumpingState::JumpingState(GameObject* player)
 	, gravity(0.0f, 0.3f)
 	, oldPosition()
 {
+	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
+	System::mSoundPlayer.play(SoundEffect::Jump);
 	spriteX = 1;
 	spriteCounter = 0;
 	player->mRenderComponent->setAnimation("Jumping");

@@ -108,6 +108,7 @@ void System::removeGameObject(GameObject* gameObject)
 									{
 										
 										(*mGameObjsPendingDeletion.begin())->Destroy();
+										
 										mGameObjsPendingDeletion.erase(mGameObjsPendingDeletion.begin());
 									}
 								};
