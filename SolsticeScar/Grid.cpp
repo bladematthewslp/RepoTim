@@ -17,8 +17,8 @@ std::string Maps::Cavern	= "Map/Level2.csv";
 std::string Maps::Woods		= "Map/map1.csv";
 
 
-Grid::Grid(std::string filename) 
-	: tileSize(32), playerPosition(), playerLanded(false)
+Grid::Grid(std::string filename, int _tileSize) 
+	: tileSize(_tileSize), playerPosition(), playerLanded(false)
 {
 	
 
@@ -40,7 +40,7 @@ Grid::Grid(std::string filename)
 	mTileTable[15]	= Textures::TILE_BRICK_WALL2_3_2;
 
 
-	sf::RectangleShape block(sf::Vector2f(32,32));
+	sf::RectangleShape block(sf::Vector2f(tileSize,tileSize));
 	GameObjectDesc tile("Grid Block", block, Layer::Default, ComponentType::RenderComponent, nullptr);
 	
 	//std::cout << "\n" << "LOADING GRID FROM FILE" << std::endl;
@@ -355,8 +355,8 @@ bool Grid::checkCollisionRight(BoxColliderComponent* collider)
 	sf::RectangleShape* box = collider->getCollisionBox();
 	sf::Vector2f topRight(box->getGlobalBounds().left + box->getGlobalBounds().width, box->getGlobalBounds().top);
 	//std::cout << topRight.x << " , " << topRight.y << std::endl;
-	int xPoint = topRight.x / 32;
-	int yPoint = topRight.y / 32;
+	int xPoint = topRight.x / tileSize;
+	int yPoint = topRight.y / tileSize;
 	//std::cout << xPoint << " , " << yPoint<< std::endl;
 	if(xPoint >= 0 && yPoint >= 0)
 	if(worldGrid[yPoint][xPoint] != 0)
@@ -365,8 +365,8 @@ bool Grid::checkCollisionRight(BoxColliderComponent* collider)
 	}
 
 	sf::Vector2f bottomRight(box->getGlobalBounds().left + box->getGlobalBounds().width, box->getGlobalBounds().top + box->getGlobalBounds().height- 10);
-	xPoint = bottomRight.x / 32;
-	yPoint = bottomRight.y / 32;
+	xPoint = bottomRight.x / tileSize;
+	yPoint = bottomRight.y / tileSize;
 	if(xPoint >= 0 && yPoint >= 0)
 	{
 
@@ -383,8 +383,8 @@ bool Grid::checkCollisionLeft(BoxColliderComponent* collider)
 	sf::RectangleShape* box = collider->getCollisionBox();
 	sf::Vector2f topLeft(box->getGlobalBounds().left, box->getGlobalBounds().top);
 
-	int xPoint = topLeft.x / 32;
-	int yPoint = topLeft.y / 32;
+	int xPoint = topLeft.x / tileSize;
+	int yPoint = topLeft.y / tileSize;
 
 	if(xPoint >= 0 && yPoint >= 0)
 	{
@@ -394,8 +394,8 @@ bool Grid::checkCollisionLeft(BoxColliderComponent* collider)
 		}
 	}
 	sf::Vector2f bottomLeft(box->getGlobalBounds().left, box->getGlobalBounds().top + box->getGlobalBounds().height - 10);
-	xPoint = bottomLeft.x / 32;
-	yPoint = bottomLeft.y / 32;
+	xPoint = bottomLeft.x / tileSize;
+	yPoint = bottomLeft.y / tileSize;
 	if(xPoint >= 0 && yPoint >= 0)
 	{
 
@@ -412,8 +412,8 @@ bool Grid::checkCollisionAbove(BoxColliderComponent* collider)
 	sf::RectangleShape* box = collider->getCollisionBox();
 	sf::Vector2f topLeft(box->getGlobalBounds().left, box->getGlobalBounds().top);
 
-	int xPoint = topLeft.x / 32;
-	int yPoint = topLeft.y / 32;
+	int xPoint = topLeft.x / tileSize;
+	int yPoint = topLeft.y / tileSize;
 
 	if(xPoint >= 0 && yPoint >= 0)
 	{
@@ -425,8 +425,8 @@ bool Grid::checkCollisionAbove(BoxColliderComponent* collider)
 
 	sf::Vector2f topRight(box->getGlobalBounds().left + box->getGlobalBounds().width, box->getGlobalBounds().top);
 	//std::cout << topRight.x << " , " << topRight.y << std::endl;
-	xPoint = topRight.x / 32;
-	yPoint = topRight.y / 32;
+	xPoint = topRight.x / tileSize;
+	yPoint = topRight.y / tileSize;
 	//std::cout << xPoint << " , " << yPoint<< std::endl;
 	if(xPoint >= 0 && yPoint >= 0)
 	{
@@ -444,8 +444,8 @@ bool Grid::checkCollisionBelow(BoxColliderComponent* collider)
 	playerPosition.y = 0;
 	sf::RectangleShape* box = collider->getCollisionBox();
 	sf::Vector2f bottomLeft(box->getGlobalBounds().left, box->getGlobalBounds().top + box->getGlobalBounds().height);
-	int xPoint = bottomLeft.x / 32;
-	int yPoint = bottomLeft.y / 32;
+	int xPoint = bottomLeft.x / tileSize;
+	int yPoint = bottomLeft.y / tileSize;
 	if(xPoint >= 0 && yPoint >= 0)
 	{
 
@@ -458,8 +458,8 @@ bool Grid::checkCollisionBelow(BoxColliderComponent* collider)
 	}
 	
 	sf::Vector2f bottomRight(box->getGlobalBounds().left + box->getGlobalBounds().width, box->getGlobalBounds().top + box->getGlobalBounds().height);
-	xPoint = bottomRight.x / 32;
-	yPoint = bottomRight.y / 32;
+	xPoint = bottomRight.x / tileSize;
+	yPoint = bottomRight.y / tileSize;
 	if(xPoint >= 0 && yPoint >= 0)
 	{
 		if(mGrid[xPoint][yPoint] != nullptr)
@@ -484,15 +484,15 @@ std::vector<std::array<int, 2>> Grid::checkCellsOccupied(BoxColliderComponent* c
 	sf::Vector2f bottomLeft(box->getGlobalBounds().left, box->getGlobalBounds().top + box->getGlobalBounds().height);
 	sf::Vector2f bottomRight(box->getGlobalBounds().left + box->getGlobalBounds().width, box->getGlobalBounds().top + box->getGlobalBounds().height);
 
-	int startTopLeft = topLeft.y/32;
-	int endTopBottom = bottomRight.x/32;
+	int startTopLeft = topLeft.y/tileSize;
+	int endTopBottom = bottomRight.x/tileSize;
 	
 	if(startTopLeft < 0 || endTopBottom < 0)
 		return cells1;
 	int count = 0;
-	for( int i = topLeft.y/32; i < bottomRight.y/32; i++)
+	for( int i = topLeft.y/tileSize; i < bottomRight.y/tileSize; i++)
 	{
-		for(int j = topLeft.x/32; j < bottomRight.x/32; j++)
+		for(int j = topLeft.x/tileSize; j < bottomRight.x/tileSize; j++)
 		{
 			std::array<int,2> cell;
 			cell[0] = i;

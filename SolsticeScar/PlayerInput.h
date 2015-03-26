@@ -11,6 +11,7 @@ class PlayerInput : public InputComponent
 	float							keyQueueTimer;
 	std::queue<sf::Keyboard::Key>*	keyQueue;
 	GameObject*						playerObject;
+
 public:
 	PlayerInput(GameObject* gameObject);
 	void							disableInput();

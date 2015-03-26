@@ -14,7 +14,7 @@ const float MAX_JUMPING_SPEED = 5.0f;
 
 JumpingState::JumpingState(GameObject* player) 
 	: CState("JumpingState")
-	, gravity(0.0f, 0.3f)
+	, gravity(0.0f, 0.5f)
 	, oldPosition()
 {
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
@@ -23,6 +23,8 @@ JumpingState::JumpingState(GameObject* player)
 	spriteCounter = 0;
 	player->mRenderComponent->setAnimation("Jumping");
 	dynamic_cast<PlayerInput*>(player->mInputComponent)->clearKeyQueue();
+	std::cout << "NEW JUMPING STATE" << std::endl;
+
 }
 
 CState* JumpingState::handleInput(GameObject* player, const sf::Event& event)
@@ -56,6 +58,7 @@ CState* JumpingState::handleInput(GameObject* player, const sf::Event& event)
 
 CState* JumpingState::update(GameObject* player, sf::Time dt, Grid& grid)
 {
+	std::cout << "JUMPING STATE UPDATE" << std::endl;
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	//player->mRenderComponent->runSpriteAnim("Jumping", *player);
 	player->mRenderComponent->runSpriteAnim(*player);

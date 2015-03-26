@@ -33,7 +33,7 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,600,200,200), "Falling", true, 6,1,-1,4);
 
 	// Ground Attacks
-	createSpriteAnim(sf::IntRect(200,800,200,200), "Slash1", false, 7,.9, 4);
+	createSpriteAnim(sf::IntRect(200,800,200,200),	"Slash1", false, 7,.9, 4);
 	createSpriteAnim(sf::IntRect(200,1000,200,200), "Slash2Part1", false, 4,.9, 3);
 	createSpriteAnim(sf::IntRect(200,1000,200,200), "Slash2Part2", false, 7,1, 3,4);
 	createSpriteAnim(sf::IntRect(200,1200,200,200), "Slash3", false, 7,.9, 5);
@@ -49,8 +49,8 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,2800,200,200), "PLAYER_CHOPPERSTYLE_RECOVERING", false, 13,1, -1,10);//9, 1, -1, 7);
 
 	// Air Attacks
-	createSpriteAnim(sf::IntRect(200,2200,200,200), "PLAYER_SWEEP", false, 5, 1.1,4);
-	createSpriteAnim(sf::IntRect(200,2600,200,200), "PLAYER_REPEL", false, 9, 1.1);
+	createSpriteAnim(sf::IntRect(200,2200,200,200), "PLAYER_SWEEP", false, 5, .9,4);
+	//createSpriteAnim(sf::IntRect(200,2600,200,200), "PLAYER_REPEL", false, 9, 1.1);
 	createSpriteAnim(sf::IntRect(200,4000,200,200), "PLAYER_HAILBRINGER", false, 3, .5);
 	createSpriteAnim(sf::IntRect(200,4000,200,200), "PLAYER_HAILBRINGER_PART2", false, 7, 2,4,3);
 	

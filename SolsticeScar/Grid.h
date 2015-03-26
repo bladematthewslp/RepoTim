@@ -28,7 +28,7 @@ struct Grid
 	bool												playerLanded;
 	void												draw(sf::RenderWindow& window);
 
-	Grid(std::string filename);
+	Grid(std::string filename, int _tileSize);
 
 	sf::Image											mImage;
 	sf::Texture											mTexture;

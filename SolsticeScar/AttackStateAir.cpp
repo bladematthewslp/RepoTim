@@ -39,7 +39,7 @@ AttackStateAir::AttackStateAir(GameObject* player)
 
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	soundEffectPlayed = false;
-	
+	//std::cout << "NEW ATTACK STATE AIR" << std::endl;
 }
 
 
@@ -84,6 +84,8 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 	RenderComponent* render = dynamic_cast<RenderComponent*>(player->mRenderComponent);
 	int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
 
+
+
 	// handle sounds
 	if(soundEffectPlayed == false)
 	{
@@ -91,9 +93,11 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 		{
 			playSound(SoundEffect::DojiSwordSwingAir, logic);
 		}
+		else if(render->currentAnim == "PLAYER_HAILBRINGER")
+			playSound(SoundEffect::DojiHailBringerDescending, logic);
 		
 	}
-
+	
 	// handle downward velocity
 	if(render->currentAnim == "PLAYER_HAILBRINGER")
 	{
@@ -152,12 +156,12 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 	
 
 	sf::Vector2f velocity = logic->getVelocity();
-	
+
 	if( render->runSpriteAnim(*player) == SpriteAnim::Status::SUCCESS)
 	{
 		if(render->currentAnim == "PLAYER_HAILBRINGER")
 		{
-			soundEffectPlayed = false;
+			//soundEffectPlayed = false;
 		}
 		else if(render->currentAnim == "PLAYER_HAILBRINGER_PART2")
 		{
@@ -173,7 +177,7 @@ CState* AttackStateAir::update(GameObject* player, sf::Time dt, Grid& grid)
 		}
 	}
 
-	airJumpSpeed += 0.2f;
+	airJumpSpeed += 0.1f;
 	logic->setVelocityY(airJumpSpeed);
 	logic->move(logic->getVelocity());
 	if(grid.checkCollisionBelow(player->mBoxColliderComponent) == true   )
@@ -211,41 +215,13 @@ void AttackStateAir::playSound(SoundEffect::ID effect, PlayerLogic* playerLogic)
 
 }
 
+
 void AttackStateAir::entry(GameObject* player)
 {
-	/*
+
+}
+void AttackStateAir::exit(GameObject* player)
+{
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
-	PlayerInput* input = dynamic_cast<PlayerInput*>(player->mInputComponent);
-	
-	// get move List from logic component
-	std::multimap<std::vector<sf::Keyboard::Key>, std::string> list = logic->getMoveList();
-
-	// create key queue to match to move list
-	std::vector<sf::Keyboard::Key> keyQueue;
-	
-	int keyQueueSize = input->getKeyQueue()->size();
-
-	for(int i = 0; i < keyQueueSize; i++)
-	{
-		keyQueue.push_back(input->getKeyQueue()->front());
-		input->getKeyQueue()->pop();
-	}
-	
-	// check if pressed keys matches an action in the move list
-	for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); iter++)
-	{
-		// if so...
-		if(keyQueue == iter->first && Attacks::getAttack(iter->second).mIsAirAttack == true)
-		{
-			std::cout << iter->second << std::endl;
-			player->mRenderComponent->setAnimation(iter->second);
-		}
-	}
-
-	// if keys did not match any move list, set default slash animation
-	player->mRenderComponent->setAnimation("PLAYER_SWEEP");
-
-	*/
-
-
+	//logic->mSoundPlayer.stop();
 }

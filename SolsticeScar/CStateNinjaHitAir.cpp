@@ -12,7 +12,8 @@ CStateNinjaHitAir::CStateNinjaHitAir(GameObject* character) : CState("CStateNinj
 	, isAirborne(false)
 	, damageTimer(0)
 	, mHitStartingVelocityX(0)
-	//, mLaunchSpeed(-13)
+	, mGravity(0, 0.3f)
+	, mLaunchSpeed(-9)
 {
 	mAirSpeed = -19;
 	NinjaLogic* logic = dynamic_cast<NinjaLogic*>(character->mLogicComponent);
@@ -41,23 +42,31 @@ CState* CStateNinjaHitAir::update(GameObject* character, sf::Time dt, Grid& grid
 
  	sf::Vector2f vel = logic->getVelocity();
 	
-	if(vel.y >= -3 && vel.y < 0)
+	/*if(vel.y >= -3 && vel.y < 0)
 		mAirSpeed += 0.22f;
 	else
 		mAirSpeed += 0.63f;
 
 	if(mAirSpeed > MAX_FALLING_SPEED)
 		mAirSpeed = MAX_FALLING_SPEED;
+	*/
 
-	
+	if(vel.y > -3 && vel.y < 3)
+		vel.y += mGravity.y / 2;
+	else
+		vel.y += mGravity.y;
 
+	if(vel.y > MAX_FALLING_SPEED)
+		vel.y = MAX_FALLING_SPEED;
+
+	//std::cout << vel.y << std::endl;
 	
-	logic->setVelocityY(mAirSpeed);
+	logic->setVelocityY(vel.y);
 	logic->move(logic->getVelocity());
 	
 	if(grid.checkCollisionAbove(character->mBoxColliderComponent) == true)
 	{
-		logic->setVelocityY(1);
+		logic->setVelocityY( -vel.y);
 		logic->move(0, logic->getVelocity().y);
 	}
 	if(grid.checkCollisionBelow(character->mBoxColliderComponent) == true   )
@@ -103,7 +112,7 @@ void CStateNinjaHitAir::successiveHit(GameObject* character, AttackType attackTy
 
 
 	damageTimer = 0;
-	mAirSpeed = -3;
+	mAirSpeed = -2;
 	logic->setVelocityY(mAirSpeed);
 	
 	if(character->getRenderComponent()->currentAnim == "AirHit1")

@@ -13,10 +13,13 @@
 RunningState::RunningState(GameObject* player)
 	: CState("RunningState")
 {
+
 	spriteTimer = 0;
 	playSpeed = 5;
 	currentFrame = 0;
 	numFrames = 8;
+
+	
 }
 
 CState* RunningState::handleInput(GameObject* player, const sf::Event& event)
@@ -51,7 +54,14 @@ CState* RunningState::update(GameObject* player, sf::Time dt, Grid& grid)
 {
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 	
+	int previousFrame = player->mRenderComponent->mSpriteSet[player->mRenderComponent->currentAnim]->currentFrame;
 	player->mRenderComponent->runSpriteAnim(*player);
+	int currentFrame = player->mRenderComponent->mSpriteSet[player->mRenderComponent->currentAnim]->currentFrame;
+	
+	if( previousFrame == 0 && currentFrame == 1)
+		System::mSoundPlayer.play(SoundEffect::Running1);
+	else if( previousFrame == 4 && currentFrame == 5)
+		System::mSoundPlayer.play(SoundEffect::Running2);
 
 
 	logic->move(logic->getVelocity());
@@ -125,4 +135,9 @@ void RunningState::setKeyDownParams(GameObject* player, sf::Keyboard::Key key)
 			logic->setVelocityX(-logic->getRunningSpeed());
 			break;
 	}
+}
+
+void RunningState::exit(GameObject* character)
+{
+	
 }

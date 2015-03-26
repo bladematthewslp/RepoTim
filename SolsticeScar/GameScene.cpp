@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "SceneStack.h"
 #include "WorldWoods.h"
-#include "WorldForest.h"
+#include "WorldCave.h"
 #include "System.h"
 #include <iostream>
 #include "ResourceHolder.h"
@@ -18,8 +18,8 @@ GameScene::GameScene(SceneStack& stack, Context& context)
 	mShape.setFillColor(sf::Color(187, 88, 93, 255));
 	mShape.setPosition(50,50);
 	
-	registerWorld<WorldForest>(Worlds::Forest);
 	registerWorld<WorldWoods>(Worlds::Woods);
+	registerWorld<WorldCave>(Worlds::Cave);
 	mCurrentWorld = createWorld(mWorlds.front());
 	
 	//mWorld = std::unique_ptr<World>(new World(stack.mContext)).release();

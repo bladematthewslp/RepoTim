@@ -10,6 +10,7 @@ class RunningState : public CState
 public:
 					RunningState(GameObject* player);
 	void			entry(GameObject* player);
+	void			exit(GameObject* character);
 	CState*			handleInput(GameObject* player, const sf::Event& event);
 	CState*			update(GameObject* player, sf::Time dt, Grid& grid);
 	void			setKeyDownParams(GameObject* player, sf::Keyboard::Key key);

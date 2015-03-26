@@ -20,8 +20,8 @@ void WorldWoods::init()
 {
 	System::mMusicPlayer.play(Music::WoodsTheme);
 
-	mGrid = std::unique_ptr<Grid>(new Grid(Maps::Woods)).release();
-
+	mGrid = std::unique_ptr<Grid>(new Grid(Maps::Woods, 32)).release();
+	
 	// ___________________________________
 	//	GUI Setup
 	// ___________________________________
@@ -83,8 +83,8 @@ void WorldWoods::init()
 	// Box Collider Component
 	mPlayer->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new PlayerBoxCollider(mPlayer)).release());
 	mPlayer->mBoxColliderComponent->setSize(80, 98);
-		//mPlayer->mBoxColliderComponent->setVisible(true);
-
+		mPlayer->mBoxColliderComponent->setVisible(true);
+	mPlayer->setPosition(300,(32*19) - mPlayer->getSprite()->getLocalBounds().height/8);
 	
 	
 	GameObjectDesc ninjaDesc("Ninja",sf::RectangleShape(), Layer::Enemy);//,ComponentType::LogicComponent);
@@ -94,6 +94,8 @@ void WorldWoods::init()
 	{
 		GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 		ninja->mBoxColliderComponent->setSize(50,75);
+		
+		//ninja->mBoxColliderComponent->setVisible(true);
 		ninja->setPosition( 1200 + (300*i),568);
 		ninjaGameObjects.push_back(ninja);
 	}

@@ -17,7 +17,7 @@
 			slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();												\
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<SlashBoxLogic>(new SlashBoxLogic(slashBox)).release());			\
 			slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new SlashBoxBoxCollider(slashBox)).release());	\
-			slashBox->mBoxColliderComponent->setVisible(true);																						\
+			slashBox->mBoxColliderComponent->setVisible(false);																						\
 			SlashBoxLogic* slashLogic = dynamic_cast<SlashBoxLogic*>(slashBox->mLogicComponent);													\
 			isAttack = true;																														\
 																																					\
@@ -36,7 +36,7 @@ AttackState::AttackState(GameObject* player)
 	slashNumber = 0;
 	//player->mRenderComponent->setAnimation("Slash1");
 	isAttack = false;
-	//std::cout << "NEW ATTACK STATE" << std::endl;
+	std::cout << "NEW ATTACK STATE" << std::endl;
 	soundEffectPlayed = false;
 	
 }

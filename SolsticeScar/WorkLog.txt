@@ -1,3 +1,26 @@
+3-26
+-------------------------
+- Adjust when grounded is true for player
+ - added a grid check below player in PlayerLogic::update(). Resolved issue with grounded being true
+	temporarily when velocity is 0 but player is in the air.
+
+- PlayerInput.cpp
+ - commented out the CState::handleInput() in PlayerInput::handleEvents. This was done because the 
+	CState::handleInput() was literally being called twice per frame: once in handleRealtimeInput() 
+	and once in handleEvents(). Since the CState handles events and realtime inputs, I commented the
+	handleEvents. So far, this has not interrupted anything the player does. What was noticed before
+	this was commented out was if the JUMP and ATTACK buttons were pressed very close in time, the
+	player would jump, but then perform a grounded attack slightly above the ground. 
+
+3-25
+-------------------------
+- Renamed WorldForest to WorldCave
+
+Grid
+ - adjust Grid constructor to specify tile size at construction time
+
+
+
 3-23
 -------------------------
 Grid.cpp

@@ -50,7 +50,7 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	dynamic_cast<GUIRedOrbRender*>(mRedOrbsGUI->mRenderComponent)->setRedOrbNum(mNumRedOrbs);
 
 
-	mGameObject->setPosition(300,(32*19) - mGameObject->getSprite()->getLocalBounds().height/8);
+	//mGameObject->setPosition(300,(32*20) - mGameObject->getSprite()->getLocalBounds().height/8 + 2);
 
 	GameObjectDesc boxDesc("playerBBox", 
 							sf::RectangleShape(sf::Vector2f(mGameObject->getSprite()->getGlobalBounds().width/4,mGameObject->getSprite()->getGlobalBounds().height/4)), 
@@ -78,13 +78,13 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	KeyVector Slash;										/*---*/											   /*---*/
 	KeyVector ChopperStyle;					ChopperStyle.push_back(sf::Keyboard::Down);			ChopperStyle.push_back(sf::Keyboard::Down);
 	KeyVector Sweep;										/*---*/											   /*---*/
-	KeyVector Repel;						Repel.push_back(sf::Keyboard::Right);
+	//KeyVector Repel;						Repel.push_back(sf::Keyboard::Right);
 	KeyVector HailBringer;					HailBringer.push_back(sf::Keyboard::Down);
 
 	mMoveList.insert(std::pair<KeyVector, std::string>(Impact, Attacks::PLAYER_IMPACT));
 	mMoveList.insert(std::pair<KeyVector, std::string>(Slash, Attacks::PLAYER_SLASH));
 	mMoveList.insert(std::pair<KeyVector, std::string>(Sweep, Attacks::PLAYER_SWEEP));
-	mMoveList.insert(std::pair<KeyVector, std::string>(Repel, Attacks::PLAYER_REPEL));
+	//mMoveList.insert(std::pair<KeyVector, std::string>(Repel, Attacks::PLAYER_REPEL));
 	mMoveList.insert(std::pair<KeyVector, std::string>(ChopperStyle, Attacks::PLAYER_CHOPPERSTYLE));
 	mMoveList.insert(std::pair<KeyVector, std::string>(HailBringer, Attacks::PLAYER_HAILBRINGER));
 	//mMoveList[Impact] =			Attacks::PLAYER_IMPACT;	//"Impact";
@@ -113,18 +113,25 @@ void PlayerLogic::update(Grid& grid)
 	PlayerInput* input = dynamic_cast<PlayerInput*>(mGameObject->mInputComponent);
 	input->handleKeyQueue();
 
+	/*
 	if(mVelocity.y != 0)// && (mGameObject->mState->getName() != "JumpingState" || mGameObject->mState->getName() != "FallingState") )
 		mIsGrounded = false;
 	else
 		mIsGrounded = true;
-
+	*/
 	
+
 	
 	CState* state = mGameObject->mState->update(playerObject, deltaTime, grid);
 	if(state != mGameObject->mState)
 	{
 		enterNewState(state);
 	}
+
+	if(grid.checkCollisionBelow(mGameObject->mBoxColliderComponent) == true  )
+		mIsGrounded = true;
+	else
+		mIsGrounded = false;
 
 	mSoundPlayer.removeStoppedSounds();
 }

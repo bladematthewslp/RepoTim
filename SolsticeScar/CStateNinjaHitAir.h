@@ -10,6 +10,7 @@ class CStateNinjaHitAir : public CState
 	int			damageTimer;
 	float		mLaunchSpeed;
 	float		mAirSpeed;
+	sf::Vector2f mGravity;
 public:
 	CStateNinjaHitAir(GameObject* character);
 	void		entry(GameObject* character, AttackType attackType);

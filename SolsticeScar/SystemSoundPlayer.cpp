@@ -6,9 +6,11 @@ SystemSoundPlayer::SystemSoundPlayer()
 
 }
 
-void SystemSoundPlayer::play(SoundEffect::ID effect)
+void SystemSoundPlayer::play(SoundEffect::ID effect, bool loop)
 {
-	mSounds.push_back(sf::Sound(mSoundBuffers.get(effect)));
+	sf::Sound newSound(mSoundBuffers.get(effect));
+	newSound.setLoop(loop);
+	mSounds.push_back(newSound);
 	mSounds.back().play();
 }
 

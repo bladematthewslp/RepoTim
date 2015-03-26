@@ -4,7 +4,7 @@
 #include "PlayerLogic.h"
 #include <iostream>
 
-const float MAX_FALLING_SPEED = 5.0f;
+const float MAX_FALLING_SPEED = 4.0f;
 
 FallingState::FallingState(GameObject* player) 
 	: CState("FallingState")
@@ -79,7 +79,7 @@ CState* FallingState::update(GameObject* player, sf::Time dt, Grid& grid)
 	if(grid.checkCollisionBelow(player->mBoxColliderComponent) == true   )
 	{
 		logic->move(sf::Vector2f(0, -grid.playerPosition.y ));
-
+		System::mSoundPlayer.play(SoundEffect::Landing);
 		CState* newState = std::unique_ptr<CState>(new StandingState(player)).release();
 		newState->entry(player);
 		return newState;

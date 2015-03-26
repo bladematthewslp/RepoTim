@@ -44,6 +44,13 @@ CState*	CStateNinjaStanding::update(GameObject* character, sf::Time dt, Grid& gr
 	float yDist = std::abs(character->getPosition().y - logic->player->getPosition().y);
 
 	spriteTimer++;
+	
+	
+	logic->move(0,1);
+	if(grid.checkCollisionBelow(character->mBoxColliderComponent) == true   )
+	{
+		logic->move(sf::Vector2f(0, -grid.playerPosition.y));
+	}
 
 	if(xDist < 400 && yDist < 50)
 	{
