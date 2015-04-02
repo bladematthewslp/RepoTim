@@ -77,6 +77,12 @@ TitleScene::TitleScene(SceneStack& stack, Context& context)
 	mControlsScreen.setSize(sf::Vector2f(960,600));
 	mControlsScreen.setPosition(32,60);
 
+	mLogoImage.loadFromFile("Sprites/logo.png");
+	mLogoImage.createMaskFromColor(sf::Color::Black);
+	mLogoTexture.loadFromImage(mLogoImage);
+	mLogo.setTexture(&mLogoTexture);
+	mLogo.setSize(sf::Vector2f(576, 346));
+	mLogo.setPosition(370,80);
 
 
 	playGameSelected = false;
@@ -224,6 +230,7 @@ void TitleScene::draw()
 	window.draw(mQuitButton);
 	window.draw(mDojiSprite);
 	window.draw(mText);
+	//window.draw(mLogo);
 	if(controlsSelected == true) 
 		window.draw(mControlsScreen);
 	window.draw(fadeInSprite);

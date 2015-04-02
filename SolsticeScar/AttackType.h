@@ -39,6 +39,7 @@ struct Attacks
 	static std::string	NONE				,
 						NINJA_SLASH_GROUND	,
 						NINJA_SLICE			,
+						PLAYER_EXPEL		,
 						PLAYER_SLASH		,
 						PLAYER_SLASH1		,
 						PLAYER_SLASH2		,
@@ -47,7 +48,6 @@ struct Attacks
 						PLAYER_CHOPPERSTYLE ,
 						PLAYER_SWEEP		,
 						PLAYER_REPEL		,
-						PLAYER_STINGER		,
 						PLAYER_QUICKSTINGER ,
 						PLAYER_UPRISING		,
 						PLAYER_QUICKUPRISING,
@@ -56,7 +56,8 @@ struct Attacks
 						RYOBE_DAGGERTHROW	,
 						RYOBE_EMBRACER		,
 						RYOBE_FELLCRESCENT	,
-						RYOBE_TELEPORT		
+						RYOBE_TELEPORT		,
+						LONG_SPIKES			
 
 						;
 	static std::map<Attacks::Name, AttackType*>		registeredAttacks;		

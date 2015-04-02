@@ -73,6 +73,26 @@ CState* CStateNinjaHit::update(GameObject* character, sf::Time dt, Grid& grid)
 		
 		logic->setVelocityX(velocity.x);
 		logic->move(logic->getVelocity());
+		
+		switch(logic->getDirection())
+		{
+			case Direction::Right:
+			{
+				if(grid.checkCollisionRight(character->mBoxColliderComponent) == true)
+				{
+					logic->move(-logic->getVelocity().x, 0);
+				}
+				break;
+			}
+			case Direction::Left:
+			{
+				if(grid.checkCollisionLeft(character->mBoxColliderComponent) == true)
+				{
+					logic->move(-logic->getVelocity().x, 0);
+				}
+				break;
+			}
+		}
 		if(damageTimer == 60)
 		{
 			CState* newState = std::unique_ptr<CState>(new CStateNinjaStanding(character)).release();

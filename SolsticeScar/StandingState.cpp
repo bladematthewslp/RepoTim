@@ -81,7 +81,8 @@ CState* StandingState::update(GameObject* player, sf::Time dt, Grid& grid)
 {
 	player->mRenderComponent->runSpriteAnim(*player);//setAnimation("Standing");//runSpriteAnim("Standing", *player);
 	
-	if(grid.checkWalkingOnTile(player) == false)		// if returns false, player is not walking on tile
+	//if(grid.checkWalkingOnTile(player) == false)		// if returns false, player is not walking on tile
+	if(grid.checkCollisionBelow(player->mBoxColliderComponent) == false)		// if returns false, player is not walking on tile
 	{
 		CState* newState = std::unique_ptr<CState>( new FallingState(player) ).release();
 		newState->entry(player);

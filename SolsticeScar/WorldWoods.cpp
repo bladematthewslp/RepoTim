@@ -83,7 +83,7 @@ void WorldWoods::init()
 	// Box Collider Component
 	mPlayer->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new PlayerBoxCollider(mPlayer)).release());
 	mPlayer->mBoxColliderComponent->setSize(80, 98);
-		mPlayer->mBoxColliderComponent->setVisible(true);
+		mPlayer->mBoxColliderComponent->setVisible(false);
 	mPlayer->setPosition(300,(32*19) - mPlayer->getSprite()->getLocalBounds().height/8);
 	
 	

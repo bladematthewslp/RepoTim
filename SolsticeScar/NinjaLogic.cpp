@@ -33,12 +33,11 @@ NinjaLogic::NinjaLogic(GameObject* gameObject)
 	mGameObject->mState = std::unique_ptr<CState>(new CStateNinjaStanding(mGameObject)).release();
 	
 	// setup damage table
-	mDamageTable[DamageType::Weak] =		3;//10;
-	mDamageTable[DamageType::Medium] =		5;//15;
-	mDamageTable[DamageType::Strong] =		9;//20;
-	mDamageTable[DamageType::Super] =		25;
+	mDamageTable[DamageType::Weak] =		5;//10;
+	mDamageTable[DamageType::Medium] =		10;//15;
+	mDamageTable[DamageType::Strong] =		15;//20;
+	mDamageTable[DamageType::Super] =		20;
 	mDamageTable[DamageType::Unblockable] = 25;
-
 
 }
 
@@ -50,13 +49,13 @@ void NinjaLogic::update(Grid& grid)
 		//mGameObject->mState = std::unique_ptr<CState>(new CStateNinjaDead(mGameObject)).release();
 	}
 	updateDirection();
-
+	/*
 	// handle mIsGrounded variable
 	if(mVelocity.y != 0)
 		mIsGrounded = false;
 	else
 		mIsGrounded = true;
-	
+	*/
 	//std::cout << mVelocity.x << " , " << mVelocity.y << std::endl;
 	
 	//std::cout << mIsGrounded << std::endl;
@@ -66,6 +65,10 @@ void NinjaLogic::update(Grid& grid)
 		mGameObject->mState = state;
 	}
 
+	if( mGameObject->mBoxColliderComponent != nullptr && grid.checkCollisionBelow(mGameObject->mBoxColliderComponent) == true  )
+		mIsGrounded = true;
+	else
+		mIsGrounded = false;
 
 }
 
@@ -76,6 +79,23 @@ void NinjaLogic::setGrounded(bool flag)
 bool NinjaLogic::isGrounded()
 {
 	return mIsGrounded;
+}
+
+void NinjaLogic::setDirection(int direction)
+{
+	if(mDirection == direction)
+		return;
+
+	if(direction == Direction::Right)
+	{
+		mGameObject->mRenderComponent->mSprite.setScale(-1, 1);
+		mDirection = Direction::Right;
+	}
+	else if(direction == Direction::Left)
+	{
+		mGameObject->mRenderComponent->mSprite.setScale(1, 1);
+		mDirection = Direction::Left;
+	}
 }
 
 void NinjaLogic::updateDirection()
@@ -154,6 +174,27 @@ void NinjaLogic::hit(GameObject* character, Attacks::Name attackName)
 	if(mHealth <= 0)
 		return;
 
+	// if ninja lands on SPIKES
+	if(character->mName == "LongSpikes")
+	{
+		// instant kill
+		mHealth = 0;
+
+		// dead state
+		if(mIsGrounded == true)
+		{
+			mGameObject->mState = std::unique_ptr<CStateNinjaDead>(new CStateNinjaDead(mGameObject)).release();
+			if(character->mName == "LongSpikes")
+				mGameObject->mRenderComponent->setAnimation("DieShredded");
+		}
+		else if(mIsGrounded == false)
+		{
+			mGameObject->mState = std::unique_ptr<CState>(new CStateNinjaDeadAir(mGameObject)).release();
+			if(character->mName == "LongSpikes")
+				mGameObject->mRenderComponent->setAnimation("DieShredded");
+		}
+		return;
+	}
 
 	// resolve attack name to attack tipe
 	AttackType attackType = Attacks::getAttack(attackName);
@@ -167,7 +208,7 @@ void NinjaLogic::hit(GameObject* character, Attacks::Name attackName)
 		// dead state
 		if(mIsGrounded == true)
 		{
-			mGameObject->mState = std::unique_ptr<CState>(new CStateNinjaDead(mGameObject)).release();
+			mGameObject->mState = std::unique_ptr<CStateNinjaDead>(new CStateNinjaDead(mGameObject)).release();
 			return;
 		}
 		else if(mIsGrounded == false)

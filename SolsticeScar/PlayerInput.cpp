@@ -149,19 +149,49 @@ void PlayerInput::handleEvents(const sf::Event& event)
 				
 				if(logic->isGrounded() == true)
 				{
+					PlayerRender* render = dynamic_cast<PlayerRender*>(mGameObject->getRenderComponent());
+					int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
+					int frameToHold = render->mSpriteSet[render->currentAnim]->mFrameToHold;
+					int numFrames = render->mSpriteSet[render->currentAnim]->numFrames;
 					typedef std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator moveListIterator;
 					// check if pressed keys matches an action in the move list
-					for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); iter++)
+					for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end();  )//iter++)
 					{
 						// if so...
 						if(keyQueue == iter->first												// if the pressed keys matches key set in move list
 							&& Attacks::getAttack(iter->second).mIsAirAttack == false			// if the attack is not an air attack
-							&& iter->second != Attacks::PLAYER_SLASH)							// if the attack is not a basic slash
+							&& iter->second != Attacks::PLAYER_SLASH							// if the attack is not a basic slash
+							&& mGameObject->mState->getName() != "AttackState")
 						{
-							CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-							logic->enterNewState(newState);
-							mGameObject->mRenderComponent->setAnimation(iter->second);
-							return;
+							// first, check if the player is facing the direction of the last input
+							if(iter->second == "PLAYER_EXPEL")
+							{
+								sf::Keyboard::Key lastKey = keyQueue.at(keyQueue.size() - 1);
+								if(lastKey == sf::Keyboard::Right && logic->getDirection() == Direction::Right
+									|| lastKey == sf::Keyboard::Left && logic->getDirection() == Direction::Left)
+								{
+									CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+									logic->enterNewState(newState);
+									mGameObject->mRenderComponent->setAnimation(iter->second);
+								
+									return;
+								}
+							}
+							else
+							{
+								CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+								logic->enterNewState(newState);
+								mGameObject->mRenderComponent->setAnimation(iter->second);
+								return;
+							}
+						}
+
+						// if no match is found, remove oldest key in queue and loop again
+						iter++;
+						if(iter == list.end() && keyQueue.size() > 1 )
+						{
+							keyQueue.erase(keyQueue.begin() );
+							iter = list.begin();
 						}
 					}
 
@@ -200,9 +230,6 @@ void PlayerInput::handleEvents(const sf::Event& event)
 						}
 						else
 						{
-							PlayerRender* render = dynamic_cast<PlayerRender*>(mGameObject->getRenderComponent());
-							int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
-							int frameToHold = render->mSpriteSet[render->currentAnim]->mFrameToHold;
 							if(currentFrame > frameToHold)
 							{
 								if(mGameObject->getRenderComponent()->currentAnim == "Slash2Part2")
@@ -238,7 +265,7 @@ void PlayerInput::handleEvents(const sf::Event& event)
 					
 
 					// if player is currently attacking
-					if(mGameObject->mState->getName() == "AttackStateAir" && mGameObject->getRenderComponent()->currentAnim != "PLAYER_HAILBRINGER")
+					if(mGameObject->mState->getName() == "AttackStateAir" && currentFrame > numFrames/2 && mGameObject->getRenderComponent()->currentAnim != "PLAYER_HAILBRINGER")
 					{
 						if(keyQueueSize == 0)
 						{
@@ -256,8 +283,9 @@ void PlayerInput::handleEvents(const sf::Event& event)
 						{
 							bool matchingKeyVectorFound = false;
 							
+							
 							// check if pressed keys matches an action in the move list
-							for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); iter++)
+							for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end();  )//iter++)
 							{
 								// if so...
 								if(keyQueue == iter->first && Attacks::getAttack(iter->second).mIsAirAttack == true)
@@ -267,6 +295,14 @@ void PlayerInput::handleEvents(const sf::Event& event)
 									mGameObject->mRenderComponent->setAnimation(iter->second);
 									matchingKeyVectorFound = true;
 									break;
+								}
+
+								// if no match is found, remove oldest key in queue and loop again
+								iter++;
+								if(iter == list.end() && keyQueue.size() > 1 )
+								{
+									keyQueue.erase(keyQueue.begin() );
+									iter = list.begin();
 								}
 							}	// end for loop
 							
@@ -305,7 +341,7 @@ void PlayerInput::handleEvents(const sf::Event& event)
 							bool matchingKeyVectorFound = false;
 
 							// check if pressed keys matches an action in the move list
-							for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); iter++)
+							for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end(); ) // iter++)
 							{
 								// if so...
 								if(keyQueue == iter->first && Attacks::getAttack(iter->second).mIsAirAttack == true)
@@ -315,6 +351,14 @@ void PlayerInput::handleEvents(const sf::Event& event)
 									mGameObject->mRenderComponent->setAnimation(iter->second);
 									matchingKeyVectorFound = true;
 									break;
+								}
+
+								// if no match is found, remove oldest key in queue and loop again
+								iter++;
+								if(iter == list.end() && keyQueue.size() > 1 )
+								{
+									keyQueue.erase(keyQueue.begin() );
+									iter = list.begin();
 								}
 							}	// end for loop
 						

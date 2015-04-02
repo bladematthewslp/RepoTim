@@ -3,6 +3,7 @@
 #include "GUIRedOrbLogic.h"
 #include "GUIRedOrbRender.h"
 #include "CStateRyobeAttacking.h"
+#include "HitAirState.h"
 #include  <iostream>
 PlayerBoxCollider::PlayerBoxCollider(GameObject* gameObject)
 	: BoxColliderComponent(gameObject)
@@ -50,6 +51,10 @@ void PlayerBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other
 	{
 		playerLogic->hit(other->mGameObject, Attacks::RYOBE_DAGGERTHROW);
 		System::removeGameObject(other->mGameObject);
+	}
+	if(other->mGameObject->mName == "LongSpikes")
+	{
+		playerLogic->hit(other->mGameObject, Attacks::LONG_SPIKES);
 	}
 	
 }

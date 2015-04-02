@@ -1,3 +1,9 @@
+4-1
+-------------------------
+Added new player attack - "Expel"
+Added Ninja states to respond to Player's Expel attack
+
+
 3-26
 -------------------------
 - Adjust when grounded is true for player
@@ -11,6 +17,10 @@
 	handleEvents. So far, this has not interrupted anything the player does. What was noticed before
 	this was commented out was if the JUMP and ATTACK buttons were pressed very close in time, the
 	player would jump, but then perform a grounded attack slightly above the ground. 
+
+ - Also, made a change in the for loop to remove the oldest key in queue and loop 
+	through move list again
+
 
 3-25
 -------------------------

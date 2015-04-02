@@ -32,11 +32,11 @@ CState* HitState::update(GameObject* player, sf::Time dt, Grid& grid)
 
 	if(grid.checkCollisionLeft(player->mBoxColliderComponent) == true)
 	{
-		logic->move(-logic->getVelocity().x, 0);
+		//logic->move(-logic->getVelocity().x, 0);
 	}
 	if(grid.checkCollisionRight(player->mBoxColliderComponent) == true)
 	{
-		logic->move(-logic->getVelocity().x, 0);
+		//logic->move(-logic->getVelocity().x, 0);
 	}
 
 	if(pauseTimer == 100)

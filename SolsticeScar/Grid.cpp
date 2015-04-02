@@ -320,6 +320,32 @@ bool Grid::checkWalkingOnTile(GameObject* player)
 		}
 	}
 	return false;
+
+	/*
+	sf::FloatRect blockRect = logic->box;
+	blockRect.height += 5;
+	for(int i = 0; i < mGrid.size(); i++)
+	{
+		for(int j = 0; j < mGrid[0].size(); j++)
+		{
+			if(mGrid[i][j] != nullptr )
+			{
+				sf::FloatRect gridBlockBounds = mGrid[i][j]->getRenderComponent()->mSprite.getGlobalBounds();
+				sf::RectangleShape* block = mGrid[i][j]->getSprite();
+				if(blockRect.intersects(block->getGlobalBounds()) )
+				{
+					if(blockRect.top +  blockRect.height > block->getGlobalBounds().top)
+					{
+					
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+
+	*/
 }
 
 float Grid::getTileUnderPlayer(GameObject* player)

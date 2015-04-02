@@ -46,6 +46,11 @@ CState* HitAirState::update(GameObject* player, sf::Time dt, Grid& grid)
 	{
 		logic->move(-logic->getVelocity().x, 0);
 	}
+	if(grid.checkCollisionAbove(player->mBoxColliderComponent) == true)
+	{
+		logic->setVelocityY(-logic->getVelocity().y);
+		logic->move(0, logic->getVelocity().y);
+	}
 
 	if(damageTimer == 20)
 	{

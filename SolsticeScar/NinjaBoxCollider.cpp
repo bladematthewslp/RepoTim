@@ -3,6 +3,7 @@
 #include "NinjaLogic.h"
 #include "PlayerLogic.h"
 #include "CStateNinjaStanding.h"
+#include "CStateNinjaHitDraggedState.h"
 
 #include <iostream>
 
@@ -28,11 +29,28 @@ void NinjaBoxCollider::onCollisionEnter(Grid& grid, BoxColliderComponent* other)
 		}
 	}
 
+	if(other->mGameObject->mName == "LongSpikes")
+	{
+		dynamic_cast<NinjaLogic*>(mGameObject->mLogicComponent)->hit(other->mGameObject, Attacks::LONG_SPIKES);
+	}
+
+	
 	
 }
 
 void NinjaBoxCollider::onCollisionStay(Grid& grid, BoxColliderComponent* other)
 {
+	if(other->mGameObject->mName == "Player")
+	{
+		if(dynamic_cast<NinjaLogic*>(mGameObject->mLogicComponent)->isGrounded() == true				// if ninja is grounded
+			&& mGameObject->mState->getName() != "CStateNinjaHitDraggedState"							// if ninja is not already being dragged
+			&& other->mGameObject->mState->getName() == "AttackState"									// while the player is in attackstate...
+			&& other->mGameObject->mRenderComponent->currentAnim == "PLAYER_EXPEL")						// ..and the expel animation is playing
+		{
+			CState* newState = std::unique_ptr<CState>(new CStateNinjaHitDraggedState(mGameObject)).release();
+			mGameObject->mState = newState;
+		}
+	}
 	/*
 	bool otherColliderRemoved = BoxColliderComponent::onCollisionStay(grid, other);
 	

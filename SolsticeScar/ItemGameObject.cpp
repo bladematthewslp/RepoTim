@@ -7,10 +7,7 @@
 ItemGameObject::ItemGameObject(GameObjectDesc desc)
 	: GameObject(desc)
 {
-	mBoxColliderComponent = std::unique_ptr<BoxColliderComponent>(new BoxColliderComponent(this)).release();
-	sf::Vector2f size = this->getSprite()->getSize();
-	mBoxColliderComponent->setSize(size.x, size.y);
-	mBoxColliderComponent->setOrigin(this->getPosition());
+	
 	//mBoxColliderComponent->setVisible(true);
 
 	mLogicComponent = std::unique_ptr<ItemLogic>(new ItemLogic(this)).release();

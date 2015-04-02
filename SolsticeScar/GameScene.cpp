@@ -17,9 +17,10 @@ GameScene::GameScene(SceneStack& stack, Context& context)
 	mShape.setSize(sf::Vector2f(100,100));
 	mShape.setFillColor(sf::Color(187, 88, 93, 255));
 	mShape.setPosition(50,50);
-	
-	registerWorld<WorldWoods>(Worlds::Woods);
+
 	registerWorld<WorldCave>(Worlds::Cave);
+	registerWorld<WorldWoods>(Worlds::Woods);
+	
 	mCurrentWorld = createWorld(mWorlds.front());
 	
 	//mWorld = std::unique_ptr<World>(new World(stack.mContext)).release();

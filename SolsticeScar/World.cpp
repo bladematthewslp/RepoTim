@@ -102,10 +102,28 @@ void World::destroyGameObjectsOutsideView()
 					{
 						System::removeGameObject( (*obj_itr) );
 						//std::cout << "DESTROYED" << std::endl;
+						break;
 					}
 				}
 			}
-			break;
+			//break;
+		}
+		if((*layer_itr)->mName == Layer::Default)
+		{
+			std::vector<GameObject*>::iterator obj_itr;
+			for(obj_itr = (*layer_itr)->mChildren.begin(); obj_itr != (*layer_itr)->mChildren.end(); obj_itr++)
+			{
+				if((*obj_itr)->mName == "GreenOrb" || (*obj_itr)->mName == "RedOrb" )
+				{
+					float dist = std::abs(mWorldView.getCenter().y - (*obj_itr)->getWorldPosition().y);
+					if(dist > mWorldView.getSize().y/2)
+					{
+						System::removeGameObject( (*obj_itr) );
+						std::cout << "DESTROYED" << std::endl;
+						break;
+					}
+				}
+			}
 		}
 	}
 

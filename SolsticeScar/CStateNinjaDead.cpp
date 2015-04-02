@@ -51,7 +51,11 @@ CStateNinjaDead::CStateNinjaDead(GameObject* character)
 CState* CStateNinjaDead::update(GameObject* character, sf::Time dt, Grid& grid)
 {
 	NinjaRender* render = dynamic_cast<NinjaRender*>(character->getRenderComponent());
-	render->runSpriteAnim(*character) ;
+	if( render->runSpriteAnim(*character)  == SpriteAnim::Status::SUCCESS)
+	{
+		//if(render->currentAnim == "DieShredded")
+		//	System::removeGameObject(character);
+	}
 
 	//std::cout << " CSTATENINJADEAD" << std::endl;
 	return this;

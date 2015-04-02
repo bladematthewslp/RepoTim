@@ -1,6 +1,7 @@
 #include "CStateNinjaRunning.h"
 #include "CStateNinjaStanding.h"
 #include "CStateNinjaAttacking.h"
+#include "CStateNinjaFalling.h"
 #include "NinjaLogic.h"
 
 CStateNinjaRunning::CStateNinjaRunning(GameObject* gameObject)
@@ -50,6 +51,13 @@ CState* CStateNinjaRunning::update(GameObject* character, sf::Time dt, Grid& gri
 		}
 	}
 
+	if(grid.checkCollisionBelow(character->mBoxColliderComponent) == false   )
+	{
+		logic->move(sf::Vector2f(0, -grid.playerPosition.y));
+		CState* newState = std::unique_ptr<CState>(new CStateNinjaFalling(character)).release();
+		newState->entry(character);
+		return newState;
+	}
 
 	if(dist < 125)
 	{
@@ -64,6 +72,8 @@ CState* CStateNinjaRunning::update(GameObject* character, sf::Time dt, Grid& gri
 		return newState;
 
 	}
+
+
 
 
 	return this;

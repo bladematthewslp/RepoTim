@@ -25,6 +25,8 @@ SlashBoxLogic::SlashBoxLogic(GameObject* gameObject)
 	mSpawnPos[Attacks::PLAYER_QUICKSTINGER][1] =  sf::Vector2f(player->getPosition() + sf::Vector2f(-120, -70));
 	mSpawnPos[Attacks::PLAYER_HAILBRINGER][0] =  sf::Vector2f(-10, -40);
 	mSpawnPos[Attacks::PLAYER_HAILBRINGER][1] =  sf::Vector2f(-100, -40);
+	mSpawnPos[Attacks::PLAYER_EXPEL][0] =  sf::Vector2f(player->getPosition() + sf::Vector2f(-0, -70));
+	mSpawnPos[Attacks::PLAYER_EXPEL][1] =  sf::Vector2f(player->getPosition() + sf::Vector2f(-120, -70));
 	
 	mStateWhenCreated = player->mState;
 }
@@ -120,6 +122,17 @@ void SlashBoxLogic::init(int dir, Attacks::Name attack, int timeToLast)
 		else
 		{
 			position = mSpawnPos[Attacks::PLAYER_HAILBRINGER][1];
+		}
+	}
+	else if(attack == Attacks::PLAYER_EXPEL)
+	{
+		if(dir == 1)
+		{
+			position = mSpawnPos[Attacks::PLAYER_EXPEL][0];
+		}
+		else
+		{
+			position = mSpawnPos[Attacks::PLAYER_EXPEL][1];
 		}
 	}
 

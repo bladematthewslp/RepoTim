@@ -33,6 +33,8 @@ public:
 	void		setGrounded(bool flag);
 	bool		isGrounded();
 	GameObject* player;
+
+	void		setDirection(int direction);
 	int			getDirection();
 	void		updateDirection();
 	int			getHealth();

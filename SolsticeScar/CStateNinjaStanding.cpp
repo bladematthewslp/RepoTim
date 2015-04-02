@@ -4,6 +4,7 @@
 #include "CStateNinjaDead.h"
 #include "CStateNinjaJumping.h"
 #include "CStateNinjaRunning.h"
+#include "CStateNinjaFalling.h"
 #include "NinjaLogic.h"
 #include "GameObject.h"
 #include "RenderComponent.h"
@@ -46,13 +47,19 @@ CState*	CStateNinjaStanding::update(GameObject* character, sf::Time dt, Grid& gr
 	spriteTimer++;
 	
 	
-	logic->move(0,1);
+	//logic->move(0,1);
 	if(grid.checkCollisionBelow(character->mBoxColliderComponent) == true   )
 	{
 		logic->move(sf::Vector2f(0, -grid.playerPosition.y));
 	}
+	else
+	{
+		CState* newState = std::unique_ptr<CState>(new CStateNinjaFalling(character)).release();
+		newState->entry(character);
+		return newState;
+	}
 
-	if(xDist < 400 && yDist < 50)
+	if(xDist < 400 && yDist < 150)
 	{
 		//std::cout << delayTimer << std::endl;
 		delayTimer++;

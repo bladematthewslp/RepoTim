@@ -37,7 +37,8 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,1000,200,200), "Slash2Part1", false, 4,.9, 3);
 	createSpriteAnim(sf::IntRect(200,1000,200,200), "Slash2Part2", false, 7,1, 3,4);
 	createSpriteAnim(sf::IntRect(200,1200,200,200), "Slash3", false, 7,.9, 5);
-	createSpriteAnim(sf::IntRect(200,3000,200,200), "Stinger", false, 8,1);
+	createSpriteAnim(sf::IntRect(200,3000,200,200), "PLAYER_EXPEL", false, 3,1.1, -1, 1);
+	createSpriteAnim(sf::IntRect(200,3000,200,200), "PLAYER_EXPEL_PART2", false, 8,1.3, 5, 3);
 	createSpriteAnim(sf::IntRect(200,3000,200,200), "QuickStinger", false, 6,.9,5,2);
 	createSpriteAnim(sf::IntRect(200,3200,200,200), "Uprising", false, 8);
 	createSpriteAnim(sf::IntRect(200,3200,200,200), "QuickUprising", false, 7,.9,-1,2);

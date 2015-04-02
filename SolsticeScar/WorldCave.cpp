@@ -89,6 +89,9 @@ void WorldCave::init()
 
 	mPlayer->setPosition(300,(32*20) - mPlayer->getSprite()->getLocalBounds().height/8 + 1);
 	
+	
+	
+	
 	GameObjectDesc ninjaDesc("Ninja",sf::RectangleShape(), Layer::Enemy);//,ComponentType::LogicComponent);
 	// make 4 ninjas
 	ninjaGameObjects.reserve(4);
@@ -97,18 +100,35 @@ void WorldCave::init()
 		GameObject* ninja = std::unique_ptr<GameObject>(new NinjaGameObject(ninjaDesc)).release();
 		ninja->mBoxColliderComponent->setSize(50,75);
 		//ninja->mBoxColliderComponent->setVisible(true);
-		ninja->setPosition( 1200 + (300*i),601);
+		ninja->setPosition( 1800 + (300*i),300);
 		ninjaGameObjects.push_back(ninja);
 	}
+	sf::Vector2f pos = ninjaGameObjects[0]->getPosition();
+	ninjaGameObjects[0]->setPosition(1200, 640);
+	ninjaGameObjects[1]->setPosition(1400, 640);
+	
+	
+	
 	GameObjectDesc ryobeDesc("Ryobe",sf::RectangleShape(), Layer::Enemy);
 	ryobeGameObject = std::unique_ptr<GameObject>(new RyobeGameObject(ryobeDesc)).release();
 	//ryobeGameObject->setPosition(100, 568);
 	ryobeGameObject->setPosition(-1000, -1000);
-	
+
+	// --------------------------------------------
+	// PROPS
+	// --------------------------------------------
+
 	GameObjectDesc lightHangingDesc("HangingLight", sf::RectangleShape(sf::Vector2f(408,448)),Layer::Default, ComponentType::RenderComponent);
 	GameObject* lightHanging = std::unique_ptr<GameObject>(new GameObject(lightHangingDesc)).release();
 	lightHanging->getSprite()->setTexture(&RenderComponent::mTextureHolder.get(Textures::PROP_LIGHT_HANGING));
-	lightHanging->setPosition(900, 50);
+	lightHanging->setPosition(1400, 50);
+
+	GameObjectDesc longSpikesDesc("LongSpikes", sf::RectangleShape(sf::Vector2f(192,85)), Layer::Default, ComponentType::RenderComponent);
+	GameObject* longSpikes = std::unique_ptr<GameObject>(new GameObject(longSpikesDesc)).release();
+	longSpikes->getSprite()->setTexture(&RenderComponent::mTextureHolder.get(Textures::PROP_SPIKES_LONG));
+	longSpikes->setPosition(3328, 650);
+	longSpikes->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new BoxColliderComponent(longSpikes)).release());
+	//longSpikes->mBoxColliderComponent->setVisible(true);
 
 	mLookAtPoint = sf::Vector2f(mPlayer->getPosition().x, 360);
 	scrollableWorld = true;
@@ -194,7 +214,6 @@ unsigned int WorldCave::update(sf::Time dt)
 		int count = 0;
   		for(int i = 0; i < ninjaGameObjects.size(); i++)
 		{
-			
 			if( dynamic_cast<NinjaLogic*>(ninjaGameObjects.at(i)->mLogicComponent)->getHealth() <= 0 )
 			{
 				count++;

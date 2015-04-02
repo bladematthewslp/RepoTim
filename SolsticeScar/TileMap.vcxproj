@@ -95,9 +95,11 @@
     <ClCompile Include="CStateNinjaAttacking.cpp" />
     <ClCompile Include="CStateNinjaDead.cpp" />
     <ClCompile Include="CStateNinjaDeadAir.cpp" />
+    <ClCompile Include="CStateNinjaFalling.cpp" />
     <ClCompile Include="CStateNinjaHit.cpp" />
     <ClCompile Include="CStateNinjaHitAir.cpp" />
     <ClCompile Include="CStateNinjaHitAirToGround.cpp" />
+    <ClCompile Include="CStateNinjaHitDraggedState.cpp" />
     <ClCompile Include="CStateNinjaJumping.cpp" />
     <ClCompile Include="CStateNinjaRunning.cpp" />
     <ClCompile Include="CStateNinjaStanding.cpp" />
@@ -187,9 +189,11 @@
     <ClInclude Include="CStateNinjaAttacking.h" />
     <ClInclude Include="CStateNinjaDead.h" />
     <ClInclude Include="CStateNinjaDeadAir.h" />
+    <ClInclude Include="CStateNinjaFalling.h" />
     <ClInclude Include="CStateNinjaHitAir.h" />
     <ClInclude Include="CStateNinjaHit.h" />
     <ClInclude Include="CStateNinjaHitAirToGround.h" />
+    <ClInclude Include="CStateNinjaHitDraggedState.h" />
     <ClInclude Include="CStateNinjaJumping.h" />
     <ClInclude Include="CStateNinjaRunning.h" />
     <ClInclude Include="CStateNinjaStanding.h" />

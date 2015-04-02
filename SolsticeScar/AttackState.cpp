@@ -3,6 +3,7 @@
 #include "JumpingState.h"
 #include "PlayerLogic.h"
 #include "PlayerInput.h"
+#include "FallingState.h"
 #include "SlashBoxLogic.h"
 #include "SlashBoxBoxCollider.h"
 #include "System.h"
@@ -17,7 +18,7 @@
 			slashBox = std::unique_ptr<GameObject>(new GameObject(slashBoxDesc)).release();												\
 			slashBox->addComponent(ComponentType::LogicComponent, std::unique_ptr<SlashBoxLogic>(new SlashBoxLogic(slashBox)).release());			\
 			slashBox->addComponent(ComponentType::BoxColliderComponent, std::unique_ptr<Component>(new SlashBoxBoxCollider(slashBox)).release());	\
-			slashBox->mBoxColliderComponent->setVisible(false);																						\
+			slashBox->mBoxColliderComponent->setVisible(true);																						\
 			SlashBoxLogic* slashLogic = dynamic_cast<SlashBoxLogic*>(slashBox->mLogicComponent);													\
 			isAttack = true;																														\
 																																					\
@@ -36,7 +37,7 @@ AttackState::AttackState(GameObject* player)
 	slashNumber = 0;
 	//player->mRenderComponent->setAnimation("Slash1");
 	isAttack = false;
-	std::cout << "NEW ATTACK STATE" << std::endl;
+	//std::cout << "NEW ATTACK STATE" << std::endl;
 	soundEffectPlayed = false;
 	
 }
@@ -244,18 +245,46 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 			isAttack = false;
 		
 	}
-	
-	//if(currentFrame == 3 || currentFrame == 7 )
-		//isAttack = false;
-	if(player->mRenderComponent->currentAnim == "QuickUprising")// && render->isAnimDelayed() == true)
+	else if(render->currentAnim == "PLAYER_EXPEL_PART2")
 	{
-		
+		if(currentFrame == 4 && isAttack == false)
+		{
+			CREATE_SLASH_BOX;
+			slashBox->mBoxColliderComponent->getCollisionBox()->setSize(sf::Vector2f(115,130));
+			slashLogic->init(logic->getDirection(), Attacks::PLAYER_EXPEL, 11);
+			isAttack = true;
+		}
+	}
+	
+	if(player->mRenderComponent->currentAnim == "PLAYER_EXPEL")
+	{
+		logic->setVelocityX(logic->getDirection() * 10);
+		logic->move(logic->getVelocity());
+		switch(logic->getDirection())
+		{
+			case Direction::Right:
+			{
+				if(grid.checkCollisionRight(player->mBoxColliderComponent) == true)
+				{
+					logic->move(-logic->getVelocity().x, 0);
+				}
+				break;
+			}
+			case Direction::Left:
+			{
+				if(grid.checkCollisionLeft(player->mBoxColliderComponent) == true)
+				{
+					logic->move(-logic->getVelocity().x, 0);
+				}
+				break;
+			}
+		}
 	}
 	
 	if( player->mRenderComponent->runSpriteAnim(*player) == SpriteAnim::SUCCESS )
 	{
 		
-		if(logic->isGrounded() == true)
+		//if(logic->isGrounded() == true)
 		{
 			if(player->mRenderComponent->currentAnim == "PLAYER_IMPACT")
 				player->mRenderComponent->setAnimation("PLAYER_IMPACT_REPEATED");
@@ -308,7 +337,6 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 			else if(player->mRenderComponent->currentAnim == "QuickStinger")
 			{
 				timer++;
-				//std::cout << "DELAYED" << std::endl;
 				if(timer == 10)
 				{
 					// ...return to Standing state
@@ -316,6 +344,17 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 					newState->entry(player);
 					return newState;
 				}
+			}
+			else if(player->mRenderComponent->currentAnim == "PLAYER_EXPEL")// && render->isAnimDelayed() == true)
+			{
+				timer++;
+				//logic->move(4, 0);
+				if(timer == 15)
+				{
+					player->mRenderComponent->setAnimation("PLAYER_EXPEL_PART2");
+				}
+
+
 			}
 			else
 			{
@@ -327,6 +366,13 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 		}
 	}
 	
+	if(grid.checkCollisionBelow(player->mBoxColliderComponent) == false   )
+	{
+
+		CState* newState = std::unique_ptr<CState>(new FallingState(player)).release();
+		newState->entry(player);
+		return newState;
+	}
 
 	return this;
 }

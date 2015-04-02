@@ -8,6 +8,7 @@ class ItemLogic : public LogicComponent
 {
 	sf::Vector2f	mVelocity;
 	float			acceleration;
+	float			timer;
 public:
 	ItemLogic(GameObject* gameObject);
 	void	update(Grid& grid);

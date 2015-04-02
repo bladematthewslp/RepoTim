@@ -56,6 +56,7 @@ void RenderComponent::loadImages()
 	// PROPS
 
 	mTextureHolder.load(Textures::PROP_LIGHT_HANGING,	"Sprites/Props/light_hanging.png");
+	mTextureHolder.load(Textures::PROP_SPIKES_LONG,		"Sprites/Props/long_spikes.png");
 
 
 

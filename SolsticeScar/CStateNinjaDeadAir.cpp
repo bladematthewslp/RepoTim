@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 CStateNinjaDeadAir::CStateNinjaDeadAir(GameObject* character)
+	: CState("CStateNinjaDeadAir")
 {
 	NinjaLogic* logic = dynamic_cast<NinjaLogic*>(character->mLogicComponent);
 

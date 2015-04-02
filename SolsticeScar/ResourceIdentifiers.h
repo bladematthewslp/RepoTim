@@ -49,6 +49,7 @@ namespace Textures
 		TILE_ROCK_WALL4,
 
 		PROP_LIGHT_HANGING,
+		PROP_SPIKES_LONG,
 	};
 }
 

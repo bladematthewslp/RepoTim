@@ -75,6 +75,8 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	/*|  MOVE NAME											KEY 1												KEY 2					|*/
 	/*|---------------------------------------------------------------------------------------------------------------------------------|*/
 	KeyVector Impact;						Impact.push_back(sf::Keyboard::Down);				               /*---*/
+	KeyVector ExpelRight;					ExpelRight.push_back(sf::Keyboard::Down);			ExpelRight.push_back(sf::Keyboard::Right);
+	KeyVector ExpelLeft;					ExpelLeft.push_back(sf::Keyboard::Down);			ExpelLeft.push_back(sf::Keyboard::Left);
 	KeyVector Slash;										/*---*/											   /*---*/
 	KeyVector ChopperStyle;					ChopperStyle.push_back(sf::Keyboard::Down);			ChopperStyle.push_back(sf::Keyboard::Down);
 	KeyVector Sweep;										/*---*/											   /*---*/
@@ -82,6 +84,8 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	KeyVector HailBringer;					HailBringer.push_back(sf::Keyboard::Down);
 
 	mMoveList.insert(std::pair<KeyVector, std::string>(Impact, Attacks::PLAYER_IMPACT));
+	mMoveList.insert(std::pair<KeyVector, std::string>(ExpelRight, Attacks::PLAYER_EXPEL));
+	mMoveList.insert(std::pair<KeyVector, std::string>(ExpelLeft, Attacks::PLAYER_EXPEL));
 	mMoveList.insert(std::pair<KeyVector, std::string>(Slash, Attacks::PLAYER_SLASH));
 	mMoveList.insert(std::pair<KeyVector, std::string>(Sweep, Attacks::PLAYER_SWEEP));
 	//mMoveList.insert(std::pair<KeyVector, std::string>(Repel, Attacks::PLAYER_REPEL));
@@ -93,10 +97,10 @@ PlayerLogic::PlayerLogic(GameObject* mGameObject)
 	//mMoveList[ChopperStyle] =	Attacks::PLAYER_CHOPPERSTYLE;//"ChopperStyle";
 
 	
-	mDamageTable[DamageType::Weak] = 10;
-	mDamageTable[DamageType::Medium] = 20;
-	mDamageTable[DamageType::Strong] = 30;
-	mDamageTable[DamageType::Super] = 40;
+	mDamageTable[DamageType::Weak] = 5;
+	mDamageTable[DamageType::Medium] = 10;
+	mDamageTable[DamageType::Strong] = 20;
+	mDamageTable[DamageType::Super] = 30;
 	mDamageTable[DamageType::Unblockable] = 40;
 
 	
@@ -133,9 +137,10 @@ void PlayerLogic::update(Grid& grid)
 	else
 		mIsGrounded = false;
 
+	
 	mSoundPlayer.removeStoppedSounds();
 }
-int deleteCount = 0;
+
 void PlayerLogic::enterNewState(CState* newState)
 {
 	mGameObject->mState->exit(mGameObject);
@@ -151,7 +156,8 @@ bool PlayerLogic::isReadyForBattle()
 {
 	if(mIsGrounded == true	&& mVelocity.x == 0 && mGameObject->mState->getName() != "BattleReadyState")
 	{
-		mGameObject->mState = std::unique_ptr<CState>(new BattleReadyState(mGameObject)).release();
+		CState* newState = std::unique_ptr<CState>(new BattleReadyState(mGameObject)).release();
+		enterNewState(newState);
 		mGameObject->mState->entry(mGameObject);
 		return true;
 	}
@@ -226,14 +232,40 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 
 	if(logic == nullptr)
 	{
-		std::cout << "No Logic Component found" << std::endl;
-		return;
+		//std::cout << "No Logic Component found" << std::endl;
+		//return;
 	}
 
 	AttackType attackType = Attacks::getAttack(attackName);
 	
 	
+	if(otherCharacter->mName == "LongSpikes")
+	{
+		// Handle health and state change here
+		mHealth -= mDamageTable[attackType.mDamageType];
+		dynamic_cast<HealthBarLogic*>(mHealthBar->mLogicComponent)->updateHealth(mHealth);
+		
+		if(mHealth <= 0)
+		{
+			CState* newState = std::unique_ptr<CState>(new DeadAirState(mGameObject)).release();
+			enterNewState(newState);
+			return;
+		}
+			
+			
+		if(isGrounded() == true)
+		{
+			CState* newState = std::unique_ptr<CState>(new HitState(mGameObject)).release();
+			enterNewState(newState);
+		}
+		else
+		{
+			CState* newState = std::unique_ptr<CState>(new HitAirState(mGameObject)).release();
+			enterNewState(newState);
+		}
 
+		return;
+	}
 	
 
 	// if the player is hit while grounded....
@@ -259,7 +291,8 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 
 		if(mHealth <= 0)
 		{
-			mGameObject->mState = std::unique_ptr<CState>(new KnockoutState(mGameObject)).release();
+			CState* newState = std::unique_ptr<CState>(new KnockoutState(mGameObject)).release();
+			enterNewState(newState);
 			return;
 		}
 
@@ -267,7 +300,9 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 		if(attackType.mDamageType == DamageType::Strong || attackType.mDamageType == DamageType::Super)
 		{
 			// change state to knockdown state
-			mGameObject->mState = std::unique_ptr<CState>(new KnockoutState(mGameObject)).release();
+			CState* newState = std::unique_ptr<CState>(new KnockoutState(mGameObject)).release();
+			enterNewState(newState);
+			
 		}
 		else	// if not,
 		{
@@ -275,7 +310,11 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 			if(mGameObject->mState->getName() == "HitState")
 				dynamic_cast<HitState*>(mGameObject->mState)->hitConsecutive(mGameObject);
 			else
-				mGameObject->mState = std::unique_ptr<CState>(new HitState(mGameObject)).release();
+			{
+				CState* newState = std::unique_ptr<CState>(new HitState(mGameObject)).release();
+				enterNewState(newState);
+			}
+				
 		}
 	}
 	else if( mIsGrounded == false)
@@ -292,11 +331,14 @@ void PlayerLogic::hit(GameObject* otherCharacter, Attacks::Name attackName)
 		dynamic_cast<HealthBarLogic*>(mHealthBar->mLogicComponent)->updateHealth(mHealth);
 		if(mHealth <= 0)
 		{
-			mGameObject->mState = std::unique_ptr<CState>(new DeadAirState(mGameObject)).release();
+			CState* newState = std::unique_ptr<CState>(new DeadAirState(mGameObject)).release();
+			enterNewState(newState);
 			return;
 		}
+			
+			CState* newState = std::unique_ptr<CState>(new HitAirState(mGameObject)).release();
+			enterNewState(newState);
 
-			mGameObject->mState = std::unique_ptr<CState>(new HitAirState(mGameObject)).release();
 
 	}
 	
@@ -412,5 +454,7 @@ void PlayerLogic::updateBox()
 void PlayerLogic::setNewState(CState* newState)
 {
 	CState* state = std::unique_ptr<CState>(newState).release();
-	mGameObject->mState = state;
+	enterNewState(state);
+	
+	
 }
