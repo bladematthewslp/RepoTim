@@ -19,7 +19,7 @@ void ItemLogic::update(Grid& grid)
 		/*sf::Vector2f size = mGameObject->getSprite()->getSize();
 		mGameObject->mBoxColliderComponent->setSize(size.x, size.y);
 		mGameObject->mBoxColliderComponent->setOrigin(mGameObject->getPosition());*/
-		mGameObject->mBoxColliderComponent->setVisible(true);
+		//mGameObject->mBoxColliderComponent->setVisible(true);
 	}
 
 	if(mGameObject->mBoxColliderComponent != nullptr)

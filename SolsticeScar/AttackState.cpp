@@ -143,20 +143,13 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 		else if(render->currentAnim == "PLAYER_CHOPPERSTYLE")
 		{
 			playSound(SoundEffect::DojiChopperStyle, logic);
-			
-			
-			/*GameObjectDesc soundDesc("Multislash");
-			GameObject* sound = std::unique_ptr<GameObject>(new GameObject(soundDesc)).release();
-			sound->addComponent(std::unique_ptr<Component>(new SoundEffectLogic(player)).release());
-			dynamic_cast<SoundEffectLogic*>(sound->mLogicComponent)->mSoundPlayer.play(SoundEffect::DojiChopperStyle);
-			soundEffectPlayed = true;
-
-			*/
 		}
 		else if(render->currentAnim == "PLAYER_HAILBRINGER_PART2")
 		{
 			playSound(SoundEffect::DojiHailBringerLanding, logic);
 		}
+		else if(render->currentAnim == "PLAYER_EXPEL_PART2")
+			playSound(SoundEffect::DojiExpel, logic);
 
 	}
 
@@ -267,6 +260,7 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 				if(grid.checkCollisionRight(player->mBoxColliderComponent) == true)
 				{
 					logic->move(-logic->getVelocity().x, 0);
+					player->mRenderComponent->setAnimation("PLAYER_EXPEL_PART2");
 				}
 				break;
 			}
@@ -275,6 +269,7 @@ CState* AttackState::update(GameObject* player, sf::Time dt, Grid& grid)
 				if(grid.checkCollisionLeft(player->mBoxColliderComponent) == true)
 				{
 					logic->move(-logic->getVelocity().x, 0);
+					player->mRenderComponent->setAnimation("PLAYER_EXPEL_PART2");
 				}
 				break;
 			}

@@ -6,7 +6,7 @@ SpriteAnim::SpriteAnim()
 {
 
 }
-SpriteAnim::SpriteAnim(sf::IntRect rect, int numberFrames, int frameToHold, bool loop, float speed, int startFrame) 
+SpriteAnim::SpriteAnim(sf::IntRect rect, int numberFrames, int frameToHold, bool loop, float speed, int startFrame, int frameToAllowNextAttack) 
 	: numFrames(numberFrames)
 	, textureRect(rect)
 	, currentFrame(startFrame)
@@ -17,6 +17,7 @@ SpriteAnim::SpriteAnim(sf::IntRect rect, int numberFrames, int frameToHold, bool
 	, mLoop(loop)
 	, playSpeed(speed/16.5)
 	, done(false)
+	, mFrameToAllowNextAttack(frameToAllowNextAttack)
 { 
 	//playSpeed = 1/16.5;//.5;
 	slashDelaySpeed = playSpeed * 3.5;//1/9.25;
@@ -151,3 +152,12 @@ int SpriteAnim::run(sf::RectangleShape& sprite)
 
 	return Status::RUNNING;
 };
+
+bool SpriteAnim::allowNextAttack(int frameNum)
+{
+	if(mFrameToAllowNextAttack == -1 || frameNum < mFrameToAllowNextAttack)
+		return false;
+	else
+		return true;
+
+}

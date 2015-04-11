@@ -15,37 +15,38 @@ SoundPlayer::SoundPlayer()
 void SoundPlayer::loadAllSounds()
 {
 
-	mSoundBuffers.load(SoundEffect::None,		"SoundEffects/silence.wav");
-	mSoundBuffers.load(SoundEffect::ChargeUp,		"SoundEffects/ChargeUp.wav");
-	mSoundBuffers.load(SoundEffect::DojiChopperStyle, "SoundEffects/DojiChopperStyle.wav");
+	mSoundBuffers.load(SoundEffect::None,				"SoundEffects/silence.wav");
+	mSoundBuffers.load(SoundEffect::ChargeUp,			"SoundEffects/ChargeUp.wav");
+	mSoundBuffers.load(SoundEffect::DojiChopperStyle,	"SoundEffects/DojiChopperStyle.wav");
 	//mSoundBuffers.load(SoundEffect::DojiChopperStyleSoundEffect, "SoundEffects/DojiChopperStyleSoundEffect.wav");
-	mSoundBuffers.load(SoundEffect::DojiDead, "SoundEffects/DojiDead.wav");
+	mSoundBuffers.load(SoundEffect::DojiDead,			"SoundEffects/DojiDead.wav");
+	mSoundBuffers.load(SoundEffect::DojiExpel,			"SoundEffects/DojiExpel.wav");
 	mSoundBuffers.load(SoundEffect::DojiHailBringerDescending, "SoundEffects/DojiHailBringerDescending2.wav");
 	mSoundBuffers.load(SoundEffect::DojiHailBringerLanding, "SoundEffects/DojiHailBringerLanding.wav");
-	mSoundBuffers.load(SoundEffect::DojiHit, "SoundEffects/DojiHit.wav");
-	mSoundBuffers.load(SoundEffect::DojiSwordSwing1, "SoundEffects/DojiSwordSwing1.wav");
-	mSoundBuffers.load(SoundEffect::DojiSwordSwing2, "SoundEffects/DojiSwordSwing2.wav");
-	mSoundBuffers.load(SoundEffect::DojiSwordSwing3, "SoundEffects/DojiSwordSwing3.wav");
-	mSoundBuffers.load(SoundEffect::DojiSwordSwingAir, "SoundEffects/DojiSwordSwingAir.wav");
-	mSoundBuffers.load(SoundEffect::DojiSwordSwingQuick, "SoundEffects/DojiSwordSwingQuick.wav");
+	mSoundBuffers.load(SoundEffect::DojiHit,			"SoundEffects/DojiHit.wav");
+	mSoundBuffers.load(SoundEffect::DojiSwordSwing1,	"SoundEffects/DojiSwordSwing1.wav");
+	mSoundBuffers.load(SoundEffect::DojiSwordSwing2,	"SoundEffects/DojiSwordSwing2.wav");
+	mSoundBuffers.load(SoundEffect::DojiSwordSwing3,	"SoundEffects/DojiSwordSwing3.wav");
+	mSoundBuffers.load(SoundEffect::DojiSwordSwingAir,	"SoundEffects/DojiSwordSwingAir.wav");
+	mSoundBuffers.load(SoundEffect::DojiSwordSwingQuick,"SoundEffects/DojiSwordSwingQuick.wav");
 	mSoundBuffers.load(SoundEffect::DojiImpact,			"SoundEffects/DojiImpact.wav");
-	mSoundBuffers.load(SoundEffect::DojiYouAreNotWorthy,			"SoundEffects/DojiYouAreNotWorthy.wav");
-	mSoundBuffers.load(SoundEffect::ElectricCurrent,			"SoundEffects/ElectricCurrent.wav");
-	mSoundBuffers.load(SoundEffect::Jump,			"SoundEffects/Jump.wav");
+	mSoundBuffers.load(SoundEffect::DojiYouAreNotWorthy,"SoundEffects/DojiYouAreNotWorthy.wav");
+	mSoundBuffers.load(SoundEffect::ElectricCurrent,	"SoundEffects/ElectricCurrent.wav");
+	mSoundBuffers.load(SoundEffect::Jump,				"SoundEffects/Jump.wav");
 	mSoundBuffers.load(SoundEffect::Landing,			"SoundEffects/Landing.wav");
-	mSoundBuffers.load(SoundEffect::NinjaDaggerSwing,			"SoundEffects/NinjaDaggerSwing.wav");
+	mSoundBuffers.load(SoundEffect::NinjaDaggerSwing,	"SoundEffects/NinjaDaggerSwing.wav");
 	mSoundBuffers.load(SoundEffect::NinjaHit,			"SoundEffects/NinjaHit.wav");
-	mSoundBuffers.load(SoundEffect::Running1,		"SoundEffects/Running1.wav");
-	mSoundBuffers.load(SoundEffect::Running2,		"SoundEffects/Running2.wav");
-	mSoundBuffers.load(SoundEffect::RyobeComeAndGetMe, "SoundEffects/RyobeComeAndGetMe.wav");
-	mSoundBuffers.load(SoundEffect::RyobeDead,		"SoundEffects/RyobeDead.wav");
-	mSoundBuffers.load(SoundEffect::RyobeEmbracer,	"SoundEffects/RyobeEmbracer.wav");
-	mSoundBuffers.load(SoundEffect::RyobeFellCrescent,		"SoundEffects/RyobeFellCrescent.wav");
-	mSoundBuffers.load(SoundEffect::RyobeFire,		"SoundEffects/RyobeFire.wav");
-	mSoundBuffers.load(SoundEffect::RyobeKnifeThrow, "SoundEffects/RyobeKnifeThrow.wav");
-	mSoundBuffers.load(SoundEffect::RyobeSwordAttack, "SoundEffects/RyobeSwordAttack.wav");
-	mSoundBuffers.load(SoundEffect::RyobeStandStill, "SoundEffects/RyobeStandStill.wav");
-	mSoundBuffers.load(SoundEffect::Teleport, "SoundEffects/Teleport.wav");
+	mSoundBuffers.load(SoundEffect::Running1,			"SoundEffects/Running1.wav");
+	mSoundBuffers.load(SoundEffect::Running2,			"SoundEffects/Running2.wav");
+	mSoundBuffers.load(SoundEffect::RyobeComeAndGetMe,	"SoundEffects/RyobeComeAndGetMe.wav");
+	mSoundBuffers.load(SoundEffect::RyobeDead,			"SoundEffects/RyobeDead.wav");
+	mSoundBuffers.load(SoundEffect::RyobeEmbracer,		"SoundEffects/RyobeEmbracer.wav");
+	mSoundBuffers.load(SoundEffect::RyobeFellCrescent,	"SoundEffects/RyobeFellCrescent.wav");
+	mSoundBuffers.load(SoundEffect::RyobeFire,			"SoundEffects/RyobeFire.wav");
+	mSoundBuffers.load(SoundEffect::RyobeKnifeThrow,	"SoundEffects/RyobeKnifeThrow.wav");
+	mSoundBuffers.load(SoundEffect::RyobeSwordAttack,	"SoundEffects/RyobeSwordAttack.wav");
+	mSoundBuffers.load(SoundEffect::RyobeStandStill,	"SoundEffects/RyobeStandStill.wav");
+	mSoundBuffers.load(SoundEffect::Teleport,			"SoundEffects/Teleport.wav");
 	
 }
 

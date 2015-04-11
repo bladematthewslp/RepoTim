@@ -77,13 +77,22 @@ TitleScene::TitleScene(SceneStack& stack, Context& context)
 	mControlsScreen.setSize(sf::Vector2f(960,600));
 	mControlsScreen.setPosition(32,60);
 
-	mLogoImage.loadFromFile("Sprites/logo.png");
-	mLogoImage.createMaskFromColor(sf::Color::Black);
-	mLogoTexture.loadFromImage(mLogoImage);
+	mLogoTexture.loadFromFile("Sprites/logo1.png");
 	mLogo.setTexture(&mLogoTexture);
-	mLogo.setSize(sf::Vector2f(576, 346));
-	mLogo.setPosition(370,80);
+	mLogo.setSize(sf::Vector2f(620,304));
+	mLogo.setPosition(240,20);
 
+	mLogoTexture2.loadFromFile("Sprites/logo2.png");
+	mLogo2.setTexture(&mLogoTexture2);
+	mLogo2.setSize(sf::Vector2f(620,304));
+	mLogo2.setPosition(240,20);
+
+	sf::Color logo2Color = mLogo2.getFillColor();
+	logo2Color.a = 0;
+	mLogo2.setFillColor(logo2Color);
+
+	firstLogoSolid = true;
+	logoSwitchTimer = -4;
 
 	playGameSelected = false;
 	quitGameSelected = false;
@@ -181,7 +190,63 @@ bool TitleScene::update(sf::Time dt)
 		fadeInTimer = 0;
 	}
 
-	
+	// fading in/out two logos
+	logoSwitchTimer += dt.asSeconds();
+	if( logoSwitchTimer >= .02)
+	{
+
+		if( firstLogoSolid == true)
+		{
+			sf::Color color(mLogo.getFillColor() );
+			if(color.a < 10)
+			{
+				color.a = 0;
+				firstLogoSolid = false;
+			}
+			else
+				color.a -= 1;//dt.asSeconds() * 140;
+
+			mLogo.setFillColor(color);
+		
+			color = mLogo2.getFillColor();
+			if(color.a > 250)
+			{
+				color.a = 255;
+			}
+			else
+				color.a += 1;//dt.asSeconds() * 140;
+
+			mLogo2.setFillColor(color);
+		
+		}
+		else
+		{
+		
+			sf::Color color(mLogo2.getFillColor() );
+			if(color.a < 10)
+			{
+				color.a = 0;
+			}
+			else
+				color.a -= 1;//dt.asSeconds() * 140;
+
+			mLogo2.setFillColor(color);
+		
+			color = mLogo.getFillColor();
+			if(color.a > 250)
+			{
+				color.a = 255;
+				firstLogoSolid = true;
+			}
+			else
+				color.a += 1;//dt.asSeconds() * 140;
+
+			mLogo.setFillColor(color);
+		}
+
+		logoSwitchTimer = 0;
+	}
+
 
 	if(buttonSelected == true)
 	{
@@ -229,8 +294,12 @@ void TitleScene::draw()
 	window.draw(mControlsButton);
 	window.draw(mQuitButton);
 	window.draw(mDojiSprite);
-	window.draw(mText);
-	//window.draw(mLogo);
+	//window.draw(mText);
+	if(logoSwitchTimer >= 0)
+	{
+		window.draw(mLogo2);
+		window.draw(mLogo);
+	}
 	if(controlsSelected == true) 
 		window.draw(mControlsScreen);
 	window.draw(fadeInSprite);

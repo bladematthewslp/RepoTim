@@ -119,7 +119,7 @@ void World::destroyGameObjectsOutsideView()
 					if(dist > mWorldView.getSize().y/2)
 					{
 						System::removeGameObject( (*obj_itr) );
-						std::cout << "DESTROYED" << std::endl;
+						//std::cout << "DESTROYED" << std::endl;
 						break;
 					}
 				}

@@ -20,6 +20,7 @@ StandingState::StandingState(GameObject* player)
 	//player->getSprite()->setTextureRect(sf::IntRect(0,0,200,200));
 	//player->mRenderComponent->runSpriteAnim("Standing", *player);
 	player->mRenderComponent->setAnimation("Standing");
+	//std::cout << "NEW STANDING STATE" << std::endl;
 }
 
 CState* StandingState::handleInput(GameObject* player, const sf::Event& event)

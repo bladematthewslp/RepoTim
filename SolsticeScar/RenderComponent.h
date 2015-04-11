@@ -30,7 +30,7 @@ public:
 	
 	std::string			currentAnim;
 	std::map<std::string, SpriteAnim*>	mSpriteSet;
-	void				createSpriteAnim(sf::IntRect rect, std::string animName, bool loop, int numFrames,float speed = 1, int frameToHold = -1, int startingFrame = 0);
+	void				createSpriteAnim(sf::IntRect rect, std::string animName, bool loop, int numFrames,float speed = 1, int frameToHold = -1, int startingFrame = 0, int frameToAllowNextAttack = -1);
 	int					runSpriteAnim(GameObject& gameObject);
 	bool				getAnimStatus();
 	void				stopSpriteAnim();

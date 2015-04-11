@@ -153,7 +153,11 @@ void PlayerInput::handleEvents(const sf::Event& event)
 					int currentFrame = render->mSpriteSet[render->currentAnim]->currentFrame;
 					int frameToHold = render->mSpriteSet[render->currentAnim]->mFrameToHold;
 					int numFrames = render->mSpriteSet[render->currentAnim]->numFrames;
+					std::string currentAnim = render->currentAnim;
 					typedef std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator moveListIterator;
+
+					bool matchingAttackFound = false;
+					
 					// check if pressed keys matches an action in the move list
 					for(std::multimap<std::vector<sf::Keyboard::Key>, std::string>::iterator iter = list.begin(); iter != list.end();  )//iter++)
 					{
@@ -161,20 +165,34 @@ void PlayerInput::handleEvents(const sf::Event& event)
 						if(keyQueue == iter->first												// if the pressed keys matches key set in move list
 							&& Attacks::getAttack(iter->second).mIsAirAttack == false			// if the attack is not an air attack
 							&& iter->second != Attacks::PLAYER_SLASH							// if the attack is not a basic slash
-							&& mGameObject->mState->getName() != "AttackState")
+							)//&& mGameObject->mState->getName() != "AttackState")
 						{
-							// first, check if the player is facing the direction of the last input
-							if(iter->second == "PLAYER_EXPEL")
+							// if player is already attacking
+							if(mGameObject->mState->getName() == "AttackState")
 							{
-								sf::Keyboard::Key lastKey = keyQueue.at(keyQueue.size() - 1);
-								if(lastKey == sf::Keyboard::Right && logic->getDirection() == Direction::Right
-									|| lastKey == sf::Keyboard::Left && logic->getDirection() == Direction::Left)
+								if( render->mSpriteSet[currentAnim]->allowNextAttack(currentFrame) == true)
 								{
-									CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-									logic->enterNewState(newState);
-									mGameObject->mRenderComponent->setAnimation(iter->second);
-								
-									return;
+									// first, check if the player is facing the direction of the last input
+									if(iter->second == "PLAYER_EXPEL" )
+									{
+										sf::Keyboard::Key lastKey = keyQueue.at(keyQueue.size() - 1);
+										if(lastKey == sf::Keyboard::Right && logic->getDirection() == Direction::Right
+											|| lastKey == sf::Keyboard::Left && logic->getDirection() == Direction::Left)
+										{
+											CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+											logic->enterNewState(newState);
+											mGameObject->mRenderComponent->setAnimation(iter->second);
+											matchingAttackFound = true;
+											return;
+										}
+									}
+									else
+									{
+										CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+										logic->enterNewState(newState);
+										mGameObject->mRenderComponent->setAnimation(iter->second);
+										return;
+									}
 								}
 							}
 							else
@@ -184,6 +202,8 @@ void PlayerInput::handleEvents(const sf::Event& event)
 								mGameObject->mRenderComponent->setAnimation(iter->second);
 								return;
 							}
+								
+							
 						}
 
 						// if no match is found, remove oldest key in queue and loop again
@@ -196,60 +216,66 @@ void PlayerInput::handleEvents(const sf::Event& event)
 					}
 
 					// if keys did not match any move list, set default slash animation accordingly
-					if(mGameObject->mState->getName() != "AttackState")
+					if(matchingAttackFound == false)
 					{
-						CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-						logic->enterNewState(newState);
-						//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-						
-						mGameObject->getRenderComponent()->setAnimation("Slash1");
-					}
-					else
-					{
-						// if the animation is delayed and player is not on last slash
-						if(mGameObject->mRenderComponent->isAnimDelayed() == true && mGameObject->getRenderComponent()->currentAnim != "Slash3" && mGameObject->getRenderComponent()->currentAnim != "PLAYER_HAILBRINGER_PART2")
+						if(mGameObject->mState->getName() != "AttackState")
 						{
 							CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
 							logic->enterNewState(newState);
 							//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-							if(mGameObject->getRenderComponent()->currentAnim == "Slash1")
-							{
-								
-								mGameObject->getRenderComponent()->setAnimation("Slash2Part1");
-							}
-							else if(mGameObject->getRenderComponent()->currentAnim == "Slash2Part1")
-							{
-								
-									mGameObject->getRenderComponent()->setAnimation("Slash3");
-							}
-							else if(mGameObject->getRenderComponent()->currentAnim == "QuickStinger")
-							{
-								
-									mGameObject->getRenderComponent()->setAnimation("Slash3");
-							}
+						
+							mGameObject->getRenderComponent()->setAnimation("Slash1");
 						}
 						else
 						{
-							if(currentFrame > frameToHold)
+							// if the animation is delayed and player is not on last slash
+							if(mGameObject->mRenderComponent->isAnimDelayed() == true 
+								&& render->currentAnim != "Slash3" 
+								&& render->currentAnim != "PLAYER_HAILBRINGER_PART2" 
+								&& render->currentAnim != "PLAYER_EXPEL_PART2")
 							{
-								if(mGameObject->getRenderComponent()->currentAnim == "Slash2Part2")
+								CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+								logic->enterNewState(newState);
+								//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+								if(mGameObject->getRenderComponent()->currentAnim == "Slash1")
 								{
-									CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-									logic->enterNewState(newState);
-									//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-									mGameObject->getRenderComponent()->setAnimation("QuickUprising");
+								
+									mGameObject->getRenderComponent()->setAnimation("Slash2Part1");
 								}
-								else if(mGameObject->getRenderComponent()->currentAnim == "QuickUprising")
+								else if(mGameObject->getRenderComponent()->currentAnim == "Slash2Part1")
 								{
-									CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-									logic->enterNewState(newState);
-									//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
-									mGameObject->getRenderComponent()->setAnimation("QuickStinger");
+								
+										mGameObject->getRenderComponent()->setAnimation("Slash3");
 								}
-
+								else if(mGameObject->getRenderComponent()->currentAnim == "QuickStinger")
+								{
+								
+										mGameObject->getRenderComponent()->setAnimation("Slash3");
+								}
 							}
+							else
+							{
+								if(currentFrame > frameToHold)
+								{
+									if(mGameObject->getRenderComponent()->currentAnim == "Slash2Part2")
+									{
+										CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+										logic->enterNewState(newState);
+										//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+										mGameObject->getRenderComponent()->setAnimation("QuickUprising");
+									}
+									else if(mGameObject->getRenderComponent()->currentAnim == "QuickUprising")
+									{
+										CState* newState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+										logic->enterNewState(newState);
+										//mGameObject->mState = std::unique_ptr<CState>(new AttackState(mGameObject)).release();
+										mGameObject->getRenderComponent()->setAnimation("QuickStinger");
+									}
+
+								}
 								
 
+							}
 						}
 					}
 				}
@@ -379,8 +405,11 @@ void PlayerInput::handleEvents(const sf::Event& event)
 				}
 				
 			}
-		}
+		}	// end if(key == sf::Keyboard::S)
 	}
+
+	
+
 	/*
 	CState* state = mGameObject->mState->handleInput(mGameObject,event);
 	if(state != mGameObject->mState)

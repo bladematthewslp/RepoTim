@@ -25,9 +25,14 @@ class TitleScene : public Scene
 	sf::RectangleShape		mControlsButton;
 	sf::RectangleShape		mQuitButton;
 
-	sf::Image				mLogoImage;
+	// Logos
 	sf::Texture				mLogoTexture;
 	sf::RectangleShape		mLogo;
+	sf::Texture				mLogoTexture2;
+	sf::RectangleShape		mLogo2;
+	bool					firstLogoSolid;
+	float					logoSwitchTimer;
+
 
 	int	mCurrentSelection;
 	void selectNext();

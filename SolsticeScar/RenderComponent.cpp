@@ -91,10 +91,10 @@ RenderComponent::~RenderComponent()
 
 }
 
-void RenderComponent::createSpriteAnim(sf::IntRect rect, std::string animName, bool loop, int numFrames,float speed, int frameToHold, int startingFrame )
+void RenderComponent::createSpriteAnim(sf::IntRect rect, std::string animName, bool loop, int numFrames,float speed, int frameToHold, int startingFrame, int frameToAllowNextAttack )
 {
 	
-	SpriteAnim* anim = std::unique_ptr<SpriteAnim>(new SpriteAnim(rect,numFrames, frameToHold, loop, speed, startingFrame)).release();
+	SpriteAnim* anim = std::unique_ptr<SpriteAnim>(new SpriteAnim(rect,numFrames, frameToHold, loop, speed, startingFrame, frameToAllowNextAttack)).release();
 	mSpriteSet.insert(std::make_pair(animName, anim));
 
 }
