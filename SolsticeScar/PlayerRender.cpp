@@ -11,6 +11,11 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	mPlayerImage = mImageHolder.get(Images::Player);
 	mPlayerImage.createMaskFromColor(sf::Color(0,128,0), 1);
 	mPlayerTexture.loadFromImage(mPlayerImage);
+
+
+	mPlayerTransformedImage = mImageHolder.get(Images::PlayerTransformed);
+	mPlayerTransformedImage.createMaskFromColor(sf::Color(0,128,0), 1);
+	mPlayerTransformedTexture.loadFromImage(mPlayerTransformedImage);
 	
 	//mSprite.setOutlineColor(sf::Color::Yellow);
 	//mSprite.setOutlineThickness(2);
@@ -75,6 +80,16 @@ PlayerRender::PlayerRender(GameObject* mGameObject) : RenderComponent(mGameObjec
 	createSpriteAnim(sf::IntRect(200,3400,200,200), "DazedPart1", false, 7, 1.3,4,2);
 	createSpriteAnim(sf::IntRect(200,3400,200,200), "DazedPart2", true, 11, 5,-1, 7);
 
+
+	// TRANSFORMED
+	createSpriteAnim(sf::IntRect(200,0,200,200),"T_Standing", true, 4, 1.7);
+	createSpriteAnim(sf::IntRect(200,200,200,200), "T_Running", true,8);
+
+	createSpriteAnim(sf::IntRect(200,400,200,200), "T_Guarding", false, 1);
+
+	// Air Basic
+	createSpriteAnim(sf::IntRect(200,600,200,200), "T_Jumping", true, 3, 1.5, 4,1);
+	createSpriteAnim(sf::IntRect(200,600,200,200), "T_Falling", true, 6, 1.5,-1,4);
 }
 
 

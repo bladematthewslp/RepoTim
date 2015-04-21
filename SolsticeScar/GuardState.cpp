@@ -1,10 +1,12 @@
 #include "GuardState.h"
+
 GuardState::GuardState(GameObject* player)
 	: CState("GuardState")
 {
 	spriteX = 0;
 	timer = 0;
 	//player->mRenderComponent->setAnimation("Guarding");
+
 }
 
 CState* GuardState::handleInput(GameObject* player, const sf::Event& event)

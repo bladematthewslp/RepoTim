@@ -12,6 +12,7 @@ void RenderComponent::loadImages()
 {
 	mImageHolder.load(Images::BloodAnimationA, "Sprites/blood_animation_A.png");
 	mImageHolder.load(Images::Player,		"Sprites/player_spritesheet.png");
+	mImageHolder.load(Images::PlayerTransformed,		"Sprites/player_transformed_spritesheet.png");
 	mImageHolder.load(Images::Ninja,		"Sprites/ninja_spritesheet.png");
 	mImageHolder.load(Images::Ryobe,		"Sprites/ryobe_spritesheet.png");
 	//mImageHolder.load(Images::RyobeDagger,	"Sprites/dagger.png");
@@ -24,6 +25,7 @@ void RenderComponent::loadImages()
 	mTextureHolder.load(Textures::LightningWall, "Sprites/lightning.png");
 	mTextureHolder.load(Textures::PlayerHUD,	"Sprites/HUD/DojiHUDNoHealthbar.png");
 	mTextureHolder.load(Textures::PlayerHUDHealthbar,"Sprites/HUD/DojiHealthbar.png");
+	mTextureHolder.load(Textures::PlayerTransformEffect,"Sprites/effects/player_transform_effect.png");
 	mTextureHolder.load(Textures::RedOrb,		"Sprites/red_orb.png");
 	mTextureHolder.load(Textures::RyobeDagger,		"Sprites/dagger.png");
 	mTextureHolder.load(Textures::RyobeHUD,		"Sprites/HUD/RyobiHUDNoHealthbar.png");

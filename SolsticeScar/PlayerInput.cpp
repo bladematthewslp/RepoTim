@@ -51,6 +51,8 @@ void PlayerInput::handleRealtimeInput(const sf::Event& event)
 
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(mGameObject->mLogicComponent);
 
+
+
 	CState* state = mGameObject->mState->handleInput(mGameObject,event);
 	if(state != mGameObject->mState)
 	{

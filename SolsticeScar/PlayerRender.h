@@ -7,12 +7,14 @@ class GameObject;
 
 class PlayerRender : public RenderComponent
 {
-	sf::Image mPlayerImage;
-	sf::Texture mPlayerTexture;
 	
 
 public:
-
+	sf::Image mPlayerImage;
+	sf::Texture mPlayerTexture;
+	
+	sf::Image mPlayerTransformedImage;
+	sf::Texture mPlayerTransformedTexture;
 	PlayerRender(GameObject* mGameObject);
 	void	update(sf::RenderTarget& window);
 };

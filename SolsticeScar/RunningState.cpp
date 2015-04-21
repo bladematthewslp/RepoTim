@@ -103,7 +103,7 @@ void RunningState::entry(GameObject* player)
 {
 	PlayerLogic* logic = dynamic_cast<PlayerLogic*>(player->mLogicComponent);
 
-	player->mRenderComponent->setAnimation("Running");
+	player->mRenderComponent->setAnimation("T_Running");
 
 
 	// set the player velocity

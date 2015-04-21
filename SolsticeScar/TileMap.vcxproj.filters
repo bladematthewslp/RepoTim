@@ -384,6 +384,9 @@
     <ClCompile Include="CStateNinjaHitDraggedState.cpp">
       <Filter>Source Files\Characters\Ninja\States</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerTransformEffectGameObject.cpp">
+      <Filter>Source Files\Assets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -679,6 +682,9 @@
     </ClInclude>
     <ClInclude Include="CStateNinjaHitDraggedState.h">
       <Filter>Header Files\Characters\Ninja\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTransformEffectGameObject.h">
+      <Filter>Header Files\Assets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

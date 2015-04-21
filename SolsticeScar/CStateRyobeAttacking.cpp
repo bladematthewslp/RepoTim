@@ -91,20 +91,9 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 		}
 		else if(character->mRenderComponent->currentAnim == "TeleportSwordAttack1")
 		{
-			/*
-			System::mSoundPlayer.play(SoundEffect::Teleport);
-			GameObjectDesc soundDesc("Sound");
-			GameObject* sound = std::unique_ptr<GameObject>(new GameObject(soundDesc)).release();
-			sound->addComponent(ComponentType::LogicComponent, std::unique_ptr<LogicComponent>(new SoundEffectLogic(sound)).release() );
-			dynamic_cast<SoundEffectLogic*>(sound->mLogicComponent)->mSoundPlayer.play(SoundEffect::RyobeSwordAttack);
-			*/
-			
-
 			System::mSoundPlayer.play(SoundEffect::Teleport);
 			playSound(SoundEffect::RyobeSwordAttack, logic);
 
-			
-			//playSound(SoundEffect::RyobeSwordAttack, logic);
 		}
 	}
 	if(character->mRenderComponent->currentAnim == "WeaponThrow")
@@ -127,7 +116,6 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 
 		if(grid.checkCollisionLeft(character->mBoxColliderComponent) == true)
 		{
-			//std::cout << logic->getVelocity().x << std::endl;
 			logic->move(-logic->getVelocity().x, 0);
 		}
 		if( embracerAttackBoxCreated == false)
@@ -158,9 +146,6 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 		}
 		else if(character->mRenderComponent->mSpriteSet["FellCrescent"]->currentFrame >= 6)
 		{
-			//fellCrescentSpeed -= 0.2f;
-			//if(fellCrescentSpeed  < 0)
-				//fellCrescentSpeed = 0;
 			logic->setVelocityX(fellCrescentSpeed * logic->getDirection() );
 			logic->move(logic->getVelocity().x, 0);
 			if(fellCrescentAttackBoxCreated == false)
@@ -180,7 +165,6 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 
 		if(grid.checkCollisionLeft(character->mBoxColliderComponent) == true)
 		{
-			//std::cout << logic->getVelocity().x << std::endl;
 			logic->move(-logic->getVelocity().x, 0);
 		}
 	}
@@ -262,12 +246,12 @@ CState* CStateRyobeAttacking::update(GameObject* character, sf::Time dt, Grid& g
 			if(player->getPosition().x > 3590 && player->getPosition().x < 4375)
 			{
 				//if(player->getPosition().x < 900)
-					character->setPosition(player->getPosition().x + 80, 568);
+					character->setPosition(player->getPosition().x + 80, 600);
 				//else
 					//character->setPosition(player->getPosition().x - 80, 536);
 			}
 			else
-				character->setPosition(player->getPosition().x - 80, 568);
+				character->setPosition(player->getPosition().x - 80, 600);
 
 
 			logic->updateDirection();

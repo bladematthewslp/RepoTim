@@ -146,6 +146,7 @@
     <ClCompile Include="PlayerLogic.cpp" />
     <ClCompile Include="PlayerRender.cpp" />
     <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerTransformEffectGameObject.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ResourceHolder.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -245,6 +246,7 @@
     <ClInclude Include="PlayerLogic.h" />
     <ClInclude Include="PlayerRender.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerTransformEffectGameObject.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="ResourceIdentifiers.h" />

@@ -13,7 +13,7 @@ FallingState::FallingState(GameObject* player)
 	spriteCounter = 0;
 	spriteX = 3;
 	if(player->mRenderComponent->currentAnim != "PLAYER_SWEEP")
-		player->mRenderComponent->setAnimation("Falling");
+		player->mRenderComponent->setAnimation("T_Falling");
 
 }
 

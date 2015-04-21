@@ -59,7 +59,7 @@ void WorldCave::init()
 									ComponentType::RenderComponent);
 
 	
-	for(int i = 0; i < 6; i++)
+	for(int i = 0; i < 15; i++)
 	{
 		
 		
@@ -281,7 +281,7 @@ unsigned int WorldCave::update(sf::Time dt)
 		// if timer reaches set number to make ryobe appear in screen
 		if(timerToBeginBattle >= 3 && ryobeGameObject->mState == nullptr )
 		{
-			ryobeGameObject->setPosition(4300, 568);
+			ryobeGameObject->setPosition(4300, 600);
 			ryobeGameObject->mState = std::unique_ptr<CState>(new CStateRyobeBattleEntrance(ryobeGameObject)).release();
 			//bossFightStarted = true;
 			startTimerToBeginBattle = false;

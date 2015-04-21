@@ -22,6 +22,7 @@ namespace Textures
 		LightningWall,
 		PlayerHUD,
 		PlayerHUDHealthbar,
+		PlayerTransformEffect,
 		RedOrb,
 		RyobeDagger,
 		RyobeParryEffect,
@@ -63,6 +64,7 @@ namespace Images
 		Ninja,
 		//Parry,
 		Player,
+		PlayerTransformed,
 		//RedOrb,
 		Ryobe,
 		

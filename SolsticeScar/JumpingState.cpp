@@ -21,7 +21,7 @@ JumpingState::JumpingState(GameObject* player)
 	System::mSoundPlayer.play(SoundEffect::Jump);
 	spriteX = 1;
 	spriteCounter = 0;
-	player->mRenderComponent->setAnimation("Jumping");
+	player->mRenderComponent->setAnimation("T_Jumping");
 	dynamic_cast<PlayerInput*>(player->mInputComponent)->clearKeyQueue();
 	//std::cout << "NEW JUMPING STATE" << std::endl;
 

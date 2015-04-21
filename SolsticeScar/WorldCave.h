@@ -8,7 +8,7 @@ class WorldCave : private World
 	
 	// Background data
 	GameObject*				mForeground[4];
-	GameObject*				mBackground[5];
+	GameObject*				mBackground[25];
 
 	// World characters
 	GameObject*				mPlayer;
