@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GetSize.cs">
+    <Files>
+      <File FileName="Assets\Characters\Player\Scripts\PlayerLogic.cs" Line="164" Column="3" />
+      <File FileName="Assets\Characters\CStatePlayerRunning.cs" Line="66" Column="5" />
+      <File FileName="Assets\Characters\CStatePlayerJumping.cs" Line="41" Column="3" />
+      <File FileName="Assets\Scripts\RoomScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Fade.cs" Line="11" Column="26" />
+      <File FileName="Assets\Scripts\GetSize.cs" Line="13" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

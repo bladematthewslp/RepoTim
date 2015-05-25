@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Characters\Player\Scripts\PlayerLogic.cs">
+    <Files>
+      <File FileName="Assets\Scripts\RoomScript.cs" Line="72" Column="9" />
+      <File FileName="Assets\Characters\Player\Scripts\PlayerLogic.cs" Line="308" Column="3" />
+      <File FileName="Assets\Characters\CStatePlayerRunning.cs" Line="95" Column="16" />
+      <File FileName="Assets\Scripts\Fade.cs" Line="51" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

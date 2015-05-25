@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\RoomScript.cs">
+    <Files>
+      <File FileName="Assets\Characters\CStatePlayerRunning.cs" Line="54" Column="5" />
+      <File FileName="Assets\Characters\CState.cs" Line="27" Column="3" />
+      <File FileName="Assets\Characters\CStatePlayerJumping.cs" Line="41" Column="3" />
+      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" Line="408" Column="62" />
+      <File FileName="Assets\Scripts\RoomScript.cs" Line="81" Column="63" />
+      <File FileName="Assets\Scripts\PlayerMovement.cs" Line="90" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
