@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d7d2d1cd-2525-44d4-a20e-ba282aa1f7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component">
+      <UniqueIdentifier>{027723b0-3189-4361-90b4-403d0e4d17d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component">
+      <UniqueIdentifier>{ff57ad58-17ab-4d0b-aa6a-ffd28a45e5ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{23840b37-9853-4d0a-bc43-ba0c15eb60df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{ef16a4d5-c9c7-4936-bfe5-731ce974b5fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{e3dcda60-8007-4738-8590-e7e4f0d83869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{b842f668-6df5-48a7-b19e-a05db7723936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{9ce22c49-5bfd-4c4c-8b51-bb2d9a8ead8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Cannon">
+      <UniqueIdentifier>{7e9c20be-0704-4fa1-8318-7be1d2049f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Projectile">
+      <UniqueIdentifier>{41bf8ddd-162f-4d39-985d-d2dd36961a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{0e53a1cd-09b8-4443-acc4-af3acdfbc213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Cannon">
+      <UniqueIdentifier>{812fb5d8-9bba-4db5-8ff1-57b58515a05f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Projectile">
+      <UniqueIdentifier>{a9f9921c-aa48-4ffd-a05e-20cd6e0f4e8b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonInputComponent.cpp">
+      <Filter>Source Files\GameObjects\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonRenderComponent.cpp">
+      <Filter>Source Files\GameObjects\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="time.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Application.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonGameObject.cpp">
+      <Filter>Source Files\GameObjects\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileRenderComponent.cpp">
+      <Filter>Source Files\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileScriptComponent.cpp">
+      <Filter>Source Files\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonInputComponent.h">
+      <Filter>Header Files\GameObjects\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonRenderComponent.h">
+      <Filter>Header Files\GameObjects\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Application.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>Header Files\GameObjects\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptComponent.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileScriptComponent.h">
+      <Filter>Header Files\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileRenderComponent.h">
+      <Filter>Header Files\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
