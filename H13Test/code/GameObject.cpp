@@ -30,6 +30,7 @@ GameObject::GameObject(std::string name)
 	, mRenderComponent(nullptr)
 	, mInputComponent(nullptr)
 	, mScriptComponent(nullptr)
+	, mColliderComponent(nullptr)
 	, mParent(nullptr)
 {
 	
@@ -41,7 +42,7 @@ Vector2D	GameObject::getPosition()
 	return mPosition; 
 }
 
-void		GameObject::setPosition(float x, float y)
+void		GameObject::setPosition(float x, float y, bool updateCollider)
 {
 	Vector2D worldPosition;// x, y);
 	GameObject* ancestor = mParent;
@@ -52,6 +53,12 @@ void		GameObject::setPosition(float x, float y)
 	}
 	mPosition.x = worldPosition.x + x;
 	mPosition.y = worldPosition.y + y;
+
+
+	if ( updateCollider == true && mColliderComponent)
+	{
+		//mColliderComponent->update();
+	}
 
 	for (std::vector<GameObject*>::iterator iter = mChildren.begin(); iter != mChildren.end(); ++iter)
 	{
@@ -70,9 +77,9 @@ void GameObject::updateChildrenPositions(Vector2D pos)
 	mPosition.y += (pos.y - mPosition.y);
 }
 
-void GameObject::setPosition(Vector2D pos)
+void GameObject::setPosition(Vector2D pos, bool updateCollider)
 {
-	setPosition(pos.x, pos.y);
+	setPosition(pos.x, pos.y, updateCollider);
 }
 
 float		GameObject::getRotation()
@@ -107,6 +114,7 @@ void GameObject::Destroy(GameObject& gameObject)
 {
 	std::function<void()> destroyGameObject = [&]()
 	{
+		
 		gameObject.removeAllComponentsAndGameObject();
 	};
 
@@ -167,6 +175,19 @@ void GameObject::removeAllComponentsAndGameObject()
 		}
 	}
 
+	if (mColliderComponent != nullptr)
+	{
+		for (auto cc = mApplication->mColliderComponents.begin(); cc != mApplication->mColliderComponents.end(); ++cc)
+		{
+			if ((*cc) == this->mColliderComponent)
+			{
+				mApplication->mColliderComponents.erase(cc);
+				delete mColliderComponent;
+				break;
+			}
+		}
+	}
+
 	
 
 	for (std::vector<std::unique_ptr<GameObject>>::iterator gameObject = mApplication->mGameObjects.begin(); gameObject != mApplication->mGameObjects.end(); ++gameObject)
@@ -179,6 +200,11 @@ void GameObject::removeAllComponentsAndGameObject()
 	}
 }
 
+std::string	GameObject::getName()
+{
+	return mName;
+}
+
 std::vector<GameObject*>& GameObject::getChildren()
 {
 	return mChildren;
@@ -189,33 +215,48 @@ Vector2D GameObject::getScale()
 	return mScale;
 }
 
-void GameObject::setScale(Vector2D scalar)
+void GameObject::scale(Vector2D scale)
 {
 	
 	// scale each component of vector by scalar
 	if (mRenderComponent)
 	{
-		auto& vertices = mRenderComponent->getVertices();
+		Vector2D tempScale = mScale + scale;
+
+ 		auto vertices = mRenderComponent->getVertices();
 		for (std::vector<Vector2D>::iterator vec = vertices.begin(); vec != vertices.end(); ++vec)
 		{
-			(*vec).x *= (1 /mScale.x) * scalar.x;
-			(*vec).y *= (1 /mScale.y) * scalar.y;
+			//(*vec).x *= newScale.x;
+			//(*vec).y *= newScale.y;
 		}
+		//newScale.x = 1 / newScale.x;
+		//newScale.y = 1 / newScale.y;
+		mRenderComponent->scaleVertices(scale);
 	}
 
 	// update this object's scalar
-	mScale = scalar;
+	//mScale *= scale;
+	mScale *= scale;
 
 	// update scale of each child game object
-	for (std::vector<GameObject*>::iterator iter = mChildren.begin(); iter != mChildren.end(); ++iter)
-	{
-		(*iter)->setScale(mScale);
-	}
+	//for (std::vector<GameObject*>::iterator iter = mChildren.begin(); iter != mChildren.end(); ++iter)
+	//{
+	//	(*iter)->setScale(newScale );
+	//}
 
 
 }
 
-void GameObject::setScale(float x, float y)
+void GameObject::scale(float x, float y)
 {
-	setScale(Vector2D(x, y));
+	scale(Vector2D(x, y));
+}
+
+void GameObject::move(float x, float y, bool updateCollider)
+{
+	setPosition(mPosition.x + x, mPosition.y + y, updateCollider);
+}
+void GameObject::move(Vector2D vec, bool updateCollider)
+{
+	move(vec.x, vec.y, updateCollider);
 }

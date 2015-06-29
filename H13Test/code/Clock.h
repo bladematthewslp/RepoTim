@@ -13,26 +13,7 @@ public:
 	Clock(std::string name = "Clock");
 };
 
-class ClockRenderComponent : public RenderComponent
-{
-public:
-	ClockRenderComponent(GameObject& gameObject);
 
-};
-
-class ClockScriptComponent : public ScriptComponent
-{
-	GameObject* hourHand;
-	GameObject* minuteHand;
-	GameObject* secondHand;
-
-	Vector2D mVelocity;
-public:
-	
-	ClockScriptComponent(GameObject& gameObject);
-	~ClockScriptComponent();
-	virtual void update();
-};
 
 
 class ClockHand : public GameObject
@@ -40,15 +21,6 @@ class ClockHand : public GameObject
 public:
 	ClockHand(std::string name = "ClockHand");
 };
-
-
-class ClockHandRenderComponent : public RenderComponent
-{
-
-	public:
-		ClockHandRenderComponent(GameObject& gameObject);
-};
-
 
 
 

@@ -44,6 +44,12 @@
     <Filter Include="Source Files\GameObjects\Projectile">
       <UniqueIdentifier>{a9f9921c-aa48-4ffd-a05e-20cd6e0f4e8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\Clock">
+      <UniqueIdentifier>{c5c66d0f-48ce-4405-98f4-ff2e88153464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Clock">
+      <UniqueIdentifier>{2a12c13b-4d94-44fb-bfe2-6aaceaa58076}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RenderComponent.cpp">
@@ -94,8 +100,20 @@
     <ClCompile Include="ProjectileScriptComponent.cpp">
       <Filter>Source Files\GameObjects\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
     <ClCompile Include="Clock.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameObjects\Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="ClockRenderComponent.cpp">
+      <Filter>Source Files\GameObjects\Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="ClockScriptComponent.cpp">
+      <Filter>Source Files\GameObjects\Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="ClockColliderComponent.cpp">
+      <Filter>Source Files\GameObjects\Clock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,8 +165,20 @@
     <ClInclude Include="ProjectileRenderComponent.h">
       <Filter>Header Files\GameObjects\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
     <ClInclude Include="Clock.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files\GameObjects\Clock</Filter>
+    </ClInclude>
+    <ClInclude Include="ClockScriptComponent.h">
+      <Filter>Header Files\GameObjects\Clock</Filter>
+    </ClInclude>
+    <ClInclude Include="ClockRenderComponent.h">
+      <Filter>Header Files\GameObjects\Clock</Filter>
+    </ClInclude>
+    <ClInclude Include="ClockColliderComponent.h">
+      <Filter>Header Files\GameObjects\Clock</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

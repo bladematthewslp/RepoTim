@@ -90,6 +90,10 @@
     <ClCompile Include="CannonInputComponent.cpp" />
     <ClCompile Include="CannonRenderComponent.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="ClockColliderComponent.cpp" />
+    <ClCompile Include="ClockRenderComponent.cpp" />
+    <ClCompile Include="ClockScriptComponent.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="C_Application.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -109,6 +113,10 @@
     <ClInclude Include="CannonInputComponent.h" />
     <ClInclude Include="CannonRenderComponent.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="ClockColliderComponent.h" />
+    <ClInclude Include="ClockRenderComponent.h" />
+    <ClInclude Include="ClockScriptComponent.h" />
+    <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="C_Application.h" />
     <ClInclude Include="GameObject.h" />

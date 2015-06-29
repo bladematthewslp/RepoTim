@@ -4,7 +4,7 @@
 ProjectileRenderComponent::ProjectileRenderComponent(GameObject& gameObject)
 	: RenderComponent(gameObject)
 {
-	mVertices =
+	std::vector<Vector2D> verts =
 	{
 		Vector2D(-2, +10),
 		Vector2D(-2, -10),
@@ -12,11 +12,15 @@ ProjectileRenderComponent::ProjectileRenderComponent(GameObject& gameObject)
 		Vector2D(+2, +10),
 	};
 
-	mColors =
+	setVertices(verts);
+
+	std::vector<Color> colors =
 	{
 		GetRGB(255, 0, 0),
 		GetRGB(255, 0, 0),
 		GetRGB(255, 0, 0),
 		GetRGB(255, 0, 0),
 	};
+
+	setColors(colors);
 }

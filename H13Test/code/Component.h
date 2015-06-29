@@ -3,8 +3,10 @@
 
 class GameObject;
 class C_Application;
+
 class Component
 {
+	friend class ClockColliderComponent;
 	protected:
 		GameObject& mGameObject;
 		
@@ -15,5 +17,6 @@ class Component
 
 		static C_Application* mApplication;
 		static void setApplication(C_Application* app);
+		GameObject& getGameObject() { return mGameObject;  }
 };
 

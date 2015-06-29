@@ -10,6 +10,7 @@
 class C_Application
 {
 	friend class GameObject;
+	friend class Component;
 public:
 
 	typedef unsigned int T_PressedKey;
@@ -29,23 +30,20 @@ public:
 
 	// Added by Timothy Matthews;
 	//std::unique_ptr<GameObject>* createGameObject(std::string name = "GameObject");
-	const int getScreenWidth() const
-	{
-		return m_ScreenWidth;
-	}
+	const int getScreenWidth() const { 	return m_ScreenWidth;}
 
-	const int getScreenHeight() const
-	{
-		return m_ScreenHeight;
-	}
+	const int getScreenHeight() const {	return m_ScreenHeight;}
 
-	std::vector<RenderComponent*>& getRenderComponents() const;
-	
+	void											addProjectile(GameObject* projectile);
+	void											removeProjectile(GameObject* projectile);
+	std::vector<GameObject*>&						getProjectiles() { return mProjectiles;  }
+
+
 	template <typename T>
 	void addComponent(Component* component);
 
 	std::queue < std::function<void()>> mCommandQueue;
-	
+	std::vector<ColliderComponent*>					mColliderComponents;
 	
 private:
 
@@ -58,10 +56,11 @@ private:
 	
 	// Added by Timothy Matthews
 	static std::vector<std::unique_ptr<GameObject>>	mGameObjects;
+	std::vector<GameObject*>						mProjectiles;
 	std::vector<RenderComponent*>					mRenderComponents;
 	std::vector<InputComponent*>					mInputComponents;
 	std::vector<ScriptComponent*>					mScriptComponents;
-
+	
 	
 
 };
@@ -75,7 +74,9 @@ void C_Application::addComponent(Component* component)
 		mInputComponents.push_back(dynamic_cast<InputComponent*>(component));
 	else if (dynamic_cast<ScriptComponent*>(component) != nullptr)
 		mScriptComponents.push_back(dynamic_cast<ScriptComponent*>(component));
-
+	else if (dynamic_cast<ColliderComponent*>(component) != nullptr)
+		mColliderComponents.push_back(dynamic_cast<ColliderComponent*>(component));
+	
 }
 
 

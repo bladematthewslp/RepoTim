@@ -10,5 +10,6 @@ class Projectile : public GameObject
 {
 public:
 	Projectile();
+	virtual ~Projectile();
 };
 

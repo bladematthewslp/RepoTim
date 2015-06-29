@@ -7,5 +7,11 @@ Projectile::Projectile()
 {
 	mRenderComponent = new ProjectileRenderComponent(*this);
 	mScriptComponent = new ProjectileScriptComponent(*this);
+	mColliderComponent = new ColliderComponent(*this);
+	mApplication->addProjectile(this);
 }
 
+Projectile::~Projectile()
+{
+	mApplication->removeProjectile(this);
+}

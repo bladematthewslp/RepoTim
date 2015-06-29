@@ -7,12 +7,13 @@
 
 
 
-struct  Vector2D;
+#include "Vector.h"
 
 
 #include "RenderComponent.h"
 #include "InputComponent.h"
 #include "ScriptComponent.h"
+#include "ColliderComponent.h"
 #include "C_Application.h"
 
 namespace ComponentType
@@ -29,7 +30,7 @@ namespace ComponentType
 
 class GameObject
 {
-
+	friend class C_Application;
 	private:
 		void					removeAllComponentsAndGameObject();
 	protected:
@@ -45,7 +46,7 @@ class GameObject
 	public:
 		
 		GameObject(std::string name = "GameObject");
-		~GameObject();
+		virtual ~GameObject();
 		template <typename T>
 		static GameObject* Create();
 		static GameObject* Create(std::string name = "GameObject");
@@ -56,18 +57,23 @@ class GameObject
 		RenderComponent*	mRenderComponent;
 		InputComponent*		mInputComponent;
 		ScriptComponent*	mScriptComponent;
+		ColliderComponent*	mColliderComponent;
+
+		std::string	getName();
 
 		Vector2D	getPosition();
-		void		setPosition(float x, float y);
-		void		setPosition(Vector2D pos);
+		void		setPosition(float x, float y, bool updateCollider = true);
+		void		setPosition(Vector2D pos, bool updateCollider = true);
 		void		updateChildrenPositions(Vector2D pos);
-		
+
+		void		move(float x, float y, bool updateCollider = true);
+		void		move(Vector2D vec, bool updateCollider = true);
 		float		getRotation();
 		void		setRotation(float radians);
 
 		Vector2D	getScale();
-		void		setScale(Vector2D scalar);
-		void		setScale(float x, float y);
+		void		scale(Vector2D newScale);
+		void		scale(float x, float y);
 
 		static void	setApplicaton(C_Application* application);
 

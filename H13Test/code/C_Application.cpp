@@ -3,7 +3,7 @@
 #include "time.h"
 #include "Cannon.h"
 #include "Clock.h"
-
+#include "ClockScriptComponent.h"
 std::vector<std::unique_ptr<GameObject>>	C_Application::mGameObjects;
 
 
@@ -15,17 +15,18 @@ C_Application::C_Application(int screenWidth, int screenHeight)
 {
 	
 	Component::setApplication(this);
-	GameObject::setApplicaton(this);
+	GameObject::setApplicaton(this); 
 
 	GameObject* cannon = GameObject::Create<Cannon>();
 	cannon->setPosition(m_ScreenWidth / 2.0f, m_ScreenHeight / 1.10f);
 	
 	GameObject* clock =  GameObject::Create<Clock>();
-	clock->setPosition(200, 200);
+	clock->setPosition(325, 127);
+	dynamic_cast<ClockScriptComponent*>(clock->mScriptComponent)->setVelocity(Vector2D(-3.0f, 3.0f));
 
-	
 	GameObject* clock2 = GameObject::Create<Clock>();
-	clock2->setPosition(600, 400);
+	clock2->setPosition(127, 510);
+	dynamic_cast<ClockScriptComponent*>(clock2->mScriptComponent)->setVelocity(Vector2D(+3.0f, -1.0f));
 
 
 	
@@ -34,7 +35,10 @@ C_Application::C_Application(int screenWidth, int screenHeight)
 
 C_Application::~C_Application()
 {
-
+	while (mGameObjects.size() != 0)
+	{
+		(*mGameObjects.back()).removeAllComponentsAndGameObject();
+	}
 }
 
 
@@ -43,9 +47,7 @@ void C_Application::Tick(T_PressedKey pressedKeys)
 	
 	// Sample tick
 
-	// Clear entire screen
-	FillRect(0, 0, m_ScreenWidth, m_ScreenHeight, GetRGB(0, 0, 0));
-
+	
 	// Handle pending commands
 	while (!mCommandQueue.empty())
 	{
@@ -53,26 +55,56 @@ void C_Application::Tick(T_PressedKey pressedKeys)
 		mCommandQueue.pop();
 	}
 
-	// Update input components
-	int size = mInputComponents.size();
-	for (int i = 0; i < size; i++)
+
+	// update ColliderComponents
+	for (auto collider = mColliderComponents.begin(); collider != mColliderComponents.end(); ++collider)
 	{
-		mInputComponents[i]->update(pressedKeys);
+		(*collider)->update();
 	}
 	
+	for (int i = mColliderComponents.size() - 1; i >= 0; --i)// mColliderComponents.size(); i++)
+	//for (auto collider = mColliderComponents.rbegin(); collider != mColliderComponents.rend(); ++collider)
+	{ 
+		mColliderComponents[i]->checkForCollision();
+		//(*collider)->checkForCollision();
+	}
+
+	// Update input components
+	for (auto input = mInputComponents.begin(); input != mInputComponents.end(); ++input)
+	{
+		(*input)->update(pressedKeys);
+	}
 	
 	// Update script components
-	size = mScriptComponents.size();
-	for (int i = 0; i < size; i++)
+	for (auto script = mScriptComponents.begin(); script != mScriptComponents.end(); ++script)
 	{
-		mScriptComponents[i]->update();
+		(*script)->update();
 	}
 
+	// Clear entire screen
+	FillRect(0, 0, m_ScreenWidth, m_ScreenHeight, GetRGB(0, 0, 0));
 
 	// Draw all renderable game objects
-	size = mRenderComponents.size();
-	for (int i = 0; i < size; i++)
+	for (auto render = mRenderComponents.begin(); render != mRenderComponents.end(); ++render)
 	{
-		mRenderComponents[i]->Draw();
+		(*render)->Draw();
 	}
 }
+
+void C_Application::addProjectile(GameObject* projectile)
+{
+	mProjectiles.push_back(projectile);
+}
+
+void C_Application::removeProjectile(GameObject* projectile)
+{
+	for (auto iter = mProjectiles.begin(); iter != mProjectiles.end(); ++iter)
+	{
+		if (*iter == projectile)
+		{
+			mProjectiles.erase(iter);
+			break;
+		}
+	}
+}
+

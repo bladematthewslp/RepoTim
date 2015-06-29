@@ -19,6 +19,8 @@ void ProjectileScriptComponent::update()
 
 	mGameObject.setPosition(pos.x, pos.y);
 
-	if (pos.y < 0 || pos.x < 0 || pos.x > mApplication->getScreenWidth() )
+	if (pos.y < 0 || pos.x < 0 || pos.x > mApplication->getScreenWidth())
+	{
 		mGameObject.Destroy();
+	}
 }
