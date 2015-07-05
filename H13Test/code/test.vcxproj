@@ -104,6 +104,7 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ProjectileRenderComponent.cpp" />
     <ClCompile Include="ProjectileScriptComponent.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="time.cpp" />
@@ -126,10 +127,14 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileRenderComponent.h" />
     <ClInclude Include="ProjectileScriptComponent.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="ScriptComponent.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="Vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

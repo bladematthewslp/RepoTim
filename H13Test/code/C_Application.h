@@ -6,6 +6,11 @@
 #include <functional>
 #include <queue>
 #include "GameObject.h"
+//#include "QuadTree.h"
+
+struct Node;
+
+class QuadTree;
 
 class C_Application
 {
@@ -38,13 +43,14 @@ public:
 	void											removeProjectile(GameObject* projectile);
 	std::vector<GameObject*>&						getProjectiles() { return mProjectiles;  }
 
-
+	void				createTwoClocks();
 	template <typename T>
 	void addComponent(Component* component);
 
 	std::queue < std::function<void()>> mCommandQueue;
 	std::vector<ColliderComponent*>					mColliderComponents;
-	
+
+	Node* quad;
 private:
 
 	const int	m_ScreenWidth;
@@ -61,7 +67,7 @@ private:
 	std::vector<InputComponent*>					mInputComponents;
 	std::vector<ScriptComponent*>					mScriptComponents;
 	
-	
+	QuadTree*		mQuadTree;
 
 };
 

@@ -1,0 +1,221 @@
+
+class QuadTree : public GameObject
+{
+public:
+		const int mMaxObjects = 5;
+		const int mMaxLevels = 5;
+
+		int mLevel;
+		std::vector<ColliderComponent*> mColliders;
+		AABB* mBounds;
+		std::array<QuadTree*, 4> mNodes;
+
+	
+		QuadTree(int level, AABB* bounds);// ColliderComponent* bounds);
+		void clear();
+		void split();
+		int getIndex(ColliderComponent* collider);
+		void insert(ColliderComponent* collider);
+
+		std::vector<ColliderComponent*> retrieve(std::vector<ColliderComponent*>& returnObjects, ColliderComponent* collider);
+};
+
+QuadTree::QuadTree(int level, AABB* bounds)
+	: GameObject("QuadTree")
+	, mLevel(level)
+	, mColliders()
+	, mBounds(bounds)
+	, mNodes()
+{
+	//mNodes = new std::array < std::unique_ptr<QuadTree>, 4 > ;
+	mRenderComponent = new RenderComponent(*this);
+
+	std::vector<Vector2D> verts =
+	{
+		Vector2D(0 + 2, 0+ 2),
+		Vector2D(0 + 2, mApplication->getScreenHeight() - 2),
+		Vector2D(mApplication->getScreenWidth() - 2, mApplication->getScreenHeight() - 2),
+		Vector2D(mApplication->getScreenWidth() - 2, 0 + 2),
+	};
+
+	mRenderComponent->setVertices(verts);
+
+	std::vector<Color> colors =
+	{
+		GetRGB(255, 0,0),
+		GetRGB(255, 0,0),
+		GetRGB(255, 0,0),
+		GetRGB(255, 0,0),
+
+	};
+
+	mRenderComponent->setColors(colors);
+
+
+	
+	mColliders.reserve(mMaxObjects);
+	for (std::vector<ColliderComponent*>::iterator iter = mColliders.begin(); iter != mColliders.end(); ++iter)
+	{
+		(*iter) = nullptr;
+	}
+
+	
+}
+
+void QuadTree::clear()
+{
+	mColliders.clear();
+
+	for (int i = 0; i < mNodes.size(); i++)
+	{
+		if (mNodes[i] != nullptr)
+		{
+			mNodes[i]->clear();
+			mNodes[i] = nullptr;
+		}
+	}
+}
+
+void QuadTree::split()
+{
+	int subWidth = (int)((mBounds->xMax - mBounds->xMin) / 2);
+	int subHeight = (int)((mBounds->yMax - mBounds->yMin) / 2);
+
+	int x = (int)mBounds->xMin;// -subWidth;
+	int y = (int)mBounds->yMin;// -subHeight;
+
+	AABB* c1 = std::make_unique<AABB>(x + subWidth, x + subWidth + subWidth, y, subHeight).release();
+	AABB* c2 = std::make_unique<AABB>(x, x + subWidth, y, y + subHeight).release();
+	AABB* c3 = std::make_unique<AABB>(x, x + subWidth, y + subHeight, y + subHeight + subHeight).release();
+	AABB* c4 = std::make_unique<AABB>(x + subWidth, x + subWidth + subWidth, y + subHeight, y + subHeight + subHeight).release();
+	//c1->setSize(x + subWidth, y, subWidth, subHeight);
+	//c2->setSize(x, y, subWidth, subHeight);
+	//c3->setSize(x, y + subHeight, subWidth, subHeight);
+	//c4->setSize(x + subWidth, y + subHeight, subWidth, subHeight);
+
+
+	mNodes[0] = std::make_unique<QuadTree>(mLevel + 1, std::move(c1)).release();
+	mNodes[1] = std::make_unique<QuadTree>(mLevel + 1, std::move(c2)).release();
+	mNodes[2] = std::make_unique<QuadTree>(mLevel + 1, std::move(c3)).release();
+	mNodes[3] = std::make_unique<QuadTree>(mLevel + 1, std::move(c4)).release();
+	
+	
+}
+
+int QuadTree::getIndex(ColliderComponent* collider)
+{
+	AABB col = collider->getCollider();
+	int index = -1;
+	double verticalMidpoint = mBounds->xMin + (mBounds->xMax / 2);// -mBounds->xMin);
+	double horizontalMidpoint = mBounds->yMin + (mBounds->yMax / 2);// -mBounds->yMin);
+
+	// can item fit in top quadrants
+	bool topQuadrant = (col.yMin < horizontalMidpoint && col.yMax < horizontalMidpoint);
+
+	// can item fit in bottom quadrant
+	bool bottomQuadrant = (col.yMin > horizontalMidpoint);
+
+	// can object fit in left quadrants
+	if (col.xMin < verticalMidpoint && col.xMax < verticalMidpoint)
+	{
+		if (topQuadrant)
+		{
+			index = 1;
+		}
+		else if (bottomQuadrant)
+		{
+			index = 2;
+		}
+	}
+	else if (col.xMin > verticalMidpoint)
+	{
+		if (topQuadrant)
+		{
+			index = 0;
+		}
+		else if (bottomQuadrant)
+		{
+			index = 3;
+		}
+	}
+
+	return index;
+}
+
+void QuadTree::insert(ColliderComponent* collider)
+{
+	if (mNodes[0] != nullptr)
+	{
+		int index = getIndex(collider);
+		if (index != -1)
+		{
+			mNodes[index]->insert(collider);
+			return;
+		}
+	}
+
+	mColliders.push_back(collider);
+
+	if (mColliders.size() > mMaxObjects && mLevel < mMaxLevels)
+	{
+		if (mNodes[0] == nullptr)
+		{
+			split();
+		}
+
+		std::vector<ColliderComponent*> toDelete;
+		int i = 0;
+		auto iter = mColliders.begin();
+		//for (auto iter = mColliders.begin(); iter != mColliders.end(); ++iter, ++i)
+		while (i < mColliders.size())
+		{
+			int index = getIndex(mColliders[i]);// (*iter));
+			if (index != -1)
+			{
+				mNodes[index]->insert(mColliders[i]);// ((*iter)))
+				//toDelete.push_back(mColliders[i]);
+				mColliders.erase(std::remove(mColliders.begin(), mColliders.end(), mColliders[i]), mColliders.end());
+
+			} 
+			else
+			{
+				i++;
+				iter++;
+			}
+		}
+
+		//while (toDelete.size() != 0)
+		{
+		//	mColliders.erase(toDelete.end());
+		//	toDelete.pop_back();
+
+		}
+
+	}
+}
+
+std::vector<ColliderComponent*> QuadTree::retrieve(std::vector<ColliderComponent*>& returnObjects, ColliderComponent* collider)
+{
+	int index = getIndex(collider);
+	if (index != -1 && mNodes[0] != nullptr)
+	{
+		mNodes[index]->retrieve(returnObjects, collider);
+	} 
+
+	if (mNodes[0] != nullptr)
+	{
+		for (int i = 0; i < mNodes[i]->mColliders.size(); i++)
+		{
+			returnObjects.push_back(mNodes[i]->mColliders[i]);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < mColliders.size(); i++)
+		{
+			returnObjects.push_back(mColliders[i]);
+		}
+	}
+	
+	return returnObjects;
+}

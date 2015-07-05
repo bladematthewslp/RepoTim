@@ -1,15 +1,15 @@
-﻿Build started 6/28/2015 5:17:05 PM.
-     1>Project "C:\Users\flawlezz\Desktop\H13Test\code\test.vcxproj" on node 2 (Build target(s)).
+﻿Build started 7/4/2015 8:38:59 PM.
+     1>Project "C:\Users\flawlezz\Desktop\H13\H13Test\code\test.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ClockColliderComponent.cpp
          ClockColliderComponent.cpp
-     1>c:\users\flawlezz\desktop\h13test\code\clockcollidercomponent.cpp(24): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\flawlezz\desktop\h13test\code\clockcollidercomponent.cpp(25): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\flawlezz\desktop\h13test\code\clockcollidercomponent.cpp(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\flawlezz\desktop\h13test\code\clockcollidercomponent.cpp(101): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\flawlezz\desktop\h13test\code\clockcollidercomponent.cpp(105): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\flawlezz\desktop\h13\h13test\code\clockcollidercomponent.cpp(25): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\flawlezz\desktop\h13\h13test\code\clockcollidercomponent.cpp(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\flawlezz\desktop\h13\h13test\code\clockcollidercomponent.cpp(27): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\flawlezz\desktop\h13\h13test\code\clockcollidercomponent.cpp(64): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\flawlezz\desktop\h13\h13test\code\clockcollidercomponent.cpp(68): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\flawlezz\Desktop\H13Test\code\Debug\test.exe" /INCREMENTAL /NOLOGO winmm.lib user32.lib gdi32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\flawlezz\Desktop\H13Test\code\Debug\test.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\flawlezz\Desktop\H13Test\code\Debug\test.lib" /MACHINE:X86 /SAFESEH Debug\CannonGameObject.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\flawlezz\Desktop\H13\H13Test\code\Debug\test.exe" /INCREMENTAL /NOLOGO winmm.lib user32.lib gdi32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\flawlezz\Desktop\H13\H13Test\code\Debug\test.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\flawlezz\Desktop\H13\H13Test\code\Debug\test.lib" /MACHINE:X86 /SAFESEH Debug\CannonGameObject.obj
          Debug\CannonInputComponent.obj
          Debug\CannonRenderComponent.obj
          Debug\Clock.obj
@@ -27,12 +27,13 @@
          Debug\Projectile.obj
          Debug\ProjectileRenderComponent.obj
          Debug\ProjectileScriptComponent.obj
+         Debug\QuadTree.obj
          Debug\RenderComponent.obj
          Debug\ScriptComponent.obj
          Debug\time.obj
-         test.vcxproj -> C:\Users\flawlezz\Desktop\H13Test\code\Debug\test.exe
-     1>Done Building Project "C:\Users\flawlezz\Desktop\H13Test\code\test.vcxproj" (Build target(s)).
+         test.vcxproj -> C:\Users\flawlezz\Desktop\H13\H13Test\code\Debug\test.exe
+     1>Done Building Project "C:\Users\flawlezz\Desktop\H13\H13Test\code\test.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.38
+Time Elapsed 00:00:01.22

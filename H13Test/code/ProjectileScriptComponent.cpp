@@ -7,6 +7,7 @@ ProjectileScriptComponent::ProjectileScriptComponent(GameObject& gameObject)
 	speed = 4;
 }
 
+
 void ProjectileScriptComponent::update() 
 {
 	Vector2D pos = mGameObject.getPosition();
@@ -15,11 +16,9 @@ void ProjectileScriptComponent::update()
 	pos.x += sin(angle) * speed;
 	pos.y += -cos(angle) * speed;// speed;
 
-	
-
 	mGameObject.setPosition(pos.x, pos.y);
 
-	if (pos.y < 0 || pos.x < 0 || pos.x > mApplication->getScreenWidth())
+	if (pos.y < 0 || pos.x < 0 || pos.x > mApplication->getScreenWidth() || pos.y > mApplication->getScreenHeight())
 	{
 		mGameObject.Destroy();
 	}

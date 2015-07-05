@@ -19,7 +19,10 @@ const int k_ScreenHeight = 600;
 //----------------------------
 //----------------------------
 
-
+int fps = 0;
+void calculateFPS();
+DWORD currentTime;
+DWORD timeAtNextSecond = timeGetTime();
 static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch(msg)
@@ -93,7 +96,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			// Pause kSleepTimeMs milliseconds
 
 			const DWORD kSleepTimeMs = 20;			
-			const DWORD currentTime = timeGetTime();
+			currentTime = timeGetTime();
 			const DWORD timeSinceLast = currentTime - lastTime;
 
 			if (timeSinceLast < kSleepTimeMs)
@@ -118,7 +121,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 
 			app.Tick(g_PressedKeys);
-
+			fps++;
+			calculateFPS();
 		}
 	}
 
@@ -127,4 +131,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	UninitializeGraphics();
 
 	return 0;
+}
+
+void calculateFPS()
+{
+	char msgbuf[50] = "";
+	sprintf_s(msgbuf, "FPS = %d\n", fps);
+	DWORD  time = timeGetTime();
+	if (time - timeAtNextSecond > 1000)
+	{
+		OutputDebugStringA(msgbuf);
+		fps = 0;
+		timeAtNextSecond = timeGetTime();
+	}
 }

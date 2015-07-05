@@ -57,7 +57,7 @@ void		GameObject::setPosition(float x, float y, bool updateCollider)
 
 	if ( updateCollider == true && mColliderComponent)
 	{
-		//mColliderComponent->update();
+		mColliderComponent->update();
 	}
 
 	for (std::vector<GameObject*>::iterator iter = mChildren.begin(); iter != mChildren.end(); ++iter)

@@ -115,6 +115,9 @@
     <ClCompile Include="ClockColliderComponent.cpp">
       <Filter>Source Files\GameObjects\Clock</Filter>
     </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderComponent.h">
@@ -180,5 +183,13 @@
     <ClInclude Include="ClockColliderComponent.h">
       <Filter>Header Files\GameObjects\Clock</Filter>
     </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.txt">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

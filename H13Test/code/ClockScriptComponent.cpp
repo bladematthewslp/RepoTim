@@ -3,12 +3,28 @@
 #include "GameObject.h"
 #include "Clock.h"
 #include "time.h"
+#include <random>
 
+int getRandomNumber()
+{
+	 // Seed with a real random value, if available
+	 std::random_device rd;
+
+	 // Choose a random mean between 1 and 6
+	 std::default_random_engine e1(rd());
+	 std::uniform_int_distribution<int> uniform_dist(-3, 3);
+
+	 int num = 0;
+
+	 while (num == 0)
+		 num = uniform_dist(e1);
+
+	 return num;
+}
 
 
 ClockScriptComponent::ClockScriptComponent(GameObject& gameObject)
 	: ScriptComponent(gameObject)
-	, mVelocity(-1.0f, 1.0f)
 {
 	hourHand = GameObject::Create<ClockHand>();
 	minuteHand = GameObject::Create<ClockHand>();
@@ -21,6 +37,10 @@ ClockScriptComponent::ClockScriptComponent(GameObject& gameObject)
 	//mGameObject.scale(3.0f, 3.0f);
 	hourHand->scale(.8f, .8f);
 	secondHand->scale(.2f, 1.0f);
+
+	mVelocity.x = getRandomNumber();
+	mVelocity.y = getRandomNumber();
+	
 }
 
 
@@ -47,7 +67,8 @@ void ClockScriptComponent::update()
 	Vector2D pos = mGameObject.getPosition();
 
 	mGameObject.move(mVelocity);
-
+	//(mGameObject.mColliderComponent)->update();
+	//(mGameObject.mColliderComponent)->checkForCollision();
 
 
 	if (!hourHand || !minuteHand)

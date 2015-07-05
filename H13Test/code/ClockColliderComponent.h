@@ -10,7 +10,7 @@ public:
 	ClockColliderComponent(GameObject& gameObject);
 	~ClockColliderComponent();
 	void update();
-	virtual ColliderComponent* checkForCollision();
+	virtual ColliderComponent* checkForCollision(ColliderComponent* other);
 
 };
 

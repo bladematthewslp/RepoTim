@@ -4,6 +4,8 @@
 #include "Component.h"
 #include "Vector.h"
 
+struct Node;
+
 struct AABB
 {
 	float xMin;
@@ -22,15 +24,21 @@ struct AABB
 
 class ColliderComponent : public Component
 {
-protected:
+public:
 	AABB mCollider;
 	Vector2D mPosition;
-public:
+	Node* mParentQuadNode;
+	ColliderComponent* mPrevQuadCollider;
+	ColliderComponent* mNextQuadCollider;
+
 	ColliderComponent(GameObject& gameObject);
+	~ColliderComponent();
 	virtual void update();
 	Vector2D mPreviousPosition;
 
 	Vector2D getPosition();
-	virtual ColliderComponent* checkForCollision();
-	const AABB& getCollider() const;
+	virtual ColliderComponent* checkForCollision(ColliderComponent* other);
+	const AABB& getCollider() const; 
+
+	void setSize(float xMin, float yMin, float xMax, float yMax);
 };
