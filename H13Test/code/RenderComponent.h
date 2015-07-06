@@ -3,7 +3,7 @@
 #include <vector>
 #include "Component.h"
 #include "graphics.h"
-#include "Vector.h"
+#include "Vector2D.h"
 
 class GameObject;
 

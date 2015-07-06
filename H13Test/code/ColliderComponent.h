@@ -2,9 +2,9 @@
 
 
 #include "Component.h"
-#include "Vector.h"
+#include "Vector2D.h"
 
-struct Node;
+
 
 struct AABB
 {
@@ -24,21 +24,30 @@ struct AABB
 
 class ColliderComponent : public Component
 {
-public:
-	AABB mCollider;
-	Vector2D mPosition;
-	Node* mParentQuadNode;
-	ColliderComponent* mPrevQuadCollider;
-	ColliderComponent* mNextQuadCollider;
+	friend struct Node;
+protected:
+	
+	Vector2D					mPosition;
+	
 
+	AABB						mCollider;
+
+	// variables for quad-tree
+	Node*						mParentQuadNode;
+	ColliderComponent*			mPrevQuadCollider;
+	ColliderComponent*			mNextQuadCollider;
+
+
+public:
 	ColliderComponent(GameObject& gameObject);
 	~ColliderComponent();
-	virtual void update();
-	Vector2D mPreviousPosition;
+	
+	virtual void				update();
+	
+	Vector2D					mPreviousPosition;
+	Vector2D					getPosition();
+	virtual ColliderComponent*	checkForCollision(ColliderComponent* other);
+	AABB						getCollider() const; 
 
-	Vector2D getPosition();
-	virtual ColliderComponent* checkForCollision(ColliderComponent* other);
-	const AABB& getCollider() const; 
-
-	void setSize(float xMin, float yMin, float xMax, float yMax);
+	void						setSize(float xMin, float yMin, float xMax, float yMax);
 };

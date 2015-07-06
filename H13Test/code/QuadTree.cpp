@@ -1,6 +1,4 @@
 #include "QuadTree.h"
-
-
 Node::Node()
 {
 }
@@ -66,7 +64,6 @@ void Node::InsertObject(Node* pTree, ColliderComponent* pObject)
 		// Straddling, or no child node to descend into, so link
 		// object into linked list
 		
-		//
 		pObject->mNextQuadCollider = pTree->mColliderList;
 		if(pTree->mColliderList)
 			pTree->mColliderList->mPrevQuadCollider = pObject;
@@ -90,7 +87,6 @@ void Node::RemoveObject(ColliderComponent* collider)
 
 void Node::TestAllCollisions(Node* pTree)
 {
-	DWORD time = timeGetTime();
 	// Keep track of all ancestor object lists in a stack
 	const int MAX_DEPTH = 40;
 	static Node *ancestorStack[MAX_DEPTH];
@@ -113,7 +109,6 @@ void Node::TestAllCollisions(Node* pTree)
 				pA->checkForCollision(pB);
 
 
-				//TestCollision(pA, pB);
 			}
 		}
 	}

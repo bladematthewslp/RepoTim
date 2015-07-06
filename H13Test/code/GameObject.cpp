@@ -1,9 +1,6 @@
 #include "GameObject.h"
-#include "Cannon.h"
-#include "Vector.h"
+#include "Vector2D.h"
 #include "C_Application.h"
-#include "Clock.h"
-#include <memory>
 
 C_Application*	GameObject::mApplication;
 
@@ -25,13 +22,14 @@ GameObject* GameObject::Create(std::string name)
 GameObject::GameObject(std::string name)
 	: mAngle(0)
 	, mPosition()
-	, mScale(1,1)
+	, mScale(1, 1)
 	, mName(name)
 	, mRenderComponent(nullptr)
 	, mInputComponent(nullptr)
 	, mScriptComponent(nullptr)
 	, mColliderComponent(nullptr)
 	, mParent(nullptr)
+	, mPendingDeletion(false)
 {
 	
 	
@@ -73,8 +71,9 @@ void GameObject::updateChildrenPositions(Vector2D pos)
 		(*iter)->updateChildrenPositions(pos);
 	}
 
-	mPosition.x += (pos.x - mPosition.x);
-	mPosition.y += (pos.y - mPosition.y);
+	setPosition(mPosition.x + (pos.x - mPosition.x), mPosition.y + (pos.y - mPosition.y));
+	//mPosition.x += );
+	//mPosition.y += ;
 }
 
 void GameObject::setPosition(Vector2D pos, bool updateCollider)
@@ -102,23 +101,43 @@ void GameObject::addChild(GameObject* child)
 
 void GameObject::Destroy()
 {
-	std::function<void()> destroyGameObject = [this]()
-	{
-		this->removeAllComponentsAndGameObject();
-	};
 
-	mApplication->mCommandQueue.push(destroyGameObject);
+
+	if (mPendingDeletion == false)
+	{
+		std::function<void()> destroyGameObject = [this]()
+		{
+			this->removeAllComponentsAndGameObject();
+		};
+
+		mApplication->mCommandQueue.push(destroyGameObject);
+		mPendingDeletion = true;
+	}
+	else
+	{
+		int i = 0;
+	}
 
 }
 void GameObject::Destroy(GameObject& gameObject)
 {
-	std::function<void()> destroyGameObject = [&]()
-	{
-		
-		gameObject.removeAllComponentsAndGameObject();
-	};
 
-	mApplication->mCommandQueue.push(destroyGameObject);
+	if (gameObject.mPendingDeletion == false)
+	{
+		std::function<void()> destroyGameObject = [&]()
+		{
+				gameObject.removeAllComponentsAndGameObject();
+		};
+
+		mApplication->mCommandQueue.push(destroyGameObject);
+		gameObject.mPendingDeletion = true;
+
+	}
+	else
+	{
+		int i = 0;
+	}
+
 
 }
 
@@ -135,6 +154,8 @@ void GameObject::setApplicaton(C_Application* application)
 
 void GameObject::removeAllComponentsAndGameObject()
 {
+	
+	// remove RenderComponent
 	if (mRenderComponent != nullptr)
 	{
 		for (std::vector<RenderComponent*>::iterator rc = mApplication->mRenderComponents.begin(); rc != mApplication->mRenderComponents.end(); ++rc)
@@ -148,6 +169,7 @@ void GameObject::removeAllComponentsAndGameObject()
 		}
 	}
 
+	// remove InputComponent
 	if (mInputComponent != nullptr)
 	{
 		for (std::vector<InputComponent*>::iterator ic = mApplication->mInputComponents.begin(); ic != mApplication->mInputComponents.end(); ++ic)
@@ -161,7 +183,7 @@ void GameObject::removeAllComponentsAndGameObject()
 		}
 	}
 
-	
+	// remove ScriptComponent
 	if (mScriptComponent != nullptr)
 	{
 		for (auto sc = mApplication->mScriptComponents.begin(); sc != mApplication->mScriptComponents.end(); ++sc)
@@ -175,6 +197,8 @@ void GameObject::removeAllComponentsAndGameObject()
 		}
 	}
 
+
+	// remove ColliderComponent
 	if (mColliderComponent != nullptr)
 	{
 		for (auto cc = mApplication->mColliderComponents.begin(); cc != mApplication->mColliderComponents.end(); ++cc)
@@ -188,8 +212,28 @@ void GameObject::removeAllComponentsAndGameObject()
 		}
 	}
 
-	
+	// delete all children
+	while (mChildren.size() != 0)
+	{
+		(*mChildren.back()).removeAllComponentsAndGameObject();
+	}
 
+	// remove object from parent's children vector
+	if (mParent != nullptr)
+	{
+		for (auto ancestorChild = mParent->mChildren.begin(); ancestorChild != mParent->mChildren.end(); ++ancestorChild)
+		{
+			if ((*ancestorChild) == this)
+			{
+				mParent->mChildren.erase(ancestorChild);
+				mParent = nullptr;
+				break;
+			}
+		}
+	}
+
+
+	// delete object
 	for (std::vector<std::unique_ptr<GameObject>>::iterator gameObject = mApplication->mGameObjects.begin(); gameObject != mApplication->mGameObjects.end(); ++gameObject)
 	{
 		if ((*gameObject).get() == this)
@@ -259,4 +303,14 @@ void GameObject::move(float x, float y, bool updateCollider)
 void GameObject::move(Vector2D vec, bool updateCollider)
 {
 	move(vec.x, vec.y, updateCollider);
+}
+
+void GameObject::setPendingDeletion(bool flag)
+{
+	mPendingDeletion = flag;
+}
+
+bool GameObject::getPendingDeletion()
+{
+	return mPendingDeletion;
 }

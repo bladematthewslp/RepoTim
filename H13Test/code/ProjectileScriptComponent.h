@@ -1,12 +1,13 @@
 #pragma once
 
 #include "ScriptComponent.h"
-
+#include "Vector2D.h"
 class ProjectileScriptComponent : public ScriptComponent
 {
-	float speed;
+	
 	
 public:
+	Vector2D mSpeed;
 	ProjectileScriptComponent(GameObject& gameObject);
 	virtual void update() override;
 };

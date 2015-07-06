@@ -1,7 +1,5 @@
 #pragma once
 
-#include "RenderComponent.h"
-#include "ScriptComponent.h"
 #include "GameObject.h"
 
 static const float k_PI = 3.1415926536f;

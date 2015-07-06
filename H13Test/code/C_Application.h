@@ -6,10 +6,9 @@
 #include <functional>
 #include <queue>
 #include "GameObject.h"
-//#include "QuadTree.h"
 
+// class declarations
 struct Node;
-
 class QuadTree;
 
 class C_Application

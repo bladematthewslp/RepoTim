@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Matrix.h"
 #include "C_Application.h"
+
 RenderComponent::RenderComponent(GameObject& gameObject)
 	: Component(gameObject)
 {
@@ -22,6 +23,7 @@ void RenderComponent::setVertices(std::vector<Vector2D> vertices)
 
 void RenderComponent::scaleVertices(Vector2D scale)
 {
+	// scale each transformed vertex
 	int i = 0;
 	for (auto verts = mTransformedVertices.begin(); verts != mTransformedVertices.end(); ++verts, ++i)
 	{
@@ -29,14 +31,8 @@ void RenderComponent::scaleVertices(Vector2D scale)
 		verts->y = mTransformedVertices[i].y * scale.y;
 	}
 	
+	// do the same for all children
 	updateChildVertices(scale);
-	/*
-	for (auto child = mGameObject.getChildren().begin(); child != mGameObject.getChildren().end(); ++child)
-	{
-		if ((*child)->mRenderComponent)
-			(*child)->mRenderComponent->setScale(scale);// Vector2D(scale.x / (*child)->getScale().x, scale.y / (*child)->getScale().y));
-	}
-	*/
 	
 }
 
@@ -54,7 +50,6 @@ void RenderComponent::updateChildVertices(Vector2D scale)
 			}
 			(*child)->mRenderComponent->updateChildVertices(scale);
 		}
-			//(*child)->mRenderComponent->setScale(scale);// Vector2D(scale.x / (*child)->getScale().x, scale.y / (*child)->getScale().y));
 	}
 }
 

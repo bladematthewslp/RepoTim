@@ -131,7 +131,7 @@
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="ScriptComponent.h" />
     <ClInclude Include="time.h" />
-    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Text.txt" />

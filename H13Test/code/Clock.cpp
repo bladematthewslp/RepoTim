@@ -16,7 +16,15 @@ Clock::Clock(std::string name)
 
 Clock::~Clock()
 {
-	--NUM_CLOCKS;
+	if (--NUM_CLOCKS == 0)
+	{
+		std::function<void()> newClocks = [&]()
+		{
+			mApplication->createTwoClocks();
+		};
+		mApplication->mCommandQueue.push(newClocks);
+	}
+		
 }
 
 ClockHand::ClockHand(std::string name)

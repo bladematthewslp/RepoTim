@@ -6,7 +6,8 @@
 C_Application* Component::mApplication = nullptr;
 
 Component::Component(GameObject& gameObject)
-	: mGameObject(gameObject) 
+	: mGameObject(gameObject)
+	, mEnabled(true)
 {
 	
 }
@@ -26,3 +27,12 @@ void Component::update()
 
 }
 
+
+bool Component::getEnabled()
+{
+	return mEnabled;
+}
+void		Component::setEnabled(bool flag)
+{
+	mEnabled = flag;
+}

@@ -6,10 +6,7 @@
 #include <memory>
 
 
-
-#include "Vector.h"
-
-
+#include "Vector2D.h"
 #include "RenderComponent.h"
 #include "InputComponent.h"
 #include "ScriptComponent.h"
@@ -31,24 +28,31 @@ namespace ComponentType
 class GameObject
 {
 	friend class C_Application;
+
 	private:
 		void					removeAllComponentsAndGameObject();
+		bool					mPendingDeletion;
+
 	protected:
+
 		std::string				mName;
 		Vector2D				mPosition;
 		float					mAngle;
 		Vector2D				mScale;
-		static C_Application*	mApplication;
-		GameObject*				mParent;
 
+		static C_Application*	mApplication;
+		
+		GameObject*				mParent;
 		std::vector<GameObject*> mChildren;
 
 	public:
 		
 		GameObject(std::string name = "GameObject");
 		virtual ~GameObject();
+
 		template <typename T>
 		static GameObject* Create();
+
 		static GameObject* Create(std::string name = "GameObject");
 
 		void Destroy();
@@ -79,6 +83,9 @@ class GameObject
 
 		std::vector<GameObject*>& getChildren();
 		void addChild(GameObject* child);
+
+		void		setPendingDeletion(bool flag);
+		bool		getPendingDeletion();
 };
 
 template <typename T>

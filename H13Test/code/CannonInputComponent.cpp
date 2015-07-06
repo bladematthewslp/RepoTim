@@ -1,6 +1,5 @@
 #include "CannonInputComponent.h"
 #include "GameObject.h"
-#include "C_Application.h"
 #include "Projectile.h"
 
 static const float k_PI = 3.1415926536f;

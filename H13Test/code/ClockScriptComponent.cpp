@@ -1,5 +1,4 @@
 #include "ClockScriptComponent.h"
-#include "ClockColliderComponent.h"
 #include "GameObject.h"
 #include "Clock.h"
 #include "time.h"
@@ -38,40 +37,50 @@ ClockScriptComponent::ClockScriptComponent(GameObject& gameObject)
 	hourHand->scale(.8f, .8f);
 	secondHand->scale(.2f, 1.0f);
 
-	mVelocity.x = getRandomNumber();
-	mVelocity.y = getRandomNumber();
+	mVelocity.x = (float)getRandomNumber();
+	mVelocity.y = (float)getRandomNumber();
 	
 }
 
 
 ClockScriptComponent::~ClockScriptComponent()
 {
-	if (hourHand)
-		hourHand->Destroy();
-
-	if (minuteHand)
-		minuteHand->Destroy();
-
-	if (secondHand)
-		secondHand->Destroy();
+	
 }
 
 
 void ClockScriptComponent::update()
 {
 
-	// move clock in random direction
-	float screenWidth = mApplication->getScreenWidth();
-	float screenHeight = mApplication->getScreenHeight();
-
-	Vector2D pos = mGameObject.getPosition();
-
+	// move clock 
 	mGameObject.move(mVelocity);
-	//(mGameObject.mColliderComponent)->update();
-	//(mGameObject.mColliderComponent)->checkForCollision();
 
+	// bounce off walls
+	AABB aabb = mGameObject.mColliderComponent->getCollider();
+	if (aabb.xMin < 0)// || aabb.xMax > mApplication->getScreenWidth())
+	{
+		mGameObject.move(-aabb.xMin, 0);
+		mVelocity.x *= -1;
+	}
+	else if (aabb.xMax > mApplication->getScreenWidth())
+	{
+		mGameObject.move( -(aabb.xMax - mApplication->getScreenWidth()), 0);
+		mVelocity.x *= -1;
+	}
 
-	if (!hourHand || !minuteHand)
+	if (aabb.yMin < 0 )//|| aabb.yMax > mApplication->getScreenHeight())
+	{
+		mGameObject.move(0, -aabb.yMin);
+		mVelocity.y *= -1;
+	}
+	else if (aabb.yMax > mApplication->getScreenHeight())
+	{
+		mGameObject.move(0, -(aabb.yMax - mApplication->getScreenHeight()));
+		mVelocity.y *= -1;
+	}
+	
+	// move hands
+	if (!hourHand || !minuteHand || !secondHand)
 		return;
 
 	// get updated time

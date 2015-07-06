@@ -1,4 +1,5 @@
 #pragma once
+
 #include "RenderComponent.h"
 
 class ClockRenderComponent :public RenderComponent

@@ -1,6 +1,9 @@
 #pragma once
+
 #include "ScriptComponent.h"
-#include "Vector.h"
+#include "Vector2D.h"
+
+
 class ClockScriptComponent :public ScriptComponent
 {
 	GameObject* hourHand;
